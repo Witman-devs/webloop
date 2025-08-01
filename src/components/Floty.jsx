@@ -15,6 +15,7 @@ const FloatStyle = {
   backgroundColor: blue[500],
   position: "fixed",
   top: "calc(100vh - 60px)",
+  zIndex: 20
 };
 
 function MusicControl() {
@@ -55,6 +56,7 @@ function FloatMenuStack({ open }) {
         position: "fixed",
         top: "calc(100vh - 190px)",
         display: open ? "block" : "none",
+        zIndex:20
       }}
     >
       <div>Hello</div>

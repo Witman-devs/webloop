@@ -11,14 +11,14 @@ function App() {
   const [evidanceBoardOpen, setEvidanceBoardOpen] = useState(true);
   return (
     <div style={{ padding: 10 }}>
-      <div style={{ height: "100vh", zIndex: 10 }}>
+      <div style={{ height: "100vh", zIndex: -1 }}>
         <Settings
           style={{ position: "sticky", top: "5px" }}
           onClick={() => setSideMenuOpen(!sideMenuOpen)}
         />
         <Floaty />
       </div>
-      <div style={{height: "80vh", position:"absolute", zIndex:-1, top:"10vh", left:"10px"}}>
+      <div style={{height: "80vh", position:"absolute", zIndex:10, top:"10vh", left:"10px"}}>
         <SideMenu sideMenuOpen={sideMenuOpen} setSideMenuOpen={setSideMenuOpen} setEvidanceBoardOpen={setEvidanceBoardOpen}/>
         <PageRouter pageName={pageName}/>
         <button type='button' onClick={()=>setPageName(pageName=="home"?"ouroboros":"home")} > Next Page </button>
