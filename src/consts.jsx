@@ -1,9 +1,11 @@
-import Home from './pages/home'; 
-import Ouroboros from './pages/ouroboros';
+import Home from './pages/Home'; 
+import NotFound from './pages/NotFound';
+import Symbols from './pages/Symbols';
 
 export const PAGE_COMPONENTS = {
-    "home": <Home />,
-    "ouroboros":  <Ouroboros/>
+    "home": Home ,
+    "symbols":  Symbols,
+    "notfound": NotFound,
 }
 
 export const MUSIC = [
