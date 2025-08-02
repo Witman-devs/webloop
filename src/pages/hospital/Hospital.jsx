@@ -6,20 +6,21 @@ export default function Hospital({ setPageName }) {
     <>
       <OrganizationWiki
         logo="https://upload.wikimedia.org/wikipedia/commons/a/ab/Logo_TV_2015.png"
-        name="Zerica Medical Institution"
-        description="Founded in 1902, Zerica Medical Institution is a leading research and clinical practice center based in Astriva."
+        name="Red Marsh Healthcare"
+        description="Red Marsh Hospital has been acknowledged globally as the centre of excellence. Known for its meticulous patient care by highly experienced medical staff, extensive medical research, advanced surgical facilities and a dedicated community service. Red Marsh is committed to delivering compassionate, world-class healthcare to patients from around the world. Red Marsh hospital strives to build a legacy of unmatched trust with its patients, lead in the field of innovation, and achieve unerring clinical precision."
         departments={[
           "General Medicine",
           "Cardiology",
           "Neurology",
           "Forensics",
           "Pediatrics",
+          "OBGyn"
         ]}
         keyPeople={[
           { name: "Dr. Elira Koven", role: "Director" },
           { name: "Dr. Marcus Vel", role: "Chief Medical Officer" },
         ]}
-        history="Established in the early 20th century, Zerica Medical Institution has played a vital role in advancing public health in Astriva. Known for pioneering medical procedures and research, it serves both as a teaching hospital and innovation hub."
+        history="Established in 1962, we began with 15 doctors and housing 20 beds. Today, we have increased our capacity several fold and have a total of 300 beds and 15 Operation Theatres with specialized infrastructure, and nearly 1,800 employees."
         contact={{
           address: "1 Archive Lane, Velora, Astriva",
           email: "contact@zerica.org",
@@ -30,7 +31,7 @@ export default function Hospital({ setPageName }) {
           { label: "Birth Records", pageName: "birthRecords" },
           { label: "Death Records", pageName: "deathRecords" },
           { label: "Autopsy Records", pageName: "autopsyRecords" },
-          { label: "Employement Records", pageName: "employementRecordsHospital" },
+          { label: "Employment Records", pageName: "employementRecordsHospital" },
           { label: "Reception Register", pageName: "receptionRegisterHostpital" },
         ]}
       />
