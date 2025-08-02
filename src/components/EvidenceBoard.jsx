@@ -1,5 +1,6 @@
 import { Backdrop, Menu, MenuItem } from "@mui/material";
 import { X } from "lucide-react";
+import { v4 as uuidv4 } from 'uuid';
 import { useState, useCallback, useRef } from "react";
 import {
   ReactFlow,
@@ -19,6 +20,7 @@ import "@xyflow/react/dist/style.css";
 
 import Note from "./Note";
 import Thread from "./Thread";
+import DocumentEvidence from "./DocumentEvidence";
 
 // TODO: make easy connection from anywhere you drag
 // TODO: label for threads/edges
@@ -26,13 +28,8 @@ const flowKey = "EvidenceBoard"
 
 const nodeTypes = {
   note: Note,
+  document: DocumentEvidence
 };
-
-const initialNodes = [
-  { id: "n1", position: { x: 0, y: 0 }, data: { label: "Node 1", id:"n1" }, type: 'note' },
-  { id: "n2", position: { x: 0, y: 500 }, data: { label: "Node 2", id:"n2" }, type: 'note' },
-];
-const initialEdges = [{ id: "n1-n2", source: "n1", target: "n2", type:"straight"  }];
 
 function CustomControls({setEvidanceBoardOpen, onSave}){
   // TODO: make instructions look better 
@@ -50,6 +47,7 @@ function CustomControls({setEvidanceBoardOpen, onSave}){
             position: "absolute",
             zIndex: 100,
             cursor: "pointer",
+            color:"white"
           }}
           onClick={() => {onSave(); setEvidanceBoardOpen(false)}}
         />
@@ -65,12 +63,12 @@ function Chart({setEvidanceBoardOpen}) {
   const { screenToFlowPosition } = useReactFlow();
   const [rfInstance, setRfInstance] = useState(null);
   const { setViewport } = useReactFlow();
- 
+  const [contextMenu, setContextMenu] = useState(null);
+
 
   const onSave = useCallback(() => {
     if (rfInstance) {
       const flow = rfInstance.toObject();
-      console.log("Flow", flow)
       localStorage.setItem(flowKey, JSON.stringify(flow));
     }
   }, [rfInstance]);
@@ -96,7 +94,6 @@ function Chart({setEvidanceBoardOpen}) {
       setEdges((eds) => addEdge(params, eds))},
     [],
   );
-  const [contextMenu, setContextMenu] = useState(null);
 
   const handleContextMenu = (event) => {
     event.preventDefault();
@@ -131,7 +128,7 @@ function Chart({setEvidanceBoardOpen}) {
   const addNode = useCallback(
     (e) => {
       let newNodes = {
-        id: `n${nodes.length +1}`,
+        id: uuidv4(),
         position: screenToFlowPosition({
           x: e.clientX,
           y: e.clientY,
@@ -142,7 +139,6 @@ function Chart({setEvidanceBoardOpen}) {
       };
 
       setNodes((nds) => {
-        console.log(nds)
         return nds.concat(newNodes)
     });
       handleClose(); 
@@ -152,7 +148,6 @@ function Chart({setEvidanceBoardOpen}) {
 
   const onNodesDelete = useCallback(
       (deleted) => {
-        console.log(deleted)
         let remainingNodes = [...nodes];
         setEdges(
           deleted.reduce((acc, node) => {
@@ -199,7 +194,7 @@ function Chart({setEvidanceBoardOpen}) {
           onEdgesChange={onEdgesChange}
           connectionLineComponent={Thread}
           onConnect={onConnect}
-          onInit={(props)=>{console.log("init");setRfInstance(props); onRestore()}}
+          onInit={(props)=>{setRfInstance(props); onRestore()}}
           onContextMenu={handleContextMenu}
           onEdgeDoubleClick={deleteEdge}
           fitView
