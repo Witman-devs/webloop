@@ -17,6 +17,8 @@ import victim3 from './pages/people/Victim3';
 import ward1 from './pages/people/Ward1';
 import Police from './pages/Police';
 import NewsAgency from './pages/NewsAgency';
+import Case3 from './pages/Case3';
+import Case2 from './pages/Case2';
 import BirthRecords from './pages/hospital/BirthRecords';
 
 export const PAGE_COMPONENTS = {
@@ -35,6 +37,8 @@ export const PAGE_COMPONENTS = {
     // case
     "cases": Cases,
     "case1": Case1,
+    "case2": Case2,
+    "case3": Case3,
 
     // peoples
     "director": Director,

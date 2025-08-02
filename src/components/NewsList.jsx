@@ -6,7 +6,9 @@ import {
   Grid,
   Divider,
   TextField,
+  Link
 } from "@mui/material";
+import CompanyLogo from "./CompanyLogo";
 
 const NewsCutout = ({ article }) => {
   return (
@@ -68,7 +70,10 @@ const CompanyNewsCutoutList = ({ articles = [] }) => {
           mb: 4,
         }}
       >
-        Company News Archives
+        <div style={{ display: "flex", alignItems: "center", justifyContent: "center" }}>
+          <Link component="span" onClick={()=>setPageName("newsAgency")}><CompanyLogo /></Link>
+          <p>Company News Archives</p>
+        </div>
       </Typography>
 
       <Box sx={{ mb: 4, display: "flex", justifyContent: "center" }}>
@@ -91,7 +96,7 @@ const CompanyNewsCutoutList = ({ articles = [] }) => {
       <Grid container spacing={3}>
         {filteredArticles.length > 0 ? (
           filteredArticles.map((article, index) => (
-            <Grid item xs={12} md={6} key={index}>
+            <Grid item xs={12} md={6} key={index} sx={{maxWidth: "30%",margin: "0 auto"}}>
               <NewsCutout article={article} />
             </Grid>
           ))
