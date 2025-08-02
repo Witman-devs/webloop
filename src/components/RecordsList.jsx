@@ -7,6 +7,7 @@ import {
   CardContent,
   Grid,
   Avatar,
+  Divider,
 } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
 import DeathCertificate from "./DeathCertificate";
@@ -35,7 +36,7 @@ function Document({type, data}){
 }
 
 
-export default function RecordsList({ records, columns, type }){
+export default function RecordsList({ records, columns, type, Label, companyLogo, companyName, companyAddress }){
   const [selectedRecord, setSelectedRecord] = useState(null);
 
   const handleRowClick = (params) => {
@@ -44,9 +45,33 @@ export default function RecordsList({ records, columns, type }){
 
   return (
     <>
-      <Box sx={{ height: 500, backgroundColor: "#fff", p: 2 }}>
+      {/* Header */}
+      <Grid container alignItems="center" spacing={2} sx={{ mb: 3 }}>
+        <Grid item>
+          {companyLogo && (
+            <Avatar
+              src={companyLogo}
+              alt="Company Logo"
+              variant="square"
+              sx={{ width: 80, height: 80 }}
+            />
+          )}
+        </Grid>
+        <Grid item xs>
+          <Typography variant="h5" fontWeight="bold">
+            {companyName || "Company Name"}
+          </Typography>
+          <Typography variant="subtitle1" color="text.secondary">
+            {companyAddress || "Company Address"}
+          </Typography>
+        </Grid>
+      </Grid>
+
+      <Divider sx={{ mb: 2 }} />
+
+      <Box sx={{ backgroundColor: "#fff", p: 2 }}>
         <Typography variant="h6" sx={{ mb: 2 }}>
-          Death Records Registry
+          {Label} 
         </Typography>
         <DataGrid
           rows={records}

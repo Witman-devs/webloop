@@ -3,11 +3,12 @@ import Cases from './pages/Cases';
 import College from './pages/College';
 import Director from './pages/people/Director';
 import Home from './pages/Home'; 
-import Hospital from './pages/Hospital';
+import Hospital from './pages/hospital/Hospital';
 import NotFound from './pages/NotFound';
 import Symbols from './pages/Symbols';
 import Police from './pages/Police';
 import NewsAgency from './pages/NewsAgency';
+import BirthRecords from './pages/hospital/BirthRecords';
 
 export const PAGE_COMPONENTS = {
     // places
@@ -18,6 +19,10 @@ export const PAGE_COMPONENTS = {
     "police": Police,
     "newsAgency": NewsAgency,
     
+    // documents 
+    // "newsArchival": NewsArchival,
+    "birthRecords":BirthRecords,
+
     // case
     "cases": Cases,
     "case1": Case1,
