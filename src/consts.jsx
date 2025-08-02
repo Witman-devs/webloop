@@ -6,6 +6,8 @@ import Home from './pages/Home';
 import Hospital from './pages/Hospital';
 import NotFound from './pages/NotFound';
 import Symbols from './pages/Symbols';
+import Police from './pages/Police';
+import NewsAgency from './pages/NewsAgency';
 
 export const PAGE_COMPONENTS = {
     // places
@@ -13,6 +15,8 @@ export const PAGE_COMPONENTS = {
     "symbols":  Symbols,
     "hospital": Hospital,
     "college": College,
+    "police": Police,
+    "newsAgency": NewsAgency,
     
     // case
     "cases": Cases,
