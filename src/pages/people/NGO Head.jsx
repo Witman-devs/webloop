@@ -21,11 +21,11 @@ export default function NGOHead({ setPageName }) {
             </Link>
           ),
           firstAppearance: "NGO Registry - 2010",
-          address:
-            "123 Maple Street,\nWillow Lane,\nRedmarsh",
+          address: "123 Maple Street,\nWillow Lane,\nRedmarsh",
           image: directorImg,
           bio: `Mr. John Anderson is the founder and head of Hope for Tomorrow, an NGO dedicated to supporting education and healthcare initiatives for underprivileged communities in the United States. He is recognized for his commitment to social causes and his leadership in building sustainable programs for community development.`,
         }}
+        setPageName={setPageName}
       />
     </div>
   );

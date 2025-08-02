@@ -16,7 +16,10 @@ export default function Inspector({ setPageName }) {
           deathDate: null,
           occupation: "Police Inspector",
           affiliation: (
-            <Link component="span" onClick={() => setPageName("police-station")}>
+            <Link
+              component="span"
+              onClick={() => setPageName("police-station")}
+            >
               New York City Police Department
             </Link>
           ),
@@ -28,6 +31,7 @@ export default function Inspector({ setPageName }) {
 He has solved several high-profile cases and is respected by both his peers and the community.
 He is committed to upholding the law and often conducts outreach programs to build trust between the police and citizens.`,
         }}
+        setPageName={setPageName}
       />
     </div>
   );
