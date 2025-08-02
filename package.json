@@ -13,6 +13,7 @@
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.1",
     "@mui/material": "^7.2.0",
+    "@mui/x-data-grid": "^8.9.2",
     "@xyflow/react": "^12.8.2",
     "howler": "^2.2.4",
     "lucide-react": "^0.534.0",
