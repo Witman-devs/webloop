@@ -17,6 +17,8 @@ export default function Cases({ setPageName }) {
       <Typography>
         Answer all the questions to get access to my location.
       </Typography>
+      <Link component="span" onClick={()=>setPageName("police")} > Police </Link>
+      <Link component="span" onClick={()=>setPageName("newsAgency")}>News</Link>
       <Link
         component="button"
         variant="h4"
