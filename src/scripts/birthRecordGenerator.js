@@ -1,15 +1,10 @@
-// generateBirthData.js
-
 import { faker } from '@faker-js/faker';
 import fs from 'fs'
+import { v4 as uuidv4 } from 'uuid';
 
-// Fantasy location generators
-const fantasyCities = ['Eldoria', 'Drakemouth', 'Valebrook', 'Thornhollow', 'Mistmoor'];
-const fantasyStates = ['Zantheria', 'Velmora', 'Thalador', 'Ravenspire', 'Mythros'];
-const fantasyCountries = 'Solari'
 
 function getFantasyPlace() {
-    return 'Lunara, Nocturna, Zorik'
+    return 'Redmarsh, Nocturna, Zorik'
 }
 
 function generateBirthCertificate() {
@@ -36,9 +31,11 @@ function generateBirthCertificate() {
 
   const placeOfBirth = getFantasyPlace();
   const certificateNumber = `BC-${dob.getFullYear()}-${faker.string.numeric(6)}`;
-  const office = "Office of the Civil Registrar"
+  const registrar = "Office of the Civil Registrar"
+  const id = uuidv4();
 
   return {
+    id,
     childName,
     dateOfBirth,
     timeOfBirth,
@@ -47,7 +44,7 @@ function generateBirthCertificate() {
     fatherName,
     motherName,
     certificateNumber,
-    office
+    registrar
   };
 }
 
