@@ -1,4 +1,5 @@
 import { Divider, Input, Link, List, Typography } from "@mui/material";
+import { amber, red, yellow } from "@mui/material/colors";
 
 function Question({ questionText }) {
   return (
@@ -11,7 +12,7 @@ function Question({ questionText }) {
 
 export default function Cases({ setPageName }) {
   return (
-    <>
+    <div style={{width:"60vw", left:"20vw", position:"relative"}}>
       <Typography variant="h2">Cases:</Typography>
       <Typography>
         Answer all the questions to get access to my location.
@@ -33,7 +34,7 @@ export default function Cases({ setPageName }) {
       <Link
         component="button"
         variant="h4"
-        onClick={() => setPageName("case1")}
+        onClick={() => setPageName("case2")}
       >
         Case 2: Shootout at port
       </Link>
@@ -49,7 +50,7 @@ export default function Cases({ setPageName }) {
       <Link
         component="button"
         variant="h4"
-        onClick={() => setPageName("case1")}
+        onClick={() => setPageName("case3")}
       >
         Case 3: Death of a Journalist 
       </Link>
@@ -58,6 +59,6 @@ export default function Cases({ setPageName }) {
         <Question questionText="Who receieved the organs ?" />
         <Question questionText="Who funded the NGO ?" />
       </List>
-    </>
+    </div>
   );
 }

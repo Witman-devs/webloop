@@ -1,3 +1,4 @@
+import Case1 from './pages/Case1';
 import Cases from './pages/Cases';
 import Home from './pages/Home'; 
 import NotFound from './pages/NotFound';
@@ -7,6 +8,7 @@ export const PAGE_COMPONENTS = {
     "home": Home ,
     "symbols":  Symbols,
     "cases": Cases,
+    "case1": Case1,
     "notfound": NotFound,
 }
 
