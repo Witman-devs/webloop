@@ -8,33 +8,31 @@ import {
   Grid,
   Avatar,
   Divider,
+  Button,
 } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
-import DeathCertificate from "./DeathCertificate";
-import BirthCertificate from "./BirthCertificate";
-import AutopsyReport from "./Autopsy";
-import EmploymentRecord from "./EmplymentRecord";
+import Document from "./Documents/Document";
+import MonochromeButton from "./MonochromeButton";
+import { v4 as uuidv4 } from 'uuid';
+
+const flowKey = "EvidenceBoard"
 
 
-function Document({type, data}){
-  switch (type) {
-    case "death":
-      return <DeathCertificate {...data} />;
-
-    case "birth":
-      return <BirthCertificate {...data} />;
-
-    case "autopsy":
-      return <AutopsyReport {...data} />;
-
-    case "employee":
-      return <EmploymentRecord {...data} />;
-
-    default:
-      return <div>Unsupported document type: {type}</div>;
-  }
+function AddToEvidence(type, data){
+  let flow = JSON.parse(localStorage.getItem(flowKey));
+  if(!flow) flow = {"nodes":[],"edges":[],"viewport":{"x":0,"y":0,"zoom":1}}
+  flow.nodes.push({
+        id: uuidv4(),
+        position: {
+          x: 0,
+          y: 0,
+        },
+        data: { documentType:type, documentData:data },
+        origin: [0.5, 0.0],
+        type: "document"
+      })
+    localStorage.setItem(flowKey, JSON.stringify(flow));
 }
-
 
 export default function RecordsList({ records, columns, type, Label, companyLogo, companyName, companyAddress }){
   const [selectedRecord, setSelectedRecord] = useState(null);
@@ -102,7 +100,7 @@ export default function RecordsList({ records, columns, type, Label, companyLogo
                 <Document data={selectedRecord} type={type}/>
             </Card>
           )}
-          {/* // TODO: Add a button that says add to evidance board */}
+          <MonochromeButton onClick={()=>AddToEvidence(type, selectedRecord)}>Add to evidence board</MonochromeButton>
         </Box>
       </Modal>
     </>
