@@ -10,13 +10,21 @@ function News1({setPageName}){
     )
 }
 
+function News2({setPageName}){
+    return(
+      <>
+        Another doctor was found dead in the staff quarters, reportedly hung by a rope. While authorities suggest suicide, several details raise suspicion. The so-called suicide note is vague, and colleagues claim the doctor showed no signs of distress. This incident, again at <Link component="span" onClick={()=>setPageName("hospital")}>RC hospital</Link>, is being investigated by <Link component="span" onClick={()=>setPageName("inspector")}>Inspector</Link>. Hospital's Director <Link component="span" onClick={()=>setPageName("director")}>Dr. Director</Link> expressed shock. Was this truly a suicide, or is something more sinister happening at the hospital?
+      </>
+    )
+}
+
 export default function Case1({setPageName}) {
   return (
     <div style={{ width: "60vw", left: "20vw", position: "relative" }}>
       <Typography variant="h2">Scandal at the hospital</Typography>
       <NewspaperCutout
         headline="Doctor hung himself out of guilt!"
-        date="August 2, 2017"
+        date="August 2, 2025"
         author="kelly Alan"
         content={<News1 setPageName={setPageName}/>}
         rotation="-5"
@@ -25,8 +33,8 @@ export default function Case1({setPageName}) {
       <NewspaperCutout
         headline="Another doctor found mysteriously dead at RC hostpital"
         date="August 2, 2025"
-        author={<Link component="span" onClick={()=>setPageName("journalist")}> JJ Jhonson</Link>}
-        content="A coincedent or cold blooded murder ?"
+        author={<Link component="span" onClick={()=>setPageName("victim3")}>Michael Thompson</Link>}
+        content={<News2 setPageName={setPageName}/>}
         rotation="5"
         left="20vw"
       />
