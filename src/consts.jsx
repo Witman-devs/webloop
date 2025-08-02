@@ -15,6 +15,8 @@ import victim1 from './pages/people/Victim1';
 import victim2 from './pages/people/Victim2';
 import victim3 from './pages/people/Victim3';
 import ward1 from './pages/people/Ward1';
+import Police from './pages/Police';
+import NewsAgency from './pages/NewsAgency';
 
 export const PAGE_COMPONENTS = {
     // places
@@ -22,6 +24,8 @@ export const PAGE_COMPONENTS = {
     "symbols":  Symbols,
     "hospital": Hospital,
     "college": College,
+    "police": Police,
+    "newsAgency": NewsAgency,
     
     // case
     "cases": Cases,
