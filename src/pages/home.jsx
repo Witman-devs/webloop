@@ -11,7 +11,7 @@ export default function Home({setPageName}) {
         alignItems: "center",
       }}
     >
-      <AntagonistLogo size="200px" />
+      <AntagonistLogo size="200px" setPageName={setPageName} />
       <Typography variant="h2">Hello Detective</Typography>
       <Typography width="80%" align="center">
         Its been a while since we met. How many year has it been since you took

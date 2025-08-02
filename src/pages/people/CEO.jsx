@@ -29,6 +29,7 @@ Under his leadership, NovaTech has become a pioneer in futuristic technologies a
 He is recognized for his innovative thinking, commitment to ethical business, and fostering a collaborative workplace.
 James is also a strong advocate for STEM education and frequently speaks at global technology summits.`,
         }}
+        setPageName={setPageName}
       />
     </div>
   );

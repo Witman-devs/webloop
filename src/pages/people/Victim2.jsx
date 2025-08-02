@@ -21,14 +21,14 @@ export default function Victim({ setPageName }) {
             </Link>
           ),
           firstAppearance: "Incident Report - Case #4571",
-          address:
-            "221 Oakridge Lane,\nWestbridge,\nRedmarsh",
+          address: "221 Oakridge Lane,\nWestbridge,\nRedmarsh",
           image: directorImg,
           bio: `Officer Mark Sullivan served the Westbridge Police Department for over 12 years. 
 He was known for his dedication to community safety and his calm demeanor under pressure. 
 Tragically, Officer Sullivan was killed in the line of duty during a gang shootout in downtown Westbridge. 
 His bravery and sacrifice are remembered by colleagues and citizens alike.`,
         }}
+        setPageName={setPageName}
       />
     </div>
   );

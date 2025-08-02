@@ -15,7 +15,11 @@ export default function Director({ setPageName }) {
           birthDate: "March 14, 1990",
           deathDate: "March 14, 2020",
           occupation: "Neurologist & Researcher",
-          affiliation: <Link component="span" onClick={()=>setPageName("college")}>St. Healmore Medical College</Link>,
+          affiliation: (
+            <Link component="span" onClick={() => setPageName("college")}>
+              St. Healmore Medical College
+            </Link>
+          ),
           firstAppearance: "Student Records - Batch 2008",
           address:
             "Flat 3A, Doctor's Residency,\nHealth Sector 4,\nHeartline Road,\nRedmarsh",
@@ -24,6 +28,7 @@ export default function Director({ setPageName }) {
 He was one of the top alumni from St. Healmore Medical College and now mentors young doctors across India. 
 He is a frequent speaker at conferences and an advocate for mental health policy reform. He also co-founded NeuroAid, an initiative for early detection of neurological disorders.`,
         }}
+        setPageName={setPageName}
       />
     </div>
   );

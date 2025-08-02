@@ -23,8 +23,8 @@ const InfoRow = ({ label, value }) =>
     </Box>
   );
 
-export default function ProfileCard({ person }) {
-    // TODO: update with red logo 
+export default function ProfileCard({ person, setPageName }) {
+  // TODO: update with red logo
   return (
     <Card
       elevation={1}
@@ -99,7 +99,14 @@ export default function ProfileCard({ person }) {
           alignItems: "center",
         }}
       >
-        <AntagonistLogo size="150px" />
+        <AntagonistLogo
+          size="150px"
+          style={{
+            filter:
+              "brightness(0) saturate(100%) invert(10%) sepia(88%) saturate(7284%) hue-rotate(6deg) brightness(105%) contrast(114%)",
+          }}
+          setPageName={setPageName}
+        />
       </Stack>
     </Card>
   );

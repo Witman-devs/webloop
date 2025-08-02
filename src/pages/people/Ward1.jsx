@@ -20,14 +20,14 @@ export default function WardPerson({ setPageName }) {
             </Link>
           ),
           firstAppearance: "Staff Registry - 2023",
-          address:
-            "Suite 12B, Willow Lane Residences,\nRedmarsh City",
+          address: "Suite 12B, Willow Lane Residences,\nRedmarsh City",
           image: directorImg,
           bio: `Samuel Hayes is a ward attendant at Redmarsh Hospital, Fictionalia.
 He is known for his positive attitude and resilience in his work.
 Samuel was recently seen tending to a patient, John Carter, showing his caring nature and dedication to his role.
 Samuel is supported by the dedicated staff and his family as he continues his service.`,
         }}
+        setPageName={setPageName}
       />
     </div>
   );

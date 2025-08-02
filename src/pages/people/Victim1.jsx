@@ -30,6 +30,7 @@ He was admitted in early 2023 following a series of unexplained episodes.
 John is known for his quiet demeanor and has become a familiar face among the hospital staff. 
 His case is considered unique due to the rare nature of his symptoms and his resilience throughout treatment.`,
         }}
+        setPageName={setPageName}
       />
     </div>
   );

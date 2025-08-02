@@ -15,16 +15,19 @@ export default function Reporter({ setPageName }) {
           deathDate: "April 20, 2023",
           occupation: "Investigative Reporter",
           affiliation: (
-            <Link component="span" onClick={() => setPageName("redmarsh-gazette")}>
+            <Link
+              component="span"
+              onClick={() => setPageName("redmarsh-gazette")}
+            >
               The Redmarsh Gazette
             </Link>
           ),
           firstAppearance: "News Archives - March 2020",
-          address:
-            "Apartment 7C, Willow Lane,\nRedmarsh,\nMidwest",
+          address: "Apartment 7C, Willow Lane,\nRedmarsh,\nMidwest",
           image: directorImg,
           bio: `Michael Thompson is an investigative journalist renowned for his determination to uncover the truth. He is currently working to unravel the mysterious suicide in Redmarsh and its possible connection to the recent gang shootout.`,
         }}
+        setPageName={setPageName}
       />
     </div>
   );
