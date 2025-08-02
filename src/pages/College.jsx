@@ -1,3 +1,4 @@
+import { Typography } from "@mui/material";
 import AlumniStudentsList from "../components/AlumniList";
 import TerminatedStudentsList from "../components/TerminationList";
 
