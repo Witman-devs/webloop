@@ -22,27 +22,33 @@ function generateBirthCertificate() {
     month: 'long',
     year: 'numeric',
   });
-
-  const timeOfBirth = dob.toLocaleTimeString('en-IN', {
-    hour: '2-digit',
-    minute: '2-digit',
-    hour12: true,
+  const dod = faker.date.between({ from: dob, to: '2025-12-31' });
+  const dateOfDeath = dod.toLocaleDateString('en-IN', {
+    day: 'numeric',
+    month: 'long',
+    year: 'numeric',
   });
+  const placeOfDeath = getFantasyPlace();
+  const causeOfDeath = faker.helpers.arrayElement([
+    'Natural Causes',
+    'Accident',
+    'Illness',
+    'Unknown',
+    'Chemical Mishap',
+    'Beast Attack',
+    'Poisoning',
+    'Battle Wounds'
+  ]);
+  const fullName = `${firstName} ${lastName}`;
 
-  const placeOfBirth = getFantasyPlace();
-  const certificateNumber = `BC-${dob.getFullYear()}-${faker.string.numeric(6)}`;
+  const certificateNumber = `DC-${dob.getFullYear()}-${faker.string.numeric(6)}`;
   const registrar = "Office of the Civil Registrar"
-  const id = uuidv4();
-
   return {
-    id,
-    childName,
+    fullName,
     dateOfBirth,
-    timeOfBirth,
-    gender,
-    placeOfBirth,
-    fatherName,
-    motherName,
+    dateOfDeath,
+    placeOfDeath,
+    causeOfDeath,
     certificateNumber,
     registrar
   };
@@ -54,6 +60,6 @@ console.log(generateBirthCertificate())
 const birthRecords = Array.from({ length: 100 }, generateBirthCertificate);
 
 // Write to JSON file
-fs.writeFileSync('src/assets/birth_records.json', JSON.stringify(birthRecords, null, 2), 'utf-8');
+fs.writeFileSync('src/assets/death_records.json', JSON.stringify(birthRecords, null, 2), 'utf-8');
 
 console.log('✅ 100 birth records written to birth_records.json');

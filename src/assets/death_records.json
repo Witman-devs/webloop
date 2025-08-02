@@ -1,0 +1,938 @@
+[
+  {
+    "fullName": "Manuel Durgan-Hoppe",
+    "dateOfBirth": "6 September 2022",
+    "dateOfDeath": "15 December 2022",
+    "placeOfDeath": "Redmarsh, Nocturna, Zorik",
+    "causeOfDeath": "Poisoning",
+    "certificateNumber": "DC-2022-757193",
+    "registrar": "Office of the Civil Registrar"
+  },
+  {
+    "fullName": "Courtney Tillman",
+    "dateOfBirth": "7 August 1960",
+    "dateOfDeath": "2 April 2015",
+    "placeOfDeath": "Redmarsh, Nocturna, Zorik",
+    "causeOfDeath": "Battle Wounds",
+    "certificateNumber": "DC-1960-612419",
+    "registrar": "Office of the Civil Registrar"
+  },
+  {
+    "fullName": "Pedro Smitham",
+    "dateOfBirth": "8 July 1971",
+    "dateOfDeath": "9 March 1972",
+    "placeOfDeath": "Redmarsh, Nocturna, Zorik",
+    "causeOfDeath": "Poisoning",
+    "certificateNumber": "DC-1971-165634",
+    "registrar": "Office of the Civil Registrar"
+  },
+  {
+    "fullName": "Jennifer Ondricka",
+    "dateOfBirth": "6 September 1986",
+    "dateOfDeath": "29 January 2013",
+    "placeOfDeath": "Redmarsh, Nocturna, Zorik",
+    "causeOfDeath": "Illness",
+    "certificateNumber": "DC-1986-475649",
+    "registrar": "Office of the Civil Registrar"
+  },
+  {
+    "fullName": "Johnny Jenkins",
+    "dateOfBirth": "29 August 2025",
+    "dateOfDeath": "14 September 2025",
+    "placeOfDeath": "Redmarsh, Nocturna, Zorik",
+    "causeOfDeath": "Natural Causes",
+    "certificateNumber": "DC-2025-201382",
+    "registrar": "Office of the Civil Registrar"
+  },
+  {
+    "fullName": "Lynne Barrows",
+    "dateOfBirth": "11 December 1968",
+    "dateOfDeath": "17 June 1975",
+    "placeOfDeath": "Redmarsh, Nocturna, Zorik",
+    "causeOfDeath": "Natural Causes",
+    "certificateNumber": "DC-1968-476541",
+    "registrar": "Office of the Civil Registrar"
+  },
+  {
+    "fullName": "Elizabeth Larkin",
+    "dateOfBirth": "5 April 2005",
+    "dateOfDeath": "1 June 2014",
+    "placeOfDeath": "Redmarsh, Nocturna, Zorik",
+    "causeOfDeath": "Battle Wounds",
+    "certificateNumber": "DC-2005-558033",
+    "registrar": "Office of the Civil Registrar"
+  },
+  {
+    "fullName": "Nathaniel Hermiston",
+    "dateOfBirth": "11 February 1962",
+    "dateOfDeath": "21 May 1994",
+    "placeOfDeath": "Redmarsh, Nocturna, Zorik",
+    "causeOfDeath": "Beast Attack",
+    "certificateNumber": "DC-1962-212479",
+    "registrar": "Office of the Civil Registrar"
+  },
+  {
+    "fullName": "Van Mitchell",
+    "dateOfBirth": "2 December 2022",
+    "dateOfDeath": "3 November 2025",
+    "placeOfDeath": "Redmarsh, Nocturna, Zorik",
+    "causeOfDeath": "Beast Attack",
+    "certificateNumber": "DC-2022-107405",
+    "registrar": "Office of the Civil Registrar"
+  },
+  {
+    "fullName": "Joyce Metz",
+    "dateOfBirth": "25 December 2007",
+    "dateOfDeath": "11 May 2010",
+    "placeOfDeath": "Redmarsh, Nocturna, Zorik",
+    "causeOfDeath": "Poisoning",
+    "certificateNumber": "DC-2007-630534",
+    "registrar": "Office of the Civil Registrar"
+  },
+  {
+    "fullName": "Manuel Collier",
+    "dateOfBirth": "26 May 2018",
+    "dateOfDeath": "8 October 2018",
+    "placeOfDeath": "Redmarsh, Nocturna, Zorik",
+    "causeOfDeath": "Chemical Mishap",
+    "certificateNumber": "DC-2018-892601",
+    "registrar": "Office of the Civil Registrar"
+  },
+  {
+    "fullName": "Edwin Keebler",
+    "dateOfBirth": "20 November 2016",
+    "dateOfDeath": "27 March 2021",
+    "placeOfDeath": "Redmarsh, Nocturna, Zorik",
+    "causeOfDeath": "Unknown",
+    "certificateNumber": "DC-2016-223783",
+    "registrar": "Office of the Civil Registrar"
+  },
+  {
+    "fullName": "Diana Schiller",
+    "dateOfBirth": "5 February 1980",
+    "dateOfDeath": "11 August 1987",
+    "placeOfDeath": "Redmarsh, Nocturna, Zorik",
+    "causeOfDeath": "Natural Causes",
+    "certificateNumber": "DC-1980-083038",
+    "registrar": "Office of the Civil Registrar"
+  },
+  {
+    "fullName": "Grady Wolff",
+    "dateOfBirth": "24 February 1996",
+    "dateOfDeath": "24 March 2015",
+    "placeOfDeath": "Redmarsh, Nocturna, Zorik",
+    "causeOfDeath": "Battle Wounds",
+    "certificateNumber": "DC-1996-957828",
+    "registrar": "Office of the Civil Registrar"
+  },
+  {
+    "fullName": "Eugene Douglas",
+    "dateOfBirth": "22 May 1978",
+    "dateOfDeath": "3 June 2007",
+    "placeOfDeath": "Redmarsh, Nocturna, Zorik",
+    "causeOfDeath": "Accident",
+    "certificateNumber": "DC-1978-502270",
+    "registrar": "Office of the Civil Registrar"
+  },
+  {
+    "fullName": "Sandra Mertz",
+    "dateOfBirth": "26 January 1966",
+    "dateOfDeath": "4 September 2009",
+    "placeOfDeath": "Redmarsh, Nocturna, Zorik",
+    "causeOfDeath": "Beast Attack",
+    "certificateNumber": "DC-1966-456537",
+    "registrar": "Office of the Civil Registrar"
+  },
+  {
+    "fullName": "Milton Botsford",
+    "dateOfBirth": "28 January 2014",
+    "dateOfDeath": "25 September 2022",
+    "placeOfDeath": "Redmarsh, Nocturna, Zorik",
+    "causeOfDeath": "Natural Causes",
+    "certificateNumber": "DC-2014-710970",
+    "registrar": "Office of the Civil Registrar"
+  },
+  {
+    "fullName": "Jackie Will",
+    "dateOfBirth": "19 August 1966",
+    "dateOfDeath": "7 August 1990",
+    "placeOfDeath": "Redmarsh, Nocturna, Zorik",
+    "causeOfDeath": "Beast Attack",
+    "certificateNumber": "DC-1966-282210",
+    "registrar": "Office of the Civil Registrar"
+  },
+  {
+    "fullName": "Christine Morissette",
+    "dateOfBirth": "9 March 1980",
+    "dateOfDeath": "19 December 1994",
+    "placeOfDeath": "Redmarsh, Nocturna, Zorik",
+    "causeOfDeath": "Poisoning",
+    "certificateNumber": "DC-1980-265277",
+    "registrar": "Office of the Civil Registrar"
+  },
+  {
+    "fullName": "Rick O'Hara",
+    "dateOfBirth": "4 August 1976",
+    "dateOfDeath": "19 January 2018",
+    "placeOfDeath": "Redmarsh, Nocturna, Zorik",
+    "causeOfDeath": "Beast Attack",
+    "certificateNumber": "DC-1976-472538",
+    "registrar": "Office of the Civil Registrar"
+  },
+  {
+    "fullName": "Jeffrey Bogisich",
+    "dateOfBirth": "10 October 1983",
+    "dateOfDeath": "7 May 1988",
+    "placeOfDeath": "Redmarsh, Nocturna, Zorik",
+    "causeOfDeath": "Accident",
+    "certificateNumber": "DC-1983-899689",
+    "registrar": "Office of the Civil Registrar"
+  },
+  {
+    "fullName": "Eunice Toy",
+    "dateOfBirth": "10 June 1993",
+    "dateOfDeath": "7 February 2023",
+    "placeOfDeath": "Redmarsh, Nocturna, Zorik",
+    "causeOfDeath": "Chemical Mishap",
+    "certificateNumber": "DC-1993-899746",
+    "registrar": "Office of the Civil Registrar"
+  },
+  {
+    "fullName": "Patricia Wiza",
+    "dateOfBirth": "3 April 1962",
+    "dateOfDeath": "23 June 1974",
+    "placeOfDeath": "Redmarsh, Nocturna, Zorik",
+    "causeOfDeath": "Unknown",
+    "certificateNumber": "DC-1962-683829",
+    "registrar": "Office of the Civil Registrar"
+  },
+  {
+    "fullName": "Miriam Berge",
+    "dateOfBirth": "24 July 2019",
+    "dateOfDeath": "24 April 2024",
+    "placeOfDeath": "Redmarsh, Nocturna, Zorik",
+    "causeOfDeath": "Natural Causes",
+    "certificateNumber": "DC-2019-743872",
+    "registrar": "Office of the Civil Registrar"
+  },
+  {
+    "fullName": "Joel Brekke",
+    "dateOfBirth": "4 March 1986",
+    "dateOfDeath": "10 April 1986",
+    "placeOfDeath": "Redmarsh, Nocturna, Zorik",
+    "causeOfDeath": "Accident",
+    "certificateNumber": "DC-1986-739737",
+    "registrar": "Office of the Civil Registrar"
+  },
+  {
+    "fullName": "Sylvester Roberts",
+    "dateOfBirth": "15 December 1976",
+    "dateOfDeath": "5 November 1997",
+    "placeOfDeath": "Redmarsh, Nocturna, Zorik",
+    "causeOfDeath": "Illness",
+    "certificateNumber": "DC-1976-683591",
+    "registrar": "Office of the Civil Registrar"
+  },
+  {
+    "fullName": "Mattie Bernier",
+    "dateOfBirth": "22 March 1989",
+    "dateOfDeath": "29 February 2004",
+    "placeOfDeath": "Redmarsh, Nocturna, Zorik",
+    "causeOfDeath": "Chemical Mishap",
+    "certificateNumber": "DC-1989-189860",
+    "registrar": "Office of the Civil Registrar"
+  },
+  {
+    "fullName": "Fannie Herzog",
+    "dateOfBirth": "30 May 2013",
+    "dateOfDeath": "9 January 2015",
+    "placeOfDeath": "Redmarsh, Nocturna, Zorik",
+    "causeOfDeath": "Unknown",
+    "certificateNumber": "DC-2013-363884",
+    "registrar": "Office of the Civil Registrar"
+  },
+  {
+    "fullName": "Elizabeth Goodwin",
+    "dateOfBirth": "19 May 1965",
+    "dateOfDeath": "19 April 2020",
+    "placeOfDeath": "Redmarsh, Nocturna, Zorik",
+    "causeOfDeath": "Chemical Mishap",
+    "certificateNumber": "DC-1965-050966",
+    "registrar": "Office of the Civil Registrar"
+  },
+  {
+    "fullName": "Alison Kertzmann",
+    "dateOfBirth": "27 September 2018",
+    "dateOfDeath": "28 July 2024",
+    "placeOfDeath": "Redmarsh, Nocturna, Zorik",
+    "causeOfDeath": "Accident",
+    "certificateNumber": "DC-2018-390839",
+    "registrar": "Office of the Civil Registrar"
+  },
+  {
+    "fullName": "Jana Stoltenberg",
+    "dateOfBirth": "1 February 1979",
+    "dateOfDeath": "17 September 1997",
+    "placeOfDeath": "Redmarsh, Nocturna, Zorik",
+    "causeOfDeath": "Beast Attack",
+    "certificateNumber": "DC-1979-584107",
+    "registrar": "Office of the Civil Registrar"
+  },
+  {
+    "fullName": "Shawna Luettgen",
+    "dateOfBirth": "13 September 2002",
+    "dateOfDeath": "11 November 2010",
+    "placeOfDeath": "Redmarsh, Nocturna, Zorik",
+    "causeOfDeath": "Accident",
+    "certificateNumber": "DC-2002-680080",
+    "registrar": "Office of the Civil Registrar"
+  },
+  {
+    "fullName": "Emma Hermiston-Keebler",
+    "dateOfBirth": "15 November 2009",
+    "dateOfDeath": "3 February 2017",
+    "placeOfDeath": "Redmarsh, Nocturna, Zorik",
+    "causeOfDeath": "Battle Wounds",
+    "certificateNumber": "DC-2009-414502",
+    "registrar": "Office of the Civil Registrar"
+  },
+  {
+    "fullName": "Dolores Nolan",
+    "dateOfBirth": "28 October 1983",
+    "dateOfDeath": "25 September 1989",
+    "placeOfDeath": "Redmarsh, Nocturna, Zorik",
+    "causeOfDeath": "Poisoning",
+    "certificateNumber": "DC-1983-226777",
+    "registrar": "Office of the Civil Registrar"
+  },
+  {
+    "fullName": "Cary Kris",
+    "dateOfBirth": "15 January 1981",
+    "dateOfDeath": "13 December 2021",
+    "placeOfDeath": "Redmarsh, Nocturna, Zorik",
+    "causeOfDeath": "Poisoning",
+    "certificateNumber": "DC-1981-933366",
+    "registrar": "Office of the Civil Registrar"
+  },
+  {
+    "fullName": "Edgar Langworth",
+    "dateOfBirth": "20 October 1979",
+    "dateOfDeath": "19 February 2007",
+    "placeOfDeath": "Redmarsh, Nocturna, Zorik",
+    "causeOfDeath": "Unknown",
+    "certificateNumber": "DC-1979-025162",
+    "registrar": "Office of the Civil Registrar"
+  },
+  {
+    "fullName": "Gabriel Prohaska",
+    "dateOfBirth": "14 March 1986",
+    "dateOfDeath": "19 February 1999",
+    "placeOfDeath": "Redmarsh, Nocturna, Zorik",
+    "causeOfDeath": "Illness",
+    "certificateNumber": "DC-1986-520237",
+    "registrar": "Office of the Civil Registrar"
+  },
+  {
+    "fullName": "Yolanda Pouros",
+    "dateOfBirth": "5 March 1995",
+    "dateOfDeath": "24 January 2022",
+    "placeOfDeath": "Redmarsh, Nocturna, Zorik",
+    "causeOfDeath": "Beast Attack",
+    "certificateNumber": "DC-1995-748294",
+    "registrar": "Office of the Civil Registrar"
+  },
+  {
+    "fullName": "Elsie Volkman",
+    "dateOfBirth": "1 January 1970",
+    "dateOfDeath": "13 January 2011",
+    "placeOfDeath": "Redmarsh, Nocturna, Zorik",
+    "causeOfDeath": "Unknown",
+    "certificateNumber": "DC-1970-520152",
+    "registrar": "Office of the Civil Registrar"
+  },
+  {
+    "fullName": "Hilda Reilly",
+    "dateOfBirth": "2 April 1987",
+    "dateOfDeath": "10 December 2014",
+    "placeOfDeath": "Redmarsh, Nocturna, Zorik",
+    "causeOfDeath": "Poisoning",
+    "certificateNumber": "DC-1987-020105",
+    "registrar": "Office of the Civil Registrar"
+  },
+  {
+    "fullName": "Sadie Wuckert",
+    "dateOfBirth": "29 December 1988",
+    "dateOfDeath": "2 October 1989",
+    "placeOfDeath": "Redmarsh, Nocturna, Zorik",
+    "causeOfDeath": "Natural Causes",
+    "certificateNumber": "DC-1988-131359",
+    "registrar": "Office of the Civil Registrar"
+  },
+  {
+    "fullName": "Alexandra Goyette",
+    "dateOfBirth": "23 July 2024",
+    "dateOfDeath": "12 May 2025",
+    "placeOfDeath": "Redmarsh, Nocturna, Zorik",
+    "causeOfDeath": "Accident",
+    "certificateNumber": "DC-2024-423318",
+    "registrar": "Office of the Civil Registrar"
+  },
+  {
+    "fullName": "Doreen Hettinger",
+    "dateOfBirth": "14 August 1960",
+    "dateOfDeath": "24 March 2001",
+    "placeOfDeath": "Redmarsh, Nocturna, Zorik",
+    "causeOfDeath": "Natural Causes",
+    "certificateNumber": "DC-1960-894826",
+    "registrar": "Office of the Civil Registrar"
+  },
+  {
+    "fullName": "Regina Erdman",
+    "dateOfBirth": "18 September 2004",
+    "dateOfDeath": "16 March 2023",
+    "placeOfDeath": "Redmarsh, Nocturna, Zorik",
+    "causeOfDeath": "Unknown",
+    "certificateNumber": "DC-2004-027260",
+    "registrar": "Office of the Civil Registrar"
+  },
+  {
+    "fullName": "Casey Wilkinson",
+    "dateOfBirth": "25 March 1999",
+    "dateOfDeath": "19 April 2022",
+    "placeOfDeath": "Redmarsh, Nocturna, Zorik",
+    "causeOfDeath": "Natural Causes",
+    "certificateNumber": "DC-1999-511654",
+    "registrar": "Office of the Civil Registrar"
+  },
+  {
+    "fullName": "Kathleen VonRueden",
+    "dateOfBirth": "3 July 2012",
+    "dateOfDeath": "27 February 2016",
+    "placeOfDeath": "Redmarsh, Nocturna, Zorik",
+    "causeOfDeath": "Poisoning",
+    "certificateNumber": "DC-2012-718175",
+    "registrar": "Office of the Civil Registrar"
+  },
+  {
+    "fullName": "Lola Weissnat",
+    "dateOfBirth": "2 July 2005",
+    "dateOfDeath": "15 July 2011",
+    "placeOfDeath": "Redmarsh, Nocturna, Zorik",
+    "causeOfDeath": "Natural Causes",
+    "certificateNumber": "DC-2005-660514",
+    "registrar": "Office of the Civil Registrar"
+  },
+  {
+    "fullName": "Taylor Pagac",
+    "dateOfBirth": "15 May 2017",
+    "dateOfDeath": "29 May 2020",
+    "placeOfDeath": "Redmarsh, Nocturna, Zorik",
+    "causeOfDeath": "Chemical Mishap",
+    "certificateNumber": "DC-2017-199930",
+    "registrar": "Office of the Civil Registrar"
+  },
+  {
+    "fullName": "Homer Kutch",
+    "dateOfBirth": "19 October 1965",
+    "dateOfDeath": "2 August 1966",
+    "placeOfDeath": "Redmarsh, Nocturna, Zorik",
+    "causeOfDeath": "Battle Wounds",
+    "certificateNumber": "DC-1965-107040",
+    "registrar": "Office of the Civil Registrar"
+  },
+  {
+    "fullName": "Jill Schuppe",
+    "dateOfBirth": "1 October 2022",
+    "dateOfDeath": "7 March 2023",
+    "placeOfDeath": "Redmarsh, Nocturna, Zorik",
+    "causeOfDeath": "Chemical Mishap",
+    "certificateNumber": "DC-2022-397230",
+    "registrar": "Office of the Civil Registrar"
+  },
+  {
+    "fullName": "Cedric Stokes",
+    "dateOfBirth": "10 February 2011",
+    "dateOfDeath": "27 July 2017",
+    "placeOfDeath": "Redmarsh, Nocturna, Zorik",
+    "causeOfDeath": "Chemical Mishap",
+    "certificateNumber": "DC-2011-167972",
+    "registrar": "Office of the Civil Registrar"
+  },
+  {
+    "fullName": "Johanna Walsh",
+    "dateOfBirth": "14 April 1972",
+    "dateOfDeath": "13 October 2008",
+    "placeOfDeath": "Redmarsh, Nocturna, Zorik",
+    "causeOfDeath": "Battle Wounds",
+    "certificateNumber": "DC-1972-266367",
+    "registrar": "Office of the Civil Registrar"
+  },
+  {
+    "fullName": "Isabel Mueller",
+    "dateOfBirth": "9 June 2015",
+    "dateOfDeath": "11 January 2021",
+    "placeOfDeath": "Redmarsh, Nocturna, Zorik",
+    "causeOfDeath": "Chemical Mishap",
+    "certificateNumber": "DC-2015-597210",
+    "registrar": "Office of the Civil Registrar"
+  },
+  {
+    "fullName": "Sonya Bruen",
+    "dateOfBirth": "19 October 1982",
+    "dateOfDeath": "22 May 2025",
+    "placeOfDeath": "Redmarsh, Nocturna, Zorik",
+    "causeOfDeath": "Accident",
+    "certificateNumber": "DC-1982-453632",
+    "registrar": "Office of the Civil Registrar"
+  },
+  {
+    "fullName": "Casey Berge",
+    "dateOfBirth": "3 December 2004",
+    "dateOfDeath": "8 December 2020",
+    "placeOfDeath": "Redmarsh, Nocturna, Zorik",
+    "causeOfDeath": "Accident",
+    "certificateNumber": "DC-2004-501974",
+    "registrar": "Office of the Civil Registrar"
+  },
+  {
+    "fullName": "Dennis Sauer",
+    "dateOfBirth": "24 January 1980",
+    "dateOfDeath": "23 April 2022",
+    "placeOfDeath": "Redmarsh, Nocturna, Zorik",
+    "causeOfDeath": "Beast Attack",
+    "certificateNumber": "DC-1980-090157",
+    "registrar": "Office of the Civil Registrar"
+  },
+  {
+    "fullName": "Deborah Greenfelder",
+    "dateOfBirth": "25 December 1986",
+    "dateOfDeath": "27 May 2016",
+    "placeOfDeath": "Redmarsh, Nocturna, Zorik",
+    "causeOfDeath": "Natural Causes",
+    "certificateNumber": "DC-1986-567456",
+    "registrar": "Office of the Civil Registrar"
+  },
+  {
+    "fullName": "Ramon Koelpin",
+    "dateOfBirth": "8 April 1962",
+    "dateOfDeath": "12 April 1962",
+    "placeOfDeath": "Redmarsh, Nocturna, Zorik",
+    "causeOfDeath": "Beast Attack",
+    "certificateNumber": "DC-1962-319321",
+    "registrar": "Office of the Civil Registrar"
+  },
+  {
+    "fullName": "Emily Kihn",
+    "dateOfBirth": "27 December 1965",
+    "dateOfDeath": "23 February 2019",
+    "placeOfDeath": "Redmarsh, Nocturna, Zorik",
+    "causeOfDeath": "Illness",
+    "certificateNumber": "DC-1965-739430",
+    "registrar": "Office of the Civil Registrar"
+  },
+  {
+    "fullName": "Jan Murphy",
+    "dateOfBirth": "23 December 1961",
+    "dateOfDeath": "30 May 1988",
+    "placeOfDeath": "Redmarsh, Nocturna, Zorik",
+    "causeOfDeath": "Battle Wounds",
+    "certificateNumber": "DC-1961-705244",
+    "registrar": "Office of the Civil Registrar"
+  },
+  {
+    "fullName": "Vicki Dickens",
+    "dateOfBirth": "9 February 2021",
+    "dateOfDeath": "1 December 2023",
+    "placeOfDeath": "Redmarsh, Nocturna, Zorik",
+    "causeOfDeath": "Chemical Mishap",
+    "certificateNumber": "DC-2021-734331",
+    "registrar": "Office of the Civil Registrar"
+  },
+  {
+    "fullName": "Tabitha Harris",
+    "dateOfBirth": "28 November 1994",
+    "dateOfDeath": "21 September 2004",
+    "placeOfDeath": "Redmarsh, Nocturna, Zorik",
+    "causeOfDeath": "Illness",
+    "certificateNumber": "DC-1994-154809",
+    "registrar": "Office of the Civil Registrar"
+  },
+  {
+    "fullName": "Jeremy Will",
+    "dateOfBirth": "13 July 2001",
+    "dateOfDeath": "6 January 2022",
+    "placeOfDeath": "Redmarsh, Nocturna, Zorik",
+    "causeOfDeath": "Chemical Mishap",
+    "certificateNumber": "DC-2001-296069",
+    "registrar": "Office of the Civil Registrar"
+  },
+  {
+    "fullName": "Floyd Block-Bogan",
+    "dateOfBirth": "4 August 1978",
+    "dateOfDeath": "12 June 2012",
+    "placeOfDeath": "Redmarsh, Nocturna, Zorik",
+    "causeOfDeath": "Battle Wounds",
+    "certificateNumber": "DC-1978-842807",
+    "registrar": "Office of the Civil Registrar"
+  },
+  {
+    "fullName": "Courtney Huels",
+    "dateOfBirth": "12 September 2024",
+    "dateOfDeath": "12 December 2024",
+    "placeOfDeath": "Redmarsh, Nocturna, Zorik",
+    "causeOfDeath": "Unknown",
+    "certificateNumber": "DC-2024-664065",
+    "registrar": "Office of the Civil Registrar"
+  },
+  {
+    "fullName": "Renee Larson",
+    "dateOfBirth": "21 April 2017",
+    "dateOfDeath": "29 November 2025",
+    "placeOfDeath": "Redmarsh, Nocturna, Zorik",
+    "causeOfDeath": "Poisoning",
+    "certificateNumber": "DC-2017-230922",
+    "registrar": "Office of the Civil Registrar"
+  },
+  {
+    "fullName": "Dominic Borer",
+    "dateOfBirth": "30 July 1961",
+    "dateOfDeath": "8 September 2017",
+    "placeOfDeath": "Redmarsh, Nocturna, Zorik",
+    "causeOfDeath": "Unknown",
+    "certificateNumber": "DC-1961-288518",
+    "registrar": "Office of the Civil Registrar"
+  },
+  {
+    "fullName": "Wayne Legros",
+    "dateOfBirth": "10 March 1962",
+    "dateOfDeath": "21 May 1981",
+    "placeOfDeath": "Redmarsh, Nocturna, Zorik",
+    "causeOfDeath": "Accident",
+    "certificateNumber": "DC-1962-163860",
+    "registrar": "Office of the Civil Registrar"
+  },
+  {
+    "fullName": "Dora Legros",
+    "dateOfBirth": "9 January 2001",
+    "dateOfDeath": "18 December 2025",
+    "placeOfDeath": "Redmarsh, Nocturna, Zorik",
+    "causeOfDeath": "Illness",
+    "certificateNumber": "DC-2001-196849",
+    "registrar": "Office of the Civil Registrar"
+  },
+  {
+    "fullName": "Essie Kovacek",
+    "dateOfBirth": "30 May 1979",
+    "dateOfDeath": "31 October 2001",
+    "placeOfDeath": "Redmarsh, Nocturna, Zorik",
+    "causeOfDeath": "Illness",
+    "certificateNumber": "DC-1979-912135",
+    "registrar": "Office of the Civil Registrar"
+  },
+  {
+    "fullName": "Shane Gorczany",
+    "dateOfBirth": "8 November 2020",
+    "dateOfDeath": "10 November 2024",
+    "placeOfDeath": "Redmarsh, Nocturna, Zorik",
+    "causeOfDeath": "Battle Wounds",
+    "certificateNumber": "DC-2020-864972",
+    "registrar": "Office of the Civil Registrar"
+  },
+  {
+    "fullName": "Stacey Pfannerstill",
+    "dateOfBirth": "4 June 1974",
+    "dateOfDeath": "1 June 2005",
+    "placeOfDeath": "Redmarsh, Nocturna, Zorik",
+    "causeOfDeath": "Battle Wounds",
+    "certificateNumber": "DC-1974-108151",
+    "registrar": "Office of the Civil Registrar"
+  },
+  {
+    "fullName": "Emily Armstrong",
+    "dateOfBirth": "28 June 1998",
+    "dateOfDeath": "31 October 2019",
+    "placeOfDeath": "Redmarsh, Nocturna, Zorik",
+    "causeOfDeath": "Battle Wounds",
+    "certificateNumber": "DC-1998-341055",
+    "registrar": "Office of the Civil Registrar"
+  },
+  {
+    "fullName": "Julius Klocko",
+    "dateOfBirth": "25 July 2014",
+    "dateOfDeath": "25 May 2016",
+    "placeOfDeath": "Redmarsh, Nocturna, Zorik",
+    "causeOfDeath": "Accident",
+    "certificateNumber": "DC-2014-869260",
+    "registrar": "Office of the Civil Registrar"
+  },
+  {
+    "fullName": "Jerry Abernathy",
+    "dateOfBirth": "20 January 1960",
+    "dateOfDeath": "5 March 1986",
+    "placeOfDeath": "Redmarsh, Nocturna, Zorik",
+    "causeOfDeath": "Illness",
+    "certificateNumber": "DC-1960-836228",
+    "registrar": "Office of the Civil Registrar"
+  },
+  {
+    "fullName": "April Jerde",
+    "dateOfBirth": "17 December 1971",
+    "dateOfDeath": "1 February 1999",
+    "placeOfDeath": "Redmarsh, Nocturna, Zorik",
+    "causeOfDeath": "Poisoning",
+    "certificateNumber": "DC-1971-531931",
+    "registrar": "Office of the Civil Registrar"
+  },
+  {
+    "fullName": "Jerry Toy",
+    "dateOfBirth": "19 July 2010",
+    "dateOfDeath": "11 March 2013",
+    "placeOfDeath": "Redmarsh, Nocturna, Zorik",
+    "causeOfDeath": "Battle Wounds",
+    "certificateNumber": "DC-2010-656433",
+    "registrar": "Office of the Civil Registrar"
+  },
+  {
+    "fullName": "Katie Orn",
+    "dateOfBirth": "28 December 1988",
+    "dateOfDeath": "1 September 1990",
+    "placeOfDeath": "Redmarsh, Nocturna, Zorik",
+    "causeOfDeath": "Natural Causes",
+    "certificateNumber": "DC-1988-004281",
+    "registrar": "Office of the Civil Registrar"
+  },
+  {
+    "fullName": "Norma Greenholt",
+    "dateOfBirth": "8 March 2024",
+    "dateOfDeath": "3 May 2025",
+    "placeOfDeath": "Redmarsh, Nocturna, Zorik",
+    "causeOfDeath": "Battle Wounds",
+    "certificateNumber": "DC-2024-718484",
+    "registrar": "Office of the Civil Registrar"
+  },
+  {
+    "fullName": "Christopher Erdman",
+    "dateOfBirth": "6 April 2023",
+    "dateOfDeath": "10 February 2024",
+    "placeOfDeath": "Redmarsh, Nocturna, Zorik",
+    "causeOfDeath": "Illness",
+    "certificateNumber": "DC-2023-238855",
+    "registrar": "Office of the Civil Registrar"
+  },
+  {
+    "fullName": "Rene Stokes",
+    "dateOfBirth": "9 October 1987",
+    "dateOfDeath": "8 December 1991",
+    "placeOfDeath": "Redmarsh, Nocturna, Zorik",
+    "causeOfDeath": "Poisoning",
+    "certificateNumber": "DC-1987-725084",
+    "registrar": "Office of the Civil Registrar"
+  },
+  {
+    "fullName": "Jodi MacGyver",
+    "dateOfBirth": "29 September 1969",
+    "dateOfDeath": "23 March 1983",
+    "placeOfDeath": "Redmarsh, Nocturna, Zorik",
+    "causeOfDeath": "Poisoning",
+    "certificateNumber": "DC-1969-516560",
+    "registrar": "Office of the Civil Registrar"
+  },
+  {
+    "fullName": "Ruby Rohan",
+    "dateOfBirth": "22 March 2017",
+    "dateOfDeath": "13 September 2020",
+    "placeOfDeath": "Redmarsh, Nocturna, Zorik",
+    "causeOfDeath": "Accident",
+    "certificateNumber": "DC-2017-622149",
+    "registrar": "Office of the Civil Registrar"
+  },
+  {
+    "fullName": "Alejandro Osinski",
+    "dateOfBirth": "30 May 1968",
+    "dateOfDeath": "13 October 2000",
+    "placeOfDeath": "Redmarsh, Nocturna, Zorik",
+    "causeOfDeath": "Accident",
+    "certificateNumber": "DC-1968-515542",
+    "registrar": "Office of the Civil Registrar"
+  },
+  {
+    "fullName": "Milton Lubowitz",
+    "dateOfBirth": "15 June 1994",
+    "dateOfDeath": "27 September 2001",
+    "placeOfDeath": "Redmarsh, Nocturna, Zorik",
+    "causeOfDeath": "Accident",
+    "certificateNumber": "DC-1994-903578",
+    "registrar": "Office of the Civil Registrar"
+  },
+  {
+    "fullName": "Bill Quitzon",
+    "dateOfBirth": "4 November 1960",
+    "dateOfDeath": "20 June 1991",
+    "placeOfDeath": "Redmarsh, Nocturna, Zorik",
+    "causeOfDeath": "Illness",
+    "certificateNumber": "DC-1960-827901",
+    "registrar": "Office of the Civil Registrar"
+  },
+  {
+    "fullName": "Annie Green-Ondricka",
+    "dateOfBirth": "29 December 2014",
+    "dateOfDeath": "25 June 2015",
+    "placeOfDeath": "Redmarsh, Nocturna, Zorik",
+    "causeOfDeath": "Beast Attack",
+    "certificateNumber": "DC-2014-377058",
+    "registrar": "Office of the Civil Registrar"
+  },
+  {
+    "fullName": "Ronnie West",
+    "dateOfBirth": "22 May 1983",
+    "dateOfDeath": "22 January 2007",
+    "placeOfDeath": "Redmarsh, Nocturna, Zorik",
+    "causeOfDeath": "Battle Wounds",
+    "certificateNumber": "DC-1983-765101",
+    "registrar": "Office of the Civil Registrar"
+  },
+  {
+    "fullName": "Dave Shanahan",
+    "dateOfBirth": "23 June 1965",
+    "dateOfDeath": "30 December 1986",
+    "placeOfDeath": "Redmarsh, Nocturna, Zorik",
+    "causeOfDeath": "Illness",
+    "certificateNumber": "DC-1965-473342",
+    "registrar": "Office of the Civil Registrar"
+  },
+  {
+    "fullName": "Josephine Nikolaus",
+    "dateOfBirth": "27 January 2015",
+    "dateOfDeath": "31 October 2017",
+    "placeOfDeath": "Redmarsh, Nocturna, Zorik",
+    "causeOfDeath": "Poisoning",
+    "certificateNumber": "DC-2015-153864",
+    "registrar": "Office of the Civil Registrar"
+  },
+  {
+    "fullName": "Nicholas Rohan",
+    "dateOfBirth": "10 May 2009",
+    "dateOfDeath": "21 September 2022",
+    "placeOfDeath": "Redmarsh, Nocturna, Zorik",
+    "causeOfDeath": "Unknown",
+    "certificateNumber": "DC-2009-834363",
+    "registrar": "Office of the Civil Registrar"
+  },
+  {
+    "fullName": "Lela Sipes",
+    "dateOfBirth": "25 April 2012",
+    "dateOfDeath": "21 July 2013",
+    "placeOfDeath": "Redmarsh, Nocturna, Zorik",
+    "causeOfDeath": "Illness",
+    "certificateNumber": "DC-2012-250178",
+    "registrar": "Office of the Civil Registrar"
+  },
+  {
+    "fullName": "Jordan McGlynn",
+    "dateOfBirth": "21 January 2021",
+    "dateOfDeath": "21 November 2024",
+    "placeOfDeath": "Redmarsh, Nocturna, Zorik",
+    "causeOfDeath": "Chemical Mishap",
+    "certificateNumber": "DC-2021-451818",
+    "registrar": "Office of the Civil Registrar"
+  },
+  {
+    "fullName": "Rosa Bartell",
+    "dateOfBirth": "9 February 2012",
+    "dateOfDeath": "26 August 2023",
+    "placeOfDeath": "Redmarsh, Nocturna, Zorik",
+    "causeOfDeath": "Poisoning",
+    "certificateNumber": "DC-2012-620518",
+    "registrar": "Office of the Civil Registrar"
+  },
+  {
+    "fullName": "Dana Crooks",
+    "dateOfBirth": "4 August 1961",
+    "dateOfDeath": "2 October 2004",
+    "placeOfDeath": "Redmarsh, Nocturna, Zorik",
+    "causeOfDeath": "Accident",
+    "certificateNumber": "DC-1961-881994",
+    "registrar": "Office of the Civil Registrar"
+  },
+  {
+    "fullName": "Jacquelyn McDermott",
+    "dateOfBirth": "2 September 2003",
+    "dateOfDeath": "25 October 2016",
+    "placeOfDeath": "Redmarsh, Nocturna, Zorik",
+    "causeOfDeath": "Beast Attack",
+    "certificateNumber": "DC-2003-403296",
+    "registrar": "Office of the Civil Registrar"
+  },
+  {
+    "fullName": "Karen Parisian",
+    "dateOfBirth": "22 January 2021",
+    "dateOfDeath": "28 June 2025",
+    "placeOfDeath": "Redmarsh, Nocturna, Zorik",
+    "causeOfDeath": "Battle Wounds",
+    "certificateNumber": "DC-2021-154962",
+    "registrar": "Office of the Civil Registrar"
+  },
+  {
+    "fullName": "Adrienne Reinger",
+    "dateOfBirth": "17 June 2013",
+    "dateOfDeath": "7 December 2024",
+    "placeOfDeath": "Redmarsh, Nocturna, Zorik",
+    "causeOfDeath": "Battle Wounds",
+    "certificateNumber": "DC-2013-468739",
+    "registrar": "Office of the Civil Registrar"
+  },
+  {
+    "fullName": "Eileen Hettinger",
+    "dateOfBirth": "20 May 1988",
+    "dateOfDeath": "21 December 2011",
+    "placeOfDeath": "Redmarsh, Nocturna, Zorik",
+    "causeOfDeath": "Natural Causes",
+    "certificateNumber": "DC-1988-828996",
+    "registrar": "Office of the Civil Registrar"
+  },
+  {
+    "fullName": "Grant Runte-Cassin",
+    "dateOfBirth": "3 June 1994",
+    "dateOfDeath": "11 October 2018",
+    "placeOfDeath": "Redmarsh, Nocturna, Zorik",
+    "causeOfDeath": "Accident",
+    "certificateNumber": "DC-1994-994783",
+    "registrar": "Office of the Civil Registrar"
+  },
+  {
+    "fullName": "Johnathan Michael Carter",
+    "dateOfBirth": "July 22, 1985",
+    "dateOfDeath": "April 3, 2023",
+    "placeOfDeath": "Redmarsh Psychiatric Hospital, Redmarsh, USA",
+    "causeOfDeath": "Undetermined; possibly complications from underlying conditions",
+    "certificateNumber": "DC-1985-RPH0403",
+    "registrar": "Redmarsh City Health Department"
+  },
+  {
+    "fullName": "Mark Edward Sullivan",
+    "dateOfBirth": "July 22, 1983",
+    "dateOfDeath": "April 9, 2023",
+    "placeOfDeath": "Westbridge, Redmarsh, USA",
+    "causeOfDeath": "Multiple gunshot wounds",
+    "certificateNumber": "DC-1983-RPD0409",
+    "registrar": "Redmarsh City Health Department"
+  },
+  {
+    "fullName": "Michael Andrew Thompson",
+    "dateOfBirth": "May 14, 1985",
+    "dateOfDeath": "April 20, 2023",
+    "placeOfDeath": "Redmarsh, Midwest, USA",
+    "causeOfDeath": "Apparent suicide by hanging",
+    "certificateNumber": "DC-1985-TRG0420",
+    "registrar": "Redmarsh City Health Department"
+  },
+  {
+    "fullName": "Juan Martinez",
+    "dateOfBirth": "June 22, 1982",
+    "dateOfDeath": "July 15, 2023",
+    "placeOfDeath": "Redmarsh, USA",
+    "causeOfDeath": "Suicide by hanging",
+    "certificateNumber": "DC-1982-RHC0715",
+    "registrar": "Redmarsh City Health Department"
+  }
+]
