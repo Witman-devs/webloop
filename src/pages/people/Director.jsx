@@ -12,7 +12,7 @@ export default function Director({ setPageName }) {
         person={{
           name: "Dr. Arjun Verma",
           fullName: "Arjun Raj Verma",
-          birthDate: "March 14, 1990",
+          birthDate: "December 09, 1963",
           deathDate: "March 14, 2020",
           occupation: "Neurologist & Researcher",
           affiliation: <Link component="span" onClick={()=>setPageName("college")}>St. Healmore Medical College</Link>,
