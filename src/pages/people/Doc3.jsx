@@ -12,7 +12,7 @@ export default function Victim1({ setPageName }) {
           name: "Dr. John Carter",
           fullName: "Johnathan Michael Carter",
           birthDate: "September 22, 1985",
-          occupation: "optometrist",
+          occupation: "Optometrist",
           affiliation: (
             <Link component="span" onClick={() => setPageName("redmarsh")}>
               Redmarsh Psychiatric Hospital
