@@ -1,11 +1,12 @@
 import OrganizationWiki from "../../components/OrganizationWiki";
+import { ADDRESS, LOGOS } from "../../consts";
 
 
 export default function College({ setPageName }) {
   return (
     <>
       <OrganizationWiki
-        logo="https://upload.wikimedia.org/wikipedia/commons/a/ab/Logo_TV_2015.png"
+        logo={LOGOS["college"]}
         name="IndusTech Internaltional Medical college"
         description="Industech International medical college started with an aim to impart quality education in the field of medical sciences, dedicated to shaping the next generation of healthcare leaders. With a strong emphasis on hands-on learning, research, and community outreach, we empower students with the knowledge, skills, and compassion needed to serve patients with integrity and care. Our distinguished faculty, modern infrastructure, and affiliations with top hospitals provide a dynamic environment where science meets service, and learning leads to healing."
         departments={[
@@ -19,19 +20,19 @@ export default function College({ setPageName }) {
           "Radiology"
         ]}
         keyPeople={[
-          { name: "Dr. Elira Koven", role: "Director" },
-          { name: "Dr. Marcus Vel", role: "Chief Medical Officer" },
+          { name: "Dr. Elira Verma", role: "Principle" },
+          { name: "Dr. Marcus Vel", role: "Vice Principle" },
         ]}
         history="Established in 1978, we bgean with a batch of 20 students across 5 classes each and a faculty strength of 15 doctors. We have increased our capacity to 120 students per class and a faculty strength of 78 expert doctors imparting quality education."
         contact={{
-          address: "1 Archive Lane, Velora, Astriva",
+          address: ADDRESS["college"],
           email: "contact@industech.org",
           phone: "+123 456 7890",
         }}
         setPageName={setPageName}
         pages={[
-          { label: "Admission Records", pageName: "admissionRecords" },
-          { label: "Faculty Records", pageName: "facultyRecords" }
+          { label: "Alumni Records", pageName: "alumniRecords" },
+          { label: "Termination Records", pageName: "terminationRecords" }
         ]}
       />
 

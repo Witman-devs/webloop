@@ -1,12 +1,12 @@
-import {
-  Paper,
-  Typography,
-  Box,
-  Divider,
-} from "@mui/material";
+import { Paper, Typography, Box, Divider, Link } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
 
-export default function AlumniStudentsList({ alumni = [], collegeLogo, collegeAddress }){
+export default function AlumniStudentsList({
+  alumni = [],
+  collegeLogo,
+  collegeAddress,
+  setPageName,
+}) {
   const columns = [
     { field: "id", headerName: "#", width: 70 },
     { field: "name", headerName: "Name", flex: 1 },
@@ -43,12 +43,14 @@ export default function AlumniStudentsList({ alumni = [], collegeLogo, collegeAd
         sx={{ borderBottom: "2px solid #ccc", pb: 2 }}
       >
         {collegeLogo && (
-          <Box
-            component="img"
-            src={collegeLogo}
-            alt="College Logo"
-            sx={{ width: 100, height: "auto", objectFit: "contain" }}
-          />
+          <Link component="image" onClick={() => setPageName("college")}>
+            <Box
+              component="img"
+              src={collegeLogo}
+              alt="College Logo"
+              sx={{ width: 100, height: "auto", objectFit: "contain" }}
+            />
+          </Link>
         )}
         <Box textAlign="right">
           <Typography variant="h6" sx={{ fontWeight: "bold" }}>
@@ -90,5 +92,4 @@ export default function AlumniStudentsList({ alumni = [], collegeLogo, collegeAd
       </Box>
     </Paper>
   );
-};
-
+}
