@@ -230,7 +230,7 @@ function Chart({setEvidanceBoardOpen}) {
           boxShadow: 2, 
           borderRadius: '8px',
           position: 'absolute', 
-          top: '20px', 
+          top: '70px', 
           right: '20px', 
         }}
       >
