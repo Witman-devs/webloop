@@ -15,6 +15,7 @@ const OrganRequestMessage = ({
   requestId = "REQ-9821-TRF",
   date = "August 2, 2025",
   doneDate = "03 06 2025",
+  failed = false,
 }) => {
   return (
     <Box
@@ -80,52 +81,77 @@ const OrganRequestMessage = ({
           </Box>
         </Stack>
 
-              {/* STAMP Overlay */}
-      <Box
-        sx={{
-          position: "absolute",
-          bottom: "10%",
-          left: "50%",
-          transform: "translate(-50%, -50%) rotate(-20deg)",
-          color: "#0a0",
-          fontWeight: "bold",
-          fontSize: "1.2rem",
-          border: "2px dashed #0a0",
-          px: 2,
-          py: 1,
-          opacity: 0.5,
-          textTransform: "uppercase",
-          zIndex: 2,
-          pointerEvents: "none",
-        }}
-      >
-        Done.
-        <br />
-        Dr. Rohan Mehta
-      </Box>
+      {/* STAMP Overlay */}
+      {failed?(
+        <Box
+          sx={{
+            position: "absolute",
+            top: "50%",
+            left: "50%",
+            transform: "translate(-50%, -50%) rotate(-20deg)",
+            color: "#a00",
+            fontWeight: "bold",
+            fontSize: "1.2rem",
+            border: "2px dashed #a00",
+            px: 2,
+            py: 1,
+            opacity: 0.5,
+            textTransform: "uppercase",
+            zIndex: 2,
+          }}
+        >
+          Failed Request
+        </Box>
+      ):(
+        <>
+        
+        <Box
+          sx={{
+            position: "absolute",
+            bottom: "10%",
+            left: "50%",
+            transform: "translate(-50%, -50%) rotate(-20deg)",
+            color: "#0a0",
+            fontWeight: "bold",
+            fontSize: "1.2rem",
+            border: "2px dashed #0a0",
+            px: 2,
+            py: 1,
+            opacity: 0.5,
+            textTransform: "uppercase",
+            zIndex: 2,
+            pointerEvents: "none",
+          }}
+        >
+          Done.
+          <br />
+          Dr. Rohan Mehta
+        </Box>
 
-      <Box
-        sx={{
-          position: "absolute",
-          bottom: "50%",
-          right: "5%",
-          transform: "translate(-50%, -50%) rotate(+5deg)",
-          color: "#a00",
-          fontWeight: "bold",
-          fontSize: "1.2rem",
-          border: "2px dashed #a00",
-          px: 2,
-          py: 1,
-          opacity: 0.5,
-          textTransform: "uppercase",
-          zIndex: 2,
-          pointerEvents: "none",
-        }}
-      >
-        Date
-        <br />
-        {doneDate}
-      </Box>
+        <Box
+          sx={{
+            position: "absolute",
+            bottom: "50%",
+            right: "5%",
+            transform: "translate(-50%, -50%) rotate(+5deg)",
+            color: "#a00",
+            fontWeight: "bold",
+            fontSize: "1.2rem",
+            border: "2px dashed #a00",
+            px: 2,
+            py: 1,
+            opacity: 0.5,
+            textTransform: "uppercase",
+            zIndex: 2,
+            pointerEvents: "none",
+          }}
+        >
+          Date
+          <br />
+          {doneDate}
+        </Box>
+        </>
+      )}
       </Paper>
     </Box>
   );

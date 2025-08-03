@@ -5,20 +5,25 @@ function Question({ questionText }) {
   return (
     <>
       <Typography variant="h5">Q: {questionText}</Typography>
-      <Input placeholder="Enter your answer here" style={{width:"70%"}} />
+      <Input placeholder="Enter your answer here" style={{ width: "70%" }} />
     </>
   );
 }
 
 export default function Cases({ setPageName }) {
   return (
-    <div style={{width:"60vw", left:"20vw", position:"relative", paddingBlockStart:"5vh"}}>
+    <div
+      style={{
+        width: "60vw",
+        left: "20vw",
+        position: "relative",
+        paddingBlockStart: "5vh",
+      }}
+    >
       <Typography variant="h2">Cases:</Typography>
       <Typography>
         Answer all the questions to get access to my location.
       </Typography>
-      <Link component="span" onClick={()=>setPageName("police")} > Police </Link>
-      <Link component="span" onClick={()=>setPageName("newsAgency")}>News</Link>
       <Link
         component="button"
         variant="h4"
@@ -33,34 +38,36 @@ export default function Cases({ setPageName }) {
       </List>
       <Divider style={{ margin: "30px" }} />
 
-      <Link
-        component="button"
-        variant="h4"
-        onClick={() => setPageName("case2")}
-      >
-        Case 2: Shootout at port
-      </Link>
-      <List style={{ paddingInlineStart: "10%" }}>
-        
-        <Question questionText="Whose gun did the inspector B die from ?" />
-        <Question questionText="Commission amount ?" />
-        <Question questionText="What time did the inspector A get to the port ?" />
-        </List>
-      <Divider style={{ margin: "30px" }} />
+      {false && (
+        <>
+          <Link
+            component="button"
+            variant="h4"
+            onClick={() => setPageName("case2")}
+          >
+            Case 2: Shootout at port
+          </Link>
+          <List style={{ paddingInlineStart: "10%" }}>
+            <Question questionText="Whose gun did the inspector B die from ?" />
+            <Question questionText="Commission amount ?" />
+            <Question questionText="What time did the inspector A get to the port ?" />
+          </List>
+          <Divider style={{ margin: "30px" }} />
 
-
-      <Link
-        component="button"
-        variant="h4"
-        onClick={() => setPageName("case3")}
-      >
-        Case 3: Death of a Journalist 
-      </Link>
-      <List style={{ paddingInlineStart: "10%" }}>
-        <Question questionText="What is the total transcation amount ?" />
-        <Question questionText="Who receieved the organs ?" />
-        <Question questionText="Who funded the NGO ?" />
-      </List>
+          <Link
+            component="button"
+            variant="h4"
+            onClick={() => setPageName("case3")}
+          >
+            Case 3: Death of a Journalist
+          </Link>
+          <List style={{ paddingInlineStart: "10%" }}>
+            <Question questionText="What is the total transcation amount ?" />
+            <Question questionText="Who receieved the organs ?" />
+            <Question questionText="Who funded the NGO ?" />
+          </List>
+        </>
+      )}
     </div>
   );
 }
