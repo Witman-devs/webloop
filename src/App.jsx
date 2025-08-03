@@ -9,6 +9,9 @@ import MainMenu from "./MainMenu";
 import mlink_hit_sfx from './assets/sfx/minorlink.mp3';
 import Tutorial from "./components/Tutorial";
 import { useSound } from './SoundContext'; // Assuming you save the above code in SoundContext.js
+import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { red } from '@mui/material/colors';
+
 function App() {
   // Page and routing related states
   const [pageName, setPageName] = useState("home");
@@ -55,9 +58,28 @@ function App() {
       }
     }
   };
+
+  const theme = createTheme({
+    components: {
+      MuiLink: {
+        styleOverrides: {
+          root: {
+            color: red[900],
+            textDecoration: 'underline', 
+            textDecorationColor: red[900], 
+            '&:hover': {
+              color: red[700],
+              textDecorationColor: red[700], 
+            },
+          },
+        },
+      },
+    },
+  });
   
   return start ? (
-      <div style={{ padding: 10, backgroundColor: grey[300], }}>
+    <ThemeProvider theme={theme}>
+    <div style={{ padding: 10, backgroundColor: grey[300], }}>
 
         <div className="menu" style={{ height: "100vh", width:"fit-content"}}>
           <Settings
@@ -73,7 +95,8 @@ function App() {
         </div>
         {evidanceBoardOpen && <EvidenceBoard setEvidanceBoardOpen={setEvidanceBoardOpen} />}
         <Tutorial runTour={runTour} stepIndex={stepIndex} callback={handleJoyrideCallback} />
-      </div>) : (<MainMenu setStart={setStart} />)
+      </div>
+      </ThemeProvider>) : (<MainMenu setStart={setStart} />)
 }
 
 export default App;
