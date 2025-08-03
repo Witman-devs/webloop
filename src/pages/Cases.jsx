@@ -21,8 +21,8 @@ function Question({ answer, setAnswer, questionText }) {
 function CheckAnswers(A1, A2, A3, openSnackbar, setSnackbarMessage) {
   const correctAnswers = {
     A1: ["DC-564389","DC-660433","DC-746791","DC-945350","DC-953484"], // Example death certificate numbers
-    A2: "Dr. Rohan Mehta", // Example doctor's name
-    A3: "Samuel Robert Hayes", // Example name of the person who
+    A2: new Set(["dr. rohan mehta", "rohan mehta"]), // Example doctor's name
+    A3: new Set(["samuel robert hayes", "samuel hayes"]), // Example name of the person who
   };
   const userAnswers = {
     A1: A1.trim().split(",").map(item => item.trim()), // Split by comma and trim each item
@@ -40,7 +40,7 @@ function CheckAnswers(A1, A2, A3, openSnackbar, setSnackbarMessage) {
         return;
       }
     } else {
-      if (correctAnswers[key].toLowerCase() !== userAnswers[key].toLowerCase()) {
+      if (correctAnswers[key].has(userAnswers[key].toLowerCase()) === false) {
         openSnackbar(true);
         setSnackbarMessage(`Incorrect answer for ${key}. Please try again.`);
         return;
