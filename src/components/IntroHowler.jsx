@@ -13,7 +13,7 @@ const IntroHowler = () => {
     const { getEffectiveVolume } = useSound();
     useEffect(() => {
         // Set the global volume for Howler 
-        if (rainSound) rainSound.volume(getEffectiveVolume('music', 1)); // Use the helper function to get effective volume
+        if (rainSound) rainSound.volume(0.1*getEffectiveVolume('music', 1)); // Use the helper function to get effective volume
         if (mainSong) mainSong.volume(getEffectiveVolume('music', 1)); // Use the helper function to get effective volume
     }, [getEffectiveVolume]);
     // Initialize sounds when the component mounts
