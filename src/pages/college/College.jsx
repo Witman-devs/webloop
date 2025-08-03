@@ -20,8 +20,8 @@ export default function College({ setPageName }) {
           "Radiology"
         ]}
         keyPeople={[
-          { name: "Dr. Elira Verma", role: "Principle" },
-          { name: "Dr. Marcus Vel", role: "Vice Principle" },
+          { name: "Dr. Elira Verma", role: "Principal" },
+          { name: "Dr. Marcus Vel", role: "Vice Principal" },
         ]}
         history="Established in 1978, we bgean with a batch of 20 students across 5 classes each and a faculty strength of 15 doctors. We have increased our capacity to 120 students per class and a faculty strength of 78 expert doctors imparting quality education."
         contact={{
