@@ -36,7 +36,7 @@ function MusicControl() {
   const [musicPlaying, setMusicPlaying] = useState(false);
   const soundRef = useRef(null); // useRef to persist the Howl instance
   const { getEffectiveVolume } = useSound();
-
+  
   // Effect to load and manage the Howl sound
   useEffect(() => {
     // Stop any currently playing sound when musicId changes or component unmounts
@@ -44,11 +44,6 @@ function MusicControl() {
       soundRef.current.stop();
       soundRef.current.unload(); // Unload to free up resources
     }
-
-    useEffect(() => {
-        // Set the global volume for Howler 
-        if (sound) sound.volume(getEffectiveVolume('music', 1)); // Use the helper function to get effective volume
-    }, [getEffectiveVolume]);
     const currentTrack = MUSIC[musicId];
     const soundSrc = importedMusic[currentTrack.fileName.split('/').pop()]; // Get the imported asset
 
