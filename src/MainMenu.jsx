@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { Box, Button, Typography, Stack, Fade, IconButton } from '@mui/material';
 import MonochromeButton from "./components/MonochromeButton";
@@ -8,6 +8,8 @@ import link_hit_sfx from './assets/sfx/linkhit.mp3';
 import menu_hit_sfx from './assets/sfx/menuhit.mp3';
 import Modal from 'react-modal';
 import { VolumeControls, useSound } from './SoundContext'; // Assuming you save the above code in SoundContext.js
+import '../src/smoke.css';
+
 const customStyles = {
     content: {
         top: '50%',
@@ -36,6 +38,38 @@ const MainMenu = ({ setStart }) => {
     const { getEffectiveVolume } = useSound();
     const [creditsIsOpen, setCreditsIsOpen] = React.useState(false);
     const [optionsIsOpen, setOptionsIsOpen] = React.useState(false);
+
+    useEffect(() => {
+        const numberOfRaindrops = 100;
+        const rainContainer = document.querySelector('.rain');
+        const numberOfSmokeParticles = 50; 
+        const smokeContainer = document.querySelector('.smog');
+    
+        for (let i = 0; i < numberOfRaindrops; i++) {
+          const raindrop = document.createElement('div');
+          raindrop.classList.add('raindrop');
+    
+          raindrop.style.left = `${Math.random() * 100}vw`; 
+          raindrop.style.animationDuration = `${Math.random() * 1 + 0.5}s`; 
+    
+          rainContainer.appendChild(raindrop);
+        }
+    
+         for (let i = 0; i < numberOfSmokeParticles; i++) {
+          const smokeParticle = document.createElement('div');
+          smokeParticle.classList.add('smoke-particle');
+        
+          const size = Math.random() * 60 + 20; 
+          smokeParticle.style.width = `${size}px`;
+          smokeParticle.style.height = `${size}px`;
+    
+          smokeParticle.style.left = `${Math.random() * 100}vw`; 
+          smokeParticle.style.top = `${Math.random() * 100}vh`; 
+    
+          smokeContainer.appendChild(smokeParticle);
+        }
+      }, []);
+
     // Handler for the start button
     const handleStartGame = () => {
         menu_hit.play(); // Play the sound effect
@@ -143,6 +177,8 @@ const MainMenu = ({ setStart }) => {
                     </Box>
                 </Fade>
             </Box>
+            <div className="smog"></div>
+            <div className="rain"></div>
             <Modal
                 isOpen={optionsIsOpen}
                 onRequestClose={closeOptions}
