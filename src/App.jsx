@@ -1,18 +1,18 @@
 import { useCallback, useEffect, useState } from "react";
 import PageRouter from "./components/PageRouter";
-import { Settings } from "lucide-react";
+import { NotebookPen, Settings } from "lucide-react";
 import SideMenu from "./components/SideMenu";
 import Floaty from "./components/Floty";
 import EvidenceBoard from "./components/EvidenceBoard";
 import { grey } from "@mui/material/colors";
 import MainMenu from "./MainMenu";
-import mlink_hit_sfx from './assets/sfx/minorlink.mp3';
+import mlink_hit_sfx from "./assets/sfx/minorlink.mp3";
 import Tutorial from "./components/Tutorial";
 import VideoPlayer from "./components/VideoPlayer";
-import { useSound } from './SoundContext'; // Assuming you save the above code in SoundContext.js
-import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { red } from '@mui/material/colors';
-import intro from './assets/intro.mp4'; // Assuming you save the above code in SoundContext.js
+import { useSound } from "./SoundContext"; // Assuming you save the above code in SoundContext.js
+import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { red } from "@mui/material/colors";
+import intro from "./assets/intro.mp4"; // Assuming you save the above code in SoundContext.js
 
 function App() {
   // Page and routing related states
@@ -25,23 +25,23 @@ function App() {
     setShowVideo(false);
     setRunTour(true); // Start the tutorial after the video ends or is skipped
   };
-    // useCallback to memoize the event handler for performance
+  // useCallback to memoize the event handler for performance
   const handleKeyPress = useCallback((event) => {
     // We attach this listener to 'document', making it global.
     // It will trigger no matter which specific element is focused.
-    if (event.key === 'e' || event.key === 'E') {
-      setEvidanceBoardOpen(prev => !prev);
+    if (event.ctrlKey && event.code === "Space") {
+      setEvidanceBoardOpen((prev) => !prev);
     }
   }, []); // Empty dependency array means this function is created once
 
   useEffect(() => {
     // Add event listener to the document object
     // This makes the 'e' key listener active globally across your app
-    document.addEventListener('keydown', handleKeyPress);
+    document.addEventListener("keydown", handleKeyPress);
 
     // Clean up the event listener when the component unmounts
     return () => {
-      document.removeEventListener('keydown', handleKeyPress);
+      document.removeEventListener("keydown", handleKeyPress);
     };
   }, [handleKeyPress]); // Dependency on handleKeyPress ensures correct cleanup/re-registration
 
@@ -53,9 +53,9 @@ function App() {
     src: [mlink_hit_sfx],
     autoplay: false,
     loop: false,
-    volume: getEffectiveVolume('sfx', 1), // Use the helper function to get effective volume
+    volume: getEffectiveVolume("sfx", 1), // Use the helper function to get effective volume
     // Preload to ensure it's ready before any fade operations
-    preload: true
+    preload: true,
   });
 
   // Menus related states
@@ -72,14 +72,14 @@ function App() {
 
   const handleJoyrideCallback = (data) => {
     const { status, index, type, action } = data;
-    const finishedStatuses = ['finished', 'skipped'];
-    
+    const finishedStatuses = ["finished", "skipped"];
+
     if (finishedStatuses.includes(status)) {
       setRunTour(false);
-    } else if (type === 'step:after') {
-      if (action === 'next') {
+    } else if (type === "step:after") {
+      if (action === "next") {
         setStepIndex(index + 1);
-      } else if (action === 'back' || action === 'prev') {
+      } else if (action === "back" || action === "prev") {
         setStepIndex(Math.max(index - 1, 0));
       }
     }
@@ -91,48 +91,69 @@ function App() {
         styleOverrides: {
           root: {
             color: red[900],
-            cursor: 'pointer',
-            textDecoration: 'underline', 
-            textDecorationColor: red[900], 
-            '&:hover': {
+            cursor: "pointer",
+            textDecoration: "underline",
+            textDecorationColor: red[900],
+            "&:hover": {
               color: red[700],
-              textDecorationColor: red[700], 
+              textDecorationColor: red[700],
             },
           },
         },
       },
     },
   });
-  
+
   return start ? (
     <ThemeProvider theme={theme}>
-      
-    {showVideo && (
-      <VideoPlayer
-        videoSrc={intro}
-        onVideoEnd={handleVideoEndedOrSkipped}
-        onSkip={handleVideoEndedOrSkipped}
-      />
-    )}
+      {showVideo && (
+        <VideoPlayer
+          videoSrc={intro}
+          onVideoEnd={handleVideoEndedOrSkipped}
+          onSkip={handleVideoEndedOrSkipped}
+        />
+      )}
 
-    <div style={{ padding: 10, backgroundColor: grey[400], }}>
-
-        <div className="menu" style={{ height: "100vh", width:"fit-content"}}>
-          <Settings
+      <div style={{ padding: 10, backgroundColor: grey[400] }}>
+        <div className="menu" style={{ height: "100vh", width: "fit-content" }}>
+          <NotebookPen
             style={{ position: "sticky", top: "5px", zIndex: 15 }}
-            onClick={() => setSideMenuOpen(!sideMenuOpen)}
+            onClick={() => setEvidanceBoardOpen(!evidanceBoardOpen)}
           />
           <Floaty />
         </div>
 
-        <div style={{ height: "100vh", position: "absolute", zIndex: 10, top: 0, width: "calc(100vw - 16px)", overflowX: "hidden", overflowY: "scroll" }} >
-          <SideMenu sideMenuOpen={sideMenuOpen} setSideMenuOpen={setSideMenuOpen} setEvidanceBoardOpen={setEvidanceBoardOpen} />
+        <div
+          style={{
+            height: "100vh",
+            position: "absolute",
+            zIndex: 10,
+            top: 0,
+            width: "calc(100vw - 16px)",
+            overflowX: "hidden",
+            overflowY: "scroll",
+          }}
+        >
+          <SideMenu
+            sideMenuOpen={sideMenuOpen}
+            setSideMenuOpen={setSideMenuOpen}
+            setEvidanceBoardOpen={setEvidanceBoardOpen}
+          />
           <PageRouter pageName={pageName} setPageName={setPageName} />
         </div>
-        {evidanceBoardOpen && <EvidenceBoard setEvidanceBoardOpen={setEvidanceBoardOpen} />}
-        <Tutorial runTour={runTour} stepIndex={stepIndex} callback={handleJoyrideCallback} />
+        {evidanceBoardOpen && (
+          <EvidenceBoard setEvidanceBoardOpen={setEvidanceBoardOpen} />
+        )}
+        <Tutorial
+          runTour={runTour}
+          stepIndex={stepIndex}
+          callback={handleJoyrideCallback}
+        />
       </div>
-      </ThemeProvider>) : (<MainMenu setStart={setStart} />)
+    </ThemeProvider>
+  ) : (
+    <MainMenu setStart={setStart} />
+  );
 }
 
 export default App;
