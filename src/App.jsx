@@ -115,8 +115,9 @@ function App() {
       )}
 
       <div style={{ padding: 10, backgroundColor: grey[400] }}>
-        <div className="menu" style={{ height: "100vh", width: "fit-content" }}>
+        <div style={{ height: "100vh", width: "fit-content" }}>
           <NotebookPen
+            className="menu"
             style={{ position: "sticky", top: "5px", zIndex: 15 }}
             onClick={() => setEvidanceBoardOpen(!evidanceBoardOpen)}
           />

@@ -16,7 +16,7 @@ const Tutorial = ({ runTour, stepIndex, callback }) => {
     },
     {
       target: '.menu',
-      content: 'This is your control center where clues gather, your journey history unfolds, and rare items reveal their secrets. Explore carefully cuz every corner holds a meaning!',
+      content: 'This is your Evidence Board where view clues gather, your journey history unfolds, and items reveal their secrets. Explore carefully cuz every corner holds a meaning!',
       disableBeacon: true,
     }
   ];
