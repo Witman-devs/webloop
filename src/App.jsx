@@ -7,6 +7,7 @@ import EvidenceBoard from "./components/EvidenceBoard";
 import { grey } from "@mui/material/colors";
 import MainMenu from "./MainMenu";
 import mlink_hit_sfx from './assets/sfx/minorlink.mp3';
+import Tutorial from "./components/Tutorial";
 
 function App() {
   // Page and routing related states
@@ -28,10 +29,35 @@ function App() {
   // Menus related states
   const [sideMenuOpen, setSideMenuOpen] = useState(false);
   const [evidanceBoardOpen, setEvidanceBoardOpen] = useState(false);
+
+  //State for Tutorials
+  const [runTour, setRunTour] = useState(false);
+  const [stepIndex, setStepIndex] = useState(0);
+
+  useEffect(() => {
+    setStepIndex(0);
+    setRunTour(true);
+  }, []);
+
+  const handleJoyrideCallback = (data) => {
+    const { status, index, type, action } = data;
+    const finishedStatuses = ['finished', 'skipped'];
+    
+    if (finishedStatuses.includes(status)) {
+      setRunTour(false);
+    } else if (type === 'step:after') {
+      if (action === 'next') {
+        setStepIndex(index + 1);
+      } else if (action === 'back' || action === 'prev') {
+        setStepIndex(Math.max(index - 1, 0));
+      }
+    }
+  };
+  
   return start ? (
     <div style={{ padding: 10, backgroundColor: grey[300], }}>
 
-      <div style={{ height: "100vh", width: "fit-content" }}>
+      <div className="menu" style={{ height: "100vh", width:"fit-content"}}>
         <Settings
           style={{ position: "sticky", top: "5px", zIndex: 15 }}
           onClick={() => setSideMenuOpen(!sideMenuOpen)}
@@ -44,6 +70,7 @@ function App() {
         <PageRouter pageName={pageName} setPageName={setPageName} />
       </div>
       {evidanceBoardOpen && <EvidenceBoard setEvidanceBoardOpen={setEvidanceBoardOpen} />}
+      <Tutorial runTour={runTour} stepIndex={stepIndex} callback={handleJoyrideCallback} />
     </div>) : (<MainMenu setStart={setStart} />)
 }
 

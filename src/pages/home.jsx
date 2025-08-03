@@ -1,5 +1,7 @@
+import React, { useState , useEffect } from 'react';
 import { Card, CardContent, Link, Stack, Typography } from "@mui/material";
 import AntagonistLogo from "../components/AntagonistLogo";
+import Tutorial from "../components/Tutorial";
 
 export default function Home({setPageName}) {
   return (
@@ -18,8 +20,8 @@ export default function Home({setPageName}) {
         my case... 5 years. Still couldn't catch me. This is your golden
         oportunity
       </Typography>
-      <Link component="button" variant="h4" onClick={()=>setPageName("symbols")}>What is this symbol ?</Link>
-      <Link component="button" variant="h4" onClick={()=>setPageName("cases")}> Cases </Link>
+      <Link className="symbol" component="button" variant="h4" onClick={()=>setPageName("symbols")}>What is this symbol ?</Link>
+      <Link className="case" component="button" variant="h4" onClick={()=>setPageName("cases")}> Cases </Link>
       <Card sx={{width:"80%"}}>
         <CardContent>
           <Typography variant="h5" align="center">My location </Typography>
