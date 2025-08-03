@@ -21,6 +21,7 @@ import pin_sfx from '../assets/sfx/minorlink.mp3';
 import note_sfx from '../assets/sfx/note.mp3';
 import remove_sfx from '../assets/sfx/remove.mp3';
 
+import { useSound } from '../SoundContext'; // Assuming you save the above code in SoundContext.js
 import Note from "./Note";
 import Thread from "./Thread";
 import DocumentEvidence from "./DocumentEvidence";
@@ -64,6 +65,7 @@ function CustomControls({setEvidanceBoardOpen, onSave}){
 
 function Chart({setEvidanceBoardOpen}) {
   const reactFlowWrapper = useRef(null);
+  const { getEffectiveVolume } = useSound();
 
   const [nodes, setNodes, onNodesChange] = useNodesState([]);
   const [edges, setEdges, onEdgesChange] = useEdgesState([]);
@@ -76,6 +78,7 @@ function Chart({setEvidanceBoardOpen}) {
     src: [pin_sfx],
     autoplay: false,
     loop: false,
+    volume: getEffectiveVolume('sfx', 1), // Use the helper function to get effective volume
     // Preload to ensure it's ready before any fade operations
     preload: true
   });
@@ -84,6 +87,7 @@ function Chart({setEvidanceBoardOpen}) {
     src: [remove_sfx],
     autoplay: false,
     loop: false,
+    volume: getEffectiveVolume('sfx', 1), // Use the helper function to get effective volume
     // Preload to ensure it's ready before any fade operations
     preload: true
   });
@@ -92,6 +96,7 @@ function Chart({setEvidanceBoardOpen}) {
     src: [note_sfx],
     autoplay: false,
     loop: false,
+    volume: getEffectiveVolume('sfx', 1), // Use the helper function to get effective volume
     // Preload to ensure it's ready before any fade operations
     preload: true
   });

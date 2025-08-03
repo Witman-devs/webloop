@@ -8,11 +8,12 @@ import { grey } from "@mui/material/colors";
 import MainMenu from "./MainMenu";
 import mlink_hit_sfx from './assets/sfx/minorlink.mp3';
 import Tutorial from "./components/Tutorial";
-
+import { useSound } from './SoundContext'; // Assuming you save the above code in SoundContext.js
 function App() {
   // Page and routing related states
   const [pageName, setPageName] = useState("home");
   const [start, setStart] = useState(false);
+  const { getEffectiveVolume } = useSound();
 
   useEffect(() => {
     link_hit.play(); // Play the sound effect
@@ -22,6 +23,7 @@ function App() {
     src: [mlink_hit_sfx],
     autoplay: false,
     loop: false,
+    volume: getEffectiveVolume('sfx', 1), // Use the helper function to get effective volume
     // Preload to ensure it's ready before any fade operations
     preload: true
   });
@@ -55,23 +57,23 @@ function App() {
   };
   
   return start ? (
-    <div style={{ padding: 10, backgroundColor: grey[300], }}>
+      <div style={{ padding: 10, backgroundColor: grey[300], }}>
 
-      <div className="menu" style={{ height: "100vh", width:"fit-content"}}>
-        <Settings
-          style={{ position: "sticky", top: "5px", zIndex: 15 }}
-          onClick={() => setSideMenuOpen(!sideMenuOpen)}
-        />
-        <Floaty />
-      </div>
+        <div className="menu" style={{ height: "100vh", width:"fit-content"}}>
+          <Settings
+            style={{ position: "sticky", top: "5px", zIndex: 15 }}
+            onClick={() => setSideMenuOpen(!sideMenuOpen)}
+          />
+          <Floaty />
+        </div>
 
-      <div style={{ height: "100vh", position: "absolute", zIndex: 10, top: 0, width: "calc(100vw - 16px)", overflow: "auto" }} >
-        <SideMenu sideMenuOpen={sideMenuOpen} setSideMenuOpen={setSideMenuOpen} setEvidanceBoardOpen={setEvidanceBoardOpen} />
-        <PageRouter pageName={pageName} setPageName={setPageName} />
-      </div>
-      {evidanceBoardOpen && <EvidenceBoard setEvidanceBoardOpen={setEvidanceBoardOpen} />}
-      <Tutorial runTour={runTour} stepIndex={stepIndex} callback={handleJoyrideCallback} />
-    </div>) : (<MainMenu setStart={setStart} />)
+        <div style={{ height: "100vh", position: "absolute", zIndex: 10, top: 0, width: "calc(100vw - 16px)", overflow: "auto" }} >
+          <SideMenu sideMenuOpen={sideMenuOpen} setSideMenuOpen={setSideMenuOpen} setEvidanceBoardOpen={setEvidanceBoardOpen} />
+          <PageRouter pageName={pageName} setPageName={setPageName} />
+        </div>
+        {evidanceBoardOpen && <EvidenceBoard setEvidanceBoardOpen={setEvidanceBoardOpen} />}
+        <Tutorial runTour={runTour} stepIndex={stepIndex} callback={handleJoyrideCallback} />
+      </div>) : (<MainMenu setStart={setStart} />)
 }
 
 export default App;
