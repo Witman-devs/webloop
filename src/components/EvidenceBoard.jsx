@@ -1,4 +1,4 @@
-import { Backdrop, Menu, MenuItem } from "@mui/material";
+import { Backdrop, Menu, MenuItem, Box, Typography } from "@mui/material";
 import { X } from "lucide-react";
 import { v4 as uuidv4 } from 'uuid';
 import { useState, useCallback, useRef } from "react";
@@ -222,6 +222,29 @@ function Chart({setEvidanceBoardOpen}) {
         style={{ width: "100vw", height: "100vh", zIndex: 50 }}
         ref={reactFlowWrapper}
       >
+         <Box
+        sx={{
+          width: '190px',
+          padding: '10px',
+          backgroundColor: 'white',
+          boxShadow: 2, 
+          borderRadius: '8px',
+          position: 'absolute', 
+          top: '20px', 
+          right: '20px', 
+        }}
+      >
+        <Typography variant="body1" sx={{ marginBottom: '4px' }}>
+          Instructions
+        </Typography>
+        <Typography sx={{ fontSize: '11px' }}>
+          1. Right click to add a note <br />
+          2. Select a note and BackSpace to delete the note <br />
+          3. Drag across pins on notes to join them <br />
+          4. Double click to remove thread <br />
+          5. Double click the note to edit it  
+        </Typography>
+      </Box>
         <ReactFlow
           style={{"--xy-edge-stroke-default":"#5f1313ff", "--xy-edge-stroke-width-default": 5}}
           nodes={nodes}
