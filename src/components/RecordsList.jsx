@@ -9,6 +9,7 @@ import {
   Avatar,
   Divider,
   Button,
+  Link,
 } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
 import Document from "./Documents/Document";
@@ -34,7 +35,7 @@ function AddToEvidence(type, data){
     localStorage.setItem(flowKey, JSON.stringify(flow));
 }
 
-export default function RecordsList({ records, columns, type, Label, companyLogo, companyName, companyAddress }){
+export default function RecordsList({ records, columns, type, Label, companyLogo, companyName, companyAddress, setPageName }){
   const [selectedRecord, setSelectedRecord] = useState(null);
 
   const handleRowClick = (params) => {
@@ -42,17 +43,19 @@ export default function RecordsList({ records, columns, type, Label, companyLogo
   };
 
   return (
-    <>
+    <div style={{width:"60vw", left:"20vw", position:"relative", paddingBlockStart:"5vh"}}>
       {/* Header */}
       <Grid container alignItems="center" spacing={2} sx={{ mb: 3 }}>
         <Grid item>
           {companyLogo && (
-            <Avatar
-              src={companyLogo}
-              alt="Company Logo"
-              variant="square"
-              sx={{ width: 80, height: 80 }}
-            />
+            <Link component="image" onClick={()=>setPageName("hospital")}>
+              <Avatar
+                src={companyLogo}
+                alt="Company Logo"
+                variant="square"
+                sx={{ width: 80, height: 80 }}
+              />
+            </Link>
           )}
         </Grid>
         <Grid item xs>
@@ -97,12 +100,18 @@ export default function RecordsList({ records, columns, type, Label, companyLogo
         >
           {selectedRecord && (
             <Card elevation={0}>
-                <Document data={selectedRecord} type={type}/>
+                <Document data={convertValuesToStrings(selectedRecord)} type={type}/>
             </Card>
           )}
-          <MonochromeButton onClick={()=>AddToEvidence(type, selectedRecord)}>Add to evidence board</MonochromeButton>
+          <MonochromeButton onClick={()=>AddToEvidence(type, convertValuesToStrings(selectedRecord))}>Add to evidence board</MonochromeButton>
         </Box>
       </Modal>
-    </>
+    </div>
+  );
+}
+
+function convertValuesToStrings(obj) {
+  return Object.fromEntries(
+    Object.entries(obj).map(([key, value]) => [key, String(value)])
   );
 }

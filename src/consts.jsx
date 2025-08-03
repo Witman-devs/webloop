@@ -9,9 +9,9 @@ import Symbols from './pages/Symbols';
 import CEO from './pages/people/CEO';
 import Doc1 from './pages/people/Doc1';
 import Doc2 from './pages/people/Doc2';
+import Doc3 from './pages/people/Doc3';
 import Inspector from './pages/people/Inspector';
 import ngoHead from './pages/people/NGO Head';
-import victim1 from './pages/people/Victim1';
 import victim2 from './pages/people/Victim2';
 import victim3 from './pages/people/Victim3';
 import ward1 from './pages/people/Ward1';
@@ -20,6 +20,15 @@ import NewsAgency from './pages/NewsAgency';
 import Case3 from './pages/Case3';
 import Case2 from './pages/Case2';
 import BirthRecords from './pages/hospital/BirthRecords';
+import DeathRecords from './pages/hospital/DeathRecords';
+
+import collegeLogo from './assets/logos/collegeLogo.png';
+import companyLogo from './assets/logos/companyLogo.png';
+import hospitalLogo from './assets/logos/hospitalLogo.png';
+import newsLogo from './assets/logos/newsLogo.png';
+import ngoLogo from './assets/logos/ngoLogo.png';
+import policeLogo from './assets/logos/policeLogo.png';
+import portLogo from './assets/logos/portLogo.png';
 
 export const PAGE_COMPONENTS = {
     // places
@@ -33,6 +42,7 @@ export const PAGE_COMPONENTS = {
     // documents 
     // "newsArchival": NewsArchival,
     "birthRecords":BirthRecords,
+    "deathRecords":DeathRecords,
 
     // case
     "cases": Cases,
@@ -45,9 +55,9 @@ export const PAGE_COMPONENTS = {
     "ceo": CEO,
     "doc1": Doc1,
     "doc2": Doc2,
+    "doc3": Doc3,
     "inspector": Inspector,
     "ngoHead": ngoHead,
-    "victim1": victim1,
     "victim2": victim2,
     "victim3": victim3,
     "ward1": ward1,
@@ -62,3 +72,23 @@ export const MUSIC = [
     {"label":"Clown Circus", "fileName": "../assets/music/bgoutroug.mp3"},
     {"label":"WOOOOOO", "fileName": "../assets/music/WOOOO.mp3"},
 ]
+
+export const ADDRESS = {
+    "police": "Inspector's Quarters, Police Colony, Willow Lane, Redmarsh",
+    "ngo": "123 Maple Street, Willow Lane, Redmarsh",
+    "hospital": "Health Sector 4, Heartline Road, Redmarsh",
+    "company": "Skyline Tower, Innovation District, Redmarsh",
+    "port":"Willow Lane, Redmarsh, Midwest",
+    "news":"221 Oakridge Lane, Westbridge, Redmarsh"
+}
+
+export const LOGOS = {
+    "police": policeLogo,
+    "ngo": ngoLogo,
+    "hospital": hospitalLogo,
+    "company": companyLogo,
+    "port": portLogo,
+    "news": newsLogo,
+    "college": collegeLogo
+
+}

@@ -1,7 +1,6 @@
 import { Link, Typography } from "@mui/material";
 import ProfileCard from "../../components/ProfilePage";
 import directorImg from "../../assets/characters/director.png";
-import { MedalIcon } from "lucide-react";
 
 export default function Director({ setPageName }) {
   return (
@@ -13,7 +12,7 @@ export default function Director({ setPageName }) {
           name: "Dr. Arjun Verma",
           fullName: "Arjun Raj Verma",
           birthDate: "December 09, 1963",
-          deathDate: "March 14, 2020",
+          deathDate: "September 14, 2023",
           occupation: "Neurologist & Researcher",
           affiliation: (
             <Link component="span" onClick={() => setPageName("college")}>

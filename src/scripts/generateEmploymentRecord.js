@@ -1,11 +1,12 @@
 import { faker } from '@faker-js/faker';
 import fs from 'fs';
+import { ADDRESS, LOGOS } from '../consts';
 
 /**
  * Generates a single mock employment record object.
  * @returns {object} An object with data for the EmploymentRecordSheetReadOnly component.
  */
-function generateEmploymentRecord() {
+function generateEmploymentRecord(type) {
   const gender = faker.helpers.arrayElement(['Male', 'Female']);
   const firstName = faker.person.firstName(gender === 'Male' ? 'male' : 'female');
   const lastName = faker.person.lastName();
@@ -28,7 +29,7 @@ function generateEmploymentRecord() {
     'Bachelor of Science in Medical Technology',
     'Ph.D. in Physics',
     'Bachelor of Arts in English Literature',
-    'MBBS in Computer Science'
+    'MBBS'
   ];
 
   // List of mock universities
@@ -53,7 +54,7 @@ function generateEmploymentRecord() {
   return {
     fullName,
     dob: formattedDob,
-    contact: faker.phone.number('+91-##########'),
+    contact: faker.phone.number('+1-##########'),
     email: faker.internet.email({ firstName, lastName }),
     address: `${faker.location.streetAddress()}, ${faker.location.city()}, ${faker.location.country()}`,
     qualification: faker.helpers.arrayElement(qualifications),
@@ -61,18 +62,23 @@ function generateEmploymentRecord() {
     yearOfPassing: String(yearOfPassing),
     specialRequest: faker.helpers.arrayElement(specialRequests),
     needStaffQuarter: faker.datatype.boolean(),
-    companyLogo: `https://placehold.co/150x150/F8F8F8/333?text=${faker.company.buzzNoun().toUpperCase()}`,
+    companyLogo: LOGOS[type],
     companyAddress: {
-      name: `${faker.company.name()} Hospital`,
-      lines: `${faker.location.streetAddress()}\n${faker.location.city()}, ${faker.location.countryCode()} ${faker.location.zipCode()}\n${faker.location.country()}`,
+      // name: `${faker.company.name()} Hospital`,
+      name: `Redmarsh Hospital`,
+      lines: ADDRESS[type].replace(", ", ",\n"),
     },
   };
 }
 
+console.log(generateEmploymentRecord("hospital"))
+console.log(generateEmploymentRecord("police"))
+console.log(generateEmploymentRecord("news"))
+console.log(generateEmploymentRecord("hospital"))
 // Generate 100 records
-const employmentRecords = Array.from({ length: 100 }, generateEmploymentRecord);
+// const employmentRecords = Array.from({ length: 100 }, generateEmploymentRecord, "hospital");
 
-// Write to a JSON file
-fs.writeFileSync('src/assets/employment_records.json', JSON.stringify(employmentRecords, null, 2), 'utf-8');
+// // Write to a JSON file
+// fs.writeFileSync('src/assets/employment_records.json', JSON.stringify(employmentRecords, null, 2), 'utf-8');
 
-console.log('✅ 100 employment records written to src/assets/employment_records.json');
+// console.log('✅ 100 employment records written to src/assets/employment_records.json');

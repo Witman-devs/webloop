@@ -1,7 +1,6 @@
 import { Link, Typography } from "@mui/material";
 import ProfileCard from "../../components/ProfilePage";
-import directorImg from "../../assets/characters/extra-1.png";
-import { MedalIcon } from "lucide-react";
+import directorImg from "../../assets/characters/doc2.png";
 
 export default function Doc2({ setPageName }) {
   return (

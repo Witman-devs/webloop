@@ -1,7 +1,7 @@
 import { Link, Typography } from "@mui/material";
 import ProfileCard from "../../components/ProfilePage";
-import directorImg from "../../assets/characters/ward-1.png";
-import { MedalIcon } from "lucide-react";
+import directorImg from "../../assets/characters/ward1.png";
+
 export default function WardPerson({ setPageName }) {
   return (
     <div style={{ width: "60vw", left: "20vw", position: "relative" }}>
@@ -23,9 +23,9 @@ export default function WardPerson({ setPageName }) {
           address: "Suite 12B, Willow Lane Residences,\nRedmarsh City",
           image: directorImg,
           bio: `Samuel Hayes is a ward attendant at Redmarsh Hospital, Fictionalia.
-He is known for his positive attitude and resilience in his work.
-Samuel was recently seen tending to a patient, John Carter, showing his caring nature and dedication to his role.
-Samuel is supported by the dedicated staff and his family as he continues his service.`,
+She is known for her positive attitude and resilience in her work.
+Samuel was recently seen tending to a patient, Emily Kihn, showing her caring nature and dedication to her role.
+Samuel is supported by the dedicated staff and her family as he continues her service.`,
         }}
         setPageName={setPageName}
       />

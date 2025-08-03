@@ -1,7 +1,6 @@
 import { Link, Typography } from "@mui/material";
 import ProfileCard from "../../components/ProfilePage";
-import directorImg from "../../assets/characters/doc.png";
-import { MedalIcon } from "lucide-react";
+import directorImg from "../../assets/characters/doc1.png";
 
 export default function Doc1({ setPageName }) {
   return (
@@ -12,8 +11,9 @@ export default function Doc1({ setPageName }) {
         person={{
           name: "Dr. Juan Martinez",
           fullName: "Juan Martinez",
-          birthDate: "June 22, 1982",
-          occupation: "Neurologist & Researcher",
+          birthDate: "July 22, 1982",
+          deathDate: "June 5, 2023",
+          occupation: "Surgeon & Researcher",
           affiliation: (
             <Link component="span" onClick={() => setPageName("college")}>
               St. Healmore Medical College

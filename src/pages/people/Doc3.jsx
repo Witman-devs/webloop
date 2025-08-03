@@ -1,7 +1,6 @@
 import { Link, Typography } from "@mui/material";
 import ProfileCard from "../../components/ProfilePage";
 import directorImg from "../../assets/characters/victim-1.png";
-import { MedalIcon } from "lucide-react";
 
 export default function Victim1({ setPageName }) {
   return (
@@ -10,12 +9,10 @@ export default function Victim1({ setPageName }) {
 
       <ProfileCard
         person={{
-          name: "John Carter",
+          name: "Dr. John Carter",
           fullName: "Johnathan Michael Carter",
-          birthDate: "July 22, 1985",
-          deathDate: "April 3, 2023",
-          deathDate: "N/A",
-          occupation: "Patient",
+          birthDate: "September 22, 1985",
+          occupation: "optometrist",
           affiliation: (
             <Link component="span" onClick={() => setPageName("redmarsh")}>
               Redmarsh Psychiatric Hospital
@@ -23,12 +20,11 @@ export default function Victim1({ setPageName }) {
           ),
           firstAppearance: "Patient Intake - 2023",
           address:
-            "Room 14B, Redmarsh Psychiatric Hospital,\nWillow Lane,\nRedmarsh",
+            "Flat 7C, Doctor's Residency,\nHeartline Road,\nRedmarsh",
           image: directorImg,
-          bio: `John Carter is a long-term patient at Redmarsh Psychiatric Hospital in the fictional city of Westland. 
-He was admitted in early 2023 following a series of unexplained episodes. 
-John is known for his quiet demeanor and has become a familiar face among the hospital staff. 
-His case is considered unique due to the rare nature of his symptoms and his resilience throughout treatment.`,
+          bio: `Dr. John Carter is a highly respected optometrist at Redmarsh Healthcare, known for his precision in vision care and commitment to patient education.
+He graduated with honors from the Kingsborough College of Optometry and has since been actively involved in advancing eye health awareness through community outreach programs.
+Dr. Carter is passionate about preventive eye care and regularly conducts vision screening camps and educational workshops for students and working professionals. His approachable nature and thorough approach to diagnosis make him a trusted expert in comprehensive eye care.`,
         }}
         setPageName={setPageName}
       />

@@ -20,7 +20,7 @@ export default function Inspector({ setPageName }) {
               component="span"
               onClick={() => setPageName("police-station")}
             >
-              New York City Police Department
+              Redmarsh Police Department
             </Link>
           ),
           firstAppearance: "Case File #102 - 2015",

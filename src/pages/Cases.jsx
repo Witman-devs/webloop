@@ -5,14 +5,14 @@ function Question({ questionText }) {
   return (
     <>
       <Typography variant="h5">Q: {questionText}</Typography>
-      <Input placeholder="Enter your answer here" />
+      <Input placeholder="Enter your answer here" style={{width:"70%"}} />
     </>
   );
 }
 
 export default function Cases({ setPageName }) {
   return (
-    <div style={{width:"60vw", left:"20vw", position:"relative"}}>
+    <div style={{width:"60vw", left:"20vw", position:"relative", paddingBlockStart:"5vh"}}>
       <Typography variant="h2">Cases:</Typography>
       <Typography>
         Answer all the questions to get access to my location.
