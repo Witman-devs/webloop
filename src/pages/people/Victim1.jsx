@@ -14,7 +14,6 @@ export default function Victim1({ setPageName }) {
           fullName: "Johnathan Michael Carter",
           birthDate: "July 22, 1985",
           deathDate: "April 3, 2023",
-          deathDate: "N/A",
           occupation: "Patient",
           affiliation: (
             <Link component="span" onClick={() => setPageName("redmarsh")}>

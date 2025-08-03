@@ -1,0 +1,17 @@
+/* src/App.css */
+.app-background {
+  background-image: url('./assets/my-background.png'); /* Relative path from CSS file */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  min-height: 100vh; /* Ensures the background covers the full viewport height */
+  width: 100vw; /* Ensures the background covers the full viewport width */
+}
+
+/* Or for a specific div within a component */
+.my-div-with-bg {
+  background-image: url('../assets/another-image.png'); /* Adjust path as needed */
+  background-size: contain;
+  background-repeat: repeat-x;
+  height: 200px;
+}
