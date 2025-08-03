@@ -6,6 +6,7 @@ import { Howl, Howler } from "howler"; // Import Howl and Howler
 
 import { MUSIC } from "../consts";
 import { blue } from "@mui/material/colors";
+import { useSound } from '../SoundContext'; // Assuming you save the above code in SoundContext.js
 
 // Assuming these are the actual paths from your project root
 import sciFiDetective from '../assets/music/bgmusicdet2.mp3';
@@ -34,6 +35,7 @@ function MusicControl() {
   const [musicId, setMusicId] = useState(0);
   const [musicPlaying, setMusicPlaying] = useState(false);
   const soundRef = useRef(null); // useRef to persist the Howl instance
+  const { getEffectiveVolume } = useSound();
 
   // Effect to load and manage the Howl sound
   useEffect(() => {
@@ -43,6 +45,10 @@ function MusicControl() {
       soundRef.current.unload(); // Unload to free up resources
     }
 
+    useEffect(() => {
+        // Set the global volume for Howler 
+        if (sound) sound.volume(getEffectiveVolume('music', 1)); // Use the helper function to get effective volume
+    }, [getEffectiveVolume]);
     const currentTrack = MUSIC[musicId];
     const soundSrc = importedMusic[currentTrack.fileName.split('/').pop()]; // Get the imported asset
 
@@ -51,7 +57,7 @@ function MusicControl() {
         src: [soundSrc],
         html5: true, // Use HTML5 audio to prevent issues with large files or iOS
         loop: true,  // Loop the current track
-        volume: 0.5, // You can adjust the default volume
+        volume: getEffectiveVolume('music', 1), // Use the helper function to get effective volume
         onend: () => {
           // This would typically be for sequential play, but with loop: true, it might not fire
           // If you want sequential play without loop, you'd increment musicId here

@@ -7,7 +7,7 @@ import backpng from "./assets/detback.png";
 import link_hit_sfx from './assets/sfx/linkhit.mp3';
 import menu_hit_sfx from './assets/sfx/menuhit.mp3';
 import Modal from 'react-modal';
-
+import { VolumeControls, useSound } from './SoundContext'; // Assuming you save the above code in SoundContext.js
 const customStyles = {
     content: {
         top: '50%',
@@ -33,6 +33,7 @@ const customStyles = {
  * @param {function(boolean): void} props.setStart - The state setter function to start the game.
  */
 const MainMenu = ({ setStart }) => {
+    const { getEffectiveVolume } = useSound();
     const [creditsIsOpen, setCreditsIsOpen] = React.useState(false);
     const [optionsIsOpen, setOptionsIsOpen] = React.useState(false);
     // Handler for the start button
@@ -65,6 +66,7 @@ const MainMenu = ({ setStart }) => {
         src: [menu_hit_sfx],
         autoplay: false,
         loop: false,
+        volume: getEffectiveVolume('sfx', 1), // Use the helper function to get effective volume
         // Preload to ensure it's ready before any fade operations
         preload: true
     });
@@ -74,20 +76,21 @@ const MainMenu = ({ setStart }) => {
         src: [link_hit_sfx],
         autoplay: false,
         loop: false,
+        volume: getEffectiveVolume('sfx', 1), // Use the helper function to get effective volume
         // Preload to ensure it's ready before any fade operations
         preload: true
     });
 
     return (
-    <Box
-      sx={{
-        backgroundImage: `url(${backpng})`, // Use the imported image
-        // Or if from public folder: backgroundImage: `url('/static-bg.png')`,
-        backgroundSize: 'cover', // Scales the image to cover the entire box
-        backgroundPosition: 'center', // Centers the image
-        backgroundRepeat: 'no-repeat', // Prevents repeating
-      }}
-    >
+        <Box
+            sx={{
+                backgroundImage: `url(${backpng})`, // Use the imported image
+                // Or if from public folder: backgroundImage: `url('/static-bg.png')`,
+                backgroundSize: 'cover', // Scales the image to cover the entire box
+                backgroundPosition: 'center', // Centers the image
+                backgroundRepeat: 'no-repeat', // Prevents repeating
+            }}
+        >
             <IntroHowler />
             <Box
                 sx={{
@@ -145,8 +148,13 @@ const MainMenu = ({ setStart }) => {
                 style={customStyles}
                 contentLabel="Options Modal"
             >
-                <button onClick={closeOptions}>close</button>
-                <div>out of options</div>
+                    <Box display="flex" justifyContent="space-between" alignItems="center" mb={2}>
+                        <Typography variant="h4" component="h2">Credits</Typography>
+                        <IconButton onClick={closeOptions} aria-label="close credits">
+                            X
+                        </IconButton>
+                    </Box>
+                    <VolumeControls />
             </Modal>
             <Modal
                 isOpen={creditsIsOpen}
