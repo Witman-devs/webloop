@@ -16,6 +16,7 @@ import MonochromeButton from "../components/MonochromeButton.jsx";
 import React, { useState } from "react";
 import { X } from "lucide-react";
 import deathRecords from "../assets/death_records.json"; 
+import outro_sound from '../assets/music/outro.mp3';
 
 const deathCertificateNumbers = deathRecords.map((record) => record.fullName);  
 
@@ -59,6 +60,14 @@ function Question({ answer, setAnswer, questionText, type }) {
 }
 
 function CheckAnswers(A1, A2, A3, openSnackbar, setSnackbarMessage) {
+  const outro_music = new Howl({
+    src: [outro_sound],
+    autoplay: false,
+    loop: false,
+    volume: getEffectiveVolume('sfx', 1), // Use the helper function to get effective volume
+    // Preload to ensure it's ready before any fade operations
+    preload: true
+  });
   const correctAnswers = {
     A1: ["Roxanne Hintz", "Dale Grady", "May Bayer", "Beverly Jakubowski", "Clint Barrows"], // Example death certificate numbers
     A2: new Set(["dr. rohan mehta", "rohan mehta"]), // Example doctor's name
@@ -90,6 +99,7 @@ function CheckAnswers(A1, A2, A3, openSnackbar, setSnackbarMessage) {
     }
   }
   openSnackbar(true);
+  outro_music.play(); // Play the outro music
   setSnackbarMessage("All answers are correct!");
 }
 
