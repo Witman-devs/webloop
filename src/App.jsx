@@ -114,7 +114,8 @@ function App() {
         onSkip={handleVideoEndedOrSkipped}
       />
     )}
-    <div style={{ padding: 10, backgroundColor: grey[300], }}>
+
+    <div style={{ padding: 10, backgroundColor: grey[400], }}>
 
         <div className="menu" style={{ height: "100vh", width:"fit-content"}}>
           <Settings
