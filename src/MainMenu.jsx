@@ -150,7 +150,7 @@ const MainMenu = ({ setStart }) => {
                 contentLabel="Options Modal"
             >
                     <Box display="flex" justifyContent="space-between" alignItems="center" mb={2}>
-                        <Typography variant="h4" component="h2">Credits</Typography>
+                        <Typography variant="h4" component="h2"> Options </Typography>
                         <IconButton onClick={closeOptions} aria-label="close credits">
                             X
                         </IconButton>

@@ -6,14 +6,18 @@ const Tutorial = ({ runTour, stepIndex, callback }) => {
     {
       target: '.symbol',
       content: 'Not all symbols are just icons... some are gateways. Click it when you are ready and watch what unfolds',
+      disableBeacon: true,
     },
     {
       target: '.case',
       content: 'Every loop starts with a story. Follow the path...it may lead you to where you started or pull you deeper ',
+      disableBeacon: true,
+
     },
     {
       target: '.menu',
       content: 'This is your control center where clues gather, your journey history unfolds, and rare items reveal their secrets. Explore carefully cuz every corner holds a meaning!',
+      disableBeacon: true,
     }
   ];
 
