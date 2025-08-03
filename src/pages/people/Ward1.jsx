@@ -15,7 +15,7 @@ export default function WardPerson({ setPageName }) {
           deathDate: "—",
           occupation: "Ward Attendant",
           affiliation: (
-            <Link component="span" onClick={() => setPageName("redmarsh")}>
+            <Link component="span" onClick={() => setPageName("hospital")}>
               Redmarsh Hospital
             </Link>
           ),
@@ -25,7 +25,7 @@ export default function WardPerson({ setPageName }) {
           bio: `Samuel Hayes is a ward attendant at Redmarsh Hospital, Fictionalia.
 She is known for her positive attitude and resilience in her work.
 Samuel was recently seen tending to a patient, Emily Kihn, showing her caring nature and dedication to her role.
-Samuel is supported by the dedicated staff and her family as he continues her service.`,
+Samuel is supported by the dedicated staff and her family as she continues her service.`,
         }}
         setPageName={setPageName}
       />

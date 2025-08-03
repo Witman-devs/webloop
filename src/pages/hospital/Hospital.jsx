@@ -77,7 +77,7 @@ export default function Hospital({ setPageName }) {
               <Link
                 component="span"
                 onClick={() => {
-                  setPageName("ward");
+                  setPageName("ward1");
                 }}
               >
                 Samuel Robert Hayes
@@ -89,7 +89,7 @@ export default function Hospital({ setPageName }) {
         history="Established in 1962, we began with 15 doctors and housing 20 beds. Today, we have increased our capacity several fold and have a total of 300 beds and 15 Operation Theatres with specialized infrastructure, and nearly 1,800 employees."
         contact={{
           address: ADDRESS["hospital"],
-          email: "contact@zerica.org",
+          email: "contact@redmarsh.org",
           phone: "+123 456 7890",
         }}
         setPageName={setPageName}
