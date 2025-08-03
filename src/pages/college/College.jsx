@@ -7,8 +7,8 @@ export default function College({ setPageName }) {
     <>
       <OrganizationWiki
         logo={LOGOS["college"]}
-        name="IndusTech Internaltional Medical college"
-        description="Industech International medical college started with an aim to impart quality education in the field of medical sciences, dedicated to shaping the next generation of healthcare leaders. With a strong emphasis on hands-on learning, research, and community outreach, we empower students with the knowledge, skills, and compassion needed to serve patients with integrity and care. Our distinguished faculty, modern infrastructure, and affiliations with top hospitals provide a dynamic environment where science meets service, and learning leads to healing."
+        name="St. Healmore Medical college"
+        description="St. Healmore Medical college started with an aim to impart quality education in the field of medical sciences, dedicated to shaping the next generation of healthcare leaders. With a strong emphasis on hands-on learning, research, and community outreach, we empower students with the knowledge, skills, and compassion needed to serve patients with integrity and care. Our distinguished faculty, modern infrastructure, and affiliations with top hospitals provide a dynamic environment where science meets service, and learning leads to healing."
         departments={[
           "Anatomy",
           "Biochemistry",
@@ -26,7 +26,7 @@ export default function College({ setPageName }) {
         history="Established in 1978, we bgean with a batch of 20 students across 5 classes each and a faculty strength of 15 doctors. We have increased our capacity to 120 students per class and a faculty strength of 78 expert doctors imparting quality education."
         contact={{
           address: ADDRESS["college"],
-          email: "contact@industech.org",
+          email: "contact@healmore.org",
           phone: "+123 456 7890",
         }}
         setPageName={setPageName}
