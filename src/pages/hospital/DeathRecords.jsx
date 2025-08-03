@@ -9,7 +9,7 @@ const rows = deathRecord.map((item) => ({
 }));
 
 const deathCertificateColumns = [
-  { field: "id", headerName: "ID", width: 70 },
+  { field: "certificateNumber", headerName: "ID", width: 70 },
   { field: "fullName", headerName: "Name", flex: 1 },
   { field: "doctor", headerName: "Doctor", flex: 1 },
   { field: "dateOfDeath", headerName: "Date of Death", width: 140},
