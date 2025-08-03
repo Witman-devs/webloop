@@ -27,6 +27,7 @@ export default function Home({setPageName}) {
           <Typography align="center">Revealed after you solve all my cases </Typography>
         </CardContent>
       </Card>
+
     </Stack>
   );
 }

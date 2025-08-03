@@ -8,7 +8,7 @@ const MonochromeButton = styled(Button)(({ theme }) => ({
   position: 'relative',
   overflow: 'hidden',
   zIndex: 1,
-  transition: 'color 0.3s ease',
+  transition: 'color 0.3s ease, transform 0.1s ease',
 
   '&::before': {
     content: '""',
@@ -28,6 +28,10 @@ const MonochromeButton = styled(Button)(({ theme }) => ({
 
   '&:hover::before': {
     width: '100%',
+  },
+
+  '&:active': {
+    transform: 'scale(0.95)',
   },
 }));
 

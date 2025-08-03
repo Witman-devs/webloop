@@ -25,6 +25,8 @@ import { useSound } from '../SoundContext'; // Assuming you save the above code 
 import Note from "./Note";
 import Thread from "./Thread";
 import DocumentEvidence from "./DocumentEvidence";
+import ImageEvidence from "./ImageEvidence";
+import OrganRequestEvidance from "./OrganRequestEvidance";
 
 // TODO: make easy connection from anywhere you drag
 // TODO: label for threads/edges
@@ -32,7 +34,9 @@ const flowKey = "EvidenceBoard"
 
 const nodeTypes = {
   note: Note,
-  document: DocumentEvidence
+  document: DocumentEvidence,
+  image: ImageEvidence,
+  organ_request: OrganRequestEvidance,
 };
 
 function CustomControls({setEvidanceBoardOpen, onSave}){

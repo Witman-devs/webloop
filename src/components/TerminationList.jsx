@@ -1,21 +1,63 @@
-import {
-  Box,
-  Typography,
-  Paper,
-  Divider,
-} from "@mui/material";
-import { DataGrid } from "@mui/x-data-grid";
+import React from "react";
+import { Box, Typography, Paper, Divider, Link, Snackbar, IconButton } from "@mui/material";
+import { DataGrid, renderActionsCell } from "@mui/x-data-grid";
+import { X } from "lucide-react";
 
-export default function TerminatedStudentsList({ students = [], collegeLogo, collegeAddress }){
+function handleFlagClick(setPageName, setOpen) {
+  setOpen(true);
+  localStorage.setItem("flaggedStudent", "Arjun Raj Verma");
+  setTimeout(() => setPageName("director"), 6000);
+}
+
+export default function TerminatedStudentsList({
+  students = [],
+  collegeLogo,
+  collegeAddress,
+  setPageName,
+}) {
+
+  const [open, setOpen] = React.useState(false);
+  const handleClose = () => {
+    setOpen(false);
+  };
+
   const columns = [
     { field: "id", headerName: "#", width: 70 },
-    { field: "name", headerName: "Name", flex: 1 },
+    {
+      field: "name",
+      headerName: "Name",
+      flex: 1,
+      renderCell: (params) => (
+        <Box sx={{ display: "flex", alignItems: "center" }}>
+          {params.row.name == "Arjun Raj Verma" ? (
+            <Link onClick={() => handleFlagClick(setPageName, setOpen)}>
+              {params.row.name}
+            </Link>
+          ) : (
+            params.row.name
+          )}
+        </Box>
+      ),
+    },
     { field: "rollNumber", headerName: "Roll No.", flex: 1 },
     { field: "batch", headerName: "Batch", flex: 0.6 },
     { field: "degree", headerName: "Degree", flex: 0.8 },
     { field: "reason", headerName: "Reason", flex: 2 },
     { field: "terminationDate", headerName: "Termination Date", flex: 1 },
   ];
+
+  const action = (
+    <React.Fragment>
+      <IconButton
+        size="small"
+        aria-label="close"
+        color="inherit"
+        onClick={handleClose}
+      >
+        <X fontSize="small" />
+      </IconButton>
+    </React.Fragment>
+  );
 
   const rows = students.map((s, idx) => ({
     id: idx + 1,
@@ -42,12 +84,14 @@ export default function TerminatedStudentsList({ students = [], collegeLogo, col
         sx={{ borderBottom: "2px solid #ccc", pb: 2 }}
       >
         {collegeLogo && (
-          <Box
-            component="img"
-            src={collegeLogo}
-            alt="College Logo"
-            sx={{ width: 100, height: "auto", objectFit: "contain" }}
-          />
+          <Link component="image" onClick={() => setPageName("college")}>
+            <Box
+              component="img"
+              src={collegeLogo}
+              alt="College Logo"
+              sx={{ width: 100, height: "auto", objectFit: "contain" }}
+            />
+          </Link>
         )}
         <Box textAlign="right">
           <Typography variant="h6" sx={{ fontWeight: "bold" }}>
@@ -87,7 +131,14 @@ export default function TerminatedStudentsList({ students = [], collegeLogo, col
           }}
         />
       </Box>
+      <Snackbar
+        anchorOrigin={{ vertical: "top", horizontal: "center" }}
+        open={open}
+        autoHideDuration={12000}
+        onClose={handleClose}
+        message="Clue Found: Arjun Verma is not a doctor. Opening Director's Page..."
+        action={action}
+      />
     </Paper>
   );
-};
-
+}

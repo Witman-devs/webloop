@@ -1,7 +1,8 @@
 import { Link, Typography } from "@mui/material";
 import ProfileCard from "../../components/ProfilePage";
-import directorImg from "../../assets/characters/doc.png";
-import { MedalIcon } from "lucide-react";
+import JuanImg from "../../assets/characters/doc1.png";
+import suicideNote from "../../assets/Notes/suicideNote.png";
+import ViewImage from "../../components/ViewImage";
 
 export default function Doc1({ setPageName }) {
   return (
@@ -12,8 +13,9 @@ export default function Doc1({ setPageName }) {
         person={{
           name: "Dr. Juan Martinez",
           fullName: "Juan Martinez",
-          birthDate: "June 22, 1982",
-          occupation: "Neurologist & Researcher",
+          birthDate: "July 22, 1982",
+          deathDate: "June 5, 2023",
+          occupation: "Surgeon & Researcher",
           affiliation: (
             <Link component="span" onClick={() => setPageName("college")}>
               St. Healmore Medical College
@@ -21,10 +23,26 @@ export default function Doc1({ setPageName }) {
           ),
           firstAppearance: "Student Records - Batch 2000",
           address: "Flat 3A, Doctor's Residency,\nHeartline Road,\nRedmarsh",
-          image: directorImg,
-          bio: `Dr. Juan Martinez is a reputed doctor of Redmarsh Healthcare and a renowned neurologist known for his groundbreaking work in neuroplasticity. 
-He was one of the top alumni from St. Healmore Medical College and now mentors young doctors across Redmarsh. 
-He is a frequent speaker at conferences and an advocate for mental health policy reform. He also co-founded NeuroAid, an initiative for early detection of neurological disorders.`,
+          image: JuanImg,
+          bio: (
+            <>
+              Dr. Juan Martinez is a skilled surgeon and dedicated medical
+              researcher, known for his precision in the operating room and
+              commitment to advancing clinical practices. 
+              Dr. Juan Martinez was the Chief Surgeon at{" "}
+              <Link onClick={() => setPageName("hospital")}>
+                Redmarsh Healthcare
+              </Link>. A graduate of St.
+              Healmore Medical College, Batch of 2005, he brings over two
+              decades of experience to patient care and surgical innovation. Dr.
+              Martinez continues to contribute to medical science through
+              research publications and active participation in global surgical
+              forums.
+            </>
+          ),
+          items:(
+            <ViewImage image={suicideNote} label="Dr. Juan Martinez suicide note found in the staff quarters" />
+          )
         }}
         setPageName={setPageName}
       />

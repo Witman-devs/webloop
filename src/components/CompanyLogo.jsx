@@ -1,4 +1,4 @@
-import logo from '../assets/characters/newsLogo.png';
+import logo from '../assets/logos/newsLogo.png';
 
 export default function CompanyLogo({}){
     return (
@@ -12,7 +12,7 @@ export default function CompanyLogo({}){
         }}>
             <img
                 src={logo}
-                alt="Company Logo"
+                alt="News Logo"
                 style={{
                     width: '100%',
                     height: '100%',

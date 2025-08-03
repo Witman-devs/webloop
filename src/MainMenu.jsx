@@ -99,6 +99,7 @@ const MainMenu = ({ setStart }) => {
                     alignItems: 'center', // Keep content vertically centered
                     minHeight: '100vh', // Ensure it takes up the full viewport height
                     padding: 3, // Add overall padding
+
                 }}
             >
                 <Fade in={true} timeout={1000}>
@@ -112,7 +113,7 @@ const MainMenu = ({ setStart }) => {
                             textAlign: 'center',
                             // Optional: Add a specific width or max-width to this content box
                             // If it takes full width, "moving it right" won't be visible
-                            maxWidth: '400px', // Example: Limit its width
+                            maxWidth: '50vw', // Example: Limit its width
                             width: '100%', // Ensure it takes full width up to maxWidth
                             marginRight: { xs: 0, sm: '50px' }, // Add some space from the right edge
                         }}
@@ -149,7 +150,7 @@ const MainMenu = ({ setStart }) => {
                 contentLabel="Options Modal"
             >
                     <Box display="flex" justifyContent="space-between" alignItems="center" mb={2}>
-                        <Typography variant="h4" component="h2">Credits</Typography>
+                        <Typography variant="h4" component="h2"> Options </Typography>
                         <IconButton onClick={closeOptions} aria-label="close credits">
                             X
                         </IconButton>

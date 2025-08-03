@@ -1,7 +1,6 @@
 import { Link, Typography } from "@mui/material";
 import ProfileCard from "../../components/ProfilePage";
-import directorImg from "../../assets/characters/extra-1.png";
-import { MedalIcon } from "lucide-react";
+import directorImg from "../../assets/characters/doc2.png";
 
 export default function Doc2({ setPageName }) {
   return (
@@ -23,9 +22,17 @@ export default function Doc2({ setPageName }) {
           firstAppearance: "Student Records - Batch 2000",
           address: "House 12, Greenview Apartments,\nHeartline Road,\nRedmarsh",
           image: directorImg,
-          bio: `Dr. Rohan Mehta is a leading cardiologist at Redmarsh Healthcare, recognized for his expertise in interventional cardiology and patient care.
-He graduated with honors from St. Healmore Medical College and has contributed to several national heart health campaigns.
-Dr. Mehta is also a passionate educator, regularly conducting workshops for young medical professionals and advocating for preventive cardiology.`,
+          bio: (
+            <>
+              Dr. Rohan Mehta is a leading cardiologist at <Link onClick={() => setPageName("hospital")}>Redmarsh Healthcare</Link>,
+              recognized for his expertise in interventional cardiology and
+              patient care. He graduated with honors from St. Healmore Medical
+              College and has contributed to several national heart health
+              campaigns. Dr. Mehta is also a passionate educator, regularly
+              conducting workshops for young medical professionals and
+              advocating for preventive cardiology.
+            </>
+          ),
         }}
         setPageName={setPageName}
       />
