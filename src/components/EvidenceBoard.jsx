@@ -17,6 +17,9 @@ import {
   useEdgesState,
 } from "@xyflow/react";
 import "@xyflow/react/dist/style.css";
+import pin_sfx from '../assets/sfx/minorlink.mp3';
+import note_sfx from '../assets/sfx/note.mp3';
+import remove_sfx from '../assets/sfx/remove.mp3';
 
 import Note from "./Note";
 import Thread from "./Thread";
@@ -69,6 +72,29 @@ function Chart({setEvidanceBoardOpen}) {
   const { setViewport } = useReactFlow();
   const [contextMenu, setContextMenu] = useState(null);
 
+  const pin_sound = new Howl({
+    src: [pin_sfx],
+    autoplay: false,
+    loop: false,
+    // Preload to ensure it's ready before any fade operations
+    preload: true
+  });
+
+  const unpin_sound = new Howl({
+    src: [remove_sfx],
+    autoplay: false,
+    loop: false,
+    // Preload to ensure it's ready before any fade operations
+    preload: true
+  });
+
+  const paper_sound = new Howl({
+    src: [note_sfx],
+    autoplay: false,
+    loop: false,
+    // Preload to ensure it's ready before any fade operations
+    preload: true
+  });
 
   const onSave = useCallback(() => {
     if (rfInstance) {
@@ -94,6 +120,7 @@ function Chart({setEvidanceBoardOpen}) {
 
   const onConnect = useCallback(
     (params) =>{ 
+      pin_sound.play(); // Play the sound effect
       params["type"] = "straight"
       setEdges((eds) => addEdge(params, eds))},
     [],
@@ -131,6 +158,7 @@ function Chart({setEvidanceBoardOpen}) {
 
   const addNode = useCallback(
     (e) => {
+      paper_sound.play(); // Play the sound effect
       let newNodes = {
         id: uuidv4(),
         position: screenToFlowPosition({
@@ -152,6 +180,7 @@ function Chart({setEvidanceBoardOpen}) {
 
   const onNodesDelete = useCallback(
       (deleted) => {
+        unpin_sound.play(); // Play the sound effect
         let remainingNodes = [...nodes];
         setEdges(
           deleted.reduce((acc, node) => {
