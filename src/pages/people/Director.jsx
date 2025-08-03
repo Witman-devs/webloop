@@ -1,6 +1,9 @@
 import { Link, Typography } from "@mui/material";
 import ProfileCard from "../../components/ProfilePage";
 import directorImg from "../../assets/characters/director.png";
+import suicideNote from "../../assets/Notes/suicideNote.png";
+import complaintLetter1 from "../../assets/Notes/complaintLetter1.png";
+import ViewImage from "../../components/ViewImage";
 
 export default function Director({ setPageName }) {
   const flagFound = localStorage.getItem("flaggedStudent") === "Arjun Raj Verma";
@@ -36,14 +39,15 @@ export default function Director({ setPageName }) {
               disorders.
             </>
           ),
+          // TODO: blink this section if the flag is found
           items: (
             flagFound && (
             <div>
               <Typography variant="subtitle2">Documents found</Typography>
               <ul>
-                <li>Organ Request Forms.</li>
-                <li>Letters from Ward staff complaining about equipment shortages.</li>
-                <li>Letter from Juan Martinez regarding suspicion of Organ Trafficking.</li>
+                <li><ViewImage image={complaintLetter1} label="Letters from Ward staff complaining about staff shortages." /></li>
+                {/* <li><ViewImage image={image2} label="Letter from Juan Martinez regarding suspicion of Organ Trafficking." /></li> */}
+                {/* <li><ViewImage image={image3} label="Organ Request Forms." /></li> */}
               </ul>
             </div>
           )),

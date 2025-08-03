@@ -21,6 +21,7 @@ import "@xyflow/react/dist/style.css";
 import Note from "./Note";
 import Thread from "./Thread";
 import DocumentEvidence from "./DocumentEvidence";
+import ImageEvidence from "./ImageEvidence";
 
 // TODO: make easy connection from anywhere you drag
 // TODO: label for threads/edges
@@ -28,7 +29,8 @@ const flowKey = "EvidenceBoard"
 
 const nodeTypes = {
   note: Note,
-  document: DocumentEvidence
+  document: DocumentEvidence,
+  image: ImageEvidence,
 };
 
 function CustomControls({setEvidanceBoardOpen, onSave}){

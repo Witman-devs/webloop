@@ -24,13 +24,18 @@ export default function Doc1({ setPageName }) {
           image: directorImg,
           bio: (
             <>
-              Dr. Juan Martinez is a reputed doctor of <Link onClick={() => setPageName("hospital")}>Redmarsh Healthcare</Link> and a
-              renowned neurologist known for his groundbreaking work in
-              neuroplasticity. He was one of the top alumni from St. Healmore
-              Medical College and now mentors young doctors across Redmarsh. He
-              is a frequent speaker at conferences and an advocate for mental
-              health policy reform. He also co-founded NeuroAid, an initiative
-              for early detection of neurological disorders.
+              Dr. Juan Martinez is a skilled surgeon and dedicated medical
+              researcher, known for his precision in the operating room and
+              commitment to advancing clinical practices. 
+              Dr. Juan Martinez was the Chief Surgeon at{" "}
+              <Link onClick={() => setPageName("hospital")}>
+                Redmarsh Healthcare
+              </Link>. A graduate of St.
+              Healmore Medical College, Batch of 2005, he brings over two
+              decades of experience to patient care and surgical innovation. Dr.
+              Martinez continues to contribute to medical science through
+              research publications and active participation in global surgical
+              forums.
             </>
           ),
         }}
