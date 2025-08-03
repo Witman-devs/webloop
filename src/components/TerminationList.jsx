@@ -1,16 +1,30 @@
-import {
-  Box,
-  Typography,
-  Paper,
-  Divider,
-  Link,
-} from "@mui/material";
-import { DataGrid } from "@mui/x-data-grid";
+import { Box, Typography, Paper, Divider, Link } from "@mui/material";
+import { DataGrid, renderActionsCell } from "@mui/x-data-grid";
 
-export default function TerminatedStudentsList({ students = [], collegeLogo, collegeAddress, setPageName }){
+export default function TerminatedStudentsList({
+  students = [],
+  collegeLogo,
+  collegeAddress,
+  setPageName,
+}) {
   const columns = [
     { field: "id", headerName: "#", width: 70 },
-    { field: "name", headerName: "Name", flex: 1 },
+    {
+      field: "name",
+      headerName: "Name",
+      flex: 1,
+      renderCell: (params) => (
+        <Box sx={{ display: "flex", alignItems: "center" }}>
+          {params.row.name == "Arjun Raj Verma" ? (
+            <Link onClick={() => setPageName("director")}>
+              {params.row.name}
+            </Link>
+          ) : (
+            params.row.name
+          )}
+        </Box>
+      ),
+    },
     { field: "rollNumber", headerName: "Roll No.", flex: 1 },
     { field: "batch", headerName: "Batch", flex: 0.6 },
     { field: "degree", headerName: "Degree", flex: 0.8 },
@@ -92,5 +106,4 @@ export default function TerminatedStudentsList({ students = [], collegeLogo, col
       </Box>
     </Paper>
   );
-};
-
+}

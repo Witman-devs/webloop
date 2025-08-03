@@ -1,0 +1,242 @@
+[
+  {
+    "name": "Donald Rutherford",
+    "rollNumber": "MD2005-256",
+    "batch": "2005",
+    "degree": "MBBS",
+    "reason": "Plagiarism",
+    "terminationDate": "2007-10-02"
+  },
+  {
+    "name": "Mr. Alfred Hintz",
+    "rollNumber": "MD2024-053",
+    "batch": "2024",
+    "degree": "MBBS",
+    "reason": "Excessive absences",
+    "terminationDate": "2024-09-13"
+  },
+  {
+    "name": "Homer Marks II",
+    "rollNumber": "MD2017-139",
+    "batch": "2017",
+    "degree": "MBBS",
+    "reason": "Excessive absences",
+    "terminationDate": "2020-01-25"
+  },
+  {
+    "name": "Andre Stokes I",
+    "rollNumber": "MD2021-867",
+    "batch": "2021",
+    "degree": "MBBS",
+    "reason": "Inappropriate behavior",
+    "terminationDate": "2023-04-26"
+  },
+  {
+    "name": "Mrs. Melody Ledner",
+    "rollNumber": "MD2001-261",
+    "batch": "2001",
+    "degree": "MBBS",
+    "reason": "Falsified records",
+    "terminationDate": "2003-08-07"
+  },
+  {
+    "name": "Tammy Powlowski",
+    "rollNumber": "MD2003-310",
+    "batch": "2003",
+    "degree": "MBBS",
+    "reason": "Inappropriate behavior",
+    "terminationDate": "2004-09-28"
+  },
+  {
+    "name": "Ricky Gulgowski V",
+    "rollNumber": "MD2020-253",
+    "batch": "2020",
+    "degree": "MBBS",
+    "reason": "Falsified records",
+    "terminationDate": "2022-07-08"
+  },
+  {
+    "name": "Dr. Dave Larkin",
+    "rollNumber": "MD2004-838",
+    "batch": "2004",
+    "degree": "MBBS",
+    "reason": "Code of conduct violation",
+    "terminationDate": "2006-06-15"
+  },
+  {
+    "name": "Janie Carter",
+    "rollNumber": "MD2004-909",
+    "batch": "2004",
+    "degree": "MBBS",
+    "reason": "Falsified records",
+    "terminationDate": "2007-12-17"
+  },
+  {
+    "name": "Arjun Raj Verma",
+    "rollNumber": "MD2008-001",
+    "batch": "2008",
+    "degree": "MBBS",
+    "reason": "Code of conduct violation",
+    "terminationDate": "2007-06-07"
+  },
+  {
+    "name": "Ignacio O'Keefe PhD",
+    "rollNumber": "MD2021-989",
+    "batch": "2021",
+    "degree": "MBBS",
+    "reason": "Inappropriate behavior",
+    "terminationDate": "2026-05-06"
+  },
+  {
+    "name": "Terrance Quitzon MD",
+    "rollNumber": "MD2008-553",
+    "batch": "2008",
+    "degree": "MBBS",
+    "reason": "Substance abuse",
+    "terminationDate": "2008-09-22"
+  },
+  {
+    "name": "Pat Dach",
+    "rollNumber": "MD2012-123",
+    "batch": "2012",
+    "degree": "MBBS",
+    "reason": "Code of conduct violation",
+    "terminationDate": "2013-08-05"
+  },
+  {
+    "name": "Mildred Ebert",
+    "rollNumber": "MD2008-195",
+    "batch": "2008",
+    "degree": "MBBS",
+    "reason": "Excessive absences",
+    "terminationDate": "2009-11-23"
+  },
+  {
+    "name": "Dewey McDermott",
+    "rollNumber": "MD1996-213",
+    "batch": "1996",
+    "degree": "MBBS",
+    "reason": "Inappropriate behavior",
+    "terminationDate": "2000-05-05"
+  },
+  {
+    "name": "Miss Nina Terry",
+    "rollNumber": "MD2023-810",
+    "batch": "2023",
+    "degree": "MBBS",
+    "reason": "Plagiarism",
+    "terminationDate": "2026-03-28"
+  },
+  {
+    "name": "Richard Ferry",
+    "rollNumber": "MD2006-739",
+    "batch": "2006",
+    "degree": "MBBS",
+    "reason": "Falsified records",
+    "terminationDate": "2007-06-29"
+  },
+  {
+    "name": "Mr. Leland O'Keefe",
+    "rollNumber": "MD2022-082",
+    "batch": "2022",
+    "degree": "MBBS",
+    "reason": "Inappropriate behavior",
+    "terminationDate": "2023-08-05"
+  },
+  {
+    "name": "Bruce Kilback",
+    "rollNumber": "MD2015-528",
+    "batch": "2015",
+    "degree": "MBBS",
+    "reason": "Falsified records",
+    "terminationDate": "2019-10-23"
+  },
+  {
+    "name": "Jeremiah Huels",
+    "rollNumber": "MD1998-200",
+    "batch": "1998",
+    "degree": "MBBS",
+    "reason": "Code of conduct violation",
+    "terminationDate": "2000-02-19"
+  },
+  {
+    "name": "Dewey Lehner",
+    "rollNumber": "MD1999-782",
+    "batch": "1999",
+    "degree": "MBBS",
+    "reason": "Substance abuse",
+    "terminationDate": "2002-04-18"
+  },
+  {
+    "name": "Patricia Emard",
+    "rollNumber": "MD1990-726",
+    "batch": "1990",
+    "degree": "MBBS",
+    "reason": "Inappropriate behavior",
+    "terminationDate": "1993-05-18"
+  },
+  {
+    "name": "Dallas Jenkins",
+    "rollNumber": "MD1997-739",
+    "batch": "1997",
+    "degree": "MBBS",
+    "reason": "Excessive absences",
+    "terminationDate": "1998-11-12"
+  },
+  {
+    "name": "Julio Weissnat",
+    "rollNumber": "MD1993-894",
+    "batch": "1993",
+    "degree": "MBBS",
+    "reason": "Substance abuse",
+    "terminationDate": "1995-04-07"
+  },
+  {
+    "name": "Mr. Alberto Haley",
+    "rollNumber": "MD2024-523",
+    "batch": "2024",
+    "degree": "MBBS",
+    "reason": "Code of conduct violation",
+    "terminationDate": "2025-12-30"
+  },
+  {
+    "name": "Tim Dooley",
+    "rollNumber": "MD2003-826",
+    "batch": "2003",
+    "degree": "MBBS",
+    "reason": "Substance abuse",
+    "terminationDate": "2003-10-17"
+  },
+  {
+    "name": "Mrs. Regina Funk",
+    "rollNumber": "MD2003-873",
+    "batch": "2003",
+    "degree": "MBBS",
+    "reason": "Academic dishonesty",
+    "terminationDate": "2005-06-05"
+  },
+  {
+    "name": "Mamie Rowe",
+    "rollNumber": "MD1994-973",
+    "batch": "1994",
+    "degree": "MBBS",
+    "reason": "Falsified records",
+    "terminationDate": "1995-04-25"
+  },
+  {
+    "name": "Willis Hintz",
+    "rollNumber": "MD2010-608",
+    "batch": "2010",
+    "degree": "MBBS",
+    "reason": "Inappropriate behavior",
+    "terminationDate": "2014-07-30"
+  },
+  {
+    "name": "Leo Harris DDS",
+    "rollNumber": "MD2017-856",
+    "batch": "2017",
+    "degree": "MBBS",
+    "reason": "Code of conduct violation",
+    "terminationDate": "2020-01-24"
+  }
+]
