@@ -10,6 +10,7 @@ import {
   Divider,
   Button,
   Link,
+  Stack,
 } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
 import Document from "./Documents/Document";
@@ -19,7 +20,7 @@ import { v4 as uuidv4 } from 'uuid';
 const flowKey = "EvidenceBoard"
 
 
-function AddToEvidence(type, data){
+function AddToEvidence(type, data, setMessage){
   let flow = JSON.parse(localStorage.getItem(flowKey));
   if(!flow) flow = {"nodes":[],"edges":[],"viewport":{"x":0,"y":0,"zoom":1}}
   flow.nodes.push({
@@ -33,11 +34,15 @@ function AddToEvidence(type, data){
         type: "document"
       })
     localStorage.setItem(flowKey, JSON.stringify(flow));
+  setMessage("Added to evidence board successfully!");
+  setTimeout(() => {
+    setMessage("");
+  }, 3000);
 }
 
 export default function RecordsList({ records, columns, type, Label, companyLogo, companyName, companyAddress, setPageName }){
   const [selectedRecord, setSelectedRecord] = useState(null);
-
+  const [message, setMessage] = useState("");
   const handleRowClick = (params) => {
     setSelectedRecord(params.row);
   };
@@ -103,7 +108,12 @@ export default function RecordsList({ records, columns, type, Label, companyLogo
                 <Document data={convertValuesToStrings(selectedRecord)} type={type}/>
             </Card>
           )}
-          <MonochromeButton onClick={()=>AddToEvidence(type, convertValuesToStrings(selectedRecord))}>Add to evidence board</MonochromeButton>
+          <Stack direction="row" spacing={2}>
+            <MonochromeButton onClick={()=>AddToEvidence(type, convertValuesToStrings(selectedRecord), setMessage)}>Add to evidence board</MonochromeButton>
+            <Typography variant="body2" color="text.secondary">
+              {message}
+            </Typography>
+          </Stack>
         </Box>
       </Modal>
     </div>

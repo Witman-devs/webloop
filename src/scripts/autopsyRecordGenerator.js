@@ -76,9 +76,11 @@ function generateAutopsyReport() {
   
   // Add a conclusion
   const conclusion = `The cause of death is consistent with a ${causeOfDeath.toLowerCase()}.`;
+  const id = uuidv4().substring(0, 8).toUpperCase()
 
   return {
-    caseNumber: `AUT-${dateOfDeath.getFullYear()}-${uuidv4().substring(0, 8).toUpperCase()}`,
+    id: id,
+    caseNumber: `AUT-${dateOfDeath.getFullYear()}-${id}`,
     name: fullName,
     age,
     gender,

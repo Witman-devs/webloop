@@ -1,31 +1,71 @@
-import { Button, Divider, IconButton, Input, Link, List, Snackbar, Stack, Typography } from "@mui/material";
+import {
+  Autocomplete,
+  Button,
+  Divider,
+  IconButton,
+  Input,
+  Link,
+  List,
+  Snackbar,
+  Stack,
+  TextField,
+  Typography,
+} from "@mui/material";
 import { amber, red, yellow } from "@mui/material/colors";
 import MonochromeButton from "../components/MonochromeButton.jsx";
 import React, { useState } from "react";
 import { X } from "lucide-react";
+import deathRecords from "../assets/death_records.json"; 
 
-function Question({ answer, setAnswer, questionText }) {
+const deathCertificateNumbers = deathRecords.map((record) => record.fullName);  
+
+function Question({ answer, setAnswer, questionText, type }) {
   return (
     <div style={{ marginBlockEnd: "20px" }}>
       <Typography variant="h5">Q: {questionText}</Typography>
-      <Input
-        placeholder="Enter your answer here"
-        style={{ width: "70%" }}
-        value={answer}
-        onChange={(e) => setAnswer(e.target.value)}
-      />
+      {type === "dropdown" ? (
+        <Autocomplete
+          multiple
+          id="tags-standard"
+          options={deathCertificateNumbers}
+          getOptionLabel={(option) => option}
+          // defaultValue={answer}
+          value={answer}
+          onChange={(event, newValue) => {
+            console.log(newValue);
+            setAnswer(newValue);
+          }}
+          renderInput={(params) => (
+            <TextField
+              {...params}
+              variant="standard"
+              label="Multiple values"
+              placeholder="Death People's Names"
+              fullWidth={false}
+              style={{ width: "70%" }}
+              />
+          )}
+        />
+      ) : (
+        <Input
+          style={{ width: "70%" }}
+          placeholder="Enter your answer here"
+          value={answer}
+          onChange={(e) => setAnswer(e.target.value)}
+        />
+      )}
     </div>
   );
 }
 
 function CheckAnswers(A1, A2, A3, openSnackbar, setSnackbarMessage) {
   const correctAnswers = {
-    A1: ["DC-564389","DC-660433","DC-746791","DC-945350","DC-953484"], // Example death certificate numbers
-    A2: "Dr. Rohan Mehta", // Example doctor's name
-    A3: "Samuel Robert Hayes", // Example name of the person who
+    A1: ["Roxanne Hintz", "Dale Grady", "May Bayer", "Beverly Jakubowski", "Clint Barrows"], // Example death certificate numbers
+    A2: new Set(["dr. rohan mehta", "rohan mehta"]), // Example doctor's name
+    A3: new Set(["samuel robert hayes", "samuel hayes"]), // Example name of the person who
   };
   const userAnswers = {
-    A1: A1.trim().split(",").map(item => item.trim()), // Split by comma and trim each item
+    A1: A1.map((item) => item.trim()), // Split by comma and trim each item
     A2: A2.trim(),
     A3: A3.trim(),
   };
@@ -34,13 +74,15 @@ function CheckAnswers(A1, A2, A3, openSnackbar, setSnackbarMessage) {
   for (const key in correctAnswers) {
     if (Array.isArray(correctAnswers[key])) {
       // If the correct answer is an array, check if all elements are present in user answers
-      if (!correctAnswers[key].every(item => userAnswers[key].includes(item))) {
+      if (
+        !correctAnswers[key].every((item) => userAnswers[key].includes(item))
+      ) {
         openSnackbar(true);
         setSnackbarMessage(`Incorrect answer for ${key}. Please try again.`);
         return;
       }
     } else {
-      if (correctAnswers[key].toLowerCase() !== userAnswers[key].toLowerCase()) {
+      if (correctAnswers[key].has(userAnswers[key].toLowerCase()) === false) {
         openSnackbar(true);
         setSnackbarMessage(`Incorrect answer for ${key}. Please try again.`);
         return;
@@ -52,13 +94,13 @@ function CheckAnswers(A1, A2, A3, openSnackbar, setSnackbarMessage) {
 }
 
 export default function Cases({ setPageName }) {
-  const [A1, setA1] = useState("");
+  const [A1, setA1] = useState([]);
   const [A2, setA2] = useState("");
   const [A3, setA3] = useState("");
   const [open, setOpen] = useState(false);
   const [snackbarMessage, setSnackbarMessage] = useState("");
 
-    const action = (
+  const action = (
     <React.Fragment>
       <IconButton
         size="small"
@@ -95,6 +137,7 @@ export default function Cases({ setPageName }) {
         <Question
           answer={A1}
           setAnswer={setA1}
+          type="dropdown"
           questionText="Death certificate number of patients whose organs were trafficked(comma seperated, in any order)."
         />
         <Question
@@ -109,7 +152,9 @@ export default function Cases({ setPageName }) {
         />
       </List>
       <Stack direction="row-reverse">
-        <MonochromeButton onClick={() => CheckAnswers(A1, A2, A3, setOpen, setSnackbarMessage)}>
+        <MonochromeButton
+          onClick={() => CheckAnswers(A1, A2, A3, setOpen, setSnackbarMessage)}
+        >
           Submit Answers
         </MonochromeButton>
       </Stack>
@@ -147,7 +192,7 @@ export default function Cases({ setPageName }) {
       )}
 
       <Snackbar
-      anchorOrigin={{ vertical: "top", horizontal: "center" }}
+        anchorOrigin={{ vertical: "top", horizontal: "center" }}
         open={open}
         autoHideDuration={6000}
         onClose={() => setOpen(false)}

@@ -125,7 +125,7 @@ function App() {
           <Floaty />
         </div>
 
-        <div style={{ height: "100vh", position: "absolute", zIndex: 10, top: 0, width: "calc(100vw - 16px)", overflow: "auto" }} >
+        <div style={{ height: "100vh", position: "absolute", zIndex: 10, top: 0, width: "calc(100vw - 16px)", overflowX: "hidden", overflowY: "scroll" }} >
           <SideMenu sideMenuOpen={sideMenuOpen} setSideMenuOpen={setSideMenuOpen} setEvidanceBoardOpen={setEvidanceBoardOpen} />
           <PageRouter pageName={pageName} setPageName={setPageName} />
         </div>
