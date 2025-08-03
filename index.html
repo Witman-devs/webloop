@@ -3,11 +3,25 @@
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/png" href="/lgoo.png" />
+    <!-- Tailwind CSS CDN for styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Use the Inter font for a clean, modern look -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>WebLoop</title>
+    <style>
+      body {
+        font-family: 'Inter', sans-serif;
+      }
+    </style>
   </head>
-  <body style="margin: 0;">
-    <div id="root" style="height: 100vh; overflow:hidden;"></div>
+  <!-- Set the body to have no margin and the root div to fill the viewport -->
+  <body class="m-0 bg-gray-100">
+    <!-- This text will appear if React fails to load, helping us debug -->
+    <div id="root" class="h-screen w-screen overflow-hidden items-center justify-center">
+      <p class="text-gray-500 text-lg">Loading application...</p>
+    </div>
+    <!-- The script that loads your main React component -->
     <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>
