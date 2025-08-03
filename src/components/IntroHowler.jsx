@@ -2,53 +2,50 @@ import React, { useState, useEffect } from 'react';
 import { Howl, Howler } from 'howler';
 
 // Import your song files directly
-import phase1_song from '../assets/music/intro.wav';
-import phase2_song from '../assets/music/pickup.wav';
-import phase3_song from '../assets/music/chorus.wav';
+import phase1_song from '../assets/music/mm.mp3';
 import rain_sound from '../assets/music/rain.mp3';
 
 const IntroHowler = () => {
-    const [currentPhase, setCurrentPhase] = useState(0);
+    // State to hold Howl instances
+    const [rainSound, setRainSound] = useState(null);
+    const [mainSong, setMainSong] = useState(null);
 
-    // Define your sound objects using the imported files
-    const phases = [
-        { id: 0, src: phase1_song },
-        { id: 1, src: phase2_song },
-        { id: 2, src: phase3_song },
-    ];
-
-    // Create an array of Howl instances
-    const sounds = phases.map(phase => new Howl({
-        src: [phase.src],
-        autoplay: false,
-        loop: false,
-    }));
-
-    const rain = new Howl({
-        src: [rain_sound],
-        autoplay: true,
-        loop: true,
-        volume: 0.1
-    });
-
-    // The rest of the useEffect hook and control functions remain the same
+    // Initialize sounds when the component mounts
     useEffect(() => {
-        sounds[currentPhase].play();
-        sounds[currentPhase].on('end', () => {
-            if (currentPhase < phases.length - 1) {
-                setCurrentPhase(currentPhase + 1);
-            } else {
-                setCurrentPhase(1);
-            }
+        const rain = new Howl({
+            src: [rain_sound],
+            autoplay: true,
+            loop: true,
+            volume: 0.1,
+            // Preload to ensure it's ready before any fade operations
+            preload: true
         });
 
+        const main = new Howl({
+            src: [phase1_song],
+            autoplay: true,
+            loop: true,
+            volume: 1.0, // Start at full volume
+            preload: true
+        });
+
+        // Store instances in state
+        setRainSound(rain);
+        setMainSong(main);
+
+        // Clean up sounds when the component unmounts
         return () => {
-            sounds[currentPhase].off('end');
+            if (rain) {
+                rain.unload();
+            }
+            if (main) {
+                main.unload();
+            }
         };
-    }, [currentPhase]);
+    }, []); // Empty dependency array means this runs once on mount
 
     return (
-        <></>
+        <></> // This component doesn't render any visible UI
     );
 };
 
