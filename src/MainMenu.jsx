@@ -4,6 +4,8 @@ import { Box, Button, Typography, Stack, Fade, IconButton } from '@mui/material'
 import MonochromeButton from "./components/MonochromeButton";
 import IntroHowler from "./components/IntroHowler";
 import backpng from "./assets/detback.png";
+import link_hit_sfx from './assets/sfx/linkhit.mp3';
+import menu_hit_sfx from './assets/sfx/menuhit.mp3';
 import Modal from 'react-modal';
 
 const customStyles = {
@@ -35,24 +37,46 @@ const MainMenu = ({ setStart }) => {
     const [optionsIsOpen, setOptionsIsOpen] = React.useState(false);
     // Handler for the start button
     const handleStartGame = () => {
+        menu_hit.play(); // Play the sound effect
         setStart(true);
     };
 
     const handleOptions = () => {
+        link_hit.play(); // Play the sound effect
         setOptionsIsOpen(true);
     };
 
     const handleCredits = () => {
+        link_hit.play(); // Play the sound effect
         setCreditsIsOpen(true);
     };
 
     const closeOptions = () => {
+        link_hit.play(); // Play the sound effect
         setOptionsIsOpen(false);
     };
 
     const closeCredits = () => {
+        link_hit.play(); // Play the sound effect
         setCreditsIsOpen(false);
     };
+
+    const menu_hit = new Howl({
+        src: [menu_hit_sfx],
+        autoplay: false,
+        loop: false,
+        // Preload to ensure it's ready before any fade operations
+        preload: true
+    });
+
+
+    const link_hit = new Howl({
+        src: [link_hit_sfx],
+        autoplay: false,
+        loop: false,
+        // Preload to ensure it's ready before any fade operations
+        preload: true
+    });
 
     return (
     <Box
