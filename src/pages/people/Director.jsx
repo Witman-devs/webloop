@@ -3,7 +3,9 @@ import ProfileCard from "../../components/ProfilePage";
 import directorImg from "../../assets/characters/director.png";
 import suicideNote from "../../assets/Notes/suicideNote.png";
 import complaintLetter1 from "../../assets/Notes/complaintLetter1.png";
-import ViewImage from "../../components/ViewImage";
+import ViewOrganRequest from "../../components/ViewOrganRequest.jsx";
+import ViewImage from "../../components/ViewImage.jsx";
+
 
 export default function Director({ setPageName }) {
   const flagFound = localStorage.getItem("flaggedStudent") === "Arjun Raj Verma";
@@ -47,7 +49,7 @@ export default function Director({ setPageName }) {
               <ul>
                 <li><ViewImage image={complaintLetter1} label="Letters from Ward staff complaining about staff shortages." /></li>
                 {/* <li><ViewImage image={image2} label="Letter from Juan Martinez regarding suspicion of Organ Trafficking." /></li> */}
-                {/* <li><ViewImage image={image3} label="Organ Request Forms." /></li> */}
+                <li><ViewOrganRequest /></li>
               </ul>
             </div>
           )),
