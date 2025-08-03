@@ -1,5 +1,13 @@
-import { Box, Typography, Paper, Divider, Link } from "@mui/material";
+import React from "react";
+import { Box, Typography, Paper, Divider, Link, Snackbar, IconButton } from "@mui/material";
 import { DataGrid, renderActionsCell } from "@mui/x-data-grid";
+import { X } from "lucide-react";
+
+function handleFlagClick(setPageName, setOpen) {
+  setOpen(true);
+  localStorage.setItem("flaggedStudent", "Arjun Raj Verma");
+  setTimeout(() => setPageName("director"), 6000);
+}
 
 export default function TerminatedStudentsList({
   students = [],
@@ -7,6 +15,12 @@ export default function TerminatedStudentsList({
   collegeAddress,
   setPageName,
 }) {
+
+  const [open, setOpen] = React.useState(false);
+  const handleClose = () => {
+    setOpen(false);
+  };
+
   const columns = [
     { field: "id", headerName: "#", width: 70 },
     {
@@ -16,7 +30,7 @@ export default function TerminatedStudentsList({
       renderCell: (params) => (
         <Box sx={{ display: "flex", alignItems: "center" }}>
           {params.row.name == "Arjun Raj Verma" ? (
-            <Link onClick={() => setPageName("director")}>
+            <Link onClick={() => handleFlagClick(setPageName, setOpen)}>
               {params.row.name}
             </Link>
           ) : (
@@ -31,6 +45,19 @@ export default function TerminatedStudentsList({
     { field: "reason", headerName: "Reason", flex: 2 },
     { field: "terminationDate", headerName: "Termination Date", flex: 1 },
   ];
+
+  const action = (
+    <React.Fragment>
+      <IconButton
+        size="small"
+        aria-label="close"
+        color="inherit"
+        onClick={handleClose}
+      >
+        <X fontSize="small" />
+      </IconButton>
+    </React.Fragment>
+  );
 
   const rows = students.map((s, idx) => ({
     id: idx + 1,
@@ -104,6 +131,14 @@ export default function TerminatedStudentsList({
           }}
         />
       </Box>
+      <Snackbar
+        anchorOrigin={{ vertical: "top", horizontal: "center" }}
+        open={open}
+        autoHideDuration={12000}
+        onClose={handleClose}
+        message="Clue Found: Arjun Verma is not a doctor. Opening Director's Page..."
+        action={action}
+      />
     </Paper>
   );
 }

@@ -45,19 +45,30 @@ export default function ProfileCard({ person, setPageName }) {
           <Typography variant="h3" gutterBottom sx={{ fontWeight: "bold" }}>
             {person.name}
           </Typography>
-
           <Typography variant="subtitle1" gutterBottom>
             {person.fullName}
           </Typography>
-
           <Divider sx={{ my: 2, borderColor: "#000" }} />
-
           <Typography variant="h6" gutterBottom>
             Biography
           </Typography>
           <Typography variant="body1" paragraph sx={{ whiteSpace: "pre-line" }}>
             {person.bio}
           </Typography>
+          {person.items &&(
+          <>
+            <Typography variant="h6" gutterBottom>
+              Items
+            </Typography>
+            <Typography
+              variant="body1"
+              paragraph
+              sx={{ whiteSpace: "pre-line" }}
+            >
+              {person.items}
+            </Typography>
+          </>
+          )}
         </Box>
 
         {/* Image and quick info */}
