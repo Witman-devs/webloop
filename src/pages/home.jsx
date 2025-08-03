@@ -1,7 +1,6 @@
 import React, { useState , useEffect } from 'react';
 import { Card, CardContent, Link, Stack, Typography } from "@mui/material";
 import AntagonistLogo from "../components/AntagonistLogo";
-import Tutorial from "../components/Tutorial";
 
 export default function Home({setPageName}) {
   return (
