@@ -1,11 +1,48 @@
-import { Link, Typography } from "@mui/material";
+import { Link, Typography, Box, Button, Modal } from "@mui/material";
 import ProfileCard from "../../components/ProfilePage";
 import directorImg from "../../assets/characters/inspector.png";
+import React, { useState, useEffect } from "react";
 import { MedalIcon } from "lucide-react";
 
+// Modal styling
+const style = {
+  position: 'absolute',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  width: 400,
+  bgcolor: 'background.paper',
+  border: '2px solid #000',
+  boxShadow: 24,
+  p: 4,
+  textAlign: 'center',
+};
+
 export default function Inspector({ setPageName }) {
+  // State to control the modal's open/close status
+  const [open, setOpen] = useState(true);
+
+  const handleClose = () => {
+    setOpen(false);
+    setPageName("home"); // Redirect to home page when modal is closed
+  }
+
   return (
     <div style={{ width: "60vw", left: "20vw", position: "relative" }}>
+      <Modal
+        open={open}
+        onClose={handleClose}
+      >
+        <Box sx={style}>
+          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+            This page does not have any information relevant to Case 1.
+          </Typography>
+          <Button onClick={handleClose} sx={{ mt: 3 }} variant="contained">
+            Close
+          </Button>
+        </Box>
+      </Modal>
+
       <Typography variant="h2">Personal page of Police Inspector</Typography>
 
       <ProfileCard
