@@ -141,7 +141,6 @@ function FloatMenuStack({ open }) {
       }}
     >
       {/* <div>Hello</div> */}
-      <MusicControl />
     </Stack>
   );
 }
