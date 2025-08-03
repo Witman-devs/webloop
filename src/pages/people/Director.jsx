@@ -5,6 +5,7 @@ import complaintLetter1 from "../../assets/Notes/complaintLetter1.png";
 import LetterFromJuan from "../../assets/Notes/LetterFromJuan.png";
 import ViewOrganRequest from "../../components/ViewOrganRequest.jsx";
 import ViewImage from "../../components/ViewImage.jsx";
+import "../../index.css"; // Ensure styles are imported
 
 
 export default function Director({ setPageName }) {
@@ -44,7 +45,7 @@ export default function Director({ setPageName }) {
           // TODO: blink this section if the flag is found
           items: (
             flagFound && (
-            <div>
+            <div className="blink">
               <Typography variant="subtitle2">Documents found</Typography>
               <ul>
                 <li><ViewImage image={complaintLetter1} label="Letters from Ward staff complaining about staff shortages." /></li>
