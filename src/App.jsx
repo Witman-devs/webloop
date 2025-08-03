@@ -85,6 +85,7 @@ function App() {
         styleOverrides: {
           root: {
             color: red[900],
+            cursor: 'pointer',
             textDecoration: 'underline', 
             textDecorationColor: red[900], 
             '&:hover': {
