@@ -1,15 +1,34 @@
 import { Paper, Typography, Box, Divider, Link } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
 
+const DoctorInfo = {
+  "Dr. Juan Martinez": "doc1",
+  "Dr. Rohan Mehta": "doc2",
+}
+
+
 export default function AlumniStudentsList({
   alumni = [],
   collegeLogo,
   collegeAddress,
   setPageName,
 }) {
+  
   const columns = [
     { field: "id", headerName: "#", width: 70 },
-    { field: "name", headerName: "Name", flex: 1 },
+    { field: "name", headerName: "Name", flex: 1,
+        renderCell: (params) => (
+        <Box sx={{ display: "flex", alignItems: "center" }}>
+          {params.row.name in DoctorInfo ? (
+            <Link onClick={() => setPageName(DoctorInfo[params.row.name])}>
+              {params.row.name}
+            </Link>
+          ) : (
+            params.row.name
+          )}
+        </Box>
+      ),
+     },
     { field: "rollNumber", headerName: "Roll No.", flex: 1 },
     { field: "degree", headerName: "Degree", flex: 0.8 },
     { field: "batch", headerName: "Batch", flex: 0.6 },
@@ -17,7 +36,6 @@ export default function AlumniStudentsList({
     { field: "specialization", headerName: "Specialization", flex: 1 },
     { field: "currentEmployment", headerName: "Current Employment", flex: 2 },
   ];
-
   const rows = alumni.map((s, idx) => ({
     id: idx + 1,
     ...s,

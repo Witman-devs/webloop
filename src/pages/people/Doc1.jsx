@@ -22,9 +22,17 @@ export default function Doc1({ setPageName }) {
           firstAppearance: "Student Records - Batch 2000",
           address: "Flat 3A, Doctor's Residency,\nHeartline Road,\nRedmarsh",
           image: directorImg,
-          bio: `Dr. Juan Martinez is a reputed doctor of Redmarsh Healthcare and a renowned neurologist known for his groundbreaking work in neuroplasticity. 
-He was one of the top alumni from St. Healmore Medical College and now mentors young doctors across Redmarsh. 
-He is a frequent speaker at conferences and an advocate for mental health policy reform. He also co-founded NeuroAid, an initiative for early detection of neurological disorders.`,
+          bio: (
+            <>
+              Dr. Juan Martinez is a reputed doctor of <Link onClick={() => setPageName("hospital")}>Redmarsh Healthcare</Link> and a
+              renowned neurologist known for his groundbreaking work in
+              neuroplasticity. He was one of the top alumni from St. Healmore
+              Medical College and now mentors young doctors across Redmarsh. He
+              is a frequent speaker at conferences and an advocate for mental
+              health policy reform. He also co-founded NeuroAid, an initiative
+              for early detection of neurological disorders.
+            </>
+          ),
         }}
         setPageName={setPageName}
       />

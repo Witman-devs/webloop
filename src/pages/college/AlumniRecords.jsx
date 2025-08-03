@@ -1,6 +1,5 @@
-import { Link, Typography } from "@mui/material";
+import alumniRecords from "../../assets/college/alumniRecords.json";
 import AlumniStudentsList from "../../components/AlumniList";
-import TerminatedStudentsList from "../../components/TerminationList";
 import { ADDRESS, LOGOS } from "../../consts";
 
 export default function AlumniRecords({ setPageName }) {
@@ -13,35 +12,7 @@ export default function AlumniRecords({ setPageName }) {
           name: "St. Healmore Medical College",
           lines: ADDRESS["college"],
         }}
-        alumni={[
-          {
-            name: "Dr. Anjali Mehta",
-            rollNumber: "MD2016-012",
-            degree: "MBBS",
-            batch: "2016",
-            graduationYear: "2021",
-            specialization: "Cardiology",
-            currentEmployment: "Consultant, Apollo Hospitals",
-          },
-          {
-            name: "Dr. Rahul Singh",
-            rollNumber: "MD2015-034",
-            degree: "BDS",
-            batch: "2015",
-            graduationYear: "2020",
-            specialization: "Oral Surgery",
-            currentEmployment: "Private Practice, Delhi",
-          },
-          {
-            name: "Dr. Farah Khan",
-            rollNumber: "MD2017-021",
-            degree: "MBBS",
-            batch: "2017",
-            graduationYear: "2022",
-            specialization: "Pediatrics",
-            currentEmployment: "Resident, NIMS Hospital",
-          },
-        ]}
+        alumni={alumniRecords}
       />
     </div>
   );

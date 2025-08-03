@@ -14,8 +14,8 @@ export default function Victim1({ setPageName }) {
           birthDate: "September 22, 1985",
           occupation: "Optometrist",
           affiliation: (
-            <Link component="span" onClick={() => setPageName("redmarsh")}>
-              Redmarsh Psychiatric Hospital
+            <Link component="span" onClick={() => setPageName("hospital")}>
+              Redmarsh Healthcare
             </Link>
           ),
           firstAppearance: "Patient Intake - 2023",
