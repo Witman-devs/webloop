@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import PageRouter from "./components/PageRouter";
 import { Settings } from "lucide-react";
 import SideMenu from "./components/SideMenu";
@@ -17,6 +17,26 @@ function App() {
   const [pageName, setPageName] = useState("home");
   const [start, setStart] = useState(false);
   const { getEffectiveVolume } = useSound();
+
+    // useCallback to memoize the event handler for performance
+  const handleKeyPress = useCallback((event) => {
+    // We attach this listener to 'document', making it global.
+    // It will trigger no matter which specific element is focused.
+    if (event.key === 'e' || event.key === 'E') {
+      setEvidanceBoardOpen(prev => !prev);
+    }
+  }, []); // Empty dependency array means this function is created once
+
+  useEffect(() => {
+    // Add event listener to the document object
+    // This makes the 'e' key listener active globally across your app
+    document.addEventListener('keydown', handleKeyPress);
+
+    // Clean up the event listener when the component unmounts
+    return () => {
+      document.removeEventListener('keydown', handleKeyPress);
+    };
+  }, [handleKeyPress]); // Dependency on handleKeyPress ensures correct cleanup/re-registration
 
   useEffect(() => {
     link_hit.play(); // Play the sound effect

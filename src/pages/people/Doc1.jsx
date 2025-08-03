@@ -1,6 +1,8 @@
 import { Link, Typography } from "@mui/material";
 import ProfileCard from "../../components/ProfilePage";
-import directorImg from "../../assets/characters/doc1.png";
+import JuanImg from "../../assets/characters/doc1.png";
+import suicideNote from "../../assets/Notes/suicideNote.png";
+import ViewImage from "../../components/ViewImage";
 
 export default function Doc1({ setPageName }) {
   return (
@@ -21,7 +23,7 @@ export default function Doc1({ setPageName }) {
           ),
           firstAppearance: "Student Records - Batch 2000",
           address: "Flat 3A, Doctor's Residency,\nHeartline Road,\nRedmarsh",
-          image: directorImg,
+          image: JuanImg,
           bio: (
             <>
               Dr. Juan Martinez is a skilled surgeon and dedicated medical
@@ -38,6 +40,9 @@ export default function Doc1({ setPageName }) {
               forums.
             </>
           ),
+          items:(
+            <ViewImage image={suicideNote} label="Dr. Juan Martinez suicide note found in the staff quarters" />
+          )
         }}
         setPageName={setPageName}
       />
