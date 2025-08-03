@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import Card from "@mui/material/Card";
 import { CardContent, Stack, Typography } from "@mui/material";
-import { ArrowBigLeft, ArrowBigRight, Pause, Play } from "lucide-react";
+import { ArrowBigLeft, ArrowBigRight, Pause, Play, Music } from "lucide-react";
 import { Howl, Howler } from "howler"; // Import Howl and Howler
 
 import { MUSIC } from "../consts";
@@ -25,10 +25,14 @@ const FloatStyle = {
   height: "50px",
   width: "50px",
   borderRadius: "50%",
-  backgroundColor: blue[500],
+  backgroundColor: "black", // Updated to black
   position: "fixed",
   top: "calc(100vh - 60px)",
-  zIndex: 20
+  zIndex: 20,
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'center',
+  cursor: 'pointer',
 };
 
 function MusicControl() {
@@ -51,7 +55,7 @@ function MusicControl() {
       const sound = new Howl({
         src: [soundSrc],
         html5: true, // Use HTML5 audio to prevent issues with large files or iOS
-        loop: true,  // Loop the current track
+        loop: true,  // Loop the current track
         volume: getEffectiveVolume('music', 1), // Use the helper function to get effective volume
         onend: () => {
           // This would typically be for sequential play, but with loop: true, it might not fire
@@ -73,7 +77,7 @@ function MusicControl() {
         soundRef.current = null;
       }
     };
-  }, [musicId]); // Re-run effect when musicId changes
+  }, [musicId, getEffectiveVolume]); // Re-run effect when musicId changes
 
   // Effect to handle play/pause state changes
   useEffect(() => {
@@ -145,7 +149,10 @@ export default function Floaty() {
   const [menuOpen, setMenuOpen] = useState(false);
   return (
     <>
-      <div style={FloatStyle} onClick={() => setMenuOpen(!menuOpen)} />
+      {/* Updated the floating button to be black with a music icon */}
+      <div style={FloatStyle} onClick={() => setMenuOpen(!menuOpen)}>
+        <Music color="white" size={32} />
+      </div>
       <FloatMenuStack open={menuOpen} />
     </>
   );
