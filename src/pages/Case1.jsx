@@ -33,7 +33,7 @@ export default function Case1({setPageName}) {
       <NewspaperCutout
         headline="Another doctor found mysteriously dead at RC hostpital"
         date="June 6, 2023"
-        author={<Link component="span" onClick={()=>setPageName("victim3")}>Michael Thompson</Link>}
+        author="Michael Thompson"
         content={<News2 setPageName={setPageName}/>}
         rotation="5"
         left="20vw"
