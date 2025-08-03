@@ -8,16 +8,23 @@ import { grey } from "@mui/material/colors";
 import MainMenu from "./MainMenu";
 import mlink_hit_sfx from './assets/sfx/minorlink.mp3';
 import Tutorial from "./components/Tutorial";
+import VideoPlayer from "./components/VideoPlayer";
 import { useSound } from './SoundContext'; // Assuming you save the above code in SoundContext.js
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { red } from '@mui/material/colors';
+import intro from './assets/intro.mp4'; // Assuming you save the above code in SoundContext.js
 
 function App() {
   // Page and routing related states
   const [pageName, setPageName] = useState("home");
+  const [showVideo, setShowVideo] = useState(true);
   const [start, setStart] = useState(false);
   const { getEffectiveVolume } = useSound();
 
+  const handleVideoEndedOrSkipped = () => {
+    setShowVideo(false);
+    setRunTour(true); // Start the tutorial after the video ends or is skipped
+  };
     // useCallback to memoize the event handler for performance
   const handleKeyPress = useCallback((event) => {
     // We attach this listener to 'document', making it global.
@@ -61,7 +68,6 @@ function App() {
 
   useEffect(() => {
     setStepIndex(0);
-    setRunTour(true);
   }, []);
 
   const handleJoyrideCallback = (data) => {
@@ -99,6 +105,14 @@ function App() {
   
   return start ? (
     <ThemeProvider theme={theme}>
+      
+    {showVideo && (
+      <VideoPlayer
+        videoSrc={intro}
+        onVideoEnd={handleVideoEndedOrSkipped}
+        onSkip={handleVideoEndedOrSkipped}
+      />
+    )}
     <div style={{ padding: 10, backgroundColor: grey[300], }}>
 
         <div className="menu" style={{ height: "100vh", width:"fit-content"}}>
