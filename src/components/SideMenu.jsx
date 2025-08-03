@@ -11,7 +11,7 @@ export default function SideMenu({sideMenuOpen, setSideMenuOpen, setEvidanceBoar
               <Drawer open={sideMenuOpen} onClose={()=>setSideMenuOpen(false)}>
           <List>
             <ListItem onClick={()=>handleClick("evidanceBoard")}>
-              Evidance Board
+              Evidence Board
             </ListItem>
             <ListItem>
               WebLoop history
