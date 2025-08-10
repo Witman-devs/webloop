@@ -161,6 +161,7 @@ function Chart({ setEvidanceBoardOpen, rfInstance, setRfInstance, save }) {
         data: { label: `n${nodes.length + 1}` },
         origin: [0.5, 0.0],
         type: "note",
+        dragHandle: ".noteHeader",
       };
 
       setNodes((nds) => {
