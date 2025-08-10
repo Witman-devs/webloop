@@ -30,6 +30,7 @@ const Tutorial = ({ runTour, stepIndex, callback }) => {
       scrollToFirstStep
       showProgress
       showSkipButton
+      disableScrollParentFix = {true}
       locale={{
         back: 'Previous',      
         close: 'Close',        

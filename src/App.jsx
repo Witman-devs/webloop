@@ -66,27 +66,8 @@ function App() {
     }
   };
 
-  const theme = createTheme({
-    components: {
-      MuiLink: {
-        styleOverrides: {
-          root: {
-            color: red[900],
-            cursor: "pointer",
-            textDecoration: "underline",
-            textDecorationColor: red[900],
-            "&:hover": {
-              color: red[700],
-              textDecorationColor: red[700],
-            },
-          },
-        },
-      },
-    },
-  });
-
-  return start ? (
-    <ThemeProvider theme={theme}>
+  return (
+    <>
       {showVideo && (
         <VideoPlayer
           videoSrc={intro}
@@ -96,6 +77,7 @@ function App() {
       )}
 
       <div style={{ padding: 10, backgroundColor: grey[400] }}>
+        {/* Overlay layer. */}
         <div style={{ height: "100vh", width: "fit-content" }}>
           <NotebookPen
             className="menu"
@@ -105,25 +87,22 @@ function App() {
           <Floaty />
         </div>
 
+        {/* Main content area */}
         <div
           style={{
             height: "100vh",
             position: "absolute",
             zIndex: 10,
             top: 0,
-            width: "calc(100vw - 16px)",
+            width: "calc(100vw - 10px)",
+            "overflow-y": "auto",
             overflowX: "hidden",
-            overflowY: "scroll",
           }}
         >
-          <SideMenu
-            sideMenuOpen={sideMenuOpen}
-            setSideMenuOpen={setSideMenuOpen}
-            setEvidanceBoardOpen={setEvidanceBoardOpen}
-          />
           <PageRouter pageName={pageName} setPageName={setPageName} />
         </div>
 
+        {/* Hidden elements */}
         <EvidenceBoard
           evidanceBoardOpen={evidanceBoardOpen}
           setEvidanceBoardOpen={setEvidanceBoardOpen}
@@ -135,9 +114,7 @@ function App() {
           callback={handleJoyrideCallback}
         />
       </div>
-    </ThemeProvider>
-  ) : (
-    <MainMenu setStart={setStart} />
+    </>
   );
 }
 
