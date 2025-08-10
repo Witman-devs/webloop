@@ -39,7 +39,7 @@ const nodeTypes = {
 };
 
 function CustomControls({ setEvidanceBoardOpen, save }) {
-  // TODO: make instructions look better
+  // TODO: make instructions look better. Add icons
   return (
     <>
       <X
@@ -57,6 +57,29 @@ function CustomControls({ setEvidanceBoardOpen, save }) {
           setEvidanceBoardOpen(false);
         }}
       />
+      <Box
+        sx={{
+          width: "190px",
+          padding: "10px",
+          backgroundColor: "white",
+          boxShadow: 2,
+          borderRadius: "8px",
+          position: "absolute",
+          top: "70px",
+          right: "20px",
+        }}
+      >
+        <Typography variant="body1" sx={{ marginBottom: "4px" }}>
+          Instructions
+        </Typography>
+        <Typography sx={{ fontSize: "11px" }}>
+          1. Right click to add a note <br />
+          2. Select a note and BackSpace to delete the note <br />
+          3. Drag across pins on notes to join them <br />
+          4. Double click to remove thread <br />
+          5. Double click the note to edit it
+        </Typography>
+      </Box>
     </>
   );
 }
@@ -216,29 +239,6 @@ function Chart({ setEvidanceBoardOpen, rfInstance, setRfInstance, save }) {
       style={{ width: "100vw", height: "100vh", zIndex: 50 }}
       ref={reactFlowWrapper}
     >
-      <Box
-        sx={{
-          width: "190px",
-          padding: "10px",
-          backgroundColor: "white",
-          boxShadow: 2,
-          borderRadius: "8px",
-          position: "absolute",
-          top: "70px",
-          right: "20px",
-        }}
-      >
-        <Typography variant="body1" sx={{ marginBottom: "4px" }}>
-          Instructions
-        </Typography>
-        <Typography sx={{ fontSize: "11px" }}>
-          1. Right click to add a note <br />
-          2. Select a note and BackSpace to delete the note <br />
-          3. Drag across pins on notes to join them <br />
-          4. Double click to remove thread <br />
-          5. Double click the note to edit it
-        </Typography>
-      </Box>
       <ReactFlow
         style={{
           "--xy-edge-stroke-default": "#5f1313ff",

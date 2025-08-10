@@ -15,7 +15,7 @@ const DEFAULT_HANDLE_STYLE = {
   bottom: -5,
 };
 
-export default memo(({ data, isConnectable = false }) => {
+export default memo(({ data}) => {
   const [note, setNote] = useState(data["label"]);
 
   return (
