@@ -25,25 +25,6 @@ function App() {
     setShowVideo(false);
     setRunTour(true); // Start the tutorial after the video ends or is skipped
   };
-  // useCallback to memoize the event handler for performance
-  const handleKeyPress = useCallback((event) => {
-    // We attach this listener to 'document', making it global.
-    // It will trigger no matter which specific element is focused.
-    if (event.ctrlKey && event.code === "Space") {
-      setEvidanceBoardOpen((prev) => !prev);
-    }
-  }, []); // Empty dependency array means this function is created once
-
-  useEffect(() => {
-    // Add event listener to the document object
-    // This makes the 'e' key listener active globally across your app
-    document.addEventListener("keydown", handleKeyPress);
-
-    // Clean up the event listener when the component unmounts
-    return () => {
-      document.removeEventListener("keydown", handleKeyPress);
-    };
-  }, [handleKeyPress]); // Dependency on handleKeyPress ensures correct cleanup/re-registration
 
   useEffect(() => {
     link_hit.play(); // Play the sound effect
@@ -142,9 +123,12 @@ function App() {
           />
           <PageRouter pageName={pageName} setPageName={setPageName} />
         </div>
-        {evidanceBoardOpen && (
-          <EvidenceBoard setEvidanceBoardOpen={setEvidanceBoardOpen} />
-        )}
+
+        <EvidenceBoard
+          evidanceBoardOpen={evidanceBoardOpen}
+          setEvidanceBoardOpen={setEvidanceBoardOpen}
+        />
+
         <Tutorial
           runTour={runTour}
           stepIndex={stepIndex}
