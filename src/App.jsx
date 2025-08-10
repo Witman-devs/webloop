@@ -18,13 +18,23 @@ function App() {
   // Page and routing related states
   const [pageName, setPageName] = useState("home");
   const [showVideo, setShowVideo] = useState(true);
-  const [start, setStart] = useState(false);
   const { getEffectiveVolume } = useSound();
 
   const handleVideoEndedOrSkipped = () => {
     setShowVideo(false);
-    setRunTour(true); // Start the tutorial after the video ends or is skipped
+    setRunTour(true); 
   };
+
+  useEffect(() => {
+    // Check if the video has been played before
+    const hasPlayedVideo = localStorage.getItem("hasPlayedVideo");
+    if (hasPlayedVideo) {
+      setShowVideo(false);
+      setRunTour(false);
+    } else {
+      localStorage.setItem("hasPlayedVideo", "true");
+    }
+  }, []);
 
   useEffect(() => {
     link_hit.play(); // Play the sound effect
@@ -95,7 +105,7 @@ function App() {
             zIndex: 10,
             top: 0,
             width: "calc(100vw - 10px)",
-            "overflow-y": "auto",
+            overflowY: "auto",
             overflowX: "hidden",
           }}
         >
@@ -105,6 +115,12 @@ function App() {
         {/* Hidden elements */}
         <EvidenceBoard
           evidanceBoardOpen={evidanceBoardOpen}
+          setEvidanceBoardOpen={setEvidanceBoardOpen}
+        />
+
+        <SideMenu
+          sideMenuOpen={sideMenuOpen}
+          setSideMenuOpen={setSideMenuOpen}
           setEvidanceBoardOpen={setEvidanceBoardOpen}
         />
 
