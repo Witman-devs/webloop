@@ -12,8 +12,8 @@ function Page({pageName, setPageName}){
 export default function PageRouter({pageName, setPageName}){
 
     return(
-    <div style={{minHeight:"80vh", minWidth:"90vw"}}>
+    <> 
         <Page pageName={pageName} setPageName={setPageName} />
-    </div>
+    </>
     )
 }

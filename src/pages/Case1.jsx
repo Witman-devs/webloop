@@ -24,7 +24,7 @@ export default function Case1({setPageName}) {
       <Typography variant="h2">Scandal at the hospital</Typography>
       <NewspaperCutout
         headline="Doctor hung himself out of guilt!"
-        date="August 2, 2025"
+        date="June 6, 2023"
         author="kelly Alan"
         content={<News1 setPageName={setPageName}/>}
         rotation="-5"
@@ -32,8 +32,8 @@ export default function Case1({setPageName}) {
       />
       <NewspaperCutout
         headline="Another doctor found mysteriously dead at RC hostpital"
-        date="August 2, 2025"
-        author={<Link component="span" onClick={()=>setPageName("victim3")}>Michael Thompson</Link>}
+        date="June 6, 2023"
+        author="Michael Thompson"
         content={<News2 setPageName={setPageName}/>}
         rotation="5"
         left="20vw"

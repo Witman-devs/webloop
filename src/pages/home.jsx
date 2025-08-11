@@ -13,8 +13,6 @@ export default function Home({setPageName}) {
       }}
     >
       <AntagonistLogo size="200px" setPageName={setPageName} />
-      <div className="smog"></div>
-      <div className="rain"></div>
       <Typography variant="h2">Hello Detective</Typography>
       <Typography width="80%" align="center">
         Its been a while since we met. How many year has it been since you took

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React , {useEffect} from 'react';
 import PropTypes from 'prop-types';
 import { Box, Button, Typography, Stack, Fade, IconButton } from '@mui/material';
 import MonochromeButton from "./components/MonochromeButton";
@@ -9,6 +9,7 @@ import menu_hit_sfx from './assets/sfx/menuhit.mp3';
 import Modal from 'react-modal';
 import { VolumeControls, useSound } from './SoundContext'; // Assuming you save the above code in SoundContext.js
 import '../src/smoke.css';
+import { NavLink, useNavigate } from 'react-router';
 
 const customStyles = {
     content: {
@@ -34,10 +35,11 @@ const customStyles = {
  * @param {object} props - The component props.
  * @param {function(boolean): void} props.setStart - The state setter function to start the game.
  */
-const MainMenu = ({ setStart }) => {
+const MainMenu = () => {
     const { getEffectiveVolume } = useSound();
     const [creditsIsOpen, setCreditsIsOpen] = React.useState(false);
     const [optionsIsOpen, setOptionsIsOpen] = React.useState(false);
+    const navigate = useNavigate();
 
     useEffect(() => {
         const numberOfRaindrops = 100;
@@ -72,27 +74,27 @@ const MainMenu = ({ setStart }) => {
 
     // Handler for the start button
     const handleStartGame = () => {
-        menu_hit.play(); // Play the sound effect
-        setStart(true);
+        menu_hit.play(); 
+        navigate('/game');
     };
 
     const handleOptions = () => {
-        link_hit.play(); // Play the sound effect
+        link_hit.play(); 
         setOptionsIsOpen(true);
     };
 
     const handleCredits = () => {
-        link_hit.play(); // Play the sound effect
+        link_hit.play(); 
         setCreditsIsOpen(true);
     };
 
     const closeOptions = () => {
-        link_hit.play(); // Play the sound effect
+        link_hit.play(); 
         setOptionsIsOpen(false);
     };
 
     const closeCredits = () => {
-        link_hit.play(); // Play the sound effect
+        link_hit.play(); 
         setCreditsIsOpen(false);
     };
 
@@ -100,8 +102,7 @@ const MainMenu = ({ setStart }) => {
         src: [menu_hit_sfx],
         autoplay: false,
         loop: false,
-        volume: getEffectiveVolume('sfx', 1), // Use the helper function to get effective volume
-        // Preload to ensure it's ready before any fade operations
+        volume: getEffectiveVolume('sfx', 1),
         preload: true
     });
 
@@ -110,29 +111,27 @@ const MainMenu = ({ setStart }) => {
         src: [link_hit_sfx],
         autoplay: false,
         loop: false,
-        volume: getEffectiveVolume('sfx', 1), // Use the helper function to get effective volume
-        // Preload to ensure it's ready before any fade operations
+        volume: getEffectiveVolume('sfx', 1),
         preload: true
     });
 
     return (
         <Box
             sx={{
-                backgroundImage: `url(${backpng})`, // Use the imported image
-                // Or if from public folder: backgroundImage: `url('/static-bg.png')`,
-                backgroundSize: 'cover', // Scales the image to cover the entire box
-                backgroundPosition: 'center', // Centers the image
-                backgroundRepeat: 'no-repeat', // Prevents repeating
+                backgroundImage: `url(${backpng})`, 
+                backgroundSize: 'cover', 
+                backgroundPosition: 'center', 
+                backgroundRepeat: 'no-repeat', 
             }}
         >
             <IntroHowler />
             <Box
                 sx={{
-                    display: 'flex', // Make this a flex container
-                    justifyContent: 'flex-end', // Push content to the right
-                    alignItems: 'center', // Keep content vertically centered
-                    minHeight: '100vh', // Ensure it takes up the full viewport height
-                    padding: 3, // Add overall padding
+                    display: 'flex', 
+                    justifyContent: 'flex-end', 
+                    alignItems: 'center', 
+                    minHeight: '100vh', 
+                    padding: 3, 
 
                 }}
             >
@@ -141,15 +140,13 @@ const MainMenu = ({ setStart }) => {
                         sx={{
                             display: 'flex',
                             flexDirection: 'column',
-                            alignItems: 'center', // Centers items *within* this Box
+                            alignItems: 'center', 
                             justifyContent: 'center',
                             color: 'text.primary',
                             textAlign: 'center',
-                            // Optional: Add a specific width or max-width to this content box
-                            // If it takes full width, "moving it right" won't be visible
-                            maxWidth: '50vw', // Example: Limit its width
-                            width: '100%', // Ensure it takes full width up to maxWidth
-                            marginRight: { xs: 0, sm: '50px' }, // Add some space from the right edge
+                            maxWidth: '50vw', 
+                            width: '100%', 
+                            marginRight: { xs: 0, sm: '50px' }, 
                         }}
                     >
                         <Typography

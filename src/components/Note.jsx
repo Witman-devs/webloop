@@ -8,7 +8,6 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import { Check, Edit2, Trash2 } from "lucide-react";
 
 const DEFAULT_HANDLE_STYLE = {
   width: 50,
@@ -16,33 +15,21 @@ const DEFAULT_HANDLE_STYLE = {
   bottom: -5,
 };
 
-export default memo(({ data, isConnectable = false }) => {
-  const [isEditable, setIsEditable] = useState(false);
+export default memo(({ data}) => {
   const [note, setNote] = useState(data["label"]);
 
   return (
     <>
       <Card
         style={{
-          padding: 25,
           backgroundColor: yellow[500],
           width: "250px",
           minHeight: "250px",
+          boxShadow: "5px 5px 7px rgba(33,33,33,.7)",
         }}
-        onDoubleClick={() => setIsEditable(true)}
       >
-        <CardHeader
-          action={
-            isEditable ? (
-              <Check onClick={() => setIsEditable(false)} />
-            ) : (
-              <Edit2 onClick={() => setIsEditable(true)} />
-            )
-          }
-        />
-        <CardContent>
-          <Typography variant="h4">
-            {isEditable ? (
+        <div className="noteHeader" style={{ cursor: "grab", backgroundColor: yellow[100], width: "100%", height: "50px" }}></div>
+        <CardContent style={{ padding: 0, marginInlineStart: 10, marginInlineEnd: 10 }}>
               <TextField
                 fullWidth={true}
                 multiline
@@ -52,13 +39,12 @@ export default memo(({ data, isConnectable = false }) => {
                   data["label"] = e.target.value;
                 }}
                 variant="standard"
-                inputProps={{ style: { fontSize: 27 } }}
+                InputProps={{ style: { fontSize: 27 }}}
+                minRows={6}
               />
-            ) : (
-              note
-            )}
-          </Typography>
+          
         </CardContent>
+
         <Handle
           type="source"
           id="red"

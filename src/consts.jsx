@@ -29,9 +29,11 @@ import Case2 from './pages/Case2';
 // Hospital Docs
 import BirthRecords from './pages/hospital/BirthRecords';
 import DeathRecords from './pages/hospital/DeathRecords';
+import AutopsyReport from './pages/hospital/AutopsyRecords';
 
 // College Docs
 import AlumniRecords from './pages/college/AlumniRecords';
+import TerminationRecords from './pages/college/TerminationRecords';
 
 // Logos
 import collegeLogo from './assets/logos/collegeLogo.png';
@@ -41,7 +43,6 @@ import newsLogo from './assets/logos/newsLogo.png';
 import ngoLogo from './assets/logos/ngoLogo.png';
 import policeLogo from './assets/logos/policeLogo.png';
 import portLogo from './assets/logos/portLogo.png';
-import TerminationRecords from './pages/college/TerminationRecords';
 
 export const PAGE_COMPONENTS = {
     // places
@@ -56,6 +57,7 @@ export const PAGE_COMPONENTS = {
     // "newsArchival": NewsArchival,
     "birthRecords":BirthRecords,
     "deathRecords":DeathRecords,
+    "autopsyRecords": AutopsyReport,
     "alumniRecords": AlumniRecords,
     "terminationRecords": TerminationRecords,
     
@@ -79,6 +81,36 @@ export const PAGE_COMPONENTS = {
     
     // system
     "notfound": NotFound,
+}
+
+export const PAGE_TITLES = {
+    "home": "Home",
+    "symbols": "Symbols",
+    
+    "hospital": "RedMarsh Hospital",
+    "college": "St. Healmore Medical College",
+    "police": "Police",
+    "newsAgency": "News Agency",
+    "birthRecords": "Birth Records",
+    "deathRecords": "Death Records",
+    "autopsyRecords": "Autopsy Records",
+    "alumniRecords": "Alumni Records",
+    "terminationRecords": "Termination Records",
+    "cases": "Cases",
+    "case1": "Case 1",
+    "case2": "Case 2",
+    "case3": "Case 3",
+    "director": "Dr. Arjun Verma",
+    "ceo": "CEO",
+    "doc1": "Dr. Juan Martinez",
+    "doc2": "Dr. Rohan Mehta",
+    "doc3": "Dr. Jhon Carter",
+    "inspector": "Inspector",
+    "ngoHead": "NGO Head",
+    "victim2": "Victim 2",
+    "victim3": "Victim 3",
+    "ward1": "Ward 1",
+    "notfound": "Page Not Found",
 }
 
 export const MUSIC = [

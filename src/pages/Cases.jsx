@@ -1,64 +1,154 @@
-import { Button, Divider, IconButton, Input, Link, List, Snackbar, Stack, Typography } from "@mui/material";
-import { amber, red, yellow } from "@mui/material/colors";
-import MonochromeButton from "../components/MonochromeButton.jsx";
-import React, { useState } from "react";
-import { X } from "lucide-react";
+import {
+  Autocomplete,
+  Button,
+  Divider,
+  IconButton,
+  Input,
+  Link,
+  List,
+  Snackbar,
+  Stack,
+  TextField,
+  Typography,
+} from "@mui/material";
+import React, { use, useEffect, useState } from "react";
+import { Check, X } from "lucide-react";
+import deathRecords from "../assets/death_records.json";
+import MonochromeButton from "../components/MonochromeButton";
 
-function Question({ answer, setAnswer, questionText }) {
+
+const deathCertificateNumbers = deathRecords.map((record) => record.fullName);
+
+const Questions = {
+  Case1: [
+    {
+      questionText: "Name of patients whose organs were trafficked.",
+      answer: [
+        "Roxanne Hintz",
+        "Dale Grady",
+        "May Bayer",
+        "Beverly Jakubowski",
+        "Clint Barrows",
+      ],
+      type: "dropdown",
+    },
+    {
+      questionText: "Name of doctor involved in trafficking",
+      answer: new Set(["dr. rohan mehta", "rohan mehta"]),
+    },
+    {
+      questionText: "Who wrote the organ trafficking report?",
+      answer: new Set(["samuel robert hayes", "samuel hayes"]),
+    },
+  ],
+};
+
+function QuestionSet({ questions, setCaseSolved }) {
+  const [correctResponseCount, setCorrectResponseCount] = useState(0);
+  useEffect(() => {
+    if (correctResponseCount === questions.length) {
+      // TODO: add a animation for case solved
+      setCaseSolved((prev) => prev + 1);
+    }
+  }, [correctResponseCount, questions.length]);
   return (
-    <div style={{ marginBlockEnd: "20px" }}>
-      <Typography variant="h5">Q: {questionText}</Typography>
-      <Input
-        placeholder="Enter your answer here"
-        style={{ width: "70%" }}
-        value={answer}
-        onChange={(e) => setAnswer(e.target.value)}
-      />
+    <div>
+      {questions.map((question, index) => (
+        <Question
+          key={index}
+          correctAnswer={question.answer}
+          questionText={question.questionText}
+          type={question.type}
+          setCorrectResponseCount={setCorrectResponseCount}
+        />
+      ))}
     </div>
   );
 }
 
-function CheckAnswers(A1, A2, A3, openSnackbar, setSnackbarMessage) {
-  const correctAnswers = {
-    A1: ["DC-564389","DC-660433","DC-746791","DC-945350","DC-953484"], // Example death certificate numbers
-    A2: "Dr. Rohan Mehta", // Example doctor's name
-    A3: "Samuel Robert Hayes", // Example name of the person who
+function Question({ correctAnswer, questionText, type, setCorrectResponseCount }) {
+  const [answer, setAnswer] = useState(type === "dropdown" ? [] : "");
+  const [answered, setAnswered] = useState(false);
+  const handleSubmit = () => {
+    const isCorrect = CheckAnswer(correctAnswer, answer);
+    setAnswered(isCorrect);
+    if (isCorrect) setCorrectResponseCount((prevCount) => prevCount + 1);
   };
-  const userAnswers = {
-    A1: A1.trim().split(",").map(item => item.trim()), // Split by comma and trim each item
-    A2: A2.trim(),
-    A3: A3.trim(),
-  };
+// TODO: add a animation for incorrect answer
+  return (
+    <div style={{ marginBlockEnd: "20px" }}>
+      <Typography variant="h5">Q: {questionText}</Typography>
+      {
+        answered ? (
+          <Typography variant="h6" color="green" display="inline" >{type === "dropdown" ? answer.join(", ") : answer}</Typography>
+        ) : (
+          <form style={{ display: "flex", alignContent: "center", alignItems: "center" }} onSubmit={(e) => { e.preventDefault(); handleSubmit(); }}>
+          <InputField
+            answer={answer}
+            setAnswer={setAnswer}
+            type={type}
+            style={{ flex:1, maxWidth: "70%" }}
+          />
+          <X color="red" style={{ display: answered ? "none" : "inline", marginInlineStart: "10px" }} />
+          <MonochromeButton style={{ marginInlineStart: "10px" }} onClick={handleSubmit}> Check Answer</MonochromeButton>
+          </form>
+        )
+      }
+    </div>
+  );
+}
 
-  // Check if user answers match correct answers
-  for (const key in correctAnswers) {
-    if (Array.isArray(correctAnswers[key])) {
-      // If the correct answer is an array, check if all elements are present in user answers
-      if (!correctAnswers[key].every(item => userAnswers[key].includes(item))) {
-        openSnackbar(true);
-        setSnackbarMessage(`Incorrect answer for ${key}. Please try again.`);
-        return;
-      }
-    } else {
-      if (correctAnswers[key].toLowerCase() !== userAnswers[key].toLowerCase()) {
-        openSnackbar(true);
-        setSnackbarMessage(`Incorrect answer for ${key}. Please try again.`);
-        return;
-      }
-    }
+function InputField({ answer, setAnswer, type, style }) {
+  return (
+    <>
+      {type === "dropdown" ? (
+        <Autocomplete
+          multiple
+          style={{ display: "inline", ...style }}
+          options={deathCertificateNumbers}
+          getOptionLabel={(option) => option}
+          value={answer}
+          onChange={(event, newValue) => {
+            setAnswer(newValue);
+          }}
+          sx={style}
+          renderInput={(params) => (
+            <TextField
+              {...params}
+              variant="standard"
+              label="Multiple values"
+              placeholder="Dead People's Names"
+              fullWidth={false}
+              style={{ width: "100%" }}
+            />
+          )}
+        />
+      ) : (
+        <Input
+          style={style}
+          placeholder="Enter your answer here"
+          value={answer}
+          onChange={(e) => setAnswer(e.target.value)}
+        />
+      )}
+    </>
+  );
+}
+
+function CheckAnswer(correctAnswer, userAnswer) {
+  if (Array.isArray(correctAnswer)) {
+    return correctAnswer.every((item) => userAnswer.includes(item));
+  } else {
+    return correctAnswer.has(userAnswer.toLowerCase());
   }
-  openSnackbar(true);
-  setSnackbarMessage("All answers are correct!");
 }
 
 export default function Cases({ setPageName }) {
-  const [A1, setA1] = useState("");
-  const [A2, setA2] = useState("");
-  const [A3, setA3] = useState("");
   const [open, setOpen] = useState(false);
   const [snackbarMessage, setSnackbarMessage] = useState("");
+  const [caseSolved, setCaseSolved] = useState(0);
 
-    const action = (
+  const action = (
     <React.Fragment>
       <IconButton
         size="small"
@@ -71,6 +161,12 @@ export default function Cases({ setPageName }) {
     </React.Fragment>
   );
 
+  useEffect(() => {
+    if (caseSolved == 0) return;
+    setSnackbarMessage(`Case ${caseSolved} solved!`);
+    setOpen(true);
+  }, [caseSolved]);
+
   return (
     <div
       style={{
@@ -82,7 +178,9 @@ export default function Cases({ setPageName }) {
     >
       <Typography variant="h2">Cases:</Typography>
       <Typography>
-        Answer all the questions to get access to my location.
+        Answer all the questions to get access to my location. I am a good UX
+        designer, so answers are not case sensitive. I will accept the answers
+        even without middle name or prefixes.
       </Typography>
       <Link
         component="button"
@@ -92,27 +190,9 @@ export default function Cases({ setPageName }) {
         Case 1: Scandal at hospital
       </Link>
       <List style={{ paddingInlineStart: "10%" }}>
-        <Question
-          answer={A1}
-          setAnswer={setA1}
-          questionText="Death certificate number of patients whose organs were trafficked(comma seperated, in any order)."
-        />
-        <Question
-          answer={A2}
-          setAnswer={setA2}
-          questionText="Name of doctor involved in trafficking"
-        />
-        <Question
-          answer={A3}
-          setAnswer={setA3}
-          questionText="Who wrote the suicide note"
-        />
+        <QuestionSet questions={Questions["Case1"]} setCaseSolved={setCaseSolved} />
       </List>
-      <Stack direction="row-reverse">
-        <MonochromeButton onClick={() => CheckAnswers(A1, A2, A3, setOpen, setSnackbarMessage)}>
-          Submit Answers
-        </MonochromeButton>
-      </Stack>
+
       <Divider style={{ margin: "30px" }} />
 
       {false && (
@@ -147,9 +227,9 @@ export default function Cases({ setPageName }) {
       )}
 
       <Snackbar
-      anchorOrigin={{ vertical: "top", horizontal: "center" }}
+        anchorOrigin={{ vertical: "top", horizontal: "center" }}
         open={open}
-        autoHideDuration={6000}
+        autoHideDuration={12000}
         onClose={() => setOpen(false)}
         message={snackbarMessage}
         action={action}
