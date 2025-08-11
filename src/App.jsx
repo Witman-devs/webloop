@@ -33,6 +33,7 @@ import {
 } from "@mui/material";
 import MonochromeButton from "./components/MonochromeButton";
 import { PAGE_COMPONENTS, PAGE_TITLES } from "./consts";
+import './App.css';
 
 function App() {
   // Page and routing related states
@@ -185,7 +186,7 @@ function App() {
         </div>
 
         {/* Main content area */}
-        <div
+        <div className="vignette-effect"
           style={{
             height: "100vh",
             position: "absolute",
@@ -223,13 +224,13 @@ function App() {
         <Modal open={searchOpen} onClose={() => setSearchOpen(false)}>
           <Box
             sx={{
-              height: "50vh",
+              height: "55vh",
               width: "40vw",
               position: "absolute",
               top: "5vh",
               left: "30vw",
               backgroundColor: grey[500],
-              overflowY: "scroll",
+              overflow: "hidden",
             }}
           >
             <Stack spacing={2} sx={{ padding: 2 }}>
@@ -258,10 +259,15 @@ function App() {
                   fullWidth
                 />
               </form>
-              <Stack gap={2}>
+              <Stack className="search-scroll" gap={1} 
+                sx={{
+                  maxHeight: '250px',
+                  overflowY: 'auto',
+                }}>
                 {searchResults.map((element, index) => (
                   <Link
                   variant="subtitle1"
+                  className="search-stack"
                   id={index}
                   style={{
                     paddingInlineStart: "36px",
