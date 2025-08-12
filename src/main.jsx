@@ -2,7 +2,7 @@ import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import App from "./App.jsx";
 import Modal from "react-modal";
-import { SoundProvider } from "./SoundContext";
+import { SoundProvider } from "./hook/SoundContext";
 import { BrowserRouter, Route, Routes } from "react-router";
 import MainMenu from "./MainMenu.jsx";
 import { createTheme, ThemeProvider } from "@mui/material";
@@ -29,7 +29,6 @@ const theme = createTheme({
 });
 
 createRoot(document.getElementById("root")).render(
-  <StrictMode>
     <ThemeProvider theme={theme}>
       <BrowserRouter>
         <SoundProvider>
@@ -40,5 +39,4 @@ createRoot(document.getElementById("root")).render(
         </SoundProvider>
       </BrowserRouter>
     </ThemeProvider>
-  </StrictMode>
 );

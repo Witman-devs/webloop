@@ -9,17 +9,17 @@ import {
   Settings,
 } from "lucide-react";
 import SideMenu from "./components/SideMenu";
-import Floaty from "./components/Floty";
+// import Floaty from "./components/Floty";
 import EvidenceBoard from "./components/EvidenceBoard";
 import { grey } from "@mui/material/colors";
-import MainMenu from "./MainMenu";
-import mlink_hit_sfx from "./assets/sfx/minorlink.mp3";
+
+
 import Tutorial from "./components/Tutorial";
 import VideoPlayer from "./components/VideoPlayer";
-import { useSound } from "./SoundContext"; // Assuming you save the above code in SoundContext.js
+import { useSound } from "./hook/SoundContext"; 
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { red } from "@mui/material/colors";
-import intro from "./assets/intro.mp4"; // Assuming you save the above code in SoundContext.js
+import intro from "./assets/intro.mp4"; 
 import {
   Box,
   colors,
@@ -32,14 +32,15 @@ import {
   Typography,
 } from "@mui/material";
 import MonochromeButton from "./components/MonochromeButton";
-import { PAGE_COMPONENTS, PAGE_TITLES } from "./consts";
+import { MUSIC_TITLE, PAGE_COMPONENTS, PAGE_TITLES } from "./consts";
+import Floaty from "./components/Floty";
 
 function App() {
   // Page and routing related states
   const [pageName, setPageName] = useState("home");
   const [showVideo, setShowVideo] = useState(true);
   const [history, setHistory] = useState(["home"]);
-  const { getEffectiveVolume } = useSound();
+  const { getEffectiveVolume, playSFXMusic  } = useSound();
 
   // Menus related states
   const [sideMenuOpen, setSideMenuOpen] = useState(false);
@@ -75,17 +76,8 @@ function App() {
   }, []);
 
   useEffect(() => {
-    link_hit.play(); // Play the sound effect
+    playSFXMusic(MUSIC_TITLE.MinorLink)
   }, [pageName]);
-
-  const link_hit = new Howl({
-    src: [mlink_hit_sfx],
-    autoplay: false,
-    loop: false,
-    volume: getEffectiveVolume("sfx", 1), // Use the helper function to get effective volume
-    // Preload to ensure it's ready before any fade operations
-    preload: true,
-  });
 
   const goToPreviousPage = () => {
     console.log("Going to previous page");

@@ -4,7 +4,7 @@ import { Howl, Howler } from 'howler';
 // Import your song files directly
 import phase1_song from '../assets/music/mm.mp3';
 import rain_sound from '../assets/music/rain.mp3';
-import { useSound } from '../SoundContext'; // Assuming you save the above code in SoundContext.js
+import { useSound } from '../hook/SoundContext'; // Assuming you save the above code in SoundContext.js
 
 const IntroHowler = () => {
     // State to hold Howl instances
