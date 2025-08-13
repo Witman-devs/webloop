@@ -221,7 +221,7 @@ export default function MainMenu() {
         <Box
           sx={{
             width: "50vw",
-            height: "50vh",
+            minHeight: "50vh",
             padding: 2,
             border: "1px solid #ccc",
             borderRadius: "8px",

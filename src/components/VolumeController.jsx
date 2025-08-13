@@ -63,6 +63,7 @@ export default function VolumeController() {
               max={1}
               step={0.01}
               valueLabelDisplay="auto"
+              color="black"
             />
           </Grid>
           <Grid>
@@ -85,6 +86,7 @@ export default function VolumeController() {
               max={1}
               step={0.1}
               valueLabelDisplay="auto"
+              color="black"
             />
           </Grid>
           <Grid>
@@ -106,6 +108,7 @@ export default function VolumeController() {
               max={1}
               step={0.01}
               valueLabelDisplay="auto"
+              color="black"
             />
           </Grid>
           <Grid>
