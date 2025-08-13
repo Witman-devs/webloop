@@ -1,46 +1,30 @@
-import { use, useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import PageRouter from "./components/PageRouter";
-import {
-  History,
-  MoveLeft,
-  MoveRight,
-  NotebookPen,
-  Search,
-  Settings,
-} from "lucide-react";
+import { History, MoveLeft, NotebookPen, Search } from "lucide-react";
 import SideMenu from "./components/SideMenu";
-import Floaty from "./components/Floty";
 import EvidenceBoard from "./components/EvidenceBoard";
 import { grey } from "@mui/material/colors";
-import MainMenu from "./MainMenu";
-import mlink_hit_sfx from "./assets/sfx/minorlink.mp3";
 import Tutorial from "./components/Tutorial";
 import VideoPlayer from "./components/VideoPlayer";
-import { useSound } from "./SoundContext"; // Assuming you save the above code in SoundContext.js
-import { createTheme, ThemeProvider } from "@mui/material/styles";
-import { red } from "@mui/material/colors";
-import intro from "./assets/intro.mp4"; // Assuming you save the above code in SoundContext.js
-import {
-  Box,
-  colors,
-  Input,
-  Link,
-  Modal,
-  Stack,
-  TextField,
-  Tooltip,
-  Typography,
-} from "@mui/material";
-import MonochromeButton from "./components/MonochromeButton";
-import { PAGE_COMPONENTS, PAGE_TITLES } from "./consts";
-import './App.css';
+import { useSound } from "./hook/SoundContext";
+import intro from "./assets/intro.mp4";
+import { Box, Link, Modal, Stack, TextField, Tooltip } from "@mui/material";
+import { MUSIC_TITLE, PAGE_COMPONENTS, PAGE_KEYS, PAGE_TITLES } from "./consts";
+import Floaty from "./components/Floty";
+import "./App.css";
+import { CenterFocusStrong, Savings } from "@mui/icons-material";
 
 function App() {
   // Page and routing related states
   const [pageName, setPageName] = useState("home");
   const [showVideo, setShowVideo] = useState(true);
   const [history, setHistory] = useState(["home"]);
-  const { getEffectiveVolume } = useSound();
+  const { playSFXMusic } = useSound();
+  const [seenPages, setSeenPages] = useState(() => {
+    let progress = JSON.parse(localStorage.getItem("pages"));
+    if (progress && progress["pages"]) return new Set(progress["pages"]);
+    return new Set();
+  });
 
   // Menus related states
   const [sideMenuOpen, setSideMenuOpen] = useState(false);
@@ -49,44 +33,56 @@ function App() {
   const [searchQuery, setSearchQuery] = useState("");
   const [searchResults, setSearchResults] = useState([]);
 
-    //State for Tutorials
+  //State for Tutorials
   const [runTour, setRunTour] = useState(false);
   const [stepIndex, setStepIndex] = useState(0);
 
+  // Progress related
+  const saveProgress = () => {
+    // Saving as array as Set converted to object on save
+    localStorage.setItem("pages", JSON.stringify({ pages: [...seenPages] }));
+  };
 
+  useEffect(() => {
+    window.addEventListener("beforeunload", saveProgress);
+
+    return () => {
+      window.removeEventListener("beforeunload", saveProgress);
+    };
+  }, [saveProgress]);
+
+  // Pages / Routing related
   const goToPage = (page) => {
     setPageName(page);
     setHistory((prevHistory) => [...prevHistory, page]);
   };
 
-  const handleVideoEndedOrSkipped = () => {
-    setShowVideo(false);
-    setRunTour(true);
-  };
-
   useEffect(() => {
-    // Check if the video has been played before
-    const hasPlayedVideo = localStorage.getItem("hasPlayedVideo");
-    if (hasPlayedVideo) {
-      setShowVideo(false);
-      setRunTour(false);
-    } else {
-      localStorage.setItem("hasPlayedVideo", "true");
-    }
-  }, []);
-
-  useEffect(() => {
-    link_hit.play(); // Play the sound effect
+    playSFXMusic(MUSIC_TITLE.MinorLink);
+    if (seenPages.has(pageName)) return;
+    setSeenPages((prev) => {
+      let newSet = prev.add(PAGE_TITLES[pageName]);
+      return new Set(newSet);
+    });
   }, [pageName]);
 
-  const link_hit = new Howl({
-    src: [mlink_hit_sfx],
-    autoplay: false,
-    loop: false,
-    volume: getEffectiveVolume("sfx", 1), // Use the helper function to get effective volume
-    // Preload to ensure it's ready before any fade operations
-    preload: true,
-  });
+  // Key bindings
+  const handleSearch = (query) => {
+    console.log('"', searchQuery, '" "', query, '"');
+    let Pages = Object.values(PAGE_TITLES);
+    let searchParam = searchQuery.trim();
+    if (query && query.trim()) searchParam = query.trim();
+    if (searchParam.trim() == "")
+      setSearchResults(Pages.filter((pageName) => seenPages.has(pageName)));
+    else
+      setSearchResults(
+        Pages.filter((pageName) => {
+          if (!seenPages.has(pageName)) return null;
+          if (pageName.toLowerCase().includes(searchParam.toLowerCase()))
+            return pageName;
+        })
+      );
+  };
 
   const goToPreviousPage = () => {
     console.log("Going to previous page");
@@ -100,11 +96,10 @@ function App() {
   const handleKeyPress = useCallback(
     (event) => {
       if (event.ctrlKey && event.code === "ArrowLeft") goToPreviousPage();
-      else if (event.ctrlKey && event.code === "KeyK"){
+      else if (event.ctrlKey && event.code === "KeyK") {
         event.preventDefault();
         setSearchOpen(!searchOpen);
-      }
-      else if (event.ctrlKey && event.code === "KeyH"){
+      } else if (event.ctrlKey && event.code === "KeyH") {
         event.preventDefault();
         setSideMenuOpen(!sideMenuOpen);
       }
@@ -119,19 +114,12 @@ function App() {
     };
   }, [handleKeyPress]);
 
-  const handleSearch = (query) => {
-    let Pages = Object.keys(PAGE_COMPONENTS);
-    let searchParam = searchQuery;
-    if (query) searchParam = query;
-    setSearchResults(
-      Pages.filter((pageName) => pageName.includes(searchParam.toLowerCase()))
-    );
+  // Tour/Intro setup
+
+  const handleVideoEndedOrSkipped = () => {
+    setShowVideo(false);
+    setRunTour(true);
   };
-
-
-  useEffect(() => {
-    setStepIndex(0);
-  }, []);
 
   const handleJoyrideCallback = (data) => {
     const { status, index, type, action } = data;
@@ -147,6 +135,21 @@ function App() {
       }
     }
   };
+
+  useEffect(() => {
+    // Check if the video has been played before
+    const hasPlayedVideo = localStorage.getItem("hasPlayedVideo");
+    if (hasPlayedVideo) {
+      setShowVideo(false);
+      setRunTour(false);
+    } else {
+      localStorage.setItem("hasPlayedVideo", "true");
+    }
+  }, []);
+
+  useEffect(() => {
+    setStepIndex(0);
+  }, []);
 
   return (
     <>
@@ -186,7 +189,8 @@ function App() {
         </div>
 
         {/* Main content area */}
-        <div className="vignette-effect"
+        <div
+          className="vignette-effect"
           style={{
             height: "100vh",
             position: "absolute",
@@ -220,8 +224,14 @@ function App() {
           callback={handleJoyrideCallback}
         />
 
-          {/* TODO: Make better css for search */}
-        <Modal open={searchOpen} onClose={() => setSearchOpen(false)}>
+        {/* TODO: Make better css for search */}
+        <Modal
+          open={searchOpen}
+          onClose={() => {
+            setSearchOpen(false);
+            setSearchQuery("");
+          }}
+        >
           <Box
             sx={{
               height: "55vh",
@@ -249,6 +259,7 @@ function App() {
                   InputProps={{
                     startAdornment: <Search position="start">Search</Search>,
                   }}
+                  sx={{ maxHeight: "10vh" }}
                   variant="outlined"
                   placeholder="Search Visited Page..."
                   value={searchQuery}
@@ -257,26 +268,36 @@ function App() {
                     handleSearch(e.target.value);
                   }}
                   fullWidth
+                  autoFocus={true}
                 />
               </form>
-              <Stack className="search-scroll" gap={1} 
+
+              <Stack
+                className="search-scroll"
+                gap={1}
                 sx={{
-                  maxHeight: '250px',
-                  overflowY: 'auto',
-                }}>
+                  height: "45vh",
+                  overflowY: "scroll",
+                }}
+              >
                 {searchResults.map((element, index) => (
                   <Link
-                  variant="subtitle1"
-                  className="search-stack"
-                  id={index}
-                  style={{
-                    paddingInlineStart: "36px",
-                  }}
-                  onClick={()=>goToPage(element)}
+                    key={index}
+                    variant="subtitle1"
+                    className="search-stack"
+                    id={index}
+                    style={{
+                      paddingInlineStart: "36px",
+                    }}
+                    onClick={() => {
+                      goToPage(PAGE_KEYS[element]);
+                      setSearchOpen(false);
+                      setSearchQuery("");
+                    }}
                   >
-                    <div style={{"&:hover":{color:grey[900]}}}>
-                    {PAGE_TITLES[element]}
-                  </div>
+                    <div style={{ "&:hover": { color: grey[900] } }}>
+                      {element}
+                    </div>
                   </Link>
                 ))}
               </Stack>

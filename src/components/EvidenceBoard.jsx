@@ -16,16 +16,14 @@ import {
   useEdgesState,
 } from "@xyflow/react";
 import "@xyflow/react/dist/style.css";
-import pin_sfx from "../assets/sfx/minorlink.mp3";
-import note_sfx from "../assets/sfx/note.mp3";
-import remove_sfx from "../assets/sfx/remove.mp3";
 
-import { useSound } from "../SoundContext"; // Assuming you save the above code in SoundContext.js
+import { useSound } from "../hook/SoundContext"; // Assuming you save the above code in SoundContext.js
 import Note from "./Note";
 import Thread from "./Thread";
 import DocumentEvidence from "./DocumentEvidence";
 import ImageEvidence from "./ImageEvidence";
 import OrganRequestEvidance from "./OrganRequestEvidance";
+import { MUSIC_TITLE } from "../consts";
 
 // TODO: make easy connection from anywhere you drag
 // TODO: label for threads/edges
@@ -86,40 +84,13 @@ function CustomControls({ setEvidanceBoardOpen, save }) {
 
 function Chart({ setEvidanceBoardOpen, rfInstance, setRfInstance, save }) {
   const reactFlowWrapper = useRef(null);
-  const { getEffectiveVolume } = useSound();
+  const { getEffectiveVolume, playSFXMusic } = useSound();
 
   const [nodes, setNodes, onNodesChange] = useNodesState([]);
   const [edges, setEdges, onEdgesChange] = useEdgesState([]);
   const { screenToFlowPosition } = useReactFlow();
   const { setViewport } = useReactFlow();
   const [contextMenu, setContextMenu] = useState(null);
-
-  const pin_sound = new Howl({
-    src: [pin_sfx],
-    autoplay: false,
-    loop: false,
-    volume: getEffectiveVolume("sfx", 1), // Use the helper function to get effective volume
-    // Preload to ensure it's ready before any fade operations
-    preload: true,
-  });
-
-  const unpin_sound = new Howl({
-    src: [remove_sfx],
-    autoplay: false,
-    loop: false,
-    volume: getEffectiveVolume("sfx", 1), // Use the helper function to get effective volume
-    // Preload to ensure it's ready before any fade operations
-    preload: true,
-  });
-
-  const paper_sound = new Howl({
-    src: [note_sfx],
-    autoplay: false,
-    loop: false,
-    volume: getEffectiveVolume("sfx", 1), // Use the helper function to get effective volume
-    // Preload to ensure it's ready before any fade operations
-    preload: true,
-  });
 
   const onRestore = useCallback(() => {
     const restoreFlow = async () => {
@@ -137,7 +108,7 @@ function Chart({ setEvidanceBoardOpen, rfInstance, setRfInstance, save }) {
   }, [setNodes, setViewport]);
 
   const onConnect = useCallback((params) => {
-    pin_sound.play(); // Play the sound effect
+    playSFXMusic(MUSIC_TITLE.MinorLink)
     params["type"] = "straight";
     setEdges((eds) => addEdge(params, eds));
   }, []);
@@ -174,7 +145,7 @@ function Chart({ setEvidanceBoardOpen, rfInstance, setRfInstance, save }) {
 
   const addNode = useCallback(
     (e) => {
-      paper_sound.play(); // Play the sound effect
+      playSFXMusic(MUSIC_TITLE.Note)
       let newNodes = {
         id: uuidv4(),
         position: screenToFlowPosition({
@@ -197,7 +168,7 @@ function Chart({ setEvidanceBoardOpen, rfInstance, setRfInstance, save }) {
 
   const onNodesDelete = useCallback(
     (deleted) => {
-      unpin_sound.play(); // Play the sound effect
+      playSFXMusic(MUSIC_TITLE.Remove)
       let remainingNodes = [...nodes];
       setEdges(
         deleted.reduce((acc, node) => {
