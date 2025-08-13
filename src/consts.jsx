@@ -86,6 +86,7 @@ export const PAGE_COMPONENTS = {
   notfound: NotFound,
 };
 
+// Key should match with PAGE_COMPONENTS
 export const PAGE_TITLES = {
   home: "Home",
   symbols: "Symbols",
@@ -115,6 +116,9 @@ export const PAGE_TITLES = {
   ward1: "Ward 1",
   notfound: "Page Not Found",
 };
+
+export const PAGE_KEYS = {};
+Object.keys(PAGE_TITLES).forEach(key => {PAGE_KEYS[PAGE_TITLES[key]] = key;})
 
 export let MUSIC_TITLE = {
   MainMenu: "Main menu",
