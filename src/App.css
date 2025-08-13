@@ -1,0 +1,39 @@
+.search-stack {
+  padding: 15px;
+  background-color: #b1b3b3; 
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.search-stack:hover {
+  background-color: #ced2d6;
+  color: rgb(166, 26, 26);
+}
+
+.vignette-effect {
+  position: absolute;    
+  top: 0;
+  left: 0;
+  width: 100%;          
+  height: 100%;
+  background: radial-gradient(
+    ellipse at center,
+    rgba(0, 0, 0, 0) 50%,
+    rgba(0, 0, 0, 0.6) 100%
+  );
+  z-index: 9999;
+}
+
+.search-scroll::-webkit-scrollbar {
+  width: 10px;
+}
+
+.search-scroll::-webkit-scrollbar-thumb {
+  background-color: #5a5c5e;
+  border-radius: 10px;
+}
+
+.search-scroll {
+  scrollbar-width: thin;
+  scrollbar-color: #5a5c5e transparent;
+}
