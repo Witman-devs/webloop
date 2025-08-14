@@ -51,11 +51,13 @@ function QuestionSet({ questions, setCaseSolved }) {
       setCaseSolved((prev) => prev + 1);
     }
   }, [correctResponseCount, questions.length]);
+
   return (
     <div>
       {questions.map((question, index) => (
         <Question
           key={index}
+          questionId = {index}
           correctAnswer={question.answer}
           questionText={question.questionText}
           type={question.type}
@@ -66,15 +68,26 @@ function QuestionSet({ questions, setCaseSolved }) {
   );
 }
 
-function Question({ correctAnswer, questionText, type, setCorrectResponseCount }) {
-  const [answer, setAnswer] = useState(type === "dropdown" ? [] : "");
-  const [answered, setAnswered] = useState(false);
+function Question({ questionId, correctAnswer, questionText, type, setCorrectResponseCount }) {
+  const [answer, setAnswer] = useState(()=>{
+    let ans = localStorage.getItem("q"+questionId) || "";
+    if(type === "dropdown")
+      return ans === "" ? []:ans.split(",")
+    return ans
+  });
+  const [answered, setAnswered] = useState(CheckAnswer(correctAnswer, answer));
+  
   const handleSubmit = () => {
     const isCorrect = CheckAnswer(correctAnswer, answer);
     setAnswered(isCorrect);
     if (isCorrect) setCorrectResponseCount((prevCount) => prevCount + 1);
   };
-// TODO: add a animation for incorrect answer
+  
+  useEffect(()=>{
+    localStorage.setItem("q"+questionId, answer);
+  }, [answer])
+
+  // TODO: add a animation for incorrect answer
   return (
     <div style={{ marginBlockEnd: "20px" }}>
       <Typography variant="h5">Q: {questionText}</Typography>
