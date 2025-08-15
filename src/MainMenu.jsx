@@ -10,12 +10,11 @@ import {
   Link,
 } from "@mui/material";
 import MonochromeButton from "./components/MonochromeButton";
-// import IntroHowler from "./components/IntroHowler";
-import backpng from "./assets/detback.png";
+import backpng from "./assets/detective.png";
 import Modal from "react-modal";
 import { useSound } from "./hook/SoundContext"; // Assuming you save the above code in SoundContext.js
 import VolumeController from "./components/VolumeController";
-import "../src/smoke.css";
+import './MainMenu.css'
 import { NavLink, useNavigate } from "react-router";
 import { MUSIC_TITLE } from "./consts";
 import { X } from "lucide-react";
@@ -50,8 +49,6 @@ export default function MainMenu() {
   useEffect(() => {
     const numberOfRaindrops = 100;
     const rainContainer = document.querySelector(".rain");
-    const numberOfSmokeParticles = 50;
-    const smokeContainer = document.querySelector(".smog");
 
     for (let i = 0; i < numberOfRaindrops; i++) {
       const raindrop = document.createElement("div");
@@ -61,20 +58,6 @@ export default function MainMenu() {
       raindrop.style.animationDuration = `${Math.random() * 1 + 0.5}s`;
 
       rainContainer.appendChild(raindrop);
-    }
-
-    for (let i = 0; i < numberOfSmokeParticles; i++) {
-      const smokeParticle = document.createElement("div");
-      smokeParticle.classList.add("smoke-particle");
-
-      const size = Math.random() * 60 + 20;
-      smokeParticle.style.width = `${size}px`;
-      smokeParticle.style.height = `${size}px`;
-
-      smokeParticle.style.left = `${Math.random() * 100}vw`;
-      smokeParticle.style.top = `${Math.random() * 100}vh`;
-
-      smokeContainer.appendChild(smokeParticle);
     }
   }, []);
 
@@ -109,14 +92,11 @@ export default function MainMenu() {
   };
 
   return (
-    <Box
-      sx={{
-        backgroundImage: `url(${backpng})`,
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-        backgroundRepeat: "no-repeat",
-      }}
-    >
+    <Box>
+      <div style={{width:"50vw", overflow:"clip"}} >
+        <div className="blackLayer" />
+        <div className="whiteLayer" />
+      </div>
       <Box
         sx={{
           display: "flex",
@@ -258,13 +238,18 @@ export default function MainMenu() {
             <ul>
               <li>
                 Persona generation:
-                <Link marginInlineStart={1} target="_blank" href="https://www.dicebear.com/">
+                <Link
+                  marginInlineStart={1}
+                  target="_blank"
+                  href="https://www.dicebear.com/"
+                >
                   https://www.dicebear.com/
                 </Link>
               </li>
               <li>
                 Paper texture:
-                <Link marginInlineStart={1}
+                <Link
+                  marginInlineStart={1}
                   target="_blank"
                   href="https://www.transparenttextures.com"
                 >
@@ -273,13 +258,21 @@ export default function MainMenu() {
               </li>
               <li>
                 Handwritten generator:
-                <Link marginInlineStart={1} target="_blank" href="https://texttohandwriting.in/">
+                <Link
+                  marginInlineStart={1}
+                  target="_blank"
+                  href="https://texttohandwriting.in/"
+                >
                   https://texttohandwriting.in/
                 </Link>
               </li>
               <li>
                 Data is generated using fakerJs:
-                <Link marginInlineStart={1} target="_blank" href="https://fakerjs.dev/">
+                <Link
+                  marginInlineStart={1}
+                  target="_blank"
+                  href="https://fakerjs.dev/"
+                >
                   https://fakerjs.dev/
                 </Link>
               </li>
