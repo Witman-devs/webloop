@@ -14,10 +14,10 @@ import backpng from "./assets/detective.png";
 import Modal from "react-modal";
 import { useSound } from "./hook/SoundContext"; // Assuming you save the above code in SoundContext.js
 import VolumeController from "./components/VolumeController";
-import './MainMenu.css'
+import "./MainMenu.css";
 import { NavLink, useNavigate } from "react-router";
 import { MUSIC_TITLE } from "./consts";
-import { X } from "lucide-react";
+import { TriangleAlert, X } from "lucide-react";
 
 const customStyles = {
   content: {
@@ -39,8 +39,30 @@ const customStyles = {
   },
 };
 
+const warningStyles = {
+  content: {
+    top: "50%",
+    left: "50%",
+    right: "auto",
+    bottom: "auto",
+    marginRight: "-50%",
+    transform: "translate(-50%, -50%)",
+    zIndex: 1000,
+    padding: "24px", // Add some default padding to the modal content area
+    borderRadius: "8px", // Optional: Add some rounded corners
+    backgroundColor: "black", // Or a specific color like '#fff'
+    color: "white",
+    boxShadow: "0px 4px 20px rgba(0,0,0,0.2)", // Optional: Add a subtle shadow
+  },
+  overlay: {
+    backgroundColor: "rgba(0, 0, 0, 0.75)", // Example: default dark overlay
+    zIndex: 1300, // Set a high z-index for the overlay
+  },
+};
+
 export default function MainMenu() {
-  const { getEffectiveVolume, playMainMusic, playSFXMusic } = useSound();
+  const { playMainMusic, playSFXMusic } = useSound();
+  const [warnIsOpen, setWarnIsOpen] = React.useState(true);
   const [creditsIsOpen, setCreditsIsOpen] = React.useState(false);
   const [optionsIsOpen, setOptionsIsOpen] = React.useState(false);
   const navigate = useNavigate();
@@ -93,7 +115,7 @@ export default function MainMenu() {
 
   return (
     <Box>
-      <div style={{width:"50vw", overflow:"clip"}} >
+      <div style={{ width: "50vw", overflow: "clip" }}>
         <div className="blackLayer" />
         <div className="whiteLayer" />
       </div>
@@ -278,6 +300,45 @@ export default function MainMenu() {
               </li>
             </ul>
           </Typography>
+        </Box>
+      </Modal>
+
+      <Modal
+        isOpen={warnIsOpen}
+        style={warningStyles}
+        contentLabel="Warning Modal"
+      >
+        <Box
+          display="flex"
+          justifyContent="space-between"
+          alignItems="center"
+          mb={2}
+        >
+          <TriangleAlert />
+          <Typography variant="h4" style={{textAlign:"center"}}>Cautionary Warning!</Typography>
+          <TriangleAlert />
+        </Box>
+        <Box
+          sx={{
+            width: "50vw",
+            minHeight: "50vh",
+            padding: 2,
+            border: "1px solid #ccc",
+            borderRadius: "8px",
+            alignItems: "center",
+            display:"flex",
+            flexDirection:"column",
+            justifyContent:"space-evenly"
+          }}
+        >
+          <Typography variant="h4"> Warning: </Typography>
+          <Typography variant="h5" marginBlockEnd={1}>
+            This game includes strong language. This is about you exploring cases about a suicide(s) and Murder(s) and organ trafficking. No visuals as such just the suggestion of it.  
+          </Typography>
+          <Typography variant="h5" marginBlockEnd={3}>
+            Story matching with anyone is purly coincident. This is for entertainment purposes only
+          </Typography>
+          <MonochromeButton style={{backgroundColor:"white", width:"100%"}} onClick={()=>setWarnIsOpen(false)}>Okay!</MonochromeButton>
         </Box>
       </Modal>
     </Box>
