@@ -1,0 +1,89 @@
+/* .glow-correct {
+  animation: greenGlow 3s ease-out forwards;
+}
+
+@keyframes greenGlow {
+  0% {
+    text-shadow: 7 7 3px #00ff00;
+  }
+  50% {
+    text-shadow: 0 0 7px #2cd52c;
+  }
+  100% {
+    text-shadow: 0 0 0px #2cd52c;
+  }
+} */
+
+.green-flash-box {
+  display: inline-block;
+  width: 100%;
+  border-radius: 4px;
+  background-color: #38b638;
+  color: black !important;
+  animation: flashGreenBox 2s ease-out forwards;
+}
+
+@keyframes flashGreenBox {
+  0% {
+    background-color: #58d358;
+    color: black;
+  }
+  100% {
+    background-color: transparent;
+    color: green;
+  }
+}
+
+/* Permanent green text after animation ends */
+.green-text {
+  color: green !important;
+  font-weight: bold;
+}
+
+.shake {
+  animation: shakeInput 0.4s ease-in-out;
+}
+
+@keyframes shakeInput {
+  0% { transform: translateX(0); }
+  20% { transform: translateX(-5px); }
+  40% { transform: translateX(5px); }
+  60% { transform: translateX(-5px); }
+  80% { transform: translateX(5px); }
+  100% { transform: translateX(0); }
+}
+
+.red-border {
+  border: 2px solid rgb(218, 4, 4) !important;
+  border-radius: 4px;
+  padding: 5px;
+}
+
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0,0,1,0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background: transparent;
+  text-align: center;
+  color: rgb(3, 1, 2);
+  user-select: none;
+}
+
+.modal-content img {
+  max-width: 150px;
+  margin-bottom: 20px;
+  filter: drop-shadow(0 0 5px rgba(245, 249, 245, 0.7));
+}
+
+.snackbar {
+  color: rgb(2, 2, 2); 
+  text-shadow: 0 1px 3px rgba(245, 249, 245, 0.7); 
+}
+

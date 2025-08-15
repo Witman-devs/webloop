@@ -146,8 +146,12 @@ export default function MainMenu() {
               sx={{
                 fontWeight: "bold",
                 mb: 2,
-                letterSpacing: "0.1em",
-                textShadow: "2px 2px 8px rgba(0,0,0,0.5)",
+                letterSpacing: "0.07em",
+                fontFamily: 'Cinzel, cursive',
+                background: 'linear-gradient(90deg, #0d0c0cff, #8e7025ff, #0d0c0cff)',
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+                textShadow: "4px 4px 3px rgba(0,0,0,0.5)",
               }}
             >
               The Golden Mare
@@ -155,8 +159,11 @@ export default function MainMenu() {
 
             <Typography
               variant="h5"
-              component="p"
-              sx={{ mb: 6, color: "text.secondary" }}
+              component="h5"
+              sx={{ mb: 6, 
+                fontWeight: 600,
+                fontFamily: 'Playfair Display, serif',
+                color: "text.secondary"}}
             >
               My justice coils, a perfect, endless round.
             </Typography>
