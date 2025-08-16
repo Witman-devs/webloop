@@ -358,6 +358,6 @@ export default function MainMenu() {
           </MonochromeButton>
         </Box>
       </Modal>
-    </Box>
+    </Box> 
   );
 }
