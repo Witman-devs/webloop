@@ -303,10 +303,10 @@ function App() {
         >
           <Box sx={{
             height: "80vh",
-            width: "40vw",
+            width: "60vw",
             position: "absolute",
             transform: 'translate(-50%, -50%)',
-            overflowY: "scroll",
+            overflowY: "auto",
             top: "50%",
             left: "50%", bgcolor: grey[500], color: 'text.primary',
             borderRadius: 4, 
@@ -319,12 +319,11 @@ function App() {
                 position: 'absolute',
                 right: 8,
                 top: 8,
-                color: (theme) => theme.palette.grey[800],
               }}
             >
-              <X size={20} />
+              <X />
             </IconButton>
-            <Cases setPageName={setPageNameWrapper} />
+            <Cases setPageName={setPageNameWrapper} sx={{left:"2vw", width:"50vw"}}/>
           </Box>
         </Modal>
 
