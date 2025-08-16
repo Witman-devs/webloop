@@ -46,6 +46,7 @@ import newsLogo from "./assets/logos/newsLogo.png";
 import ngoLogo from "./assets/logos/ngoLogo.png";
 import policeLogo from "./assets/logos/policeLogo.png";
 import portLogo from "./assets/logos/portLogo.png";
+import MainMenu from "./MainMenu";
 
 export const PAGE_COMPONENTS = {
   // places
@@ -55,6 +56,7 @@ export const PAGE_COMPONENTS = {
   college: College,
   police: Police,
   newsAgency: NewsAgency,
+  mainMenu: MainMenu, // Main menu is the home page
 
   // documents
   // "newsArchival": NewsArchival,
@@ -142,6 +144,8 @@ export let MUSIC = {
   ],
   sfx: [
     { label: "home", fileName: "/music/sfx/home.mp3" },
+    { label: "correct", fileName: "/music/sfx/correct.mp3" },
+    { label: "incorrect", fileName: "/music/sfx/incorrect.mp3" },
     {
       label: "mainMenuLink",
       fileName: "/music/sfx/mainMenuLink.mp3",

@@ -8,6 +8,7 @@ import {
   Fade,
   IconButton,
   Link,
+  Tooltip,
 } from "@mui/material";
 import MonochromeButton from "./components/MonochromeButton";
 import backpng from "./assets/detective.png";
@@ -17,7 +18,8 @@ import VolumeController from "./components/VolumeController";
 import "./MainMenu.css";
 import { NavLink, useNavigate } from "react-router";
 import { MUSIC_TITLE } from "./consts";
-import { TriangleAlert, X } from "lucide-react";
+import { TriangleAlert, X, LogOut } from "lucide-react";
+import { red } from "@mui/material/colors";
 
 const customStyles = {
   content: {
@@ -113,6 +115,12 @@ export default function MainMenu() {
     setCreditsIsOpen(false);
   };
 
+  const handleCloseTabUnopened = () => {
+    window.opener = null; // Disconnects the current window from its opener
+    window.open("", "_self"); // Opens a blank page in the current tab
+    window.close(); // Closes the current tab (now the blank one)  
+  };
+
   return (
     <Box>
       <div style={{ width: "50vw", overflow: "clip" }}>
@@ -172,6 +180,19 @@ export default function MainMenu() {
               </MonochromeButton>
               <MonochromeButton onClick={handleCredits}>
                 Credits
+              </MonochromeButton>
+              <MonochromeButton onClick={handleCloseTabUnopened}
+                sx={{
+                  color: 'red',
+                  borderColor: 'red',
+                  '&::before': {
+                    backgroundColor: 'red',
+                  },
+                  '&:hover': {
+                    color: 'black',
+                  },
+                }}>
+                Exit
               </MonochromeButton>
             </Stack>
           </Box>
