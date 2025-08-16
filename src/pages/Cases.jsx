@@ -15,6 +15,7 @@ import React, { use, useEffect, useState } from "react";
 import { Check, X } from "lucide-react";
 import deathRecords from "../assets/death_records.json";
 import MonochromeButton from "../components/MonochromeButton";
+import { useSound } from "../hook/SoundContext";
 import "../answers.css";
 import detImage from "../assets/characters/det.png";
 
@@ -52,11 +53,13 @@ function QuestionSet({ questions, setCaseSolved }) {
       setCaseSolved((prev) => prev + 1);
     }
   }, [correctResponseCount, questions.length]);
+
   return (
     <div>
       {questions.map((question, index) => (
         <Question
           key={index}
+          questionId = {index}
           correctAnswer={question.answer}
           questionText={question.questionText}
           type={question.type}
@@ -67,37 +70,50 @@ function QuestionSet({ questions, setCaseSolved }) {
   );
 }
 
-function Question({ correctAnswer, questionText, type, setCorrectResponseCount }) {
-  const [answer, setAnswer] = useState(type === "dropdown" ? [] : "");
-  const [answered, setAnswered] = useState(false);
+function Question({ questionId, correctAnswer, questionText, type, setCorrectResponseCount }) {
+  const { playSFXMusic } = useSound();
+  const [answer, setAnswer] = useState(()=>{
+    let ans = localStorage.getItem("q"+questionId) || "";
+    if(type === "dropdown")
+      return ans === "" ? []:ans.split(",")
+    return ans
+  });
+  const [answered, setAnswered] = useState(CheckAnswer(correctAnswer, answer));
   const [isCorrectVal, setIsCorrect] = useState(false);
-  const [isWrong, setIsWrong] = useState(false);
+  const [ansState, setAnsState] = useState(0);
 
-  const handleSubmit = () => {
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
     const isCorrect = CheckAnswer(correctAnswer, answer);
+    if(!isCorrect) {
+      setAnsState(-1);
+      playSFXMusic("incorrect");
+      setTimeout(() => setAnsState(0), 500);
+    }
+    else {
+      setAnsState(1);
+      setCorrectResponseCount((prevCount) => prevCount + 1);
+      playSFXMusic("correct");
+    }
     setAnswered(isCorrect);
-    setIsCorrect(isCorrect);
-    setIsWrong(!isCorrect);
-
-    if (isCorrect) setCorrectResponseCount((prevCount) => prevCount + 1);
-    
-    if (!isCorrect) {
-    setTimeout(() => {
-      setIsWrong(false);
-    }, 500);
-  }
   };
-// TODO: add a animation for incorrect answer
+  
+  useEffect(()=>{
+    localStorage.setItem("q"+questionId, answer);
+  }, [answer])
+
+  // TODO: add a animation for incorrect answer
   return (
     <div style={{ marginBlockEnd: "20px" }}>
       <Typography variant="h5">Q: {questionText}</Typography>
       {
         answered ? (
           <div style={{ display: "flex"}}>
-          <Typography variant="h6" className={isCorrectVal ? "green-flash-box green-text" : ""} display="inline" >{type === "dropdown" ? answer.join(", ") : answer}</Typography>
+          <Typography variant="h6" className={ansState == 1 ? "green-flash-box green-text" : "green-text"} display="inline" >{type === "dropdown" ? answer.join(", ") : answer}</Typography>
           </div>
         ) : (
-          <form style={{ display: "flex", alignContent: "center", alignItems: "center" }} onSubmit={(e) => { e.preventDefault(); handleSubmit(); }} className={isWrong ? "shake red-border": ""}>
+          <form style={{ display: "flex", alignContent: "center", alignItems: "center" }} onSubmit={handleSubmit} className={ansState == -1 ? "shake red-border": ""}>
           <InputField
             answer={answer}
             setAnswer={setAnswer}
@@ -209,63 +225,63 @@ export default function Cases({ setPageName }) {
   }, [caseSolved]);
 
   return (
-    <div
-      style={{
-        width: "60vw",
-        left: "20vw",
-        position: "relative",
-        paddingBlockStart: "5vh",
-      }}
-    >
-      <Typography variant="h2">Cases:</Typography>
-      <Typography>
-        Answer all the questions to get access to my location. I am a good UX
-        designer, so answers are not case sensitive. I will accept the answers
-        even without middle name or prefixes.
-      </Typography>
-      <Link
-        component="button"
-        variant="h4"
-        onClick={() => setPageName("case1")}
+      <div
+        style={{
+          width: "60vw",
+          left:"20vw",
+          position: "relative",
+          paddingBlockStart: "5vh",
+        }}
       >
-        Case 1: Scandal at hospital
-      </Link>
-      <List style={{ paddingInlineStart: "10%" }}>
-        <QuestionSet questions={Questions["Case1"]} setCaseSolved={setCaseSolved} />
-      </List>
+        <Typography variant="h2">Cases:</Typography>
+        <Typography>
+          Answer all the questions to get access to my location. I am a good UX
+          designer, so answers are not case sensitive. I will accept the answers
+          even without middle name or prefixes.
+        </Typography>
+        <Link
+          component="button"
+          variant="h4"
+          onClick={() => setPageName("case1")}
+        >
+          Case 1: Scandal at hospital
+        </Link>
+        <List style={{ paddingInlineStart: "10%" }}>
+          <QuestionSet questions={Questions["Case1"]} setCaseSolved={setCaseSolved} />
+        </List>
 
-      <Divider style={{ margin: "30px" }} />
+        <Divider style={{ margin: "30px" }} />
 
-      {false && (
-        <>
-          <Link
-            component="button"
-            variant="h4"
-            onClick={() => setPageName("case2")}
-          >
-            Case 2: Shootout at port
-          </Link>
-          <List style={{ paddingInlineStart: "10%" }}>
-            <Question questionText="Whose gun did the inspector B die from ?" />
-            <Question questionText="Commission amount ?" />
-            <Question questionText="What time did the inspector A get to the port ?" />
-          </List>
-          <Divider style={{ margin: "30px" }} />
+        {false && (
+          <>
+            <Link
+              component="button"
+              variant="h4"
+              onClick={() => setPageName("case2")}
+            >
+              Case 2: Shootout at port
+            </Link>
+            <List style={{ paddingInlineStart: "10%" }}>
+              <Question questionText="Whose gun did the inspector B die from ?" />
+              <Question questionText="Commission amount ?" />
+              <Question questionText="What time did the inspector A get to the port ?" />
+            </List>
+            <Divider style={{ margin: "30px" }} />
 
-          <Link
-            component="button"
-            variant="h4"
-            onClick={() => setPageName("case3")}
-          >
-            Case 3: Death of a Journalist
-          </Link>
-          <List style={{ paddingInlineStart: "10%" }}>
-            <Question questionText="What is the total transcation amount ?" />
-            <Question questionText="Who receieved the organs ?" />
-            <Question questionText="Who funded the NGO ?" />
-          </List>
-        </>
-      )}
+            <Link
+              component="button"
+              variant="h4"
+              onClick={() => setPageName("case3")}
+            >
+              Case 3: Death of a Journalist
+            </Link>
+            <List style={{ paddingInlineStart: "10%" }}>
+              <Question questionText="What is the total transcation amount ?" />
+              <Question questionText="Who receieved the organs ?" />
+              <Question questionText="Who funded the NGO ?" />
+            </List>
+          </>
+        )}
 
       <Snackbar
         anchorOrigin={{ vertical: "top", horizontal: "center" }}

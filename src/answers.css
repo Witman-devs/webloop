@@ -26,11 +26,10 @@
 @keyframes flashGreenBox {
   0% {
     background-color: #58d358;
-    color: black;
+    color: #58d358;
   }
   100% {
     background-color: transparent;
-    color: green;
   }
 }
 

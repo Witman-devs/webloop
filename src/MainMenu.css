@@ -1,17 +1,65 @@
-/* src/App.css */
-.app-background {
-  background-image: url('./assets/my-background.png'); /* Relative path from CSS file */
-  background-size: cover;
-  background-position: center;
+.whiteLayer {
+  background-image: url(/src/assets/detective.png);
+  background-size: 100% 100%;
+  background-position: center center;
   background-repeat: no-repeat;
-  min-height: 100vh; /* Ensures the background covers the full viewport height */
-  width: 100vw; /* Ensures the background covers the full viewport width */
+  background-color: grey;
+  height: 100vh;
+  width: 100vw;
+  position: fixed;
+  z-index: -1;
+  filter: invert(100%);
+  animation: movement 2s ease-in-out alternate-reverse infinite;
 }
 
-/* Or for a specific div within a component */
-.my-div-with-bg {
-  background-image: url('../assets/another-image.png'); /* Adjust path as needed */
-  background-size: contain;
-  background-repeat: repeat-x;
-  height: 200px;
+@keyframes movement {
+  0%{
+    background-size: 100% 100%;
+    filter: invert(0%);
+  } 
+
+  100% {
+    background-size: 97% 103%;
+    filter: invert(100%)
+  }
+}
+
+.blackLayer {
+  background-image: url(/src/assets/detective.png);
+  background-size: 100% 100%;
+  background-position: center center;
+  background-repeat: no-repeat;
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+}
+
+.rain {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.raindrop {
+  position: absolute;
+  width: 2px;
+  height: 10px;
+  background: rgba(255, 255, 255, 0.663);
+  animation: rainAnimation 0.5s linear infinite;
+}
+
+@keyframes rainAnimation {
+  0% {
+    transform: translateY(-100px);
+    opacity: 1;
+  }
+
+  100% {
+    transform: translateY(100vh);
+    opacity: 0.5;
+  }
 }

@@ -8,17 +8,16 @@ import {
   Fade,
   IconButton,
   Link,
+  Tooltip,
 } from "@mui/material";
 import MonochromeButton from "./components/MonochromeButton";
-// import IntroHowler from "./components/IntroHowler";
-import backpng from "./assets/detback.png";
 import Modal from "react-modal";
 import { useSound } from "./hook/SoundContext"; // Assuming you save the above code in SoundContext.js
 import VolumeController from "./components/VolumeController";
-import "../src/smoke.css";
-import { NavLink, useNavigate } from "react-router";
+import "./MainMenu.css";
+import { useNavigate } from "react-router";
 import { MUSIC_TITLE } from "./consts";
-import { X } from "lucide-react";
+import { TriangleAlert, X } from "lucide-react";
 
 const customStyles = {
   content: {
@@ -40,8 +39,30 @@ const customStyles = {
   },
 };
 
+const warningStyles = {
+  content: {
+    top: "50%",
+    left: "50%",
+    right: "auto",
+    bottom: "auto",
+    marginRight: "-50%",
+    transform: "translate(-50%, -50%)",
+    zIndex: 1000,
+    padding: "24px", // Add some default padding to the modal content area
+    borderRadius: "8px", // Optional: Add some rounded corners
+    backgroundColor: "black", // Or a specific color like '#fff'
+    color: "white",
+    boxShadow: "0px 4px 20px rgba(0,0,0,0.2)", // Optional: Add a subtle shadow
+  },
+  overlay: {
+    backgroundColor: "rgba(0, 0, 0, 0.75)", // Example: default dark overlay
+    zIndex: 1300, // Set a high z-index for the overlay
+  },
+};
+
 export default function MainMenu() {
-  const { getEffectiveVolume, playMainMusic, playSFXMusic } = useSound();
+  const { playMainMusic, playSFXMusic } = useSound();
+  const [warnIsOpen, setWarnIsOpen] = React.useState(false);
   const [creditsIsOpen, setCreditsIsOpen] = React.useState(false);
   const [optionsIsOpen, setOptionsIsOpen] = React.useState(false);
   const navigate = useNavigate();
@@ -50,8 +71,6 @@ export default function MainMenu() {
   useEffect(() => {
     const numberOfRaindrops = 100;
     const rainContainer = document.querySelector(".rain");
-    const numberOfSmokeParticles = 50;
-    const smokeContainer = document.querySelector(".smog");
 
     for (let i = 0; i < numberOfRaindrops; i++) {
       const raindrop = document.createElement("div");
@@ -61,20 +80,6 @@ export default function MainMenu() {
       raindrop.style.animationDuration = `${Math.random() * 1 + 0.5}s`;
 
       rainContainer.appendChild(raindrop);
-    }
-
-    for (let i = 0; i < numberOfSmokeParticles; i++) {
-      const smokeParticle = document.createElement("div");
-      smokeParticle.classList.add("smoke-particle");
-
-      const size = Math.random() * 60 + 20;
-      smokeParticle.style.width = `${size}px`;
-      smokeParticle.style.height = `${size}px`;
-
-      smokeParticle.style.left = `${Math.random() * 100}vw`;
-      smokeParticle.style.top = `${Math.random() * 100}vh`;
-
-      smokeContainer.appendChild(smokeParticle);
     }
   }, []);
 
@@ -109,14 +114,11 @@ export default function MainMenu() {
   };
 
   return (
-    <Box
-      sx={{
-        backgroundImage: `url(${backpng})`,
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-        backgroundRepeat: "no-repeat",
-      }}
-    >
+    <Box>
+      <div style={{ width: "50vw", overflow: "clip" }}>
+        <div className="blackLayer" />
+        <div className="whiteLayer" />
+      </div>
       <Box
         sx={{
           display: "flex",
@@ -207,7 +209,7 @@ export default function MainMenu() {
         </Box>
         <VolumeController />
       </Modal>
-
+      {/* Credit Modal */}
       <Modal
         isOpen={creditsIsOpen}
         onRequestClose={closeCredits}
@@ -265,13 +267,18 @@ export default function MainMenu() {
             <ul>
               <li>
                 Persona generation:
-                <Link marginInlineStart={1} target="_blank" href="https://www.dicebear.com/">
+                <Link
+                  marginInlineStart={1}
+                  target="_blank"
+                  href="https://www.dicebear.com/"
+                >
                   https://www.dicebear.com/
                 </Link>
               </li>
               <li>
                 Paper texture:
-                <Link marginInlineStart={1}
+                <Link
+                  marginInlineStart={1}
                   target="_blank"
                   href="https://www.transparenttextures.com"
                 >
@@ -280,18 +287,75 @@ export default function MainMenu() {
               </li>
               <li>
                 Handwritten generator:
-                <Link marginInlineStart={1} target="_blank" href="https://texttohandwriting.in/">
+                <Link
+                  marginInlineStart={1}
+                  target="_blank"
+                  href="https://texttohandwriting.in/"
+                >
                   https://texttohandwriting.in/
                 </Link>
               </li>
               <li>
                 Data is generated using fakerJs:
-                <Link marginInlineStart={1} target="_blank" href="https://fakerjs.dev/">
+                <Link
+                  marginInlineStart={1}
+                  target="_blank"
+                  href="https://fakerjs.dev/"
+                >
                   https://fakerjs.dev/
                 </Link>
               </li>
             </ul>
           </Typography>
+        </Box>
+      </Modal>
+      {/* Warning modal */}
+      <Modal
+        isOpen={warnIsOpen}
+        style={warningStyles}
+        contentLabel="Warning Modal"
+      >
+        <Box
+          display="flex"
+          justifyContent="space-between"
+          alignItems="center"
+          mb={2}
+        >
+          <TriangleAlert />
+          <Typography variant="h4" style={{ textAlign: "center" }}>
+            Cautionary Warning!
+          </Typography>
+          <TriangleAlert />
+        </Box>
+        <Box
+          sx={{
+            width: "50vw",
+            minHeight: "50vh",
+            padding: 2,
+            border: "1px solid #ccc",
+            borderRadius: "8px",
+            alignItems: "center",
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "space-evenly",
+          }}
+        >
+          <Typography variant="h4"> Warning: </Typography>
+          <Typography variant="h5" marginBlockEnd={1}>
+            This game includes strong language. This is about you exploring
+            cases about a suicide(s) and Murder(s) and organ trafficking. No
+            visuals as such just the suggestion of it.
+          </Typography>
+          <Typography variant="h5" marginBlockEnd={3}>
+            Story matching with anyone is purly coincident. This is for
+            entertainment purposes only
+          </Typography>
+          <MonochromeButton
+            style={{ backgroundColor: "white", width: "100%" }}
+            onClick={() => setWarnIsOpen(false)}
+          >
+            Okay!
+          </MonochromeButton>
         </Box>
       </Modal>
     </Box>

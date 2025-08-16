@@ -1,18 +1,45 @@
 import { useCallback, useEffect, useState } from "react";
 import PageRouter from "./components/PageRouter";
-import { History, MoveLeft, NotebookPen, Search } from "lucide-react";
+import {
+  History,
+  MoveLeft,
+  MoveRight,
+  NotebookPen,
+  Search,
+  LogOut,
+  X,
+  FileQuestionMark,
+  Settings,
+} from "lucide-react";
+import { NavLink, useNavigate } from "react-router";
 import SideMenu from "./components/SideMenu";
 import EvidenceBoard from "./components/EvidenceBoard";
 import { grey } from "@mui/material/colors";
 import Tutorial from "./components/Tutorial";
 import VideoPlayer from "./components/VideoPlayer";
 import { useSound } from "./hook/SoundContext";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { red } from "@mui/material/colors";
 import intro from "./assets/intro.mp4";
-import { Box, Link, Modal, Stack, TextField, Tooltip } from "@mui/material";
+import {
+  Box,
+  colors,
+  Input,
+  Link,
+  Modal,
+  Backdrop,
+  IconButton,
+  Stack,
+  TextField,
+  Tooltip,
+  Typography,
+} from "@mui/material";
 import { MUSIC_TITLE, PAGE_COMPONENTS, PAGE_KEYS, PAGE_TITLES } from "./consts";
 import Floaty from "./components/Floty";
 import "./App.css";
 import { CenterFocusStrong, Savings } from "@mui/icons-material";
+import MonochromeButton from "./components/MonochromeButton";
+import Cases from "./pages/Cases";
 
 function App() {
   // Page and routing related states
@@ -29,6 +56,7 @@ function App() {
   // Menus related states
   const [sideMenuOpen, setSideMenuOpen] = useState(false);
   const [evidanceBoardOpen, setEvidanceBoardOpen] = useState(false);
+  const [questionBoardOpen, setQuestionBoardOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const [searchResults, setSearchResults] = useState([]);
@@ -36,11 +64,21 @@ function App() {
   //State for Tutorials
   const [runTour, setRunTour] = useState(false);
   const [stepIndex, setStepIndex] = useState(0);
+  const navigate = useNavigate();
 
   // Progress related
   const saveProgress = () => {
     // Saving as array as Set converted to object on save
     localStorage.setItem("pages", JSON.stringify({ pages: [...seenPages] }));
+  }
+  
+  const setPageNameWrapper = (pageName) => {
+    goToPage(pageName);
+    setQuestionBoardOpen(false);
+  }
+
+  const handleCloseTabUnopened = () => {
+    navigate("/");
   };
 
   useEffect(() => {
@@ -99,12 +137,21 @@ function App() {
       else if (event.ctrlKey && event.code === "KeyK") {
         event.preventDefault();
         setSearchOpen(!searchOpen);
-      } else if (event.ctrlKey && event.code === "KeyH") {
+      }
+      else if (event.ctrlKey && event.code === "KeyH") {
         event.preventDefault();
         setSideMenuOpen(!sideMenuOpen);
       }
+      else if (event.ctrlKey && event.code === "KeyA") {
+        event.preventDefault();
+        setQuestionBoardOpen(!questionBoardOpen);
+      }
+      else if (event.ctrlKey && event.code === "KeyG") {
+        event.preventDefault();
+        setPageName("home");
+      }
     },
-    [goToPreviousPage, setSearchOpen, setSideMenuOpen]
+    [goToPreviousPage, setSearchOpen, setSideMenuOpen, setQuestionBoardOpen, setPageName]
   );
 
   useEffect(() => {
@@ -184,10 +231,36 @@ function App() {
             <Tooltip title="History; clt + H" placement="right">
               <History onClick={() => setSideMenuOpen(!sideMenuOpen)} />
             </Tooltip>
+            <Tooltip title="Cases; clt + A" placement="right">
+              <FileQuestionMark onClick={() => setQuestionBoardOpen(!questionBoardOpen)} />
+            </Tooltip> 
           </Stack>
           <Floaty />
         </div>
 
+        <Tooltip title="Exit Application" placement="left">
+          <IconButton
+            aria-label="exit"
+            onClick={handleCloseTabUnopened}
+            sx={{
+              position: 'fixed',
+              top: 10,
+              right: 20,
+              zIndex: 1001,
+              backgroundColor: red[700],
+              color: 'white',
+              '&:hover': {
+                backgroundColor: red[900],
+              },
+              borderRadius: 2,
+              boxShadow: 3,
+              padding: '10px',
+            }}
+          >
+            <LogOut size={24} />
+          </IconButton>
+        </Tooltip>
+        
         {/* Main content area */}
         <div
           className="vignette-effect"
@@ -223,6 +296,37 @@ function App() {
           stepIndex={stepIndex}
           callback={handleJoyrideCallback}
         />
+
+        <Modal
+          open={questionBoardOpen}
+          onClose={() => setQuestionBoardOpen(false)}
+        >
+          <Box sx={{
+            height: "80vh",
+            width: "40vw",
+            position: "absolute",
+            transform: 'translate(-50%, -50%)',
+            overflowY: "scroll",
+            top: "50%",
+            left: "50%", bgcolor: grey[500], color: 'text.primary',
+            borderRadius: 4, 
+            outline: 'none',
+          }}>
+            <IconButton
+              aria-label="close"
+              onClick={() => setQuestionBoardOpen(false)}
+              sx={{
+                position: 'absolute',
+                right: 8,
+                top: 8,
+                color: (theme) => theme.palette.grey[800],
+              }}
+            >
+              <X size={20} />
+            </IconButton>
+            <Cases setPageName={setPageNameWrapper} />
+          </Box>
+        </Modal>
 
         {/* TODO: Make better css for search */}
         <Modal
