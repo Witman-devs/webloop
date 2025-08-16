@@ -39,7 +39,7 @@ const Questions = {
       answer: new Set(["dr. rohan mehta", "rohan mehta"]),
     },
     {
-      questionText: "Who wrote the organ trafficking report?",
+      questionText: "Who wrote the suicide note?",
       answer: new Set(["samuel robert hayes", "samuel hayes"]),
     },
   ],
@@ -188,7 +188,7 @@ function CaseSolvedModal({ visible, onClose, message }) {
 }
 
 
-export default function Cases({ setPageName }) {
+export default function Cases({ setPageName, sx={} }) {
   const [open, setOpen] = useState(false);
   const [snackbarMessage, setSnackbarMessage] = useState(<></>);
   const [caseSolved, setCaseSolved] = useState(0);
@@ -231,6 +231,7 @@ export default function Cases({ setPageName }) {
           left:"20vw",
           position: "relative",
           paddingBlockStart: "5vh",
+          ...sx
         }}
       >
         <Typography variant="h2">Cases:</Typography>
