@@ -15,7 +15,8 @@ import React, { use, useEffect, useState } from "react";
 import { Check, X } from "lucide-react";
 import deathRecords from "../assets/death_records.json";
 import MonochromeButton from "../components/MonochromeButton";
-
+import "../answers.css";
+import detImage from "../assets/characters/det.png";
 
 const deathCertificateNumbers = deathRecords.map((record) => record.fullName);
 
@@ -69,10 +70,22 @@ function QuestionSet({ questions, setCaseSolved }) {
 function Question({ correctAnswer, questionText, type, setCorrectResponseCount }) {
   const [answer, setAnswer] = useState(type === "dropdown" ? [] : "");
   const [answered, setAnswered] = useState(false);
+  const [isCorrectVal, setIsCorrect] = useState(false);
+  const [isWrong, setIsWrong] = useState(false);
+
   const handleSubmit = () => {
     const isCorrect = CheckAnswer(correctAnswer, answer);
     setAnswered(isCorrect);
+    setIsCorrect(isCorrect);
+    setIsWrong(!isCorrect);
+
     if (isCorrect) setCorrectResponseCount((prevCount) => prevCount + 1);
+    
+    if (!isCorrect) {
+    setTimeout(() => {
+      setIsWrong(false);
+    }, 500);
+  }
   };
 // TODO: add a animation for incorrect answer
   return (
@@ -80,9 +93,11 @@ function Question({ correctAnswer, questionText, type, setCorrectResponseCount }
       <Typography variant="h5">Q: {questionText}</Typography>
       {
         answered ? (
-          <Typography variant="h6" color="green" display="inline" >{type === "dropdown" ? answer.join(", ") : answer}</Typography>
+          <div style={{ display: "flex"}}>
+          <Typography variant="h6" className={isCorrectVal ? "green-flash-box green-text" : ""} display="inline" >{type === "dropdown" ? answer.join(", ") : answer}</Typography>
+          </div>
         ) : (
-          <form style={{ display: "flex", alignContent: "center", alignItems: "center" }} onSubmit={(e) => { e.preventDefault(); handleSubmit(); }}>
+          <form style={{ display: "flex", alignContent: "center", alignItems: "center" }} onSubmit={(e) => { e.preventDefault(); handleSubmit(); }} className={isWrong ? "shake red-border": ""}>
           <InputField
             answer={answer}
             setAnswer={setAnswer}
@@ -143,10 +158,25 @@ function CheckAnswer(correctAnswer, userAnswer) {
   }
 }
 
+function CaseSolvedModal({ visible, onClose, message }) {
+  if (!visible) return null;
+
+  return (
+    <div className="modal-overlay" onClick={onClose}>
+      <div className="modal-content" onClick={e => e.stopPropagation()}>
+        <img src={detImage} alt="Case Solved" />
+        <h2 className="snackbar">{message}</h2>
+      </div>
+    </div>
+  );
+}
+
+
 export default function Cases({ setPageName }) {
   const [open, setOpen] = useState(false);
-  const [snackbarMessage, setSnackbarMessage] = useState("");
+  const [snackbarMessage, setSnackbarMessage] = useState(<></>);
   const [caseSolved, setCaseSolved] = useState(0);
+  const [showCaseSolvedModal, setShowCaseSolvedModal] = useState(false);
 
   const action = (
     <React.Fragment>
@@ -163,8 +193,19 @@ export default function Cases({ setPageName }) {
 
   useEffect(() => {
     if (caseSolved == 0) return;
-    setSnackbarMessage(`Case ${caseSolved} solved!`);
-    setOpen(true);
+    setSnackbarMessage(
+      <>
+          <strong>Case {caseSolved} solved!</strong><br />
+          Your instincts were sharp, and your deductions even sharper.<br />
+          On to the next mystery...
+      </>);
+      setShowCaseSolvedModal(true);
+
+    const timer = setTimeout(() => {
+      setShowCaseSolvedModal(false);
+    }, 3000); 
+
+    return () => clearTimeout(timer);
   }, [caseSolved]);
 
   return (
@@ -234,6 +275,13 @@ export default function Cases({ setPageName }) {
         message={snackbarMessage}
         action={action}
       />
+
+      <CaseSolvedModal
+        visible={showCaseSolvedModal}
+        onClose={() => setShowCaseSolvedModal(false)}
+        message={snackbarMessage}
+      />
+
     </div>
   );
 }
