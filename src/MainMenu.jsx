@@ -8,14 +8,14 @@ import {
   Fade,
   IconButton,
   Link,
+  Tooltip,
 } from "@mui/material";
 import MonochromeButton from "./components/MonochromeButton";
-import backpng from "./assets/detective.png";
 import Modal from "react-modal";
 import { useSound } from "./hook/SoundContext"; // Assuming you save the above code in SoundContext.js
 import VolumeController from "./components/VolumeController";
 import "./MainMenu.css";
-import { NavLink, useNavigate } from "react-router";
+import { useNavigate } from "react-router";
 import { MUSIC_TITLE } from "./consts";
 import { TriangleAlert, X } from "lucide-react";
 
@@ -62,7 +62,7 @@ const warningStyles = {
 
 export default function MainMenu() {
   const { playMainMusic, playSFXMusic } = useSound();
-  const [warnIsOpen, setWarnIsOpen] = React.useState(true);
+  const [warnIsOpen, setWarnIsOpen] = React.useState(false);
   const [creditsIsOpen, setCreditsIsOpen] = React.useState(false);
   const [optionsIsOpen, setOptionsIsOpen] = React.useState(false);
   const navigate = useNavigate();
@@ -202,7 +202,7 @@ export default function MainMenu() {
         </Box>
         <VolumeController />
       </Modal>
-
+      {/* Credit Modal */}
       <Modal
         isOpen={creditsIsOpen}
         onRequestClose={closeCredits}
@@ -302,7 +302,7 @@ export default function MainMenu() {
           </Typography>
         </Box>
       </Modal>
-
+      {/* Warning modal */}
       <Modal
         isOpen={warnIsOpen}
         style={warningStyles}
@@ -315,7 +315,9 @@ export default function MainMenu() {
           mb={2}
         >
           <TriangleAlert />
-          <Typography variant="h4" style={{textAlign:"center"}}>Cautionary Warning!</Typography>
+          <Typography variant="h4" style={{ textAlign: "center" }}>
+            Cautionary Warning!
+          </Typography>
           <TriangleAlert />
         </Box>
         <Box
@@ -326,19 +328,27 @@ export default function MainMenu() {
             border: "1px solid #ccc",
             borderRadius: "8px",
             alignItems: "center",
-            display:"flex",
-            flexDirection:"column",
-            justifyContent:"space-evenly"
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "space-evenly",
           }}
         >
           <Typography variant="h4"> Warning: </Typography>
           <Typography variant="h5" marginBlockEnd={1}>
-            This game includes strong language. This is about you exploring cases about a suicide(s) and Murder(s) and organ trafficking. No visuals as such just the suggestion of it.  
+            This game includes strong language. This is about you exploring
+            cases about a suicide(s) and Murder(s) and organ trafficking. No
+            visuals as such just the suggestion of it.
           </Typography>
           <Typography variant="h5" marginBlockEnd={3}>
-            Story matching with anyone is purly coincident. This is for entertainment purposes only
+            Story matching with anyone is purly coincident. This is for
+            entertainment purposes only
           </Typography>
-          <MonochromeButton style={{backgroundColor:"white", width:"100%"}} onClick={()=>setWarnIsOpen(false)}>Okay!</MonochromeButton>
+          <MonochromeButton
+            style={{ backgroundColor: "white", width: "100%" }}
+            onClick={() => setWarnIsOpen(false)}
+          >
+            Okay!
+          </MonochromeButton>
         </Box>
       </Modal>
     </Box>

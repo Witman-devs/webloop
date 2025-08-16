@@ -142,6 +142,8 @@ export let MUSIC = {
   ],
   sfx: [
     { label: "home", fileName: "/music/sfx/home.mp3" },
+    { label: "correct", fileName: "/music/sfx/correct.mp3" },
+    { label: "incorrect", fileName: "/music/sfx/incorrect.mp3" },
     {
       label: "mainMenuLink",
       fileName: "/music/sfx/mainMenuLink.mp3",
