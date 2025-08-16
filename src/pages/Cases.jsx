@@ -15,8 +15,9 @@ import React, { use, useEffect, useState } from "react";
 import { Check, X } from "lucide-react";
 import deathRecords from "../assets/death_records.json";
 import MonochromeButton from "../components/MonochromeButton";
-import { useSound } from "../hook/SoundContext"; // Assuming you save the above code in SoundContext.js
-
+import { useSound } from "../hook/SoundContext";
+import "../answers.css";
+import detImage from "../assets/characters/det.png";
 
 const deathCertificateNumbers = deathRecords.map((record) => record.fullName);
 
@@ -78,17 +79,24 @@ function Question({ questionId, correctAnswer, questionText, type, setCorrectRes
     return ans
   });
   const [answered, setAnswered] = useState(CheckAnswer(correctAnswer, answer));
-  
-  const handleSubmit = () => {
+  const [isCorrectVal, setIsCorrect] = useState(false);
+  const [ansState, setAnsState] = useState(0);
+
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
     const isCorrect = CheckAnswer(correctAnswer, answer);
     if(!isCorrect) {
+      setAnsState(-1);
       playSFXMusic("incorrect");
+      setTimeout(() => setAnsState(0), 500);
     }
     else {
+      setAnsState(1);
+      setCorrectResponseCount((prevCount) => prevCount + 1);
       playSFXMusic("correct");
     }
     setAnswered(isCorrect);
-    if (isCorrect) setCorrectResponseCount((prevCount) => prevCount + 1);
   };
   
   useEffect(()=>{
@@ -101,9 +109,11 @@ function Question({ questionId, correctAnswer, questionText, type, setCorrectRes
       <Typography variant="h5">Q: {questionText}</Typography>
       {
         answered ? (
-          <Typography variant="h6" color="green" display="inline" >{type === "dropdown" ? answer.join(", ") : answer}</Typography>
+          <div style={{ display: "flex"}}>
+          <Typography variant="h6" className={ansState == 1 ? "green-flash-box green-text" : "green-text"} display="inline" >{type === "dropdown" ? answer.join(", ") : answer}</Typography>
+          </div>
         ) : (
-          <form style={{ display: "flex", alignContent: "center", alignItems: "center" }} onSubmit={(e) => { e.preventDefault(); handleSubmit(); }}>
+          <form style={{ display: "flex", alignContent: "center", alignItems: "center" }} onSubmit={handleSubmit} className={ansState == -1 ? "shake red-border": ""}>
           <InputField
             answer={answer}
             setAnswer={setAnswer}
@@ -164,10 +174,25 @@ function CheckAnswer(correctAnswer, userAnswer) {
   }
 }
 
+function CaseSolvedModal({ visible, onClose, message }) {
+  if (!visible) return null;
+
+  return (
+    <div className="modal-overlay" onClick={onClose}>
+      <div className="modal-content" onClick={e => e.stopPropagation()}>
+        <img src={detImage} alt="Case Solved" />
+        <h2 className="snackbar">{message}</h2>
+      </div>
+    </div>
+  );
+}
+
+
 export default function Cases({ setPageName }) {
   const [open, setOpen] = useState(false);
-  const [snackbarMessage, setSnackbarMessage] = useState("");
+  const [snackbarMessage, setSnackbarMessage] = useState(<></>);
   const [caseSolved, setCaseSolved] = useState(0);
+  const [showCaseSolvedModal, setShowCaseSolvedModal] = useState(false);
 
   const action = (
     <React.Fragment>
@@ -184,15 +209,26 @@ export default function Cases({ setPageName }) {
 
   useEffect(() => {
     if (caseSolved == 0) return;
-    setSnackbarMessage(`Case ${caseSolved} solved!`);
-    setOpen(true);
+    setSnackbarMessage(
+      <>
+          <strong>Case {caseSolved} solved!</strong><br />
+          Your instincts were sharp, and your deductions even sharper.<br />
+          On to the next mystery...
+      </>);
+      setShowCaseSolvedModal(true);
+
+    const timer = setTimeout(() => {
+      setShowCaseSolvedModal(false);
+    }, 3000); 
+
+    return () => clearTimeout(timer);
   }, [caseSolved]);
 
   return (
-    <div style={{ padding: 100, display: "flex", justifyContent: "center" }}>
       <div
         style={{
           width: "60vw",
+          left:"20vw",
           position: "relative",
           paddingBlockStart: "5vh",
         }}
@@ -247,15 +283,21 @@ export default function Cases({ setPageName }) {
           </>
         )}
 
-        <Snackbar
-          anchorOrigin={{ vertical: "top", horizontal: "center" }}
-          open={open}
-          autoHideDuration={12000}
-          onClose={() => setOpen(false)}
-          message={snackbarMessage}
-          action={action}
-        />
-      </div>
+      <Snackbar
+        anchorOrigin={{ vertical: "top", horizontal: "center" }}
+        open={open}
+        autoHideDuration={12000}
+        onClose={() => setOpen(false)}
+        message={snackbarMessage}
+        action={action}
+      />
+
+      <CaseSolvedModal
+        visible={showCaseSolvedModal}
+        onClose={() => setShowCaseSolvedModal(false)}
+        message={snackbarMessage}
+      />
+
     </div>
   );
 }
