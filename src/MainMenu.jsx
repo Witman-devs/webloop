@@ -62,7 +62,7 @@ const warningStyles = {
 
 export default function MainMenu() {
   const { playMainMusic, playSFXMusic } = useSound();
-  const [warnIsOpen, setWarnIsOpen] = React.useState(false);
+  const [warnIsOpen, setWarnIsOpen] = React.useState(true);
   const [creditsIsOpen, setCreditsIsOpen] = React.useState(false);
   const [optionsIsOpen, setOptionsIsOpen] = React.useState(false);
   const navigate = useNavigate();
