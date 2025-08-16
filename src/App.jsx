@@ -142,7 +142,7 @@ function App() {
         event.preventDefault();
         setSideMenuOpen(!sideMenuOpen);
       }
-      else if (event.ctrlKey && event.code === "KeyS") {
+      else if (event.ctrlKey && event.code === "KeyA") {
         event.preventDefault();
         setQuestionBoardOpen(!questionBoardOpen);
       }
@@ -151,7 +151,7 @@ function App() {
         setPageName("home");
       }
     },
-    [goToPreviousPage, setSearchOpen, setSideMenuOpen]
+    [goToPreviousPage, setSearchOpen, setSideMenuOpen, setQuestionBoardOpen, setPageName]
   );
 
   useEffect(() => {
@@ -309,10 +309,9 @@ function App() {
             overflowY: "scroll",
             top: "50%",
             left: "50%", bgcolor: grey[500], color: 'text.primary',
-            borderRadius: 4, // Adjust this value for desired roundness
+            borderRadius: 4, 
             outline: 'none',
           }}>
-            {/* Close Button */}
             <IconButton
               aria-label="close"
               onClick={() => setQuestionBoardOpen(false)}
@@ -323,7 +322,6 @@ function App() {
                 color: (theme) => theme.palette.grey[800],
               }}
             >
-              {/* Use the Lucide X component */}
               <X size={20} />
             </IconButton>
             <Cases setPageName={setPageNameWrapper} />
