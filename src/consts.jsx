@@ -46,7 +46,6 @@ import newsLogo from "./assets/logos/newsLogo.png";
 import ngoLogo from "./assets/logos/ngoLogo.png";
 import policeLogo from "./assets/logos/policeLogo.png";
 import portLogo from "./assets/logos/portLogo.png";
-import MainMenu from "./MainMenu";
 
 export const PAGE_COMPONENTS = {
   // places
@@ -56,7 +55,6 @@ export const PAGE_COMPONENTS = {
   college: College,
   police: Police,
   newsAgency: NewsAgency,
-  mainMenu: MainMenu, // Main menu is the home page
 
   // documents
   // "newsArchival": NewsArchival,
