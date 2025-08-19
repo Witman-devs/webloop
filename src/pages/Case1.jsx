@@ -1,10 +1,12 @@
 import { Link, Typography } from "@mui/material";
-import NewspaperCutout from "../components/NewsPaperCutout";
+import NewspaperCutout from "../components/NewspaperCutout";
+import CrimeSceneOverlay from '../components/CrimeSceneOverlay';
+import "../App.css";
 
 function News1({setPageName}){
     return(
         <>
-            <Link component="span" onClick={()=>setPageName("doc1")}> Dr. Juan Martinez </Link> found in staff quater hung by the rope with suicide note saying he can't take this guilt of being reason for someones death. 
+            <Link component="span" onClick={()=>setPageName("doc1")}> Dr. Juan Martinez </Link> found in staff quarter hung by a rope with suicide note saying he can't take this guilt of being reason for someones death. 
             This is case from <Link component="span" onClick={()=>setPageName("hospital")}>RedMarsh Healthcare</Link>, case is handled by <Link component="span" onClick={()=>setPageName("inspector")}> Inspector Amarjit Singh</Link>. Hospital's Director <Link component="span" onClick={()=>setPageName("director")}>Dr. Arjun Verma</Link> shows grief. Says he lost one of the best doctors at the hospital. He never made any mistake in past 5 years he was working for the hospital.
         </>
     )
@@ -20,8 +22,9 @@ function News2({setPageName}){
 
 export default function Case1({setPageName}) {
   return (
-    <div style={{ width: "60vw", left: "20vw", position: "relative" }}>
-      <Typography variant="h2">Scandal at the hospital</Typography>
+    <div style={{ width: "60vw", left: "20vw", position: "relative", padding: "1vw" }}>
+      <CrimeSceneOverlay />
+      <Typography className="font" variant="h2">Scandal at the hospital</Typography>
       <NewspaperCutout
         headline="Doctor hung himself out of guilt!"
         date="June 6, 2023"
@@ -31,7 +34,7 @@ export default function Case1({setPageName}) {
         left="2px"
       />
       <NewspaperCutout
-        headline="Another doctor found mysteriously dead at RC hostpital"
+        headline="Another doctor found mysteriously dead at Redmarsh hospital"
         date="June 6, 2023"
         author="Michael Thompson"
         content={<News2 setPageName={setPageName}/>}

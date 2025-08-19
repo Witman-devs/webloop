@@ -12,9 +12,7 @@ export default function Director({ setPageName }) {
   const flagFound = localStorage.getItem("flaggedStudent") === "Arjun Raj Verma";
 
   return (
-    <div style={{ width: "60vw", left: "20vw", position: "relative" }}>
-      <Typography variant="h2">Personal page of Director</Typography>
-
+    <div style={{ width: "60vw", left: "20vw", position: "relative", padding: "2vw" }}>
       <ProfileCard
         person={{
           name: "Dr. Arjun Verma",
