@@ -18,6 +18,7 @@ import MonochromeButton from "../components/MonochromeButton";
 import { useSound } from "../hook/SoundContext";
 import "../answers.css";
 import detImage from "../assets/characters/det.png";
+import "../App.css";
 
 const deathCertificateNumbers = deathRecords.map((record) => record.fullName);
 
@@ -79,7 +80,6 @@ function Question({ questionId, correctAnswer, questionText, type, setCorrectRes
     return ans
   });
   const [answered, setAnswered] = useState(CheckAnswer(correctAnswer, answer));
-  const [isCorrectVal, setIsCorrect] = useState(false);
   const [ansState, setAnsState] = useState(0);
 
 
@@ -106,14 +106,14 @@ function Question({ questionId, correctAnswer, questionText, type, setCorrectRes
   // TODO: add a animation for incorrect answer
   return (
     <div style={{ marginBlockEnd: "20px" }}>
-      <Typography variant="h5">Q: {questionText}</Typography>
+      <Typography className="font" variant="h5">Q: {questionText}</Typography>
       {
         answered ? (
           <div style={{ display: "flex"}}>
-          <Typography variant="h6" className={ansState == 1 ? "green-flash-box green-text" : "green-text"} display="inline" >{type === "dropdown" ? answer.join(", ") : answer}</Typography>
+          <Typography variant="h6" className={ansState == 1 ? "green-flash-box green-text font" : "green-text font"} display="inline" >{type === "dropdown" ? answer.join(", ") : answer}</Typography>
           </div>
         ) : (
-          <form style={{ display: "flex", alignContent: "center", alignItems: "center" }} onSubmit={handleSubmit} className={ansState == -1 ? "shake red-border": ""}>
+          <form style={{ display: "flex", alignContent: "center", alignItems: "center" }} onSubmit={handleSubmit} className={ansState == -1 ? "shake red-border font": "font"}>
           <InputField
             answer={answer}
             setAnswer={setAnswer}
@@ -235,7 +235,7 @@ export default function Cases({ setPageName, sx={} }) {
         }}
       >
         <Typography variant="h2">Cases:</Typography>
-        <Typography>
+        <Typography className="font" style={{ fontSize: "1.1rem", padding: "2%" }}>
           Answer all the questions to get access to my location. I am a good UX
           designer, so answers are not case sensitive. I will accept the answers
           even without middle name or prefixes.
@@ -244,6 +244,7 @@ export default function Cases({ setPageName, sx={} }) {
           component="button"
           variant="h4"
           onClick={() => setPageName("case1")}
+          className="font"
         >
           Case 1: Scandal at hospital
         </Link>

@@ -150,7 +150,7 @@ export default function MainMenu() {
                 mb: 2,
                 letterSpacing: "0.07em",
                 fontFamily: 'Cinzel, cursive',
-                background: 'linear-gradient(90deg, #0d0c0cff, #8e7025ff, #0d0c0cff)',
+                background: 'linear-gradient(90deg, #0d0c0cff, #a7852dff, #0d0c0cff)',
                 WebkitBackgroundClip: 'text',
                 WebkitTextFillColor: 'transparent',
                 textShadow: "4px 4px 3px rgba(0,0,0,0.5)",
@@ -160,11 +160,11 @@ export default function MainMenu() {
             </Typography>
 
             <Typography
-              variant="h5"
-              component="h5"
+              variant="h4"
+              component="h4"
               sx={{ mb: 6, 
                 fontWeight: 600,
-                fontFamily: 'Playfair Display, serif',
+                fontFamily: 'Crimson Pro, serif',
                 color: "text.secondary"}}
             >
               My justice coils, a perfect, endless round.
@@ -322,7 +322,7 @@ export default function MainMenu() {
           mb={2}
         >
           <TriangleAlert />
-          <Typography variant="h4" style={{ textAlign: "center" }}>
+          <Typography variant="h4" style={{ textAlign: "center",fontFamily: 'Anton, sans-serif' }}>
             Cautionary Warning!
           </Typography>
           <TriangleAlert />
@@ -340,14 +340,14 @@ export default function MainMenu() {
             justifyContent: "space-evenly",
           }}
         >
-          <Typography variant="h4"> Warning: </Typography>
+          <Typography sx={{fontFamily: 'Anton, sans-serif'}} variant="h4"> Warning: </Typography>
           <Typography variant="h5" marginBlockEnd={1}>
             This game includes strong language. This is about you exploring
             cases about a suicide(s) and Murder(s) and organ trafficking. No
             visuals as such just the suggestion of it.
           </Typography>
           <Typography variant="h5" marginBlockEnd={3}>
-            Story matching with anyone is purly coincident. This is for
+            Story matching with anyone is purely coincidental. This is for
             entertainment purposes only
           </Typography>
           <MonochromeButton

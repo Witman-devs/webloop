@@ -6,7 +6,7 @@ import { MUSIC_TITLE } from "../consts";
 
 export default function AntagonistLogo({
   size = "200px",
-  style = {},
+  style = {filter: 'grayscale(100%) brightness(0) sepia(100%) hue-rotate(180deg)'},
   setPageName,
 }) {
   const { playSFXMusic } = useSound();

@@ -4,9 +4,7 @@ import directorImg from "../../assets/characters/ward1.png";
 
 export default function WardPerson({ setPageName }) {
   return (
-    <div style={{ width: "60vw", left: "20vw", position: "relative" }}>
-      <Typography variant="h2">Personal page of Ward Employee</Typography>
-
+    <div style={{ width: "60vw", left: "20vw", position: "relative", padding: "2vw" }}>
       <ProfileCard
         person={{
           name: "Samuel Hayes",

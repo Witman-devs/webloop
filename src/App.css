@@ -37,3 +37,32 @@
   scrollbar-width: thin;
   scrollbar-color: #5a5c5e transparent;
 }
+
+.article {
+  position: relative;
+}
+
+.article::before {
+  content: "\1F4CC"; /* Unicode for paperclip */
+  position: absolute;
+  left: 45%;
+  top: 0;
+  transform: translateY(-50%) rotate(-60deg);
+  font-size: 40px; /* Adjust size of the paperclip */
+}
+
+@font-face {
+  font-family: 'RansomNote';
+  src: url('/ransom.ttf') format('truetype');
+}
+
+.ransom-note {
+  font-family: 'RansomNote', sans-serif !important;
+  font-size: 55px !important;
+  letter-spacing: 2px !important;
+}
+
+.font{
+  font-family: 'Special Elite', serif !important;
+}
+

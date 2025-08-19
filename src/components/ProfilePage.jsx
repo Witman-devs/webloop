@@ -10,6 +10,7 @@ import {
   Stack,
 } from "@mui/material";
 import AntagonistLogo from "./AntagonistLogo";
+import paper from '../assets/extras/paper.png';
 
 const InfoRow = ({ label, value }) =>
   value && (

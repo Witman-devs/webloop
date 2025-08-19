@@ -1,6 +1,7 @@
 import React, { useState , useEffect } from 'react';
 import { Card, CardContent, Link, Stack, Typography } from "@mui/material";
 import AntagonistLogo from "../components/AntagonistLogo";
+import "../App.css";
 
 export default function Home({setPageName}) {
   return (
@@ -13,14 +14,14 @@ export default function Home({setPageName}) {
       }}
     >
       <AntagonistLogo size="200px" setPageName={setPageName} />
-      <Typography variant="h2">Hello Detective</Typography>
-      <Typography width="80%" align="center">
+      <Typography className="ransom-note" variant="h2">Hello Detective</Typography>
+      <Typography sx={{fontSize: "1.2rem"}} className="font" width="80%" align="center">
         Its been a while since we met. How many year has it been since you took
         my case... 5 years. Still couldn't catch me. This is your golden
         oportunity
       </Typography>
-      <Link className="symbol" component="button" variant="h4" onClick={()=>setPageName("symbols")}>What is this symbol ?</Link>
-      <Link className="case" component="button" variant="h4" onClick={()=>setPageName("cases")}> Cases </Link>
+      <Link className="symbol font" component="button" variant="h4" onClick={()=>setPageName("symbols")}>What is this symbol ?</Link>
+      <Link className="case font" component="button" variant="h4" onClick={()=>setPageName("cases")}> Cases </Link>
       <Card sx={{width:"80%"}}>
         <CardContent>
           <Typography variant="h5" align="center">My location </Typography>
