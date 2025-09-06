@@ -7,6 +7,7 @@ import {
   Checkbox,
   FormControlLabel,
 } from "@mui/material";
+import { ADDRESS, LOGOS } from "../../consts";
 
 const Field = ({ label, value }) => (
   <Grid item xs={12} sm={6}>
@@ -14,6 +15,28 @@ const Field = ({ label, value }) => (
     <Typography sx={{ ml: 1 }}>{value || "—"}</Typography>
   </Grid>
 );
+
+const mappings = {
+
+  "Redmard Healthcare": "hospital",
+  "Kingsborough College of Optometry": "",
+  "St. Healmore Medical College": "college",
+  "Atlas News Agency": "news",
+  "Redmarsh Police Department": "police",
+  "Redmarsh Chemicals": "ChemicalCompany",
+  "Generico": "company",
+
+}
+
+function getCompanyLogo(companyName) {
+  console.log("companyName", companyName);
+  console.log("image", LOGOS[mappings[companyName]])
+  return LOGOS[mappings[companyName]] || "";
+}
+
+function getCompanyAddress(companyName) {
+  return ADDRESS[mappings[companyName]] || "";
+}
 
 export default function EmploymentRecord({
   fullName,
@@ -26,8 +49,7 @@ export default function EmploymentRecord({
   yearOfPassing,
   specialRequest,
   needStaffQuarter,
-  companyLogo,
-  companyAddress,
+  company,
 }){
   return (
     <Paper
@@ -48,20 +70,20 @@ export default function EmploymentRecord({
         mb={2}
         sx={{ borderBottom: "2px solid #ccc", pb: 2 }}
       >
-        {companyLogo && (
+        {company && (
           <Box
             component="img"
-            src={companyLogo}
+            src={getCompanyLogo(company)}
             alt="Company Logo"
             sx={{ width: 100, height: "auto", objectFit: "contain" }}
           />
         )}
         <Box textAlign="right">
           <Typography variant="h6" sx={{ fontWeight: "bold" }}>
-            {companyAddress?.name || "Company Name"}
+            {company || "Company Name"}
           </Typography>
           <Typography variant="body2" sx={{ whiteSpace: "pre-line" }}>
-            {companyAddress?.lines || "Company Address\nCity, Country"}
+            {getCompanyAddress(company) || "Company Address\nCity, Country"}
           </Typography>
         </Box>
       </Box>

@@ -98,6 +98,7 @@ export default function Hospital({ setPageName }) {
           { label: "Birth Records", pageName: "birthRecords" },
           { label: "Death Records", pageName: "deathRecords" },
           { label: "Autopsy Records", pageName: "autopsyRecords" },
+          // { label: "Employment Records", pageName: "autopsyRecords" },
         ]}
       />
 
