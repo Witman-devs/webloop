@@ -63,11 +63,14 @@ export default function VolumeController() {
               max={1}
               step={0.01}
               valueLabelDisplay="auto"
+              valueLabelFormat={(value) => `${parseInt(value * 100)}`}
               color="black"
             />
           </Grid>
-          <Grid>
-            <Typography variant="subtitle1">{masterVolume * 100}</Typography>
+          <Grid size={1}>
+            <Typography variant="subtitle1">
+              {parseInt(masterVolume * 100)}
+            </Typography>
           </Grid>
         </Grid>
 
@@ -86,11 +89,14 @@ export default function VolumeController() {
               max={1}
               step={0.1}
               valueLabelDisplay="auto"
+              valueLabelFormat={(value) => `${parseInt(value * 100)}`}
               color="black"
             />
           </Grid>
-          <Grid>
-            <Typography variant="subtitle1">{sfxVolume * 100}</Typography>
+          <Grid size={1}>
+            <Typography variant="subtitle1">
+              {parseInt(sfxVolume * 100)}
+            </Typography>
           </Grid>
         </Grid>
         <Grid container direction="row" size={12} justifyContent="end">
@@ -108,11 +114,14 @@ export default function VolumeController() {
               max={1}
               step={0.01}
               valueLabelDisplay="auto"
+              valueLabelFormat={(value) => `${parseInt(value * 100)}`}
               color="black"
             />
           </Grid>
-          <Grid>
-            <Typography variant="subtitle1">{musicVolume * 100}</Typography>
+          <Grid size={1}>
+            <Typography variant="subtitle1">
+              {parseInt(musicVolume * 100)}
+            </Typography>
           </Grid>
         </Grid>
       </Grid>
