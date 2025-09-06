@@ -4,7 +4,11 @@ import directorImg from "../../assets/characters/doc2.png";
 
 export default function Doc2({ setPageName }) {
   return (
+<<<<<<< HEAD
     <div style={{ width: "60vw", left: "20vw", position: "relative" }}>
+=======
+    <div style={{ width: "60vw", left: "20vw", position: "relative", padding: "2vw" }}>
+>>>>>>> fa96d0fb70e8528264fe4d9bcc10b98a77df3b72
 
       <ProfileCard
         person={{
