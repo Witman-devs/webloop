@@ -18,6 +18,7 @@ import "./MainMenu.css";
 import { useNavigate } from "react-router";
 import { MUSIC_TITLE } from "./consts";
 import { TriangleAlert, X } from "lucide-react";
+import DataController from "./components/DataController";
 
 const customStyles = {
   content: {
@@ -149,10 +150,11 @@ export default function MainMenu() {
                 fontWeight: "bold",
                 mb: 2,
                 letterSpacing: "0.07em",
-                fontFamily: 'Cinzel, cursive',
-                background: 'linear-gradient(90deg, #0d0c0cff, #a7852dff, #0d0c0cff)',
-                WebkitBackgroundClip: 'text',
-                WebkitTextFillColor: 'transparent',
+                fontFamily: "Cinzel, cursive",
+                background:
+                  "linear-gradient(90deg, #0d0c0cff, #a7852dff, #0d0c0cff)",
+                WebkitBackgroundClip: "text",
+                WebkitTextFillColor: "transparent",
                 textShadow: "4px 4px 3px rgba(0,0,0,0.5)",
               }}
             >
@@ -162,10 +164,12 @@ export default function MainMenu() {
             <Typography
               variant="h4"
               component="h4"
-              sx={{ mb: 6, 
+              sx={{
+                mb: 6,
                 fontWeight: 600,
-                fontFamily: 'Crimson Pro, serif',
-                color: "text.secondary"}}
+                fontFamily: "Crimson Pro, serif",
+                color: "text.secondary",
+              }}
             >
               My justice coils, a perfect, endless round.
             </Typography>
@@ -207,7 +211,18 @@ export default function MainMenu() {
             <X />
           </IconButton>
         </Box>
-        <VolumeController />
+        <Box
+          sx={{
+            width: "50vw",
+            height: "50vh",
+            padding: 2,
+            border: "1px solid #ccc",
+            borderRadius: "8px",
+          }}
+        >
+          <VolumeController />
+          <DataController />
+        </Box>
       </Modal>
       {/* Credit Modal */}
       <Modal
@@ -322,7 +337,10 @@ export default function MainMenu() {
           mb={2}
         >
           <TriangleAlert />
-          <Typography variant="h4" style={{ textAlign: "center",fontFamily: 'Anton, sans-serif' }}>
+          <Typography
+            variant="h4"
+            style={{ textAlign: "center", fontFamily: "Anton, sans-serif" }}
+          >
             Cautionary Warning!
           </Typography>
           <TriangleAlert />
@@ -340,7 +358,10 @@ export default function MainMenu() {
             justifyContent: "space-evenly",
           }}
         >
-          <Typography sx={{fontFamily: 'Anton, sans-serif'}} variant="h4"> Warning: </Typography>
+          <Typography sx={{ fontFamily: "Anton, sans-serif" }} variant="h4">
+            {" "}
+            Warning:{" "}
+          </Typography>
           <Typography variant="h5" marginBlockEnd={1}>
             This game includes strong language. This is about you exploring
             cases about a suicide(s) and Murder(s) and organ trafficking. No
@@ -358,6 +379,6 @@ export default function MainMenu() {
           </MonochromeButton>
         </Box>
       </Modal>
-    </Box> 
+    </Box>
   );
 }

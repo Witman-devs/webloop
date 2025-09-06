@@ -234,7 +234,7 @@ export default function Cases({ setPageName, sx={} }) {
           ...sx
         }}
       >
-        <Typography variant="h2">Cases:</Typography>
+        <Typography variant="h2" className="font">Cases:</Typography>
         <Typography className="font" style={{ fontSize: "1.1rem", padding: "2%" }}>
           Answer all the questions to get access to my location. I am a good UX
           designer, so answers are not case sensitive. I will accept the answers

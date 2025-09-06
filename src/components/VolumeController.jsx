@@ -28,15 +28,7 @@ export default function VolumeController() {
   };
 
   return (
-    <Box
-      sx={{
-        width: "50vw",
-        height: "50vh",
-        padding: 2,
-        border: "1px solid #ccc",
-        borderRadius: "8px",
-      }}
-    >
+    <Box>
       <Typography variant="h6" gutterBottom>
         Audio Settings
       </Typography>
