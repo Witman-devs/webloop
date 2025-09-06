@@ -6,8 +6,7 @@ import ViewImage from "../../components/ViewImage";
 
 export default function Doc1({ setPageName }) {
   return (
-    <div style={{ width: "60vw", left: "20vw", position: "relative" }}>
-      <Typography variant="h2">Personal page of Doctor</Typography>
+    <div style={{ width: "60vw", left: "20vw", position: "relative", padding: "2vw" }}>
 
       <ProfileCard
         person={{

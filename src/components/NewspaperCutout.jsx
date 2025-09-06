@@ -1,5 +1,7 @@
 import React from "react";
 import { Card, CardContent, Typography, Box } from "@mui/material";
+import newspaperImage from '../assets/extras/newspaper.png';
+import "../App.css";
 
 export default function NewspaperCutout({ headline, date, author="",content, rotation=-0.4, left='0' }){
 
@@ -19,10 +21,12 @@ export default function NewspaperCutout({ headline, date, author="",content, rot
         color: "#3e3a36",
         backgroundImage: `
           linear-gradient(to bottom, transparent 95%, rgba(0,0,0,0.05) 100%),
-          repeating-linear-gradient(45deg, rgba(0,0,0,0.03), rgba(0,0,0,0.03) 1px, transparent 1px, transparent 5px)
+          repeating-linear-gradient(45deg, rgba(0,0,0,0.03), rgba(0,0,0,0.03) 1px, transparent 1px, transparent 5px),
+          url(${newspaperImage})
         `,
-        backgroundSize: "100% 4px, 6px 6px",
+         backgroundSize: "100% 4px, 6px 6px, cover",
       }}
+      className="article"
     >
       <Typography
         variant="h3"
@@ -54,9 +58,11 @@ export default function NewspaperCutout({ headline, date, author="",content, rot
           <Typography
             variant="body1"
             sx={{
-              lineHeight: 1.8,
-              fontSize: "1.05rem",
+              lineHeight: 1.3,
+              fontSize: "1.2rem",
+              fontFamily: "'Playfair Display', serif",
               whiteSpace: "pre-line",
+
             }}
           >
             {content}
