@@ -5,7 +5,6 @@ import directorImg from "../../assets/characters/doc2.png";
 export default function Doc2({ setPageName }) {
   return (
     <div style={{ width: "60vw", left: "20vw", position: "relative" }}>
-      <Typography variant="h2">Personal page of Doctor 2</Typography>
 
       <ProfileCard
         person={{

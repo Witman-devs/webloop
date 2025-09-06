@@ -6,8 +6,6 @@ import { MedalIcon } from "lucide-react";
 export default function Victim({ setPageName }) {
   return (
     <div style={{ width: "60vw", left: "20vw", position: "relative" }}>
-      <Typography variant="h2">Personal page of Officer</Typography>
-
       <ProfileCard
         person={{
           name: "Officer Mark Sullivan",

@@ -13,7 +13,6 @@ export default function Director({ setPageName }) {
 
   return (
     <div style={{ width: "60vw", left: "20vw", position: "relative" }}>
-      <Typography variant="h2">Personal page of Director</Typography>
 
       <ProfileCard
         person={{

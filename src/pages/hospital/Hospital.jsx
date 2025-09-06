@@ -16,6 +16,7 @@ export default function Hospital({ setPageName }) {
           "Forensics",
           "Pediatrics",
           "OBGyn",
+          "Optometrist"
         ]}
         keyPeople={[
           {

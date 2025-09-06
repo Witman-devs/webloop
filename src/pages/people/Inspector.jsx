@@ -43,8 +43,6 @@ export default function Inspector({ setPageName }) {
         </Box>
       </Modal>
 
-      <Typography variant="h2">Personal page of Police Inspector</Typography>
-
       <ProfileCard
         person={{
           name: "Inspector Amarjit Singh",

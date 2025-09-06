@@ -6,7 +6,7 @@ import { X } from "lucide-react";
 function handleFlagClick(setPageName, setOpen) {
   setOpen(true);
   localStorage.setItem("flaggedStudent", "Arjun Raj Verma");
-  setTimeout(() => setPageName("director"), 6000);
+  // setTimeout(() => setPageName("director"), 30000);
 }
 
 export default function TerminatedStudentsList({
@@ -48,14 +48,12 @@ export default function TerminatedStudentsList({
 
   const action = (
     <React.Fragment>
-      <IconButton
+      <Link
         size="small"
-        aria-label="close"
-        color="inherit"
-        onClick={handleClose}
+        onClick={()=>setPageName("director")}
       >
-        <X fontSize="small" />
-      </IconButton>
+        Open Page
+      </Link>
     </React.Fragment>
   );
 
@@ -134,10 +132,11 @@ export default function TerminatedStudentsList({
       <Snackbar
         anchorOrigin={{ vertical: "top", horizontal: "center" }}
         open={open}
-        autoHideDuration={12000}
+        autoHideDuration={30000}
         onClose={handleClose}
-        message="Clue Found: Arjun Verma is not a doctor. Opening Director's Page..."
+        message="Clue Found: Arjun Verma is not a doctor."
         action={action}
+        sx={{color:"black", backgroundColor:"white"}}
       />
     </Paper>
   );

@@ -5,8 +5,6 @@ import directorImg from "../../assets/characters/victim-1.png";
 export default function Victim1({ setPageName }) {
   return (
     <div style={{ width: "60vw", left: "20vw", position: "relative" }}>
-      <Typography variant="h2">Personal page of Patient</Typography>
-
       <ProfileCard
         person={{
           name: "Dr. John Carter",

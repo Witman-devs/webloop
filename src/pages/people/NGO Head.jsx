@@ -6,7 +6,6 @@ import { MedalIcon } from "lucide-react";
 export default function NGOHead({ setPageName }) {
   return (
     <div style={{ width: "60vw", left: "20vw", position: "relative" }}>
-      <Typography variant="h2">Personal page of NGO Head</Typography>
 
       <ProfileCard
         person={{

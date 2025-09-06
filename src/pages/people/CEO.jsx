@@ -6,8 +6,6 @@ import { MedalIcon } from "lucide-react";
 export default function CEO({ setPageName }) {
   return (
     <div style={{ width: "60vw", left: "20vw", position: "relative" }}>
-      <Typography variant="h2">Personal page of CEO</Typography>
-
       <ProfileCard
         person={{
           name: "Mr. James Anderson",

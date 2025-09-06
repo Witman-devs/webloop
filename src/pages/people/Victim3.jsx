@@ -5,7 +5,6 @@ import { MedalIcon } from "lucide-react";
 export default function Reporter({ setPageName }) {
   return (
     <div style={{ width: "60vw", left: "20vw", position: "relative" }}>
-      <Typography variant="h2">Personal page of Reporter</Typography>
 
       <ProfileCard
         person={{
