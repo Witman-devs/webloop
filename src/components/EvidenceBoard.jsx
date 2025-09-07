@@ -170,6 +170,9 @@ function Chart({ setEvidanceBoardOpen, rfInstance, setRfInstance, save }) {
     (deleted) => {
       playSFXMusic(MUSIC_TITLE.Remove)
       let remainingNodes = [...nodes];
+      deleted.forEach( deletedNode => {
+        localStorage.setItem("addedDocuments", JSON.stringify(JSON.parse(localStorage.getItem("addedDocuments")).filter(id => deletedNode.id !== id)));
+      })
       setEdges(
         deleted.reduce((acc, node) => {
           const incomers = getIncomers(node, remainingNodes, acc);
