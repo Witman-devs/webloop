@@ -34,11 +34,9 @@ import {
   Tooltip,
   Typography,
 } from "@mui/material";
-import { MUSIC_TITLE, PAGE_COMPONENTS, PAGE_KEYS, PAGE_TITLES } from "./consts";
+import { MUSIC_TITLE, PAGE_KEYS, PAGE_TITLES } from "./consts";
 import Floaty from "./components/Floty";
 import "./App.css";
-import { CenterFocusStrong, Savings } from "@mui/icons-material";
-import MonochromeButton from "./components/MonochromeButton";
 import Cases from "./pages/Cases";
 
 function App() {
@@ -59,30 +57,25 @@ function App() {
   const [questionBoardOpen, setQuestionBoardOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
-  const [searchResults, setSearchResults] = useState([]);
+  const [searchResults, setSearchResults] = useState(() => {
+    return (JSON.parse(localStorage.getItem("pages")) || { pages: [] })[
+      "pages"
+    ];
+  });
 
   //State for Tutorials
   const [runTour, setRunTour] = useState(false);
   const [stepIndex, setStepIndex] = useState(0);
   const navigate = useNavigate();
 
-  // Progress related
-  const saveProgress = () => {
-    localStorage.setItem("pages", JSON.stringify({ pages: [...seenPages] }));
-  }
-  
   const setPageNameWrapper = (pageName) => {
     goToPage(pageName);
     setQuestionBoardOpen(false);
-  }
+  };
 
   const handleCloseTabUnopened = () => {
     navigate("/");
   };
-
-  useEffect(() => {
-    window.addEventListener("beforeunload", saveProgress);
-  }, [saveProgress]);
 
   // Pages / Routing related
   const goToPage = (page) => {
@@ -92,28 +85,23 @@ function App() {
 
   useEffect(() => {
     playSFXMusic(MUSIC_TITLE.MinorLink);
-    if (seenPages.has(pageName)) return;
-    setSeenPages((prev) => {
-      let newSet = prev.add(PAGE_TITLES[pageName]);
-      return new Set(newSet);
-    });
+    if (seenPages.has(PAGE_TITLES[pageName])) return;
+    let newSeenPages = new Set([...seenPages, PAGE_TITLES[pageName]]);
+    setSearchResults([...newSeenPages])
+    setSeenPages(new Set(newSeenPages));
+    localStorage.setItem("pages", JSON.stringify({ pages: [...newSeenPages] }));
   }, [pageName]);
 
   // Key bindings
   const handleSearch = (query) => {
-    let Pages = Object.values(PAGE_TITLES);
-    let searchParam = searchQuery.trim();
-    if (query && query.trim()) searchParam = query.trim();
-    if (searchParam.trim() == "")
-      setSearchResults(Pages.filter((pageName) => seenPages.has(pageName)));
-    else
+    if (query.trim() != "")
       setSearchResults(
-        Pages.filter((pageName) => {
-          if (!seenPages.has(pageName)) return null;
-          if (pageName.toLowerCase().includes(searchParam.toLowerCase()))
+        [...seenPages].filter((pageName) => {
+          if (pageName.toLowerCase().includes(query.toLowerCase()))
             return pageName;
         })
       );
+    else setSearchResults([...seenPages]);
   };
 
   const goToPreviousPage = () => {
@@ -129,21 +117,24 @@ function App() {
       else if (event.ctrlKey && event.code === "KeyK") {
         event.preventDefault();
         setSearchOpen(!searchOpen);
-      }
-      else if (event.ctrlKey && event.code === "KeyH") {
+      } else if (event.ctrlKey && event.code === "KeyH") {
         event.preventDefault();
         setSideMenuOpen(!sideMenuOpen);
-      }
-      else if (event.ctrlKey && event.code === "KeyA") {
+      } else if (event.ctrlKey && event.code === "KeyA") {
         event.preventDefault();
         setQuestionBoardOpen(!questionBoardOpen);
-      }
-      else if (event.ctrlKey && event.code === "KeyG") {
+      } else if (event.ctrlKey && event.code === "KeyG") {
         event.preventDefault();
         setPageName("home");
       }
     },
-    [goToPreviousPage, setSearchOpen, setSideMenuOpen, setQuestionBoardOpen, setPageName]
+    [
+      goToPreviousPage,
+      setSearchOpen,
+      setSideMenuOpen,
+      setQuestionBoardOpen,
+      setPageName,
+    ]
   );
 
   useEffect(() => {
@@ -224,8 +215,10 @@ function App() {
               <History onClick={() => setSideMenuOpen(!sideMenuOpen)} />
             </Tooltip>
             <Tooltip title="Cases; clt + A" placement="right">
-              <FileQuestionMark onClick={() => setQuestionBoardOpen(!questionBoardOpen)} />
-            </Tooltip> 
+              <FileQuestionMark
+                onClick={() => setQuestionBoardOpen(!questionBoardOpen)}
+              />
+            </Tooltip>
           </Stack>
           <Floaty />
         </div>
@@ -235,24 +228,24 @@ function App() {
             aria-label="exit"
             onClick={handleCloseTabUnopened}
             sx={{
-              position: 'fixed',
+              position: "fixed",
               top: 10,
               right: 20,
               zIndex: 1001,
               backgroundColor: red[700],
-              color: 'white',
-              '&:hover': {
+              color: "white",
+              "&:hover": {
                 backgroundColor: red[900],
               },
               borderRadius: 2,
               boxShadow: 3,
-              padding: '10px',
+              padding: "10px",
             }}
           >
             <LogOut size={24} />
           </IconButton>
         </Tooltip>
-        
+
         {/* Main content area */}
         <div
           className="vignette-effect"
@@ -293,29 +286,36 @@ function App() {
           open={questionBoardOpen}
           onClose={() => setQuestionBoardOpen(false)}
         >
-          <Box sx={{
-            height: "80vh",
-            width: "60vw",
-            position: "absolute",
-            transform: 'translate(-50%, -50%)',
-            overflowY: "auto",
-            top: "50%",
-            left: "50%", bgcolor: grey[500], color: 'text.primary',
-            borderRadius: 4, 
-            outline: 'none',
-          }}>
+          <Box
+            sx={{
+              height: "80vh",
+              width: "60vw",
+              position: "absolute",
+              transform: "translate(-50%, -50%)",
+              overflowY: "auto",
+              top: "50%",
+              left: "50%",
+              bgcolor: grey[500],
+              color: "text.primary",
+              borderRadius: 4,
+              outline: "none",
+            }}
+          >
             <IconButton
               aria-label="close"
               onClick={() => setQuestionBoardOpen(false)}
               sx={{
-                position: 'absolute',
+                position: "absolute",
                 right: 8,
                 top: 8,
               }}
             >
               <X />
             </IconButton>
-            <Cases setPageName={setPageNameWrapper} sx={{left:"2vw", width:"50vw"}}/>
+            <Cases
+              setPageName={setPageNameWrapper}
+              sx={{ left: "2vw", width: "50vw" }}
+            />
           </Box>
         </Modal>
 
@@ -388,6 +388,7 @@ function App() {
                       goToPage(PAGE_KEYS[element]);
                       setSearchOpen(false);
                       setSearchQuery("");
+                      setSearchResults([...seenPages]);
                     }}
                   >
                     <div style={{ "&:hover": { color: grey[900] } }}>
