@@ -116,6 +116,7 @@ const professionWorkPlace = {  "Professor":[],
   "Inspector":[],
   "Artist":[""],
   "Journalist":[],
+  "Cheif Executive Officer":["Generico"]
 }
 
 for (const [workplace, profs] of Object.entries(workplaceProfession)) {
@@ -387,6 +388,43 @@ function createFamily() {
   };
 }
 
+function AddStaticData(){
+// All static people data
+  generateBirthRecords("Arjun", "Verma", new Date("December 09, 1963"), "Male", "Raj Verma", "Sita Verma");
+  generateEmploymentRecord("Arjun", "Verma", new Date("December 09, 1963"), "Flat 3A, Doctor's Residency, Health Sector 4, Heartline Road, Redmarsh", "Neurologist");
+  generateDeathRecords("Arjun", "Verma", new Date("December 09, 1963"), new Date("September 14, 2023"));
+
+  generateBirthRecords("James", "Anderson", new Date("April 22, 1977"), "Male", "Robert Anderson");
+  generateEmploymentRecord("James", "Anderson", new Date("April 22, 1977"), "Suite 42, Skyline Tower, Innovation District, Redmarsh", "Chief Executive Officer");
+  generateDeathRecords("James", "Anderson", new Date("April 22, 1977"), new Date("November 20, 2023"));
+
+  generateBirthRecords("Juan", "Martinez", new Date("July 22, 1982"), "Male");
+  generateEmploymentRecord("Juan", "Martinez", new Date("July 22, 1982"), "Flat 3A, Doctor's Residency, Heartline Road, Redmarsh", "Surgeon");
+  generateDeathRecords("Juan", "Martinez", new Date("July 22, 1982"), new Date("June 5, 2023"));
+
+  generateBirthRecords("Rohan", "Mehta", new Date("July 22, 1982"), "Male", "Prakash Mehta");
+  generateEmploymentRecord("Rohan", "Mehta", new Date("July 22, 1982"), "House 12, Greenview Apartments, Heartline Road, Redmarsh", "Cardiologist");
+
+  generateBirthRecords("John", "Carter", new Date("September 22, 1985"), "Male", "Michael Carter");
+  generateEmploymentRecord("John", "Carter", new Date("September 22, 1985"), "Flat 7C, Doctor's Residency, Heartline Road, Redmarsh", "Optometrist");
+
+  generateBirthRecords("Amarjit", "Singh", new Date("July 22, 1982"), "Male");
+  generateEmploymentRecord("Amarjit", "Singh", new Date("July 22, 1982"), "Inspector's Quarters, Police Colony, Willow Lane, Redmarsh", "Inspector");
+
+  generateBirthRecords("Mark", "Sullivan", new Date("July 22, 1983"), "Male", "Edward Sullivan");
+  generateEmploymentRecord("Mark", "Sullivan", new Date("July 22, 1983"), "221 Oakridge Lane, Westbridge, Redmarsh", "Inspector");
+  generateDeathRecords("Mark", "Sullivan", new Date("July 22, 1983"), new Date("April 9, 2023"));
+
+  generateBirthRecords("Michael", "Thompson", new Date("May 14, 1985"), "Male", "Andrew Thompson");
+  generateEmploymentRecord("Michael", "Thompson", new Date("May 14, 1985"), "Apartment 7C, Willow Lane, Redmarsh, Midwest", "Journalist");
+  generateDeathRecords("Michael", "Thompson", new Date("May 14, 1985"), new Date("April 20, 2023"));
+
+  generateBirthRecords("Samuel", "Hayes", new Date("March 15, 1978"), "Male", "Robert Hayes");
+  generateEmploymentRecord("Samuel", "Hayes", new Date("March 15, 1978"), "Suite 12B, Willow Lane Residences, Redmarsh City", "Ward");
+
+  // data for people who were trafficked
+}
+
 for (let i = 0; i < 100; i++) {
   createFamily();
   updateDoctors();
@@ -413,3 +451,4 @@ for (let i = 0; i < 100; i++) {
     );
   }
 }
+

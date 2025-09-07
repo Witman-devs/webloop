@@ -10,12 +10,12 @@ export default function CEO({ setPageName }) {
         person={{
           name: "Mr. James Anderson",
           fullName: "James Robert Anderson",
-          birthDate: "April 22, 1975",
+          birthDate: "April 22, 1977",
           deathDate: "",
           occupation: "Chief Executive Officer",
           affiliation: (
             <Link component="span" onClick={() => setPageName("companyA")}>
-              NovaTech Dynamics Inc.
+              Generico
             </Link>
           ),
           firstAppearance: "Board Members - 2015",

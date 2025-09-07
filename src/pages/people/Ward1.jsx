@@ -10,7 +10,7 @@ export default function WardPerson({ setPageName }) {
           name: "Samuel Hayes",
           fullName: "Samuel Robert Hayes",
           birthDate: "March 15, 1978",
-          deathDate: "—",
+          deathDate: "",
           occupation: "Ward Attendant",
           affiliation: (
             <Link component="span" onClick={() => setPageName("hospital")}>
