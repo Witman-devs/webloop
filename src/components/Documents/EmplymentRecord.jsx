@@ -18,7 +18,7 @@ const Field = ({ label, value }) => (
 
 const mappings = {
 
-  "Redmard Healthcare": "hospital",
+  "Redmarsh Healthcare": "hospital",
   "Kingsborough College of Optometry": "",
   "St. Healmore Medical College": "college",
   "Atlas News Agency": "news",

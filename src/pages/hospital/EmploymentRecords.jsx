@@ -8,7 +8,7 @@ const employmentCertificateColumns = [
   { field: "email", headerName: "email", width: 80 },
 ];
 
-export default function EmploymentRecords({ setPageName }) {
+export default function EmploymentRecords({ setPageName, companyName }) {
   return (
     <RecordsList
       records={EmploymentRecord}

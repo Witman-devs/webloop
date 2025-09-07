@@ -37,7 +37,7 @@ const professions = [
 const medicalProfessions = ["Cardiologist", "Neurologist", "Gynecologist"];
 
 const workplaces = [
-  "Redmard Healthcare",
+  "Redmarsh Healthcare",
   "Kingsborough College of Optometry",
   "St. Healmore Medical College",
   "Atlas News Agency",
@@ -47,7 +47,7 @@ const workplaces = [
 ];
 
 const workplaceProfession = {
-  "Redmard Healthcare": [
+  "Redmarsh Healthcare": [
     "Cardiologist",
     "Neurologist",
     "Gynecologist",
