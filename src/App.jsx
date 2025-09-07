@@ -68,7 +68,6 @@ function App() {
 
   // Progress related
   const saveProgress = () => {
-    // Saving as array as Set converted to object on save
     localStorage.setItem("pages", JSON.stringify({ pages: [...seenPages] }));
   }
   
@@ -83,10 +82,6 @@ function App() {
 
   useEffect(() => {
     window.addEventListener("beforeunload", saveProgress);
-
-    return () => {
-      window.removeEventListener("beforeunload", saveProgress);
-    };
   }, [saveProgress]);
 
   // Pages / Routing related
@@ -106,7 +101,6 @@ function App() {
 
   // Key bindings
   const handleSearch = (query) => {
-    console.log('"', searchQuery, '" "', query, '"');
     let Pages = Object.values(PAGE_TITLES);
     let searchParam = searchQuery.trim();
     if (query && query.trim()) searchParam = query.trim();
@@ -123,8 +117,6 @@ function App() {
   };
 
   const goToPreviousPage = () => {
-    console.log("Going to previous page");
-    console.log(history);
     if (history.length > 1) {
       setPageName(history[history.length - 2]);
       setHistory((prevHistory) => prevHistory.slice(0, -1));

@@ -100,6 +100,7 @@ export const PAGE_TITLES = {
   birthRecords: "Birth Records",
   deathRecords: "Death Records",
   autopsyRecords: "Autopsy Records",
+  hospitalEmployeeRecords: "Hospital Employee Records",
   alumniRecords: "Alumni Records",
   terminationRecords: "Termination Records",
   cases: "Cases",
