@@ -27,7 +27,7 @@ function generateRandomTerminationRecord(batch) {
 // Add the fixed record first
 const records = [
   {
-    name: "Arjun Raj Verma",
+    name: "Cletus Raj Blick",
     rollNumber: "MD2008-001",
     batch: "2008",
     degree: "MBBS",

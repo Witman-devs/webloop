@@ -27,7 +27,7 @@ export default function Hospital({ setPageName }) {
                   setPageName("doc2");
                 }}
               >
-                Dr. Rohan Mehta
+                Dr. Hubert Lowe
               </Link>
             ),
             role: "Director",
@@ -40,7 +40,7 @@ export default function Hospital({ setPageName }) {
                   setPageName("director");
                 }}
               >
-                Dr. Arjun Verma
+                Dr. Cletus Blick
               </Link>
             ),
             role: "Ex-Director",

@@ -125,7 +125,7 @@ const OrganRequestMessage = ({
         >
           Done.
           <br />
-          Dr. Rohan Mehta
+          Dr. Hubert Lowe
         </Box>
 
         <Box

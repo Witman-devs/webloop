@@ -20,7 +20,7 @@ const deathCertificateColumns = [
 export default function deathRecords({ setPageName }) {
   return (
     <RecordsList
-      records={rows}
+      records={deathRecord}
       columns={deathCertificateColumns}
       type="death"
       companyName="Redmarsh Healthcare"

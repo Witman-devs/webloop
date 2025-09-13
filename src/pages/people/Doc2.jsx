@@ -8,8 +8,8 @@ export default function Doc2({ setPageName }) {
 
       <ProfileCard
         person={{
-          name: "Dr. Rohan Mehta",
-          fullName: "Rohan Prakash Mehta",
+          name: "Dr. Hubert Lowe",
+          fullName: "Hubert Matt Lowe",
           birthDate: "July 22, 1982",
           deathDate: "",
           occupation: "Cardiologist & Educator",
@@ -23,11 +23,11 @@ export default function Doc2({ setPageName }) {
           image: directorImg,
           bio: (
             <>
-              Dr. Rohan Mehta is a leading cardiologist at <Link onClick={() => setPageName("hospital")}>Redmarsh Healthcare</Link>,
+              Dr. Hubert Lowe is a leading cardiologist at <Link onClick={() => setPageName("hospital")}>Redmarsh Healthcare</Link>,
               recognized for his expertise in interventional cardiology and
               patient care. He graduated with honors from St. Healmore Medical
               College and has contributed to several national heart health
-              campaigns. Dr. Mehta is also a passionate educator, regularly
+              campaigns. Dr. Lowe is also a passionate educator, regularly
               conducting workshops for young medical professionals and
               advocating for preventive cardiology.
             </>

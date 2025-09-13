@@ -9,6 +9,7 @@ const employmentRecordsFile = true;
 const birthRecords = [];
 const deathRecords = [];
 const employmentRecords = [];
+const alumniRecords = [];
 
 const doctors = [];
 
@@ -86,7 +87,7 @@ const workplaceProfession = {
     "Peon",
     "Accountant",
   ],
-  "Generico": [
+  Generico: [
     "Businessman",
     "Computer Engineer",
     "Chemical Engineer",
@@ -98,26 +99,27 @@ const workplaceProfession = {
   ],
 };
 
-const professionWorkPlace = {  "Professor":[],
-  "Cardiologist":[],
-  "Neurologist":[],
-  "Gynecologist":[],
-  "Optometrist":[],
-  "Businessman":[],
-  "Watchman":[],
-  "Ward":[],
-  "Nurse":[],
-  "Peon":[],
-  "Driver":[],
-  "Lawyer":[],
-  "Accountant":[],
-  "Chemical Engineer":[],
-  "Computer Engineer":[],
-  "Inspector":[],
-  "Artist":[""],
-  "Journalist":[],
-  "Cheif Executive Officer":["Generico"]
-}
+const professionWorkPlace = {
+  Professor: [],
+  Cardiologist: [],
+  Neurologist: [],
+  Gynecologist: [],
+  Optometrist: [],
+  Businessman: [],
+  Watchman: [],
+  Ward: [],
+  Nurse: [],
+  Peon: [],
+  Driver: [],
+  Lawyer: [],
+  Accountant: [],
+  "Chemical Engineer": [],
+  "Computer Engineer": [],
+  Inspector: [],
+  Artist: [""],
+  Journalist: [],
+  "Chief Executive Officer": ["Generico"],
+};
 
 for (const [workplace, profs] of Object.entries(workplaceProfession)) {
   profs.forEach((prof) => {
@@ -137,12 +139,12 @@ const DeathReasons = [
 ];
 
 const specialRequests = [
-    'Requires flexible working hours due to a new child being born.',
-    'Needs accommodation for a medical condition.',
-    'Requests a standing desk for ergonomic reasons.',
-    'Prefers remote work on Fridays.',
-    'No special requests at this time.'
-  ];
+  "Requires flexible working hours due to a new child being born.",
+  "Needs accommodation for a medical condition.",
+  "Requests a standing desk for ergonomic reasons.",
+  "Prefers remote work on Fridays.",
+  "No special requests at this time.",
+];
 
 function generateBirthRecords(
   firstName,
@@ -176,14 +178,22 @@ function generateBirthRecords(
   birthRecords.push(data);
 }
 
-function generateDeathRecords(firstName, lastName, birthDate, deathDate) {
+function generateDeathRecords(
+  firstName,
+  lastName,
+  birthDate,
+  deathDate,
+  causeOfDeath = null,
+  doctor = null,
+  examiner = null
+) {
   let data = {
     id: uuidv4(),
     fullName: firstName + " " + lastName,
     dateOfBirth: birthDate.toISOString().split("T")[0],
     dateOfDeath: deathDate.toISOString().split("T")[0],
     age: Math.floor((deathDate - birthDate) / (1000 * 60 * 60 * 24 * 365)),
-    causeOfDeath: faker.helpers.arrayElement(DeathReasons),
+    causeOfDeath: causeOfDeath || faker.helpers.arrayElement(DeathReasons),
     placeOfDeath: "Redmarsh, Nocturna, Zorik",
     certificateNumber: `DC-${deathDate.getFullYear()}-${faker.string.numeric(
       6
@@ -191,16 +201,25 @@ function generateDeathRecords(firstName, lastName, birthDate, deathDate) {
     registrar: "Office of the Civil Registrar",
   };
 
+  if (doctor) data.doctor = doctor;
+  if (examiner) data.examiner = examiner;
   //   console.log(data);
 
   deathRecords.push(data);
 }
 
-function generateEmploymentRecord(firstName, lastName, birthDate, address, profession){
+function generateEmploymentRecord(
+  firstName,
+  lastName,
+  birthDate,
+  address,
+  profession
+) {
   let university = "University of Redmarsh";
-  if (medicalProfessions.includes(profession)){
+  if (medicalProfessions.includes(profession)) {
     university = "St. Healmore Medical College";
-    if(profession === "Optometrist") university = "Kingsborough College of Optometry";
+    if (profession === "Optometrist")
+      university = "Kingsborough College of Optometry";
   }
   let data = {
     id: uuidv4(),
@@ -222,6 +241,7 @@ function generateEmploymentRecord(firstName, lastName, birthDate, address, profe
 
 function updateDoctors() {
   deathRecords.forEach((record) => {
+    if (record.doctor) return;
     record.doctor = faker.helpers.arrayElement(doctors);
     record.examiner = faker.helpers.arrayElement(doctors);
   });
@@ -296,10 +316,30 @@ function createFamily() {
     spouseWorkplace = faker.helpers.arrayElement(workplaces);
   }
 
-  if (medicalProfessions.includes(profession))
+  if (medicalProfessions.includes(profession)) {
     doctors.push(`${firstName} ${lastName}`);
-  if (medicalProfessions.includes(spouseProfession))
+    alumniRecords.push({
+      name: `Dr. ${firstName} ${lastName}`,
+      rollNumber: `MD${birthDateMain.getFullYear()+22}-${faker.number.int({min:1, max:60})}`,
+      degree: "MBBS",
+      batch: `${birthDateMain.getFullYear()+17}`,
+      graduationYear: `${birthDateMain.getFullYear()+22}`,
+      specialization: profession,
+      currentEmployment: "Lead Surgeon, Redmarsh Healthcare",
+    });
+  }
+  if (medicalProfessions.includes(spouseProfession)){
     doctors.push(`${spouse} ${lastName}`);
+    alumniRecords.push({
+      name: `Dr. ${spouse} ${lastName}`,
+      rollNumber: `MD${birthDateSpouse.getFullYear()+22}-${faker.number.int({min:1, max:60})}`,
+      degree: "MBBS",
+      batch: `${birthDateSpouse.getFullYear()+17}`,
+      graduationYear: `${birthDateSpouse.getFullYear()+22}`,
+      specialization: profession,
+      currentEmployment: "Lead Surgeon, Redmarsh Healthcare",
+    });
+  }
 
   generateEmploymentRecord(
     firstName,
@@ -388,43 +428,200 @@ function createFamily() {
   };
 }
 
-function AddStaticData(){
-// All static people data
-  generateBirthRecords("Arjun", "Verma", new Date("December 09, 1963"), "Male", "Raj Verma", "Sita Verma");
-  generateEmploymentRecord("Arjun", "Verma", new Date("December 09, 1963"), "Flat 3A, Doctor's Residency, Health Sector 4, Heartline Road, Redmarsh", "Neurologist");
-  generateDeathRecords("Arjun", "Verma", new Date("December 09, 1963"), new Date("September 14, 2023"));
+function AddStaticData() {
+  let dateWithTime = (date) => {
+    date.setTime(date.getTime() + Math.random() * 86400000);
+    return date;
+  };
+  // All static people data
+  generateBirthRecords(
+    "Cletus",
+    "Blick",
+    dateWithTime(new Date("December 09, 1963")),
+    "Male",
+    "Raj Blick",
+    "Sita Blick"
+  );
+  generateEmploymentRecord(
+    "Cletus",
+    "Blick",
+    dateWithTime(new Date("December 09, 1963")),
+    "Flat 3A, Doctor's Residency, Health Sector 4, Heartline Road, Redmarsh",
+    "Neurologist"
+  );
+  generateDeathRecords(
+    "Cletus",
+    "Blick",
+    dateWithTime(new Date("December 09, 1963")),
+    dateWithTime(new Date("September 14, 2023"))
+  );
 
-  generateBirthRecords("James", "Anderson", new Date("April 22, 1977"), "Male", "Robert Anderson");
-  generateEmploymentRecord("James", "Anderson", new Date("April 22, 1977"), "Suite 42, Skyline Tower, Innovation District, Redmarsh", "Chief Executive Officer");
-  generateDeathRecords("James", "Anderson", new Date("April 22, 1977"), new Date("November 20, 2023"));
+  generateBirthRecords(
+    "James",
+    "Anderson",
+    dateWithTime(new Date("April 22, 1977")),
+    "Male",
+    "Robert Anderson"
+  );
+  generateEmploymentRecord(
+    "James",
+    "Anderson",
+    dateWithTime(new Date("April 22, 1977")),
+    "Suite 42, Skyline Tower, Innovation District, Redmarsh",
+    "Chief Executive Officer"
+  );
+  generateDeathRecords(
+    "James",
+    "Anderson",
+    dateWithTime(new Date("April 22, 1977")),
+    dateWithTime(new Date("November 20, 2023"))
+  );
 
-  generateBirthRecords("Juan", "Martinez", new Date("July 22, 1982"), "Male");
-  generateEmploymentRecord("Juan", "Martinez", new Date("July 22, 1982"), "Flat 3A, Doctor's Residency, Heartline Road, Redmarsh", "Surgeon");
-  generateDeathRecords("Juan", "Martinez", new Date("July 22, 1982"), new Date("June 5, 2023"));
+  generateBirthRecords(
+    "Juan",
+    "Martinez",
+    dateWithTime(new Date("July 22, 1982")),
+    "Male"
+  );
+  generateEmploymentRecord(
+    "Juan",
+    "Martinez",
+    dateWithTime(new Date("July 22, 1982")),
+    "Flat 3A, Doctor's Residency, Heartline Road, Redmarsh",
+    "Cardiologist"
+  );
+  generateDeathRecords(
+    "Juan",
+    "Martinez",
+    dateWithTime(new Date("July 22, 1982")),
+    dateWithTime(new Date("June 5, 2023"))
+  );
 
-  generateBirthRecords("Rohan", "Mehta", new Date("July 22, 1982"), "Male", "Prakash Mehta");
-  generateEmploymentRecord("Rohan", "Mehta", new Date("July 22, 1982"), "House 12, Greenview Apartments, Heartline Road, Redmarsh", "Cardiologist");
+  generateBirthRecords(
+    "Hubert",
+    "Lowe",
+    dateWithTime(new Date("July 22, 1982")),
+    "Male",
+    "Matt Lowe"
+  );
+  generateEmploymentRecord(
+    "Hubert",
+    "Lowe",
+    dateWithTime(new Date("July 22, 1982")),
+    "House 12, Greenview Apartments, Heartline Road, Redmarsh",
+    "Cardiologist"
+  );
 
-  generateBirthRecords("John", "Carter", new Date("September 22, 1985"), "Male", "Michael Carter");
-  generateEmploymentRecord("John", "Carter", new Date("September 22, 1985"), "Flat 7C, Doctor's Residency, Heartline Road, Redmarsh", "Optometrist");
+  generateBirthRecords(
+    "John",
+    "Carter",
+    dateWithTime(new Date("September 22, 1985")),
+    "Male",
+    "Michael Carter"
+  );
+  generateEmploymentRecord(
+    "John",
+    "Carter",
+    dateWithTime(new Date("September 22, 1985")),
+    "Flat 7C, Doctor's Residency, Heartline Road, Redmarsh",
+    "Optometrist"
+  );
 
-  generateBirthRecords("Amarjit", "Singh", new Date("July 22, 1982"), "Male");
-  generateEmploymentRecord("Amarjit", "Singh", new Date("July 22, 1982"), "Inspector's Quarters, Police Colony, Willow Lane, Redmarsh", "Inspector");
+  generateBirthRecords(
+    "Olive",
+    "Harris",
+    dateWithTime(new Date("July 22, 1982")),
+    "Male"
+  );
+  generateEmploymentRecord(
+    "Olive",
+    "Harris",
+    dateWithTime(new Date("July 22, 1982")),
+    "Inspector's Quarters, Police Colony, Willow Lane, Redmarsh",
+    "Inspector"
+  );
 
-  generateBirthRecords("Mark", "Sullivan", new Date("July 22, 1983"), "Male", "Edward Sullivan");
-  generateEmploymentRecord("Mark", "Sullivan", new Date("July 22, 1983"), "221 Oakridge Lane, Westbridge, Redmarsh", "Inspector");
-  generateDeathRecords("Mark", "Sullivan", new Date("July 22, 1983"), new Date("April 9, 2023"));
+  generateBirthRecords(
+    "Mark",
+    "Sullivan",
+    dateWithTime(new Date("July 22, 1983")),
+    "Male",
+    "Edward Sullivan"
+  );
+  generateEmploymentRecord(
+    "Mark",
+    "Sullivan",
+    dateWithTime(new Date("July 22, 1983")),
+    "221 Oakridge Lane, Westbridge, Redmarsh",
+    "Inspector"
+  );
+  generateDeathRecords(
+    "Mark",
+    "Sullivan",
+    dateWithTime(new Date("July 22, 1983")),
+    dateWithTime(new Date("April 9, 2023"))
+  );
 
-  generateBirthRecords("Michael", "Thompson", new Date("May 14, 1985"), "Male", "Andrew Thompson");
-  generateEmploymentRecord("Michael", "Thompson", new Date("May 14, 1985"), "Apartment 7C, Willow Lane, Redmarsh, Midwest", "Journalist");
-  generateDeathRecords("Michael", "Thompson", new Date("May 14, 1985"), new Date("April 20, 2023"));
+  generateBirthRecords(
+    "Michael",
+    "Thompson",
+    dateWithTime(new Date("May 14, 1985")),
+    "Male",
+    "Andrew Thompson"
+  );
+  generateEmploymentRecord(
+    "Michael",
+    "Thompson",
+    dateWithTime(new Date("May 14, 1985")),
+    "Apartment 7C, Willow Lane, Redmarsh, Midwest",
+    "Journalist"
+  );
+  generateDeathRecords(
+    "Michael",
+    "Thompson",
+    dateWithTime(new Date("May 14, 1985")),
+    dateWithTime(new Date("April 20, 2023"))
+  );
 
-  generateBirthRecords("Samuel", "Hayes", new Date("March 15, 1978"), "Male", "Robert Hayes");
-  generateEmploymentRecord("Samuel", "Hayes", new Date("March 15, 1978"), "Suite 12B, Willow Lane Residences, Redmarsh City", "Ward");
+  generateBirthRecords(
+    "Samuel",
+    "Hayes",
+    dateWithTime(new Date("March 15, 1978")),
+    "Male",
+    "Robert Hayes"
+  );
+  generateEmploymentRecord(
+    "Samuel",
+    "Hayes",
+    dateWithTime(new Date("March 15, 1978")),
+    "Suite 12B, Willow Lane Residences, Redmarsh City",
+    "Ward"
+  );
+
+  doctors.push("Cletus Blick");
+  doctors.push("Hubert Lowe");
+  doctors.push("Hubert Lowe");
 
   // data for people who were trafficked
 }
 
+function updateAlumniRecords(){
+  fs.readFile("src/assets/college/alumniRecords.json", "utf-8", (err, data) => {
+    if (err) {
+      console.error("Error reading alumni records file:", err);
+      return;
+    }
+    data = JSON.parse(data);
+    data.push(...alumniRecords);
+    fs.writeFileSync(
+      "src/assets/college/alumniRecords.json",
+      JSON.stringify(data, null, 2),
+      "utf-8"
+    );
+  })
+}
+
+AddStaticData();
 for (let i = 0; i < 100; i++) {
   createFamily();
   updateDoctors();
@@ -443,12 +640,12 @@ for (let i = 0; i < 100; i++) {
       "utf-8"
     );
   }
-  if(employmentRecordsFile){
+  if (employmentRecordsFile) {
     fs.writeFileSync(
       "src/assets/employment_records.json",
       JSON.stringify(employmentRecords, null, 2),
       "utf-8"
     );
   }
+  if(alumniRecords) updateAlumniRecords();
 }
-

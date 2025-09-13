@@ -28,13 +28,13 @@ function generateAlumnus(batch) {
 // Start with the two fixed entries
 const alumni = [
   {
-    name: "Dr. Rohan Mehta",
+    name: "Dr. Hubert Lowe",
     rollNumber: "MD2000-001",
     degree: "MBBS",
     batch: "2000",
     graduationYear: "2005",
     specialization: "Cardiology",
-    currentEmployment: "Senior Cardiologist, HeartCare Institute"
+    currentEmployment: "Senior Cardiologist, Redmarsh Healthcare"
   },
   {
     name: "Dr. Juan Martinez",
@@ -43,7 +43,7 @@ const alumni = [
     batch: "2000",
     graduationYear: "2005",
     specialization: "Surgery",
-    currentEmployment: "Lead Surgeon, GlobalMed Hospital"
+    currentEmployment: "Lead Surgeon, Redmarsh Healthcare"
   }
 ];
 

@@ -45,8 +45,8 @@ export default function Inspector({ setPageName }) {
 
       <ProfileCard
         person={{
-          name: "Inspector Amarjit Singh",
-          fullName: "Amarjit Singh",
+          name: "Inspector Olive Harris",
+          fullName: "Olive Harris",
           birthDate: "July 22, 1982",
           deathDate: null,
           occupation: "Police Inspector",
@@ -62,7 +62,7 @@ export default function Inspector({ setPageName }) {
           address:
             "Inspector's Quarters,\nPolice Colony,\nWillow Lane,\nRedmarsh",
           image: directorImg,
-          bio: `Inspector Amarjit Singh is a decorated officer known for his integrity and sharp investigative skills.
+          bio: `Inspector Olive Harris is a decorated officer known for his integrity and sharp investigative skills.
 He has solved several high-profile cases and is respected by both his peers and the community.
 He is committed to upholding the law and often conducts outreach programs to build trust between the police and citizens.`,
         }}

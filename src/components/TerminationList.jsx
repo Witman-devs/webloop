@@ -5,7 +5,7 @@ import { X } from "lucide-react";
 
 function handleFlagClick(setPageName, setOpen) {
   setOpen(true);
-  localStorage.setItem("flaggedStudent", "Arjun Raj Verma");
+  localStorage.setItem("flaggedStudent", "Cletus Raj Blick");
   // setTimeout(() => setPageName("director"), 30000);
 }
 
@@ -29,7 +29,7 @@ export default function TerminatedStudentsList({
       flex: 1,
       renderCell: (params) => (
         <Box sx={{ display: "flex", alignItems: "center" }}>
-          {params.row.name == "Arjun Raj Verma" ? (
+          {params.row.name == "Cletus Raj Blick" ? (
             <Link onClick={() => handleFlagClick(setPageName, setOpen)}>
               {params.row.name}
             </Link>
@@ -134,7 +134,7 @@ export default function TerminatedStudentsList({
         open={open}
         autoHideDuration={30000}
         onClose={handleClose}
-        message="Clue Found: Arjun Verma is not a doctor."
+        message="Clue Found: Cletus Blick is not a doctor."
         action={action}
         sx={{color:"black", backgroundColor:"white"}}
       />

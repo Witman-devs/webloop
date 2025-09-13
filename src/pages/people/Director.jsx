@@ -9,14 +9,14 @@ import "../../index.css"; // Ensure styles are imported
 
 
 export default function Director({ setPageName }) {
-  const flagFound = localStorage.getItem("flaggedStudent") === "Arjun Raj Verma";
+  const flagFound = localStorage.getItem("flaggedStudent") === "Cletus Raj Blick";
 
   return (
     <div style={{ width: "60vw", left: "20vw", position: "relative", padding: "2vw" }}>
       <ProfileCard
         person={{
-          name: "Dr. Arjun Verma",
-          fullName: "Arjun Raj Verma",
+          name: "Dr. Cletus Blick",
+          fullName: "Cletus Raj Blick",
           birthDate: "December 09, 1963",
           deathDate: "September 14, 2023",
           occupation: "Neurologist & Researcher",
@@ -31,7 +31,7 @@ export default function Director({ setPageName }) {
           image: directorImg,
           bio: (
             <>
-              Dr. Arjun Verma is a renowned neurologist known for his
+              Dr. Cletus Blick is a renowned neurologist known for his
               groundbreaking work in neuroplasticity. He was one of the top
               alumni from St. Healmore Medical College and now mentors young
               doctors across Zorik. He is a frequent speaker at conferences and

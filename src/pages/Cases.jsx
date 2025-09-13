@@ -37,7 +37,7 @@ const Questions = {
     },
     {
       questionText: "Name of doctor involved in trafficking",
-      answer: new Set(["dr. rohan mehta", "rohan mehta"]),
+      answer: new Set(["dr. hubert lowe", "hubert lowe"]),
     },
     {
       questionText: "Who wrote the suicide note?",

@@ -3,7 +3,7 @@ import { DataGrid } from "@mui/x-data-grid";
 
 const DoctorInfo = {
   "Dr. Juan Martinez": "doc1",
-  "Dr. Rohan Mehta": "doc2",
+  "Dr. Hubert Lowe": "doc2",
 }
 
 
