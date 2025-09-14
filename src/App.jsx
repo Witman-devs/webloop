@@ -87,7 +87,7 @@ function App() {
     playSFXMusic(MUSIC_TITLE.MinorLink);
     if (seenPages.has(PAGE_TITLES[pageName])) return;
     let newSeenPages = new Set([...seenPages, PAGE_TITLES[pageName]]);
-    setSearchResults([...newSeenPages])
+    setSearchResults([...newSeenPages]);
     setSeenPages(new Set(newSeenPages));
     localStorage.setItem("pages", JSON.stringify({ pages: [...newSeenPages] }));
   }, [pageName]);
@@ -200,22 +200,24 @@ function App() {
           >
             <Tooltip title="Open Evidence Board. clt + Space" placement="right">
               <NotebookPen
+                cursor="pointer"
                 className="menu"
                 onClick={() => setEvidanceBoardOpen(!evidanceBoardOpen)}
                 aria-label="Evidence Board"
               />
             </Tooltip>
             <Tooltip title="Go Back; clt + Left Arrow" placement="right">
-              <MoveLeft onClick={goToPreviousPage} />
+              <MoveLeft cursor="pointer" onClick={goToPreviousPage} />
             </Tooltip>
             <Tooltip title="Search; clt + K" placement="right">
-              <Search onClick={() => setSearchOpen(!searchOpen)} />
+              <Search cursor="pointer" onClick={() => setSearchOpen(!searchOpen)} />
             </Tooltip>
             <Tooltip title="History; clt + H" placement="right">
-              <History onClick={() => setSideMenuOpen(!sideMenuOpen)} />
+              <History cursor="pointer" onClick={() => setSideMenuOpen(!sideMenuOpen)} />
             </Tooltip>
             <Tooltip title="Cases; clt + A" placement="right">
               <FileQuestionMark
+              cursor="pointer"
                 onClick={() => setQuestionBoardOpen(!questionBoardOpen)}
               />
             </Tooltip>
