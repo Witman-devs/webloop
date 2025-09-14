@@ -16,7 +16,6 @@ export default function AutopsyReport({
   return (
     <Box
       sx={{
-        maxWidth: 800,
         margin: "40px auto",
         padding: 4,
         border: "1.5px solid #444",

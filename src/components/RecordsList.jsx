@@ -35,7 +35,7 @@ function AddToEvidence(type, data, setMessage) {
   localStorage.setItem(flowKey, JSON.stringify(flow));
   setMessage("Added to evidence board successfully!");
   let addedDocs = JSON.parse(localStorage.getItem("addedDocuments")) || [];
-  addedDocs.push(data["id"])
+  addedDocs.push(data["id"]);
   localStorage.setItem("addedDocuments", JSON.stringify(addedDocs));
 }
 
@@ -58,7 +58,8 @@ export default function RecordsList({
   const handleRowClick = (params) => {
     setSelectedRecord(params.row);
     const addedDocs = JSON.parse(localStorage.getItem("addedDocuments")) || [];
-    if(addedDocs.includes(params.row["id"])) setMessage("This is already Added to evidence board")
+    if (addedDocs.includes(params.row["id"]))
+      setMessage("This is already Added to evidence board");
     else setMessage("");
   };
 
@@ -122,23 +123,16 @@ export default function RecordsList({
             boxShadow: 24,
             p: 4,
             width: "60vw",
+            height: "90vh",
             borderRadius: 2,
+            overflowY: "auto",
           }}
         >
-          {selectedRecord && (
-            <Card elevation={0}>
-              <Document
-                data={convertValuesToStrings(selectedRecord)}
-                type={type}
-              />
-            </Card>
-          )}
-          <Stack direction="row" spacing={2}>
-            {message?
-            (<Typography variant="h5" color="text.secondary">
+          {message ? (
+            <Typography variant="h5" color="text.secondary">
               {message}
             </Typography>
-            ):(
+          ) : (
             <MonochromeButton
               onClick={() =>
                 AddToEvidence(
@@ -150,9 +144,32 @@ export default function RecordsList({
             >
               Add to evidence board
             </MonochromeButton>
-            )}
-
-          </Stack>
+          )}
+          {selectedRecord && (
+            <Card elevation={0}>
+              <Document
+                data={convertValuesToStrings(selectedRecord)}
+                type={type}
+              />
+            </Card>
+          )}
+          {message ? (
+            <Typography variant="h5" color="text.secondary">
+              {message}
+            </Typography>
+          ) : (
+            <MonochromeButton
+              onClick={() =>
+                AddToEvidence(
+                  type,
+                  convertValuesToStrings(selectedRecord),
+                  setMessage
+                )
+              }
+            >
+              Add to evidence board
+            </MonochromeButton>
+          )}
         </Box>
       </Modal>
     </div>

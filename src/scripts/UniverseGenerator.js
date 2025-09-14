@@ -10,6 +10,7 @@ const birthRecords = [];
 const deathRecords = [];
 const employmentRecords = [];
 const alumniRecords = [];
+const autopsyReports = []
 
 const doctors = [];
 
@@ -138,6 +139,53 @@ const DeathReasons = [
   "Battle Wounds",
 ];
 
+const autopsyReasons = {
+  "Accident": {
+    findings: [
+      `- Multiple fractures to the ribs and pelvis\n- Pulmonary lacerations with internal hemorrhage\n- Seatbelt marks and airbag deployment confirmed\n- Cause of death consistent with high-speed impact trauma`,
+      `- Depressed skull fracture of the ${faker.helpers.arrayElement(['frontal', 'parietal', 'temporal'])} bone\n- Subdural hematoma present\n- Extensive contusions to the face and chest\n- No signs of foul play, consistent with accidental fall`,
+      `- Compound fracture of the femur\n- Spinal injury noted at L${faker.number.int({min:1, max:5})} vertebra\n- Internal bleeding within abdominal cavity\n- Findings consistent with accidental blunt force trauma`
+    ],
+    conclusion: "Cause of death attributed to blunt force trauma sustained in an accidental event."
+  },
+
+  "Chemical Mishap": {
+    findings: [
+      `- Pulmonary edema with frothy fluid in airways\n- Gastric mucosal erosions\n- Hepatic necrosis and renal congestion\n- Toxicology confirmed lethal dose of ${faker.helpers.arrayElement(['cyanide', 'arsenic', 'methanol', 'chloroform'])}`,
+      `- Widespread petechial hemorrhages\n- Severe cerebral edema noted\n- Toxicological analysis detected ${faker.helpers.arrayElement(['carbon monoxide', 'phosgene gas', 'sarin'])} exposure\n- No external trauma observed`,
+      `- Erosions in esophagus and stomach\n- Severe chemical burns in oropharynx\n- Pulmonary congestion and alveolar damage\n- Blood tests revealed elevated ${faker.helpers.arrayElement(['lead', 'mercury', 'organophosphates'])} levels`
+    ],
+    conclusion: "Cause of death determined to be acute chemical intoxication."
+  },
+
+  "Beast Attack": {
+    findings: [
+      `- Multiple deep lacerations and puncture wounds to torso and limbs\n- Vascular rupture leading to exsanguination\n- Bite mark spacing consistent with ${faker.helpers.arrayElement(['Tiger', 'Leopard', 'bear'])} dentition\n- Extensive tearing of soft tissue`,
+      `- Crushing injuries to the thoracic cavity\n- Severe claw-induced abrasions across the back\n- Massive hemorrhage evident in chest cavity\n- Defensive wounds on forearms suggesting struggle`,
+      `- Partial avulsion of soft tissues in lower extremities\n- Penetrating injuries with irregular wound margins\n- Vertebral fractures at T${faker.number.int({min:2, max:9})}\n- Evidence consistent with predatory animal attack`
+    ],
+    conclusion: "Cause of death due to exsanguination from animal-inflicted trauma."
+  },
+
+  "Poisoning": {
+    findings: [
+      `- Gastric mucosa erosion consistent with corrosive ingestion\n- Pulmonary congestion and cerebral edema noted\n- Toxicology detected lethal concentration of ${faker.helpers.arrayElement(['cyanide', 'strychnine', 'ricin'])}\n- No evidence of external trauma`,
+      `- Multiple organ congestion observed\n- Renal tubular necrosis evident\n- Toxicological screening positive for ${faker.helpers.arrayElement(['barbiturates', 'opioids', 'benzodiazepines'])}\n- Circumstances suggest ingestion of toxic substance`,
+      `- Frothy fluid in airways\n- Hepatic and renal degeneration identified\n- Blood sample confirmed elevated ${faker.helpers.arrayElement(['alcohol', 'ethylene glycol', 'heroin'])} levels\n- Findings consistent with fatal poisoning`
+    ],
+    conclusion: "Cause of death due to systemic poisoning."
+  },
+
+  "Battle Wounds": {
+    findings: [
+      `- Penetrating wound to thoracic cavity\n- Major vessel injury with profuse internal bleeding\n- Projectile lodged near T${faker.number.int({min:3, max:8})} vertebra\n- Gunshot residue confirmed on clothing`,
+      `- Multiple sharp force injuries to abdomen\n- Laceration of liver and stomach\n- Extensive hemorrhage within peritoneal cavity\n- Weapon type consistent with combat knife`,
+      `- Compound fractures of the radius and ulna\n- Deep penetrating wound to chest\n- Pulmonary collapse and massive hemothorax\n- Findings consistent with battle-related trauma`
+    ],
+    conclusion: "Cause of death due to hemorrhagic shock secondary to battle-related injuries."
+  }
+}
+
 const specialRequests = [
   "Requires flexible working hours due to a new child being born.",
   "Needs accommodation for a medical condition.",
@@ -203,7 +251,25 @@ function generateDeathRecords(
 
   if (doctor) data.doctor = doctor;
   if (examiner) data.examiner = examiner;
-  //   console.log(data);
+  if (Object.keys(autopsyReasons).includes(data.causeOfDeath)) {
+    const id = uuidv4().substring(0, 8).toUpperCase()
+    const autopsyData = {
+      id: id,
+      caseNumber: `AUT-${deathDate.getFullYear()}-${id}`,
+      name: data.fullName,
+      age: data.age,
+      gender: data.gender,
+      dateOfDeath: data.dateOfDeath,
+      dateOfExamination: data.dateOfDeath,
+      location: `${faker.location.city()} Medical Examiner's Office`,
+      causeOfDeath: data.causeOfDeath,
+      findings: faker.helpers.arrayElement(autopsyReasons[data.causeOfDeath].findings),
+      conclusion: autopsyReasons[data.causeOfDeath].conclusion,
+    }
+    if(doctor) autopsyData.examiner = doctor;
+    autopsyReports.push(autopsyData);
+
+  }
 
   deathRecords.push(data);
 }
@@ -245,6 +311,10 @@ function updateDoctors() {
     record.doctor = faker.helpers.arrayElement(doctors);
     record.examiner = faker.helpers.arrayElement(doctors);
   });
+  autopsyReports.forEach((report)=>{
+    if (report.examiner) return;
+    report.examiner = faker.helpers.arrayElement(doctors);
+  })
 }
 
 function createFamily() {
@@ -320,22 +390,28 @@ function createFamily() {
     doctors.push(`${firstName} ${lastName}`);
     alumniRecords.push({
       name: `Dr. ${firstName} ${lastName}`,
-      rollNumber: `MD${birthDateMain.getFullYear()+22}-${faker.number.int({min:1, max:60})}`,
+      rollNumber: `MD${birthDateMain.getFullYear() + 22}-${faker.number.int({
+        min: 1,
+        max: 60,
+      })}`,
       degree: "MBBS",
-      batch: `${birthDateMain.getFullYear()+17}`,
-      graduationYear: `${birthDateMain.getFullYear()+22}`,
+      batch: `${birthDateMain.getFullYear() + 17}`,
+      graduationYear: `${birthDateMain.getFullYear() + 22}`,
       specialization: profession,
       currentEmployment: "Lead Surgeon, Redmarsh Healthcare",
     });
   }
-  if (medicalProfessions.includes(spouseProfession)){
+  if (medicalProfessions.includes(spouseProfession)) {
     doctors.push(`${spouse} ${lastName}`);
     alumniRecords.push({
       name: `Dr. ${spouse} ${lastName}`,
-      rollNumber: `MD${birthDateSpouse.getFullYear()+22}-${faker.number.int({min:1, max:60})}`,
+      rollNumber: `MD${birthDateSpouse.getFullYear() + 22}-${faker.number.int({
+        min: 1,
+        max: 60,
+      })}`,
       degree: "MBBS",
-      batch: `${birthDateSpouse.getFullYear()+17}`,
-      graduationYear: `${birthDateSpouse.getFullYear()+22}`,
+      batch: `${birthDateSpouse.getFullYear() + 17}`,
+      graduationYear: `${birthDateSpouse.getFullYear() + 22}`,
       specialization: profession,
       currentEmployment: "Lead Surgeon, Redmarsh Healthcare",
     });
@@ -605,7 +681,7 @@ function AddStaticData() {
   // data for people who were trafficked
 }
 
-function updateAlumniRecords(){
+function updateAlumniRecords() {
   fs.readFile("src/assets/college/alumniRecords.json", "utf-8", (err, data) => {
     if (err) {
       console.error("Error reading alumni records file:", err);
@@ -618,7 +694,7 @@ function updateAlumniRecords(){
       JSON.stringify(data, null, 2),
       "utf-8"
     );
-  })
+  });
 }
 
 AddStaticData();
@@ -647,5 +723,12 @@ for (let i = 0; i < 100; i++) {
       "utf-8"
     );
   }
-  if(alumniRecords) updateAlumniRecords();
+  if (alumniRecords) updateAlumniRecords();
+  if( autopsyReports.length > 0 ){
+    fs.writeFileSync(
+      "src/assets/autopsy_reports.json",
+      JSON.stringify(autopsyReports, null, 2),
+      "utf-8"
+    );
+  }
 }
