@@ -42,7 +42,6 @@ import Cases from "./pages/Cases";
 function App() {
   // Page and routing related states
   const [pageName, setPageName] = useState("home");
-  const [showVideo, setShowVideo] = useState(true);
   const [history, setHistory] = useState(["home"]);
   const { playSFXMusic } = useSound();
   const [seenPages, setSeenPages] = useState(() => {
@@ -167,30 +166,11 @@ function App() {
   };
 
   useEffect(() => {
-    // Check if the video has been played before
-    const hasPlayedVideo = localStorage.getItem("hasPlayedVideo");
-    if (hasPlayedVideo) {
-      setShowVideo(false);
-      setRunTour(false);
-    } else {
-      localStorage.setItem("hasPlayedVideo", "true");
-    }
-  }, []);
-
-  useEffect(() => {
     setStepIndex(0);
   }, []);
 
   return (
     <>
-      {showVideo && (
-        <VideoPlayer
-          videoSrc={intro}
-          onVideoEnd={handleVideoEndedOrSkipped}
-          onSkip={handleVideoEndedOrSkipped}
-        />
-      )}
-
       <div style={{ padding: 10, backgroundColor: grey[400] }}>
         {/* Overlay layer. */}
         <div style={{ height: "100vh", width: "fit-content" }}>

@@ -1,6 +1,7 @@
 // src/VideoPlayer.jsx
 import React, { useRef, useEffect } from 'react';
 import { Box, Button } from '@mui/material';
+import { X } from 'lucide-react';
 
 const VideoPlayer = ({ videoSrc, onVideoEnd, onSkip }) => {
   const videoRef = useRef(null);
@@ -44,7 +45,7 @@ const VideoPlayer = ({ videoSrc, onVideoEnd, onSkip }) => {
         onClick={handleSkip}
         sx={{ position: 'absolute', top: 20, right: 20 }}
       >
-        Skip Video
+        <X />
       </Button>
     </Box>
   );

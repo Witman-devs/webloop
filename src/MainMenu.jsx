@@ -90,8 +90,11 @@ export default function MainMenu() {
 
   // Handler for the start button
   const handleStartGame = () => {
-    playSFXMusic(MUSIC_TITLE.StartGame);
-    navigate("/game");
+    let uri = "/game"
+    if(localStorage.getItem("emailChecked")!="true")
+      uri = "/inbox" 
+    playSFXMusic(MUSIC_TITLE.MainMenuLink);
+    navigate(uri);
   };
 
   const handleOptions = () => {

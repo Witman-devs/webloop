@@ -679,6 +679,7 @@ function AddStaticData() {
   doctors.push("Hubert Lowe");
 
   // data for people who were trafficked
+  
 }
 
 function updateAlumniRecords() {

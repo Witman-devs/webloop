@@ -1,6 +1,6 @@
-import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import App from "./App.jsx";
+import Inbox from "./pages/Inbox.jsx";
 import Modal from "react-modal";
 import { SoundProvider } from "./hook/SoundContext";
 import { BrowserRouter, Route, Routes } from "react-router";
@@ -34,6 +34,7 @@ createRoot(document.getElementById("root")).render(
         <SoundProvider>
           <Routes>
             <Route path="/" element={<MainMenu />} />
+            <Route path="/inbox" element={<Inbox />} />
             <Route path="/game" element={<App />} />
           </Routes>
         </SoundProvider>
