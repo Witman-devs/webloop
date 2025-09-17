@@ -144,12 +144,7 @@ function App() {
   }, [handleKeyPress]);
 
   // Tour/Intro setup
-
-  const handleVideoEndedOrSkipped = () => {
-    setShowVideo(false);
-    setRunTour(true);
-  };
-
+  // TODO: Add starting for tour
   const handleJoyrideCallback = (data) => {
     const { status, index, type, action } = data;
     const finishedStatuses = ["finished", "skipped"];

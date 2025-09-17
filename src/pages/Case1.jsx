@@ -27,7 +27,7 @@ export default function Case1({setPageName}) {
       <Typography className="font" variant="h2">Scandal at the hospital</Typography>
       <NewspaperCutout
         headline="Doctor hung himself out of guilt!"
-        date="June 6, 2023"
+        date="12 August 2004"
         author="kelly Alan"
         content={<News1 setPageName={setPageName}/>}
         rotation="-5"
@@ -35,7 +35,7 @@ export default function Case1({setPageName}) {
       />
       <NewspaperCutout
         headline="Another doctor found mysteriously dead at RedMarsh Healthcare"
-        date="June 6, 2023"
+        date="12 August 2004"
         author="Michael Thompson"
         content={<News2 setPageName={setPageName}/>}
         rotation="5"

@@ -317,15 +317,15 @@ function updateDoctors() {
   })
 }
 
-function createFamily() {
+function createFamily(_name, _lastName, _gender, _age, _married, _deathDate, _employment) {
   //   Generating Base info for family
-  const gender = faker.helpers.arrayElement(["Male", "Female"]);
-  const firstName = faker.person.firstName(
+  const gender = _gender || faker.helpers.arrayElement(["Male", "Female"]);
+  const firstName = _name || faker.person.firstName(
     gender === "Male" ? "male" : "female"
   );
-  const lastName = faker.person.lastName();
-  const age = faker.number.int({ min: 18, max: 80 });
-  const married = faker.datatype.boolean(0.9);
+  const lastName = _lastName || faker.person.lastName();
+  const age = _age || faker.number.int({ min: 18, max: 80 });
+  const married = _married || faker.datatype.boolean(0.9);
   let spouse, childCount, childrens;
 
   if (married) {
@@ -342,6 +342,7 @@ function createFamily() {
     mode: "age",
     min: age,
     max: age,
+    refDate: _deathDate || new Date("July 17, 2005")
   });
   let birthDateSpouse, childrensBirthDate;
   if (married) {
@@ -349,9 +350,10 @@ function createFamily() {
       mode: "age",
       min: age - 5,
       max: age + 5,
+      refDate: new Date("July 17, 2005")
     });
     childrensBirthDate = Array.from({ length: childCount }, () =>
-      faker.date.birthdate({ mode: "age", min: 0, max: age - 23 })
+      faker.date.birthdate({ mode: "age", min: 0, max: age - 23, refDate: new Date("July 17, 2005") })
     );
   }
 
@@ -436,22 +438,22 @@ function createFamily() {
   //   Generate employmenet record
 
   //   generating death certificates
-  const isDead = faker.datatype.boolean(0.1);
+  const isDead = _deathDate || faker.datatype.boolean(0.1);
   const deathDate = isDead
-    ? faker.date.between({ from: birthDateMain, to: new Date() })
+    ? _deathDate || faker.date.between({ from: birthDateMain, to: new Date("July 17, 2005") })
     : null;
   let spouseDeathDate, isSpouseDead, childrensDeathDate, childrensDeath;
   if (married) {
     isSpouseDead = faker.datatype.boolean(0.1);
     spouseDeathDate = isSpouseDead
-      ? faker.date.between({ from: birthDateSpouse, to: new Date() })
+      ? faker.date.between({ from: birthDateSpouse, to: new Date("July 17, 2005") })
       : null;
     childrensDeath = childrensBirthDate.map(() => faker.datatype.boolean(0.05));
     childrensDeathDate = childrensDeath.map((died, index) =>
       died
         ? faker.date.between({
             from: childrensBirthDate[index],
-            to: new Date(),
+            to: new Date("July 17, 2005"),
           })
         : null
     );
@@ -483,6 +485,7 @@ function createFamily() {
       workplace,
       isDead,
       deathDate,
+      address
     },
     family: married
       ? {
@@ -529,7 +532,7 @@ function AddStaticData() {
     "Cletus",
     "Blick",
     dateWithTime(new Date("December 09, 1963")),
-    dateWithTime(new Date("September 14, 2023"))
+    dateWithTime(new Date("May 03, 2005"))
   );
 
   generateBirthRecords(
@@ -550,40 +553,40 @@ function AddStaticData() {
     "James",
     "Anderson",
     dateWithTime(new Date("April 22, 1977")),
-    dateWithTime(new Date("November 20, 2023"))
+    dateWithTime(new Date("July 10, 2005"))
   );
 
   generateBirthRecords(
     "Juan",
     "Martinez",
-    dateWithTime(new Date("July 22, 1982")),
+    dateWithTime(new Date("July 22, 1977")),
     "Male"
   );
   generateEmploymentRecord(
     "Juan",
     "Martinez",
-    dateWithTime(new Date("July 22, 1982")),
+    dateWithTime(new Date("July 22, 1977")),
     "Flat 3A, Doctor's Residency, Heartline Road, Redmarsh",
     "Cardiologist"
   );
   generateDeathRecords(
     "Juan",
     "Martinez",
-    dateWithTime(new Date("July 22, 1982")),
-    dateWithTime(new Date("June 5, 2023"))
+    dateWithTime(new Date("July 22, 1977")),
+    dateWithTime(new Date("August 11, 2005"))
   );
 
   generateBirthRecords(
     "Hubert",
     "Lowe",
-    dateWithTime(new Date("July 22, 1982")),
+    dateWithTime(new Date("July 22, 1977")),
     "Male",
     "Matt Lowe"
   );
   generateEmploymentRecord(
     "Hubert",
     "Lowe",
-    dateWithTime(new Date("July 22, 1982")),
+    dateWithTime(new Date("July 22, 1977")),
     "House 12, Greenview Apartments, Heartline Road, Redmarsh",
     "Cardiologist"
   );
@@ -620,43 +623,43 @@ function AddStaticData() {
   generateBirthRecords(
     "Mark",
     "Sullivan",
-    dateWithTime(new Date("July 22, 1983")),
+    dateWithTime(new Date("July 22, 1981")),
     "Male",
     "Edward Sullivan"
   );
   generateEmploymentRecord(
     "Mark",
     "Sullivan",
-    dateWithTime(new Date("July 22, 1983")),
+    dateWithTime(new Date("July 22, 1981")),
     "221 Oakridge Lane, Westbridge, Redmarsh",
     "Inspector"
   );
   generateDeathRecords(
     "Mark",
     "Sullivan",
-    dateWithTime(new Date("July 22, 1983")),
-    dateWithTime(new Date("April 9, 2023"))
+    dateWithTime(new Date("July 22, 1981")),
+    dateWithTime(new Date("January 30, 2005"))
   );
 
   generateBirthRecords(
     "Michael",
     "Thompson",
-    dateWithTime(new Date("May 14, 1985")),
+    dateWithTime(new Date("May 14, 1981")),
     "Male",
     "Andrew Thompson"
   );
   generateEmploymentRecord(
     "Michael",
     "Thompson",
-    dateWithTime(new Date("May 14, 1985")),
+    dateWithTime(new Date("May 14, 1981")),
     "Apartment 7C, Willow Lane, Redmarsh, Midwest",
     "Journalist"
   );
   generateDeathRecords(
     "Michael",
     "Thompson",
-    dateWithTime(new Date("May 14, 1985")),
-    dateWithTime(new Date("April 20, 2023"))
+    dateWithTime(new Date("May 14, 1981")),
+    dateWithTime(new Date("February 05, 2005"))
   );
 
   generateBirthRecords(
@@ -679,7 +682,18 @@ function AddStaticData() {
   doctors.push("Hubert Lowe");
 
   // data for people who were trafficked
-  
+  createFamily("Dale", "Grady", "Male", 30, true, new Date("September 12, 2004"))
+  createFamily("May", "Bayer", "Female", 42, true, new Date("October 18, 2004"))
+  createFamily("Beverly", "Jakubowski", "Female", 20, false, new Date("November 10, 2004"))
+  createFamily("Clint", "Barrows", "Male", 50, false, new Date("December 15, 2004"))
+  // Detective background
+  let detective = createFamily("David", "Hill", "Male", 50, true)
+  generateBirthRecords("Roxanne", "Hill", new Date("November 10, 1979"), "Female", "David Hill")
+  generateEmploymentRecord("Roxanne", "Hill", new Date("November 10, 1979"), detective.address, "Computer Engineer")
+  generateDeathRecords("Roxanne", "Hill", new Date("November 10, 1979"), new Date("January 20, 2005"), "Accident", "Hubert Lowe", "Cletus Blick")
+
+  // Antagonist
+  createFamily("Roger", "Hintz", "Male", 25, false, false, "Computer Engineer")
 }
 
 function updateAlumniRecords() {

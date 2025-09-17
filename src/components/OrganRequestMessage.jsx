@@ -123,9 +123,9 @@ const OrganRequestMessage = ({
             pointerEvents: "none",
           }}
         >
-          Done.
+          Approved by: Cletus Blick
           <br />
-          Dr. Hubert Lowe
+          Done by: Hubert Lowe
         </Box>
 
         <Box

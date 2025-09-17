@@ -22,6 +22,7 @@ import {
   Button,
   Fab,
   Snackbar,
+  Tooltip,
 } from "@mui/material";
 import {
   Mail,
@@ -34,6 +35,7 @@ import {
   Pencil,
   Video,
   Play,
+  LogOut,
 } from "lucide-react";
 import "../index.css";
 import emailsData from "../assets/emails.json";
@@ -42,6 +44,7 @@ import intro from "../assets/intro.mp4";
 import { useNavigate } from "react-router";
 import { useSound } from "../hook/SoundContext";
 import { MUSIC_TITLE } from "../consts";
+import { red } from "@mui/material/colors";
 
 const emailsToBeReceived = {
   news: {
@@ -50,16 +53,15 @@ const emailsToBeReceived = {
       "Breaking News: An open challenge to Detective Hill from serial killer",
     sender: "Atlas News Agency <no-reply@atlasnews.com",
     content: NewsMail,
-    date: "2025-09-15T00:00:00Z",
+    date: "2005-07-17T00:00:00Z",
   },
   killer: {
     id: "killer",
     subject: "DETECTIVE HILL Catch me if you can",
     sender: "ouroboros.the.killer@zemail.com",
     content: KillerChallenge,
-    date: "2025-09-15T01:00:00Z"
-
-  }
+    date: "2005-07-17T01:00:00Z"
+  },
 };
 
 function KillerChallenge(){
@@ -152,6 +154,8 @@ export default function Inbox() {
   const [newEmail, setNewEmail] = useState(null);
   const [showVideo, setShowVideo] = useState(false);
   const [videoPlayedOnce, setVideoPlayedOnce] = useState(false);
+  const navigate = useNavigate();
+
 
   // Form states for compose
   const [to, setTo] = useState("");
@@ -208,9 +212,22 @@ export default function Inbox() {
           ];
         });
       }, 200);
-    } else if (to === "prince@lagosfortune.org") {
+    } else if (to === "Nigerian Royalty <prince@lagosfortune.org>") {
       // todo: put a meme in reply saying you so stupid. you are a failure
-      console.log("HEHE");
+      setEmails(prev=>{
+          const id = new Date().toString();
+          setNewEmail(id);
+          return [
+            ...prev,
+            {
+              id:id,
+              subject:subject,
+              sender:"Nigerian Royalty <prince@lagosfortune.org>",
+              date: new Date().toISOString(),
+              content: "You are a failure. Who falls for such stipud mails! Uncle steven is dissapointed at you. Look at your cousin jimmy, He is a billionare at the age of 17. He can play piano."
+            }
+          ]
+      })
     }
     setComposeOpen(false);
     setOpen(true);
@@ -291,7 +308,7 @@ export default function Inbox() {
                     {email.sender}
                   </Typography>
                   {" — "}
-                  {typeof email.content == String
+                  {typeof(email.content)=='string'
                     ? email.content.slice(0, 40)
                     : "Unable to load open mail to check content"}
                   ...
@@ -466,6 +483,29 @@ export default function Inbox() {
         onClose={() => setOpen(false)}
         message="Mail Sent"
       />
+
+        <Tooltip title="Exit Application" placement="left">
+          <IconButton
+            aria-label="exit"
+            onClick={()=>navigate("/")}
+            sx={{
+              position: "fixed",
+              top: 10,
+              right: 20,
+              zIndex: 1001,
+              backgroundColor: red[700],
+              color: "white",
+              "&:hover": {
+                backgroundColor: red[900],
+              },
+              borderRadius: 2,
+              boxShadow: 3,
+              padding: "10px",
+            }}
+          >
+            <LogOut size={24} />
+          </IconButton>
+        </Tooltip>
 
       <AttachedVideo showVideo={showVideo} setShowVideo={setShowVideo} />
     </Box>

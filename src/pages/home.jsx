@@ -16,16 +16,15 @@ export default function Home({setPageName}) {
       <AntagonistLogo size="200px" setPageName={setPageName} />
       <Typography className="ransom-note" variant="h2">Hello Detective</Typography>
       <Typography sx={{fontSize: "1.2rem"}} className="font" width="80%" align="center">
-        Its been a while since we met. How many year has it been since you took
-        my case... 5 years. Still couldn't catch me. This is your golden
-        oportunity
+        Its been a 3 months since you went into hibernation. You know it is disrespectuful to ignore me like this. 
+        My... my... I wonder if you would be able to save the lives of people on my hit list.  
       </Typography>
       <Link className="symbol font" component="button" variant="h4" onClick={()=>setPageName("symbols")}>What is this symbol ?</Link>
       <Link className="case font" component="button" variant="h4" onClick={()=>setPageName("cases")}> Cases </Link>
       <Card sx={{width:"80%"}}>
         <CardContent>
-          <Typography variant="h5" align="center">My location </Typography>
-          <Typography align="center">Revealed after you solve all my cases </Typography>
+          <Typography variant="h5" align="center">My Identity</Typography>
+          <Typography align="center">Revealed after you solve all cases</Typography>
         </CardContent>
       </Card>
 
