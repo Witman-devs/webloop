@@ -2,6 +2,7 @@ import React, { useState , useEffect } from 'react';
 import { Card, CardContent, Link, Stack, Typography } from "@mui/material";
 import AntagonistLogo from "../components/AntagonistLogo";
 import "../App.css";
+import Port from './port/Port';
 
 export default function Home({setPageName}) {
   return (
@@ -27,7 +28,6 @@ export default function Home({setPageName}) {
           <Typography align="center">Revealed after you solve all cases</Typography>
         </CardContent>
       </Card>
-
     </Stack>
   );
 }

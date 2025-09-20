@@ -1,4 +1,4 @@
-import { Box, Typography, Grid, Avatar, Divider } from "@mui/material";
+import { Box, Typography, Grid, Avatar, Divider, Paper } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
 
 export default function VisitorRegistry({
@@ -8,6 +8,8 @@ export default function VisitorRegistry({
   records = [],
 }) {
   const columns = [
+    
+    { field: "date", headerName: "Date", width: 100 },
     { field: "time", headerName: "Time", width: 100 },
     { field: "name", headerName: "Name", flex: 1 },
     { field: "purpose", headerName: "Purpose", flex: 1 },
@@ -19,7 +21,16 @@ export default function VisitorRegistry({
   const rows = records.map((row, index) => ({ id: index + 1, ...row }));
 
   return (
-    <Box sx={{ p: 4, backgroundColor: "#f3f2ef" }}>
+    <Paper
+      elevation={3}
+      sx={{
+        maxWidth: 1200,
+        margin: "40px auto",
+        padding: 4,
+        backgroundColor: "#f7f7ff",
+        fontFamily: "'Times New Roman', serif",
+      }}
+    >
       {/* Header */}
       <Grid container alignItems="center" spacing={2} sx={{ mb: 3 }}>
         <Grid item>
@@ -68,6 +79,6 @@ export default function VisitorRegistry({
           rowsPerPageOptions={[7, 14, 21]}
         />
       </Box>
-    </Box>
+    </Paper>
   );
 }

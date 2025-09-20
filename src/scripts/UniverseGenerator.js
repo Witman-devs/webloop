@@ -11,6 +11,7 @@ const deathRecords = [];
 const employmentRecords = [];
 const alumniRecords = [];
 const autopsyReports = []
+const checkInRecords = [];
 
 const doctors = [];
 
@@ -34,6 +35,7 @@ const professions = [
   "Inspector",
   "Artist",
   "Journalist",
+  "Delivery driver"
 ];
 
 const medicalProfessions = ["Cardiologist", "Neurologist", "Gynecologist"];
@@ -46,6 +48,7 @@ const workplaces = [
   "Redmarsh Police Department",
   "Redmarsh Chemicals",
   "Generico",
+  "Redmarsh Postal Services"
 ];
 
 const workplaceProfession = {
@@ -98,6 +101,14 @@ const workplaceProfession = {
     "Peon",
     "Accountant",
   ],
+  "Redmarsh Postal Services": [
+    "Businessman",
+    "Delivery driver",
+    "Lawyer",
+    "Watchman",
+    "Peon",
+    "Accountant",
+  ]
 };
 
 const professionWorkPlace = {
@@ -120,6 +131,7 @@ const professionWorkPlace = {
   Artist: [""],
   Journalist: [],
   "Chief Executive Officer": ["Generico"],
+  "Delivery driver": []
 };
 
 for (const [workplace, profs] of Object.entries(workplaceProfession)) {
@@ -183,6 +195,25 @@ const autopsyReasons = {
       `- Compound fractures of the radius and ulna\n- Deep penetrating wound to chest\n- Pulmonary collapse and massive hemothorax\n- Findings consistent with battle-related trauma`
     ],
     conclusion: "Cause of death due to hemorrhagic shock secondary to battle-related injuries."
+  },
+  "Murder": {
+    "description": "Autopsy indicates homicidal death caused by sharp-force trauma. Multiple stab wounds consistent with an assault using a bladed weapon. The distribution and depth of injuries are incompatible with self-infliction.",
+    "findings": [
+      "- Multiple stab wounds to the anterior chest wall\n- Penetration of left lung and pericardium\n- Massive internal hemorrhage noted\n- Defensive wounds observed on forearms and hands",
+      "- Single deep stab wound to the abdomen, perforating the liver\n- Secondary superficial wounds around thoracic cavity\n- Blood loss exceeding 2 liters within abdominal cavity\n- Clear signs of struggle and resistance",
+      "- Multiple incised wounds across the neck region\n- Jugular vein and trachea severed\n- Surrounding bruising consistent with forceful assault\n- No evidence suggesting self-inflicted injury",
+      "- Series of angled stab wounds to the back\n- Wounds consistent with assailant attacking from behind\n- Lung and kidney lacerations observed\n- Lack of defensive wounds suggesting incapacitation before fatal injuries"
+    ],
+    "conclusion": "Cause of death determined as homicidal sharp-force trauma, with fatal injuries caused by repeated stabbing with a knife."
+  },
+  "Suicide": {
+    "description": "Autopsy reveals death by hanging using a ligature consistent with a rope. Classical features of suicidal hanging are present, with no evidence of struggle or third-party involvement.",
+    "findings": [
+      "- Prominent ligature mark encircling the neck, positioned above the thyroid cartilage\n- Petechial hemorrhages in the conjunctiva and eyelids\n- Fracture of the hyoid bone observed\n- Tongue protrusion consistent with asphyxia",
+      "- Oblique ligature mark extending upward behind the left ear\n- Cyanosis of lips and nail beds\n- Engorgement of neck veins noted\n- No signs of external struggle or defensive injuries",
+      "- Deep rope impression around the neck with parchment-like skin changes\n- Salivary dribbling observed from the mouth\n- Fracture of thyroid cartilage confirmed\n- Findings strongly suggest suicidal hanging"
+    ],
+    "conclusion": "Cause of death determined as suicide by hanging with a rope, with asphyxial features and absence of homicidal evidence."
   }
 }
 
@@ -532,7 +563,8 @@ function AddStaticData() {
     "Cletus",
     "Blick",
     dateWithTime(new Date("December 09, 1963")),
-    dateWithTime(new Date("May 03, 2005"))
+    dateWithTime(new Date("May 03, 2005")),
+    "Murder"
   );
 
   generateBirthRecords(
@@ -573,7 +605,10 @@ function AddStaticData() {
     "Juan",
     "Martinez",
     dateWithTime(new Date("July 22, 1977")),
-    dateWithTime(new Date("August 11, 2005"))
+    dateWithTime(new Date("August 11, 2005")),
+    "Suicide",
+    "Hubert Lowe",
+    "Cletus Blick"
   );
 
   generateBirthRecords(
@@ -747,3 +782,51 @@ for (let i = 0; i < 100; i++) {
     );
   }
 }
+
+console.log("Created universe added people and there details")
+
+const dates = [];
+const today = new Date("07/17/2005");
+const sixMonthsAgo = new Date("01/17/2005");
+
+for (let d = new Date(today); d >= sixMonthsAgo; d.setDate(d.getDate() - 1)) {
+  dates.push(new Date(d)); 
+}
+
+
+for(let i=0;i<employmentRecords.length;i++){
+  //   {
+  //   time: "03:20 PM",
+  //   name: "Inspector Ravi",
+  //   purpose: "Inspection",
+  //   contact: "555-7890",
+  //   comment: "Routine check",
+  //   signature: "Ravi",
+  // }
+
+  // check in last 6 months
+  // each day you join in the workplace random days
+  // you have some one from postal service dropping something off
+  for(let d in dates){
+    let date = dates[d]
+    let data = {
+      "date": date,
+      "time": `${faker.helpers.weightedArrayElement([{weight:99, value:9}, {weight:1, value:10}])}:${faker.number.int({min:10, max:20})} AM`,
+      "name": employmentRecords[i].fullName,
+      "purpose": "Work",
+      "contact": "xxxx-xxxx", //TODO: Update it later,
+      "comment": "No comments",
+      "signature": "- -",
+      "place": employmentRecords[i].company
+    }
+    checkInRecords.push(data)
+  }
+}
+
+checkInRecords.sort((a, b)=> b.date - a.date)
+
+fs.writeFileSync(
+  "src/assets/checkin_records.json",
+  JSON.stringify(checkInRecords, null, 2),
+  "utf-8"
+);

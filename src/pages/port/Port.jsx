@@ -1,4 +1,5 @@
 import OrganizationWiki from "../../components/OrganizationWiki";
+import VisitorRegistry from "../../components/ReceptionRegistry";
 
 
 export default function Port({ setPageName }) {
@@ -33,15 +34,15 @@ export default function Port({ setPageName }) {
       />
 
 
-{/*
-
 
       <VisitorRegistry
         companyName="Red Cross Medical Corp"
         companyAddress="123 Wellness Road, Pune - 411001"
         companyLogo="https://via.placeholder.com/80"
         records={visitorRecords}
-      /> */}
+      /> 
+      
+
     </>
   );
 }

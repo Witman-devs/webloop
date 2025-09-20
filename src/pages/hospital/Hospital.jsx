@@ -99,6 +99,7 @@ export default function Hospital({ setPageName }) {
           { label: "Death Records", pageName: "deathRecords" },
           { label: "Autopsy Records", pageName: "autopsyRecords" },
           { label: "Employment Records", pageName: "hospitalEmployeeRecords" },
+          { label: "Checkin Records", pageName: "hospitalCheckinRecords" },
         ]}
       />
 
@@ -112,30 +113,3 @@ export default function Hospital({ setPageName }) {
     </>
   );
 }
-
-const visitorRecords = [
-  {
-    time: "09:10 AM",
-    name: "Dr. Smith",
-    purpose: "Meeting",
-    contact: "555-1234",
-    comment: "Discussed medical supplies",
-    signature: "Dr. S",
-  },
-  {
-    time: "11:45 AM",
-    name: "Emily Johnson",
-    purpose: "Delivery",
-    contact: "555-4567",
-    comment: "Package from courier",
-    signature: "EJ",
-  },
-  {
-    time: "03:20 PM",
-    name: "Inspector Ravi",
-    purpose: "Inspection",
-    contact: "555-7890",
-    comment: "Routine check",
-    signature: "Ravi",
-  },
-];

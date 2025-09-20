@@ -47,6 +47,7 @@ import ngoLogo from "./assets/logos/ngoLogo.png";
 import policeLogo from "./assets/logos/policeLogo.png";
 import portLogo from "./assets/logos/portLogo.png";
 import HospitalEmploymentRecords from "./pages/hospital/EmploymentRecords";
+import HospitalCheckinRecords from "./pages/hospital/CheckinRecords";
 
 export const PAGE_COMPONENTS = {
   // places
@@ -65,6 +66,7 @@ export const PAGE_COMPONENTS = {
   alumniRecords: AlumniRecords,
   terminationRecords: TerminationRecords,
   hospitalEmployeeRecords: HospitalEmploymentRecords,
+  hospitalCheckinRecords: HospitalCheckinRecords,
 
   // case
   cases: Cases,
