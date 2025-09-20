@@ -2,6 +2,7 @@ import { Link, Typography } from "@mui/material";
 import ProfileCard from "../../components/ProfilePage";
 import JuanImg from "../../assets/characters/doc1.png";
 import suicideNote from "../../assets/Notes/suicideNote.png";
+import suicideNoteTxt from "../../assets/Notes/suicideNote.txt";
 import LetterViewer from "../../components/LetterViewer";
 
 export default function Doc1({ setPageName }) {
@@ -40,7 +41,7 @@ export default function Doc1({ setPageName }) {
             </>
           ),
           items:(
-            <LetterViewer image={suicideNote} label="Dr. Juan Martinez suicide note found in the staff quarters" />
+            <LetterViewer image={suicideNote} fileSrc={suicideNoteTxt} label="Dr. Juan Martinez suicide note found in the staff quarters" />
           )
         }}
         setPageName={setPageName}

@@ -51,7 +51,7 @@ export default function Director({ setPageName }) {
               <Typography variant="subtitle2">Documents found</Typography>
               <ul>
                 <li><LetterViewer image={complaint1} fileSrc={complaint1Txt} label="Letters from Ward staff complaining about staff shortages." /></li>
-                <li><LetterViewer image={complaint1} fileSrc={complaint1Txt} label="Letters from Ward staff complaining about Malfunctioning Equipments." /></li>
+                <li><LetterViewer image={complaint2} fileSrc={complaint2Txt} label="Letters from Ward staff complaining about Malfunctioning Equipments." /></li>
                 <li><LetterViewer image={LetterFromJuan} fileSrc={LetterFromJuanTxt} label="Letter from Juan Martinez regarding suspicion of Organ Trafficking." /></li>
                 <li><ViewOrganRequest /></li>
               </ul>

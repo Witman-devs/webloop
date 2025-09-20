@@ -27,7 +27,7 @@ const Questions = {
     {
       questionText: "Name of patients whose organs were trafficked.",
       answer: [
-        "Roxanne Hintz",
+        "Roxanne Hill",
         "Dale Grady",
         "May Bayer",
         "Beverly Jakubowski",
