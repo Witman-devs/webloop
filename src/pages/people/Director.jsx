@@ -1,10 +1,14 @@
 import { Link, Typography } from "@mui/material";
 import ProfileCard from "../../components/ProfilePage";
 import directorImg from "../../assets/characters/director.png";
-import complaintLetter1 from "../../assets/Notes/complaintLetter1.png";
+import complaint1 from "../../assets/Notes/complaint1.png";
+import complaint1Txt from "../../assets/Notes/complaint1.txt";
+import complaint2 from "../../assets/Notes/complaint2.png";
+import complaint2Txt from "../../assets/Notes/complaint2.txt";
 import LetterFromJuan from "../../assets/Notes/LetterFromJuan.png";
+import LetterFromJuanTxt from "../../assets/Notes/LetterFromJuan.txt";
 import ViewOrganRequest from "../../components/ViewOrganRequest.jsx";
-import ViewImage from "../../components/ViewImage.jsx";
+import LetterViewer from "../../components/LetterViewer.jsx";
 import "../../index.css"; // Ensure styles are imported
 
 
@@ -46,8 +50,9 @@ export default function Director({ setPageName }) {
             <div className="blink">
               <Typography variant="subtitle2">Documents found</Typography>
               <ul>
-                <li><ViewImage image={complaintLetter1} label="Letters from Ward staff complaining about staff shortages." /></li>
-                <li><ViewImage image={LetterFromJuan} label="Letter from Juan Martinez regarding suspicion of Organ Trafficking." /></li>
+                <li><LetterViewer image={complaint1} fileSrc={complaint1Txt} label="Letters from Ward staff complaining about staff shortages." /></li>
+                <li><LetterViewer image={complaint1} fileSrc={complaint1Txt} label="Letters from Ward staff complaining about Malfunctioning Equipments." /></li>
+                <li><LetterViewer image={LetterFromJuan} fileSrc={LetterFromJuanTxt} label="Letter from Juan Martinez regarding suspicion of Organ Trafficking." /></li>
                 <li><ViewOrganRequest /></li>
               </ul>
             </div>

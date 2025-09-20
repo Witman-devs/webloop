@@ -21,7 +21,7 @@ export default memo(({ data, isConnectable = false }) => {
         }}
       >
         <CardContent>
-          <Typography id="modal-modal-title" variant="h6" component="h2">
+          <Typography id="modal-modal-title" variant="h4" component="h2" style={{width:"70vh"}}>
             {data["label"]}
           </Typography>
           <Typography
@@ -31,7 +31,7 @@ export default memo(({ data, isConnectable = false }) => {
             <img
               src={data["image"]}
               alt="View"
-              style={{ height: "100%", width: "auto" }}
+              style={{ height: "100vh", width: "auto" }}
             />
           </Typography>
         </CardContent>

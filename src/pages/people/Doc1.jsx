@@ -2,7 +2,7 @@ import { Link, Typography } from "@mui/material";
 import ProfileCard from "../../components/ProfilePage";
 import JuanImg from "../../assets/characters/doc1.png";
 import suicideNote from "../../assets/Notes/suicideNote.png";
-import ViewImage from "../../components/ViewImage";
+import LetterViewer from "../../components/LetterViewer";
 
 export default function Doc1({ setPageName }) {
   return (
@@ -40,7 +40,7 @@ export default function Doc1({ setPageName }) {
             </>
           ),
           items:(
-            <ViewImage image={suicideNote} label="Dr. Juan Martinez suicide note found in the staff quarters" />
+            <LetterViewer image={suicideNote} label="Dr. Juan Martinez suicide note found in the staff quarters" />
           )
         }}
         setPageName={setPageName}
