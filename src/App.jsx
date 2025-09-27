@@ -112,14 +112,17 @@ function App() {
 
   const handleKeyPress = useCallback(
     (event) => {
-      if (event.ctrlKey && event.code === "ArrowLeft") goToPreviousPage();
+      if (event.altKey && event.code === "ArrowLeft"){
+        event.preventDefault();
+        goToPreviousPage();
+      } 
       else if (event.ctrlKey && event.code === "KeyK") {
         event.preventDefault();
         setSearchOpen(!searchOpen);
       } else if (event.ctrlKey && event.code === "KeyH") {
         event.preventDefault();
         setSideMenuOpen(!sideMenuOpen);
-      } else if (event.ctrlKey && event.code === "KeyA") {
+      } else if (event.ctrlKey && event.code === "KeyS") {
         event.preventDefault();
         setQuestionBoardOpen(!questionBoardOpen);
       } else if (event.ctrlKey && event.code === "KeyG") {
