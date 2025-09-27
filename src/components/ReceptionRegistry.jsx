@@ -9,11 +9,10 @@ export default function VisitorRegistry({
 }) {
   const columns = [
     
-    { field: "date", headerName: "Date", width: 100 },
+    { field: "date", headerName: "Date", width: 100, valueFormatter: params=> new Date(params).toLocaleDateString() },
     { field: "time", headerName: "Time", width: 100 },
     { field: "name", headerName: "Name", flex: 1 },
     { field: "purpose", headerName: "Purpose", flex: 1 },
-    { field: "contact", headerName: "Contact", width: 150 },
     { field: "comment", headerName: "Comment", flex: 1 },
     { field: "signature", headerName: "Signature", width: 150 },
   ];

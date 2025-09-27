@@ -45,6 +45,7 @@ import { useNavigate } from "react-router";
 import { useSound } from "../hook/SoundContext";
 import { MUSIC_TITLE } from "../consts";
 import { red } from "@mui/material/colors";
+import MEMEImg from "../assets/failure_steven_he.gif"
 
 const emailsToBeReceived = {
   news: {
@@ -53,51 +54,53 @@ const emailsToBeReceived = {
       "Breaking News: An open challenge to Detective Hill from serial killer",
     sender: "Atlas News Agency <no-reply@atlasnews.com",
     content: NewsMail,
-    date: "2005-07-17T00:00:00Z",
+    date: new Date("07/17/2005").toISOString(),
   },
   killer: {
     id: "killer",
     subject: "DETECTIVE HILL Catch me if you can",
     sender: "ouroboros.the.killer@zemail.com",
     content: KillerChallenge,
-    date: "2005-07-17T01:00:00Z"
+    date: new Date("07/17/2005 00:00:10").toISOString(),
   },
 };
 
-function KillerChallenge(){
+function KillerChallenge() {
   const navigate = useNavigate();
   const { playMainMusic, playSFXMusic } = useSound();
 
-
-  const handleStart = ()=>{
+  const handleStart = () => {
     playSFXMusic(MUSIC_TITLE.StartGame);
     localStorage.setItem("emailChecked", "true");
-    navigate("/game")
-  }
+    navigate("/game");
+  };
 
   return (
     <>
-    <br/>
+      <br />
 
-    <Typography variant="h4">Detective Hill, Catch me if you can</Typography>
-    <br/>
+      <Typography variant="h4">Detective Hill, Catch me if you can</Typography>
+      <br />
 
-    <Typography variant="body">
-      I dare you to open the application I sent you and play with me.
-      If you humor me good I will give you my info.
-      If you fail to do so...
-    </Typography>
-      <Typography variant="h5">I have few people on my hitlist. They will be my next target.</Typography>
-    <br/>
-    <br/>
+      <Typography variant="body">
+        I dare you to open the application I sent you and play with me. If you
+        humor me good I will give you my info. If you fail to do so...
+      </Typography>
+      <Typography variant="h5">
+        I have few people on my hitlist. They will be my next target.
+      </Typography>
+      <br />
+      <br />
       <Typography>
-        Death & Despair, <br/>
+        Death & Despair, <br />
         Ouroboros The Killer
       </Typography>
-    <Button variant="span" onClick={handleStart}>
-        <Play style={{ marginRight: "5px" }}  />Launch attached application</Button>
+      <Button variant="contained" onClick={handleStart}>
+        <Play style={{ marginRight: "5px" }} />
+        Launch attached application
+      </Button>
     </>
-  )
+  );
 }
 
 function NewsMail({ showVideo, setShowVideo }) {
@@ -116,7 +119,7 @@ function NewsMail({ showVideo, setShowVideo }) {
       Atlas News Agency <br />
       <br />
       <Button
-        variant="span"
+        variant="contained"
         onClick={() => {
           setShowVideo(true);
         }}
@@ -143,6 +146,15 @@ function AttachedVideo({ showVideo, setShowVideo }) {
   );
 }
 
+function MEMEReply(){
+  return(
+    <>
+    You are a failure. Who falls for such stipud mails! <br/>Uncle steven is dissapointed at you. Look at your cousin jimmy, He is a billionare at the age of 17. He can play piano.
+    <img src={MEMEImg} />
+    </>
+  )
+}
+
 export default function Inbox() {
   const { playMainMusic, playSFXMusic } = useSound();
   const [emails, setEmails] = useState(emailsData);
@@ -156,7 +168,6 @@ export default function Inbox() {
   const [videoPlayedOnce, setVideoPlayedOnce] = useState(false);
   const navigate = useNavigate();
 
-
   // Form states for compose
   const [to, setTo] = useState("");
   const [subject, setSubject] = useState("");
@@ -168,7 +179,7 @@ export default function Inbox() {
       (email) =>
         email.subject.toLowerCase().includes(search.toLowerCase()) ||
         email.sender.toLowerCase().includes(search.toLowerCase()) ||
-        email.content.toLowerCase().includes(search.toLowerCase())
+        (typeof(email.content)=='string' && email.content.toLowerCase().includes(search.toLowerCase()))
     );
 
     filtered.sort((a, b) =>
@@ -176,7 +187,7 @@ export default function Inbox() {
         ? new Date(a.date) - new Date(b.date)
         : new Date(b.date) - new Date(a.date)
     );
-
+    console.log("Filtered", filtered)
     return filtered;
   }, [emails, search, sortOrder]);
 
@@ -187,48 +198,78 @@ export default function Inbox() {
     }, 1200);
   }, []);
 
-  useEffect(()=>{
-    if(videoPlayedOnce || !showVideo) return;
+  useEffect(() => {
+    console.log("okay we are here")
+    if (videoPlayedOnce || !showVideo) return;
+    console.log("playing video first time", emailsToBeReceived.killer)
     setVideoPlayedOnce(true);
-    setTimeout(()=>{setEmails(prev=>[...prev, emailsToBeReceived.killer]); setNewEmail("killer")}, 10000)
-
-  }, [showVideo])
+    setTimeout(() => {
+      console.log("Sending email")
+      let arr = [...emails, emailsToBeReceived.killer]
+      console.log(arr)
+      setEmails(arr);
+      setNewEmail("killer");
+    }, 10000);
+  }, [showVideo]);
 
   const handleSend = () => {
     if (to == "witman.devs@gmail.com") {
       setTimeout(() => {
         setEmails((prev) => {
-          const id = new Date().toString();
-          setNewEmail(id);
+          const id = new Date(
+            new Date("07/17/2005").getTime() + 1000 * 60 * emails.length
+          );
+          setNewEmail(id.toString());
           return [
             ...prev,
             {
-              id: id,
+              id: id.toString(),
               subject: subject,
               sender: "witman.devs@gmail.com",
-              content: `Hello player,\n\nThanks for playing our game. I Think you should watch news report and start.\n\nPS- It is cool that you emailed me:)\n\nThanks & Regards,\nWits.\n---\n\n\nOn ${new Date().toISOString()} Player send: \n\n ${content}`,
-              date: new Date().toISOString(),
+              content: `Hello player,\n\nThanks for playing our game. I Think you should watch news report and start.\n\nPS- It is cool that you emailed me:)\n\nThanks & Regards,\nWits.\n---\n\n\nOn ${id.toISOString()} Player send: \n\n ${content}`,
+              date: id.toISOString(),
             },
           ];
         });
       }, 200);
     } else if (to === "Nigerian Royalty <prince@lagosfortune.org>") {
       // todo: put a meme in reply saying you so stupid. you are a failure
-      setEmails(prev=>{
-          const id = new Date().toString();
-          setNewEmail(id);
-          return [
-            ...prev,
-            {
-              id:id,
-              subject:subject,
-              sender:"Nigerian Royalty <prince@lagosfortune.org>",
-              date: new Date().toISOString(),
-              content: "You are a failure. Who falls for such stipud mails! Uncle steven is dissapointed at you. Look at your cousin jimmy, He is a billionare at the age of 17. He can play piano."
-            }
-          ]
-      })
+      setEmails((prev) => {
+        const id = new Date(
+          new Date("07/17/2005").getTime() + 1000 * 60 * emails.length
+        );
+        setNewEmail(id.toString());
+        return [
+          ...prev,
+          {
+            id: id.toString(),
+            subject: subject,
+            sender: "Nigerian Royalty <prince@lagosfortune.org>",
+            date: id.toISOString(),
+            content:MEMEReply,
+          },
+        ];
+      });
+    } else if (to === "ouroboros.the.killer@zemail.com") {
+      setEmails((prev) => {
+        const id = new Date(
+          new Date("07/17/2005").getTime() + 1000 * 60 * emails.length
+        );
+
+        setNewEmail(id);
+        return [
+          ...prev,
+          {
+            id: id.toString(),
+            subject: subject,
+            sender: "ouroboros.the.killer@zemail.com",
+            date: id.toISOString(),
+            content: "Solve the goddamm case detective don't play with emails.",
+          },
+        ];
+      });
     }
+
     setComposeOpen(false);
     setOpen(true);
     setTo(null);
@@ -236,9 +277,9 @@ export default function Inbox() {
     setContent(null);
   };
 
-  useEffect(()=>{
+  useEffect(() => {
     playSFXMusic(MUSIC_TITLE.MinorLink);
-  }, [newEmail])
+  }, [newEmail]);
 
   return (
     <Box
@@ -308,7 +349,7 @@ export default function Inbox() {
                     {email.sender}
                   </Typography>
                   {" — "}
-                  {typeof(email.content)=='string'
+                  {typeof email.content == "string"
                     ? email.content.slice(0, 40)
                     : "Unable to load open mail to check content"}
                   ...
@@ -484,28 +525,28 @@ export default function Inbox() {
         message="Mail Sent"
       />
 
-        <Tooltip title="Exit Application" placement="left">
-          <IconButton
-            aria-label="exit"
-            onClick={()=>navigate("/")}
-            sx={{
-              position: "fixed",
-              top: 10,
-              right: 20,
-              zIndex: 1001,
-              backgroundColor: red[700],
-              color: "white",
-              "&:hover": {
-                backgroundColor: red[900],
-              },
-              borderRadius: 2,
-              boxShadow: 3,
-              padding: "10px",
-            }}
-          >
-            <LogOut size={24} />
-          </IconButton>
-        </Tooltip>
+      <Tooltip title="Exit Application" placement="left">
+        <IconButton
+          aria-label="exit"
+          onClick={() => navigate("/")}
+          sx={{
+            position: "fixed",
+            top: 10,
+            right: 20,
+            zIndex: 1001,
+            backgroundColor: red[700],
+            color: "white",
+            "&:hover": {
+              backgroundColor: red[900],
+            },
+            borderRadius: 2,
+            boxShadow: 3,
+            padding: "10px",
+          }}
+        >
+          <LogOut size={24} />
+        </IconButton>
+      </Tooltip>
 
       <AttachedVideo showVideo={showVideo} setShowVideo={setShowVideo} />
     </Box>

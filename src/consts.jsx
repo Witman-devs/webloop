@@ -101,6 +101,7 @@ export const PAGE_TITLES = {
   newsAgency: "News Agency",
   birthRecords: "Birth Records",
   deathRecords: "Death Records",
+  hospitalCheckinRecords:"Redmarsh Healthcare Checkin Records",
   autopsyRecords: "Autopsy Records",
   hospitalEmployeeRecords: "Redmarsh Healthcare Employee Records",
   alumniRecords: "Alumni Records",

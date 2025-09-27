@@ -1,4 +1,5 @@
 import { faker } from "@faker-js/faker";
+import { time } from "console";
 import fs from "fs";
 import { v4 as uuidv4 } from "uuid";
 
@@ -14,6 +15,10 @@ const autopsyReports = []
 const checkInRecords = [];
 
 const doctors = [];
+const postal = [];
+const RedmarshChemicals = [];
+const UniverseMap = {};
+let UniverseList = []
 
 // professions
 const professions = [
@@ -86,10 +91,10 @@ const workplaceProfession = {
     "Businessman",
     "Chemical Engineer",
     "Driver",
+    "Accountant",
     "Lawyer",
     "Watchman",
     "Peon",
-    "Accountant",
   ],
   Generico: [
     "Businessman",
@@ -142,9 +147,9 @@ for (const [workplace, profs] of Object.entries(workplaceProfession)) {
 
 const DeathReasons = [
   "Natural Causes",
-  "Accident",
   "Illness",
   "Cancer",
+  "Accident",
   "Chemical Mishap",
   "Beast Attack",
   "Poisoning",
@@ -197,7 +202,6 @@ const autopsyReasons = {
     conclusion: "Cause of death due to hemorrhagic shock secondary to battle-related injuries."
   },
   "Murder": {
-    "description": "Autopsy indicates homicidal death caused by sharp-force trauma. Multiple stab wounds consistent with an assault using a bladed weapon. The distribution and depth of injuries are incompatible with self-infliction.",
     "findings": [
       "- Multiple stab wounds to the anterior chest wall\n- Penetration of left lung and pericardium\n- Massive internal hemorrhage noted\n- Defensive wounds observed on forearms and hands",
       "- Single deep stab wound to the abdomen, perforating the liver\n- Secondary superficial wounds around thoracic cavity\n- Blood loss exceeding 2 liters within abdominal cavity\n- Clear signs of struggle and resistance",
@@ -207,13 +211,22 @@ const autopsyReasons = {
     "conclusion": "Cause of death determined as homicidal sharp-force trauma, with fatal injuries caused by repeated stabbing with a knife."
   },
   "Suicide": {
-    "description": "Autopsy reveals death by hanging using a ligature consistent with a rope. Classical features of suicidal hanging are present, with no evidence of struggle or third-party involvement.",
     "findings": [
       "- Prominent ligature mark encircling the neck, positioned above the thyroid cartilage\n- Petechial hemorrhages in the conjunctiva and eyelids\n- Fracture of the hyoid bone observed\n- Tongue protrusion consistent with asphyxia",
       "- Oblique ligature mark extending upward behind the left ear\n- Cyanosis of lips and nail beds\n- Engorgement of neck veins noted\n- No signs of external struggle or defensive injuries",
       "- Deep rope impression around the neck with parchment-like skin changes\n- Salivary dribbling observed from the mouth\n- Fracture of thyroid cartilage confirmed\n- Findings strongly suggest suicidal hanging"
     ],
     "conclusion": "Cause of death determined as suicide by hanging with a rope, with asphyxial features and absence of homicidal evidence."
+  },
+  "Gunshot Wound": {
+    "findings": [
+      `- Entry wound at ${faker.number.int({ min: 2, max: 5 })}th intercostal space, right anterior chest\n- Soot deposition and stippling within ${faker.number.int({ min: 5, max: 15 })} cm radius around entry\n- Bullet trajectory consistent with a close-range discharge\n- Projectile lodged near T${faker.number.int({ min: 3, max: 7 })} vertebra`,
+      `- Single gunshot wound to the abdomen\n- Entry wound ${faker.number.float({ min: 0.7, max: 1.2, precision: 0.1 })} cm in diameter, surrounded by abrasion collar\n- Perforation of liver and stomach noted\n- Internal hemorrhage exceeding ${faker.number.int({ min: 1200, max: 2500 })} mL in peritoneal cavity`,
+      `- Gunshot wound to the head with entry at right temporal region\n- Skull fracture extending across parietal bone\n- Extensive brain laceration and subdural hemorrhage present\n- Projectile recovered deformed adjacent to the occipital lobe`,
+      `- Two gunshot wounds identified: one in the thorax, one in the upper limb\n- Thoracic wound penetrated lung tissue causing hemothorax (~${faker.number.int({ min: 800, max: 1600 })} mL blood)\n- Upper limb wound traversed soft tissue, non-fatal\n- Trajectory indicates assailant at lower angle relative to victim`
+    ],
+    "conclusion":
+      "Cause of death determined as firearm-related ballistic trauma, with fatal injuries resulting in massive hemorrhage and organ perforation. Manner of death: homicide."
   }
 }
 
@@ -224,6 +237,24 @@ const specialRequests = [
   "Prefers remote work on Fridays.",
   "No special requests at this time.",
 ];
+
+function calculateAgeAtDate(dob, dod) {
+
+  if(!dod || dod == undefined || dod == null) dod = new Date("07/17/2005")
+
+  let age = dod.getFullYear() - dob.getFullYear();
+
+  // Check if birthday had not occurred yet in year of death
+  const beforeBirthday = 
+    dod.getMonth() < dob.getMonth() || 
+    (dod.getMonth() === dob.getMonth() && dod.getDate() < dob.getDate());
+
+  if (beforeBirthday) {
+    age -= 1;
+  }
+
+  return age;
+}
 
 function generateBirthRecords(
   firstName,
@@ -299,10 +330,23 @@ function generateDeathRecords(
     }
     if(doctor) autopsyData.examiner = doctor;
     autopsyReports.push(autopsyData);
-
   }
 
+  let admissionDate = new Date(deathDate.getTime() - 2 * 60 * 60 * 1000)
+  if(["Natural Causes","Illness","Cancer",].includes(data.causeOfDeath))
+    admissionDate = new Date(deathDate.getTime() - Math.random() * 5 * 24 * 60 *60*1000)
+
+  checkInRecords.push({
+    "date": admissionDate,
+    "time": timeStamp(admissionDate),
+    "name": data.fullName,
+    "comment": "Admitted to the hospital",
+    "signature": data.fullName.split(" ").map(val=>val[0]).join(" "),
+    "place": "Redmarsh Healthcare"
+  })
+
   deathRecords.push(data);
+  return admissionDate
 }
 
 function generateEmploymentRecord(
@@ -310,7 +354,8 @@ function generateEmploymentRecord(
   lastName,
   birthDate,
   address,
-  profession
+  profession,
+  company
 ) {
   let university = "University of Redmarsh";
   if (medicalProfessions.includes(profession)) {
@@ -330,8 +375,11 @@ function generateEmploymentRecord(
     yearOfPassing: birthDate.getFullYear() + 22,
     specialRequests: faker.helpers.arrayElement(specialRequests),
     needStaffQuarter: faker.datatype.boolean(0.3),
-    company: faker.helpers.arrayElement(professionWorkPlace[profession]),
+    company: company || faker.helpers.arrayElement(professionWorkPlace[profession]),
   };
+
+  if(data.company == "Redmarsh Chemicals" && ["Businessman","Chemical Engineer","Driver","Accountant","Lawyer"].includes(data.qualification))
+    RedmarshChemicals.push(data.fullName)
 
   employmentRecords.push(data);
 }
@@ -348,13 +396,19 @@ function updateDoctors() {
   })
 }
 
-function createFamily(_name, _lastName, _gender, _age, _married, _deathDate, _employment) {
+function createFamily(_name, _lastName, _gender, _age, _married, _deathDate, _profession, _workplace) {
   //   Generating Base info for family
   const gender = _gender || faker.helpers.arrayElement(["Male", "Female"]);
-  const firstName = _name || faker.person.firstName(
+  let firstName = _name || faker.person.firstName(
     gender === "Male" ? "male" : "female"
   );
-  const lastName = _lastName || faker.person.lastName();
+  let lastName = _lastName || faker.person.lastName();
+  while(UniverseMap[`${firstName} ${lastName}`]){
+    firstName = faker.person.firstName(
+      gender === "Male" ? "male" : "female"
+    );
+    lastName = faker.person.lastName();
+  }
   const age = _age || faker.number.int({ min: 18, max: 80 });
   const married = _married || faker.datatype.boolean(0.9);
   let spouse, childCount, childrens;
@@ -411,8 +465,9 @@ function createFamily(_name, _lastName, _gender, _age, _married, _deathDate, _em
     faker.location.streetAddress(true) + ", " + "Redmarsh, Nocturna, Zorik";
 
   //   generating professions and work place
-  const profession = faker.helpers.arrayElement(professions);
-  const workplace = faker.helpers.arrayElement(workplaces);
+
+  const profession = _profession || faker.helpers.arrayElement(professions);
+  const workplace = _workplace || faker.helpers.arrayElement(workplaces);
   let spouseProfession, spouseWorkplace;
   if (married) {
     spouseProfession = faker.helpers.arrayElement(professions);
@@ -420,7 +475,7 @@ function createFamily(_name, _lastName, _gender, _age, _married, _deathDate, _em
   }
 
   if (medicalProfessions.includes(profession)) {
-    doctors.push(`${firstName} ${lastName}`);
+    if(workplace=="Redmarsh Healthcare") doctors.push(`${firstName} ${lastName}`);
     alumniRecords.push({
       name: `Dr. ${firstName} ${lastName}`,
       rollNumber: `MD${birthDateMain.getFullYear() + 22}-${faker.number.int({
@@ -431,11 +486,11 @@ function createFamily(_name, _lastName, _gender, _age, _married, _deathDate, _em
       batch: `${birthDateMain.getFullYear() + 17}`,
       graduationYear: `${birthDateMain.getFullYear() + 22}`,
       specialization: profession,
-      currentEmployment: "Lead Surgeon, Redmarsh Healthcare",
+      currentEmployment: "Surgeon, Redmarsh Healthcare",
     });
   }
   if (medicalProfessions.includes(spouseProfession)) {
-    doctors.push(`${spouse} ${lastName}`);
+    if(spouseWorkplace == "Redmarsh Healthcare")doctors.push(`${spouse} ${lastName}`);
     alumniRecords.push({
       name: `Dr. ${spouse} ${lastName}`,
       rollNumber: `MD${birthDateSpouse.getFullYear() + 22}-${faker.number.int({
@@ -446,9 +501,12 @@ function createFamily(_name, _lastName, _gender, _age, _married, _deathDate, _em
       batch: `${birthDateSpouse.getFullYear() + 17}`,
       graduationYear: `${birthDateSpouse.getFullYear() + 22}`,
       specialization: profession,
-      currentEmployment: "Lead Surgeon, Redmarsh Healthcare",
+      currentEmployment: "Surgeon, Redmarsh Healthcare",
     });
   }
+
+  if(profession == "Delivery driver") postal.push(`${firstName} ${lastName}`)
+  if(spouseProfession ==   "Delivery driver") postal.push(` ${spouse} ${lastName}`)
 
   generateEmploymentRecord(
     firstName,
@@ -465,8 +523,6 @@ function createFamily(_name, _lastName, _gender, _age, _married, _deathDate, _em
       address,
       spouseProfession
     );
-
-  //   Generate employmenet record
 
   //   generating death certificates
   const isDead = _deathDate || faker.datatype.boolean(0.1);
@@ -505,6 +561,38 @@ function createFamily(_name, _lastName, _gender, _age, _married, _deathDate, _em
         );
     });
   }
+
+  UniverseMap[`${firstName} ${lastName}`] = {
+    fullName: `${firstName} ${lastName}`,
+    age: age,
+    birthDate: birthDateMain,
+    profession: profession,
+    "workplace": workplace,
+    deathDate: deathDate,
+    address: address
+  }
+
+  if(married)
+    UniverseMap[`${spouse} ${lastName}`] = {
+      fullName: `${spouse} ${lastName}`,
+      age: calculateAgeAtDate(birthDateSpouse, spouseDeathDate),
+      birthDate: birthDateSpouse,
+      profession: spouseProfession,
+      "workplace": spouseWorkplace,
+      deathDate: spouseDeathDate,
+      address: address
+    }
+  for(let i=0;i<childCount;i++){
+
+    UniverseMap[`${childrens[i]} ${lastName}`] = {
+      fullName: `${childrens[i]} ${lastName}`,
+      age: calculateAgeAtDate(childrensBirthDate[i], childrensDeathDate[i]),
+      birthDate: childrensBirthDate[i],
+      deathDate: childrensDeathDate[i],
+      address: address
+    }
+  }
+  
 
   return {
     person: {
@@ -557,7 +645,8 @@ function AddStaticData() {
     "Blick",
     dateWithTime(new Date("December 09, 1963")),
     "Flat 3A, Doctor's Residency, Health Sector 4, Heartline Road, Redmarsh",
-    "Neurologist"
+    "Neurologist",
+    "Redmarsh Healthcare"
   );
   generateDeathRecords(
     "Cletus",
@@ -566,6 +655,18 @@ function AddStaticData() {
     dateWithTime(new Date("May 03, 2005")),
     "Murder"
   );
+
+  UniverseMap["Cletus Blick"] = {
+    firstName: "Cletus",
+    lastName: "Blick",
+    fullName: "Cletus Blick",
+    age: 42,
+    birthDate: new Date("December 09, 1963"),
+    profession: "Neurologist",
+    workplace: "Redmarsh Healthcare",
+    deathDate: new Date("May 03, 2005"),
+    address: "Flat 3A, Doctor's Residency, Health Sector 4, Heartline Road, Redmarsh"
+  }
 
   generateBirthRecords(
     "James",
@@ -585,9 +686,31 @@ function AddStaticData() {
     "James",
     "Anderson",
     dateWithTime(new Date("April 22, 1977")),
-    dateWithTime(new Date("July 10, 2005"))
+    dateWithTime(new Date("July 10, 2005")),
+    "Murder"
   );
 
+  UniverseMap["James Anderson"] = {
+      firstName: "James",
+      lastName: "Anderson",
+      fullName: "James Anderson",
+      birthDate: new Date("April 22, 1977"),
+      profession: "Chief Executive Officer",
+      workplace: "Genrico",
+      deathDate: new Date("July 10, 2005"),
+      address: "Suite 42, Skyline Tower, Innovation District, Redmarsh"
+  }
+
+  UniverseMap["Juan Martinez"] = {
+    firstName: "Juan",
+    lastName: "Martinez",
+    fullName: "Juan Martinez",
+    birthDate: new Date("July 22, 1977"),
+    profession: "Cardiologist",
+    workplace: "Redmarsh Healthcare",
+    deathDate: new Date("August 11, 2005"),
+    address: "Flat 9C, Doctor's Residency, Heartline Road, Redmarsh",
+  };
   generateBirthRecords(
     "Juan",
     "Martinez",
@@ -598,8 +721,9 @@ function AddStaticData() {
     "Juan",
     "Martinez",
     dateWithTime(new Date("July 22, 1977")),
-    "Flat 3A, Doctor's Residency, Heartline Road, Redmarsh",
-    "Cardiologist"
+    "Flat 9C, Doctor's Residency, Heartline Road, Redmarsh",
+    "Cardiologist",
+    "Redmarsh Healthcare"
   );
   generateDeathRecords(
     "Juan",
@@ -610,6 +734,17 @@ function AddStaticData() {
     "Hubert Lowe",
     "Cletus Blick"
   );
+
+  
+  UniverseMap["Hubert Lowe"] = {
+    firstName: "Hubert",
+    lastName: "Lowe",
+    fullName: "Hubert Lowe",
+    birthDate: new Date("July 22, 1977"),
+    profession: "Cardiologist",
+    workplace: "Redmarsh Healthcare",
+    address: "House 12, Greenview Apartments, Heartline Road, Redmarsh"
+  };
 
   generateBirthRecords(
     "Hubert",
@@ -626,6 +761,18 @@ function AddStaticData() {
     "Cardiologist"
   );
 
+
+
+  UniverseMap["John Carter"] = {
+    firstName: "John",
+    lastName: "Carter",
+    fullName: "John Carter",
+    birthDate: new Date("September 22, 1985"),
+    profession: "Optometrist",
+    workplace: "Redmarsh Healthcare",
+    address: "Flat 7C, Doctor's Residency, Heartline Road, Redmarsh"
+  };
+
   generateBirthRecords(
     "John",
     "Carter",
@@ -641,6 +788,17 @@ function AddStaticData() {
     "Optometrist"
   );
 
+  // Currupt officer 
+  UniverseMap["Olive Harris"] = {
+    firstName: "Olive",
+    lastName: "Harris",
+    fullName: "Olive Harris",
+    birthDate: new Date("July 22, 1982"),
+    profession: "Inspector",
+    workplace:  "Redmarsh Police Department",
+    address: "221 Oakridge Lane, Westbridge, Redmarsh"
+  };
+
   generateBirthRecords(
     "Olive",
     "Harris",
@@ -651,10 +809,46 @@ function AddStaticData() {
     "Olive",
     "Harris",
     dateWithTime(new Date("July 22, 1982")),
-    "Inspector's Quarters, Police Colony, Willow Lane, Redmarsh",
+    "221 Oakridge Lane, Westbridge, Redmarsh",
     "Inspector"
   );
 
+  // Brother of curroupt officer
+  UniverseMap["Sandy Harris"] = {
+    firstName: "Sandy",
+    lastName: "Harris",
+    fullName: "Sandy Harris",
+    birthDate: new Date("June 12, 1985"),
+    profession: "Chemical Engineer",
+    workplace: "Redmarsh Chemicals",
+    address: "221 Oakridge Lane, Westbridge, Redmarsh"
+  };
+  generateBirthRecords(
+    "Sandy",
+    "Harris",
+    dateWithTime(new Date("June 12, 1985")),
+    "Male"
+  );
+  generateEmploymentRecord(
+    "Sandy",
+    "Harris",
+    dateWithTime(new Date("June 12, 1985")),
+    "221 Oakridge Lane, Westbridge, Redmarsh",
+    "Chemical Engineer",
+    "Redmarsh Chemicals"
+  );
+
+  // Inspector who died
+  UniverseMap["Mark Sullivan"] = {
+    firstName: "Mark",
+    lastName: "Sullivan",
+    fullName: "Mark Sullivan",
+    birthDate: new Date("July 22, 1981"),
+    profession: "Inspector",
+    workplace:  "Redmarsh Police Department",
+    address: "Inspector's Quarters, Police Colony, Willow Lane, Redmarsh",
+    deathDate: new Date("January 30, 2005"),
+  };
   generateBirthRecords(
     "Mark",
     "Sullivan",
@@ -666,15 +860,27 @@ function AddStaticData() {
     "Mark",
     "Sullivan",
     dateWithTime(new Date("July 22, 1981")),
-    "221 Oakridge Lane, Westbridge, Redmarsh",
+    "Inspector's Quarters, Police Colony, Willow Lane, Redmarsh",
     "Inspector"
   );
   generateDeathRecords(
     "Mark",
     "Sullivan",
     dateWithTime(new Date("July 22, 1981")),
-    dateWithTime(new Date("January 30, 2005"))
+    dateWithTime(new Date("January 30, 2005")),
+    "Gunshot Wound"
   );
+
+  // Reporter who got killed
+  UniverseMap["Michael Thompson"] = {
+    firstName: "Michael",
+    lastName: "Thompson",
+    fullName: "Michael Thompson",
+    birthDate: new Date("May 14, 1981"),
+    profession: "Journalist",
+    address: "Apartment 7C, Willow Lane, Redmarsh, Midwest",
+    deathDate: new Date("February 05, 2005")
+  };
 
   generateBirthRecords(
     "Michael",
@@ -694,9 +900,31 @@ function AddStaticData() {
     "Michael",
     "Thompson",
     dateWithTime(new Date("May 14, 1981")),
-    dateWithTime(new Date("February 05, 2005"))
+    dateWithTime(new Date("February 05, 2005")),
+    "Accident"
   );
 
+  let interviewTime = new Date("February 4, 2005 11:00:00")
+  checkInRecords.push({
+    "date": interviewTime,
+    "time": timeStamp(interviewTime),
+    "name": "Michael Thompson",
+    "comment": "Intervieing Angelina Grimes",
+    "signature": "M T",
+    "place": "Generico"
+  })
+
+
+
+  UniverseMap["Samuel Hayes"] = {
+    firstName: "Samuel",
+    lastName: "Hayes",
+    fullName: "Samuel Hayes",
+    birthDate: new Date("March 15, 1978"),
+    profession: "Ward",
+    workplace: "Redmarsh Healthcare",
+    address: "Suite 12B, Willow Lane Residences, Redmarsh City"
+  };
   generateBirthRecords(
     "Samuel",
     "Hayes",
@@ -712,6 +940,22 @@ function AddStaticData() {
     "Ward"
   );
 
+  // CEO of redmarsh chemicals
+  UniverseMap["Molly Sanford"] = {
+    firstName: "Molly",
+    lastName: "Sanford",
+    fullName: "Molly Sanford",
+    birthDate: new Date("July 12, 1965"),
+    profession: "Chief Executive Officer",
+    workplace: "Redmarsh Chemicals",
+    address: "Suite 140, Willow Lane Residences, Redmarsh City",
+    deathDate: new Date("June 5, 2005"),
+  };
+
+  generateBirthRecords("Molly", "Sanford", dateWithTime(new Date("July 12, 1965")), "Male")
+  generateEmploymentRecord("Molly", "Sanford", dateWithTime(new Date("July 12, 1965")), "Suite 140, Willow Lane Residences, Redmarsh City", "Chief Executive Officer", "Redmarsh Chemicals" )
+  generateDeathRecords("Molly", "Sanford", dateWithTime(new Date("July 12, 1965")), new Date("June 5, 2005"), "Murder")
+
   doctors.push("Cletus Blick");
   doctors.push("Hubert Lowe");
   doctors.push("Hubert Lowe");
@@ -721,14 +965,65 @@ function AddStaticData() {
   createFamily("May", "Bayer", "Female", 42, true, new Date("October 18, 2004"))
   createFamily("Beverly", "Jakubowski", "Female", 20, false, new Date("November 10, 2004"))
   createFamily("Clint", "Barrows", "Male", 50, false, new Date("December 15, 2004"))
+
   // Detective background
-  let detective = createFamily("David", "Hill", "Male", 50, true)
-  generateBirthRecords("Roxanne", "Hill", new Date("November 10, 1979"), "Female", "David Hill")
-  generateEmploymentRecord("Roxanne", "Hill", new Date("November 10, 1979"), detective.address, "Computer Engineer")
-  generateDeathRecords("Roxanne", "Hill", new Date("November 10, 1979"), new Date("January 20, 2005"), "Accident", "Hubert Lowe", "Cletus Blick")
+  generateBirthRecords("David", "Hill", new Date("February 6, 1955"), "Male")
+  generateBirthRecords("Robyn", "Hill", new Date("May 6, 1955"), "Female")
+  generateDeathRecords("Robyn", "Hill", new Date("May 6, 1955"), new Date("February 20, 2000"), "Accident")
+
+  UniverseMap["Roxanne Hill"] = {
+    firstName: "Roxanne",
+    lastName: "Hill",
+    fullName: "Roxanne Hill",
+    birthDate: new Date("November 10, 1979"),
+    profession: "Computer Engineer",
+    workplace: "Genrico",
+    address: "47462 Nicola Divide Apt. 606, Redmarsh, Nocturna, Zorik",
+    deathDate: new Date("January 20, 2005"),
+  };
+
+  generateBirthRecords("Roxanne", "Hill", new Date("November 10, 1979"), "Female", "David Hill", "Robyn Hill")
+  generateEmploymentRecord("Roxanne", "Hill", new Date("November 10, 1979"), "47462 Nicola Divide Apt. 606, Redmarsh, Nocturna, Zorik", "Computer Engineer", "Genrico")
+  let admissionDate = generateDeathRecords("Roxanne", "Hill", new Date("November 10, 1979"), new Date("January 20, 2005"), "Accident", "Hubert Lowe", "Cletus Blick")
+
 
   // Antagonist
-  createFamily("Roger", "Hintz", "Male", 25, false, false, "Computer Engineer")
+  UniverseMap["Roger Hintz"] = {
+    firstName: "Roger",
+    lastName: "Hintz",
+    fullName: "Roger Hintz",
+    birthDate: new Date("November 10, 1979"),
+    profession: "Computer Engineer",
+    workplace: "Genrico",
+    address: "47462 Nicola Divide Apt. 709, Redmarsh, Nocturna, Zorik"
+  };
+  generateBirthRecords("Roger", "Hintz", new Date("November 10, 1979"), "Male")
+  generateEmploymentRecord("Roger", "Hintz", new Date("November 10, 1979"), "47462 Nicola Divide Apt. 709, Redmarsh, Nocturna, Zorik", "Computer Engineer", "Genrico")
+  let visitTime = new Date(admissionDate.getTime() + 30 * 60 * 1000);
+  checkInRecords.push({
+    "date": visitTime,
+    "time": timeStamp(visitTime),
+    "name": "Roger Hintz",
+    "comment": "Meeting paitent Roxanne Hill",
+    "signature": "R H",
+    "place": "Redmarsh Healthcare"
+  })
+
+  // 3 people working in redmarsh chemicals and trafficing organ  
+  createFamily("Alonzo", "McEnzie", "Male", 35, true, false, "Businessman", "Redmarsh Chemicals")
+  let Ivan = createFamily("Ivan", "Lofer", "Male", 47, true, false, "Accountant", "Redmarsh Chemicals")
+  createFamily("Van", "Swift", "Male", 27, true, false, "Businessman", "Redmarsh Chemicals")
+  generateDeathRecords("Ivan", "Lofer", Ivan.person.birthDate, dateWithTime(new Date("January 30, 2005")), "Gunshot Wound")
+  UniverseMap["Ivan Lofer"]["deathDate"] = new Date("January 30, 2005")
+
+  // Ringmaster of all this 
+  createFamily("Angelina", "Grimes", "Female", 39, true, false, "Businessman", "Redmarsh Chemicals")
+
+  let marcus = createFamily("Marcus", "Thorne", "Male",35, true, false)
+  generateDeathRecords("Marcus", "Thorne", marcus.person.birthDate, new Date("August 2, 2004"), "Poisoning", "Juan Martinez")
+  UniverseMap["Marcus Thorne"]["deathDate"] = new Date("August 2, 2004")
+
+
 }
 
 function updateAlumniRecords() {
@@ -783,44 +1078,195 @@ for (let i = 0; i < 100; i++) {
   }
 }
 
+
+// Util functions 
+
+function timeStamp(date){
+  let temp = new Date(date.getTime() - 5.5 * 60 * 60 * 1000)
+  let AMPM = "AM"
+  if(temp.getHours() > 12) AMPM = "PM"
+  return `${temp.getHours()}:${temp.getMinutes()} ${AMPM}`
+}
+
+UniverseList = Object.keys(UniverseMap)
+// check in last 6 months
+// each day you join in the workplace random days
+// you have some one from postal service dropping something off
+
 console.log("Created universe added people and there details")
 
 const dates = [];
 const today = new Date("07/17/2005");
-const sixMonthsAgo = new Date("01/17/2005");
+const sixMonthsAgo = new Date("07/17/2004");
 
-for (let d = new Date(today); d >= sixMonthsAgo; d.setDate(d.getDate() - 1)) {
+for (let d = sixMonthsAgo; d <= today; d.setDate(d.getDate() + 1)) {
   dates.push(new Date(d)); 
 }
 
 
-for(let i=0;i<employmentRecords.length;i++){
-  //   {
-  //   time: "03:20 PM",
-  //   name: "Inspector Ravi",
-  //   purpose: "Inspection",
-  //   contact: "555-7890",
-  //   comment: "Routine check",
-  //   signature: "Ravi",
-  // }
-
-  // check in last 6 months
-  // each day you join in the workplace random days
-  // you have some one from postal service dropping something off
+for(let z=0;z<UniverseList.length;z++){
+  let i = UniverseList[z];
+  let signature = UniverseMap[i].fullName.split(" ").map(val=>val[0]).join(" ")
   for(let d in dates){
     let date = dates[d]
+    let _date = new Date(date.getTime() + 52200000 + faker.number.int({min: -10, max: 10}) * 60 * 1000)
+    if(UniverseMap[i].deathDate && _date >= UniverseMap[i].deathDate) break;
     let data = {
-      "date": date,
-      "time": `${faker.helpers.weightedArrayElement([{weight:99, value:9}, {weight:1, value:10}])}:${faker.number.int({min:10, max:20})} AM`,
-      "name": employmentRecords[i].fullName,
+      "date": _date,
+      "time": timeStamp(_date),
+      "name": UniverseMap[i].fullName,
       "purpose": "Work",
-      "contact": "xxxx-xxxx", //TODO: Update it later,
       "comment": "No comments",
-      "signature": "- -",
-      "place": employmentRecords[i].company
+      "signature": signature,
+      "place": UniverseMap[i].workplace
     }
     checkInRecords.push(data)
   }
+}
+
+for(let d in dates){
+  let visitors = faker.number.int({min: 5, max: 20})
+  for(let i=0;i<visitors;i++){
+      let date = dates[d]
+      date = new Date(date.getTime() + 52200000 + faker.number.int({min: 1, max: 5}) * faker.number.int({min:1, max:60}) * 60 * 1000)
+      let name = faker.person.fullName()
+      let signature = name.split(" ").map(val=>val[0]).join(" ")
+      let data = {
+        "date": date,
+        "time": timeStamp(date),
+        "name": name,
+        "purpose": "Clinc visit",
+        "comment": `Visit for ${faker.helpers.arrayElement(doctors)}`,
+        "signature": signature,
+        "place": "Redmarsh Healthcare"
+      }
+      checkInRecords.push(data)
+    }
+}
+
+console.log("Added basic checkins for work and postal services")
+
+for(let d in dates){
+  let posts = faker.number.int({min: 5, max: 10})
+  for(let i=0;i<posts;i++){
+      let date = dates[d]
+      date = new Date(date.getTime() + 52200000 + faker.number.int({min: 1, max: 5}) * faker.number.int({min:1, max:60}) * 60 * 1000)
+      let name = faker.helpers.arrayElement(postal)
+      let signature = name.split(" ").map(val=>val[0]).join(" ")
+      let receiver = UniverseMap[faker.helpers.arrayElement(UniverseList)]
+      while(!receiver["workplace"] && receiver.deathDate < new Date("07/17/2005"))
+        receiver = UniverseMap[faker.helpers.arrayElement(UniverseList)]
+      let data = {
+        "date": date,
+        "time": timeStamp(date),
+        "name": name,
+        "purpose": "postal",
+        "comment": `Post for ${receiver.fullName} from ${faker.helpers.arrayElement(["StableKart", "Zmazon", "MissedIt", "No one cooks"])}`,
+        "signature": signature,
+        "place": receiver.workplace
+      }
+      checkInRecords.push(data)
+    }
+}
+
+const importantDates = [new Date("September 12, 2004"), new Date("October 18, 2004"), new Date("November 10, 2004"), new Date("December 15, 2004"), new Date("January 20, 2005"), new Date("January 30, 2005")].map(val=>val.toISOString())
+for(let d of dates){
+  let portWork = faker.number.int({min:0, max:100}) > 75?true:false;
+  
+  if(importantDates.includes(d.toISOString())){
+    console.log(d.getDate())
+    let date = new Date(d.getTime() + 52200000 + Math.random() * 5 * 60 * 60 * 1000);
+    if(d.getDate() == 30) date = new Date(d.getTime() + 52200000 + Math.random() * 15 * 60 * 1000);
+    let names = ["Alonzo McEnzie","Ivan Lofer","Van Swift"]
+    let signatures = ["A M", "I L", "V S"]
+    let datas =  names.map((val, idx)=>{
+      let entryDate = new Date(date.getTime() + Math.random() * 20 * 60 * 1000)
+      return{
+        "date": entryDate,
+        "time": timeStamp(entryDate),
+        "name": val,
+        "purpose": "Send Goods",
+        "comment": "Chemicals to be send on urgency basis",
+        "signature": signatures[idx],
+        "place": "Redmarsh Postal Services"
+      }
+    })
+    // Day of encounter
+    if(d.getDate() == 30){
+      datas[0]["comment"] = "+ 1 person for urgent delivery";
+      datas[0]["date"] = new Date(d.getTime() + 52200000 + 10 * 60 * 1000)
+      datas[0]["time"] = "9:10 AM"
+      let inspectorEntryTime = new Date(d.getTime() + 52200000 - 30 * 60 * 1000)
+      datas.push({
+        "date": inspectorEntryTime,
+        "time": timeStamp(inspectorEntryTime),
+        "name": "Mark Sullivan",
+        "comment": "Inspection for few shipments",
+        "signature": "M S",
+        "place": "Redmarsh Postal Services"
+      })
+    } 
+
+    checkInRecords.push(...datas)
+    portWork=false
+  }
+
+  if(portWork){
+    let date = new Date(d.getTime() + 52200000 + Math.random() * 5 * 60 * 60 * 1000);
+    let SR = Math.random() * 100 < 50 ? "Send Goods": "Receive Goods"
+    let names = faker.helpers.arrayElements(RedmarshChemicals, {min:1, max:3})
+    let deadNames = names.filter(val=>UniverseMap[val].deathDate &&UniverseMap[val].deathDate<d) 
+    while( deadNames.length != 0){
+      names = faker.helpers.arrayElements(RedmarshChemicals, {min:1, max:3})
+      deadNames = names.filter(val=>UniverseMap[val].deathDate && UniverseMap[val].deathDate<d) 
+    }
+    let signatures = names.map(name=>name.split(" ").map(val=>val[0]).join(" "))
+    let datas = names.map((val, idx)=>{
+      let entryDate = new Date(date.getTime() + Math.random() * 20 * 60 * 1000)
+      return{
+        "date": entryDate,
+        "time": timeStamp(entryDate),
+        "name": val,
+        "purpose": SR,
+        "comment": "", // TODO: create better comment for delivery and posts
+        "signature": signatures[idx],
+        "place": "Redmarsh Postal Services"
+      }
+    })
+    checkInRecords.push(...datas)
+  }
+
+  let randomPortWork = faker.number.int({min:1, max: 3})
+  for(let i=0;i<randomPortWork;i++){
+    let date = new Date(d.getTime() + 52200000 + Math.random() * 5 * 60 * 60 * 1000);
+    let SR = Math.random() * 100 < 50 ? "Send Goods": "Receive Goods"
+    let name = faker.person.fullName();
+    let signature = name.split(" ").map(val=>val[0]).join(" ")
+    checkInRecords.push({
+      "date": date,
+      "time": timeStamp(date),
+      "name": name,
+      "purpose": SR,
+      "comment": "",
+      "signature": signature,
+      "place": "Redmarsh Postal Services"
+    }) 
+  }
+
+}
+
+for(let d of importantDates){
+  if(d.includes("2005-01-30")) continue
+  let postTime = new Date(new Date(d).getTime() + (Math.random() * 5 + 9) * 60 * 60 * 1000)
+  let postman = faker.helpers.arrayElement(postal);
+  checkInRecords.push({
+    "date": postTime,
+    "time": timeStamp(postTime),
+    "name": postman,
+    "comment": "Chemical sample for Angelina Grimes",
+    "signature": postman.split(" ").map(val=>val[0]).join(" "),
+    "place": "Genrico"
+  })
 }
 
 checkInRecords.sort((a, b)=> b.date - a.date)
