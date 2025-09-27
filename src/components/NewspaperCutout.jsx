@@ -1,9 +1,8 @@
-import React from "react";
 import { Card, CardContent, Typography, Box } from "@mui/material";
 import newspaperImage from '../assets/extras/newspaper.png';
 import "../App.css";
 
-export default function NewspaperCutout({ headline, date, author="",content, rotation=-0.4, left='0' }){
+export default function NewsPaperCutout({ headline, date, author="",content, rotation=-0.4, left='0' }){
 
   return (
     <Box

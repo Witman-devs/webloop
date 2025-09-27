@@ -1,5 +1,5 @@
 import { Link, Typography } from "@mui/material";
-import NewspaperCutout from "../components/NewspaperCutout";
+import NewsPaperCutout from "../components/NewsPaperCutout";
 import CrimeSceneOverlay from '../components/CrimeSceneOverlay';
 import "../App.css";
 
@@ -25,7 +25,7 @@ export default function Case1({setPageName}) {
     <div style={{ width: "60vw", left: "20vw", position: "relative", padding: "1vw" }}>
       <CrimeSceneOverlay />
       <Typography className="font" variant="h2">Scandal at the hospital</Typography>
-      <NewspaperCutout
+      <NewsPaperCutout
         headline="Doctor hung himself out of guilt!"
         date="12 August 2004"
         author="kelly Alan"
@@ -33,7 +33,7 @@ export default function Case1({setPageName}) {
         rotation="-5"
         left="2px"
       />
-      <NewspaperCutout
+      <NewsPaperCutout
         headline="Another doctor found mysteriously dead at RedMarsh Healthcare"
         date="12 August 2004"
         author="Michael Thompson"

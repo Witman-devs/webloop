@@ -1,5 +1,5 @@
 import { Link, Typography } from "@mui/material";
-import NewspaperCutout from "../components/NewsPaperCutout";
+import NewsPaperCutout from "../components/NewsPaperCutout";
 
 function News1({ setPageName }) {
   return (
@@ -24,7 +24,7 @@ export default function Case3({ setPageName }) {
   return (
     <div style={{ width: "60vw", left: "20vw", position: "relative" }}>
       <Typography variant="h2">Reporter Dead After Redmarsh Shootout</Typography>
-      <NewspaperCutout
+      <NewsPaperCutout
         headline="Investigative Reporter Killed Amid Art Scandal Shootout"
         date="April 20th, 2025"
         author="News Desk"

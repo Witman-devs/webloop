@@ -84,8 +84,10 @@ function App() {
 
   useEffect(() => {
     playSFXMusic(MUSIC_TITLE.MinorLink);
-    if (seenPages.has(PAGE_TITLES[pageName])) return;
-    let newSeenPages = new Set([...seenPages, PAGE_TITLES[pageName]]);
+    let _pageName = pageName 
+    if(PAGE_TITLES[pageName] == null) return
+    if (seenPages.has(PAGE_TITLES[_pageName])) return;
+    let newSeenPages = new Set([...seenPages, PAGE_TITLES[_pageName]]);
     setSearchResults([...newSeenPages]);
     setSeenPages(new Set(newSeenPages));
     localStorage.setItem("pages", JSON.stringify({ pages: [...newSeenPages] }));
