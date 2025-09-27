@@ -939,6 +939,15 @@ function AddStaticData() {
     "Suite 12B, Willow Lane Residences, Redmarsh City",
     "Ward"
   );
+  checkInRecords.push({    
+    "date": new Date("August 11, 2004"),
+    "time": "10:30 AM",
+    "name": "Samuel Hayes",
+    "comment": "Late due to some work at staff quarter",
+    "signature": "S H",
+    "place": "Redmarsh Healthcare"
+  })
+
 
   // CEO of redmarsh chemicals
   UniverseMap["Molly Sanford"] = {
@@ -1111,6 +1120,7 @@ for(let z=0;z<UniverseList.length;z++){
     let date = dates[d]
     let _date = new Date(date.getTime() + 52200000 + faker.number.int({min: -10, max: 10}) * 60 * 1000)
     if(UniverseMap[i].deathDate && _date >= UniverseMap[i].deathDate) break;
+    if(date.toLocaleDateString() == "11/10/2004" && i=="Samuel Hayes") continue
     let data = {
       "date": _date,
       "time": timeStamp(_date),
