@@ -271,6 +271,7 @@ function generateBirthRecords(
   let data = {
     id: uuidv4(),
     childName: firstName + " " + lastName,
+    timestamp: birthDate,
     dateOfBirth: birthDate.toISOString().split("T")[0],
     timeOfBirth: birthDate.toTimeString().split(" ")[0],
     gender: gender,
@@ -282,8 +283,6 @@ function generateBirthRecords(
     )}`,
     registrar: "Office of the Civil Registrar",
   };
-
-  //   console.log(data);
 
   birthRecords.push(data);
 }
@@ -300,6 +299,7 @@ function generateDeathRecords(
   let data = {
     id: uuidv4(),
     fullName: firstName + " " + lastName,
+    timestamp: deathDate,
     dateOfBirth: birthDate.toISOString().split("T")[0],
     dateOfDeath: deathDate.toISOString().split("T")[0],
     age: Math.floor((deathDate - birthDate) / (1000 * 60 * 60 * 24 * 365)),
@@ -321,6 +321,7 @@ function generateDeathRecords(
       name: data.fullName,
       age: data.age,
       gender: data.gender,
+      timestamp: data.timestamp,
       dateOfDeath: data.dateOfDeath,
       dateOfExamination: data.dateOfDeath,
       location: `${faker.location.city()} Medical Examiner's Office`,
@@ -526,7 +527,7 @@ function createFamily(_name, _lastName, _gender, _age, _married, _deathDate, _pr
     );
 
   //   generating death certificates
-  const isDead = _deathDate || faker.datatype.boolean(0.1);
+  const isDead = _deathDate || faker.datatype.boolean(0.3);
   const deathDate = isDead
     ? _deathDate || faker.date.between({ from: birthDateMain, to: new Date("July 17, 2005") })
     : null;
@@ -706,7 +707,7 @@ function AddStaticData() {
     firstName: "Juan",
     lastName: "Martinez",
     fullName: "Juan Martinez",
-    birthDate: new Date("July 22, 1977"),
+    birthDate: new Date("July 22, 1970"),
     profession: "Cardiologist",
     workplace: "Redmarsh Healthcare",
     deathDate: new Date("August 11, 2004"),
@@ -715,13 +716,13 @@ function AddStaticData() {
   generateBirthRecords(
     "Juan",
     "Martinez",
-    dateWithTime(new Date("July 22, 1977")),
+    dateWithTime(new Date("July 22, 1970")),
     "Male"
   );
   generateEmploymentRecord(
     "Juan",
     "Martinez",
-    dateWithTime(new Date("July 22, 1977")),
+    dateWithTime(new Date("July 22, 1970")),
     "Flat 9C, Doctor's Residency, Heartline Road, Redmarsh",
     "Cardiologist",
     "Redmarsh Healthcare"
@@ -729,7 +730,7 @@ function AddStaticData() {
   generateDeathRecords(
     "Juan",
     "Martinez",
-    dateWithTime(new Date("July 22, 1977")),
+    dateWithTime(new Date("July 22, 1970")),
     dateWithTime(new Date("August 11, 2004")),
     "Suicide",
     "Hubert Lowe",
@@ -741,7 +742,7 @@ function AddStaticData() {
     firstName: "Hubert",
     lastName: "Lowe",
     fullName: "Hubert Lowe",
-    birthDate: new Date("July 22, 1977"),
+    birthDate: new Date("July 22, 1970"),
     profession: "Cardiologist",
     workplace: "Redmarsh Healthcare",
     address: "House 12, Greenview Apartments, Heartline Road, Redmarsh"
@@ -750,14 +751,14 @@ function AddStaticData() {
   generateBirthRecords(
     "Hubert",
     "Lowe",
-    dateWithTime(new Date("July 22, 1977")),
+    dateWithTime(new Date("July 22, 1970")),
     "Male",
     "Matt Lowe"
   );
   generateEmploymentRecord(
     "Hubert",
     "Lowe",
-    dateWithTime(new Date("July 22, 1977")),
+    dateWithTime(new Date("July 22, 1970")),
     "House 12, Greenview Apartments, Heartline Road, Redmarsh",
     "Cardiologist"
   );
@@ -1058,6 +1059,7 @@ for (let i = 0; i < 100; i++) {
   updateDoctors();
   // Updating files with records
   if (birthRecordsFile) {
+    birthRecords.sort((a, b)=> b["timestamp"] - a["timestamp"])
     fs.writeFileSync(
       "src/assets/birth_records.json",
       JSON.stringify(birthRecords, null, 2),
@@ -1065,6 +1067,7 @@ for (let i = 0; i < 100; i++) {
     );
   }
   if (deathRecordsFile) {
+    deathRecords.sort((a, b)=> b["timestamp"] - a["timestamp"])
     fs.writeFileSync(
       "src/assets/death_records.json",
       JSON.stringify(deathRecords, null, 2),
@@ -1080,6 +1083,7 @@ for (let i = 0; i < 100; i++) {
   }
   if (alumniRecords) updateAlumniRecords();
   if( autopsyReports.length > 0 ){
+    autopsyReports.sort((a, b)=> b.timestamp - a.timestamp) 
     fs.writeFileSync(
       "src/assets/autopsy_reports.json",
       JSON.stringify(autopsyReports, null, 2),

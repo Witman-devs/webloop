@@ -191,7 +191,7 @@ function CaseSolvedModal({ visible, onClose, message }) {
 export default function Cases({ setPageName, sx={} }) {
   const [open, setOpen] = useState(false);
   const [snackbarMessage, setSnackbarMessage] = useState(<></>);
-  const [caseSolved, setCaseSolved] = useState(0);
+  const [caseSolved, setCaseSolved] = useState(()=>localStorage.getItem("caseSolved") || 0);
   const [showCaseSolvedModal, setShowCaseSolvedModal] = useState(false);
 
   const action = (
@@ -208,6 +208,7 @@ export default function Cases({ setPageName, sx={} }) {
   );
 
   useEffect(() => {
+    localStorage.setItem("caseSolved", caseSolved)
     if (caseSolved == 0) return;
     setSnackbarMessage(
       <>
@@ -219,7 +220,7 @@ export default function Cases({ setPageName, sx={} }) {
 
     const timer = setTimeout(() => {
       setShowCaseSolvedModal(false);
-    }, 3000); 
+    }, 30000); 
 
     return () => clearTimeout(timer);
   }, [caseSolved]);
@@ -249,7 +250,7 @@ export default function Cases({ setPageName, sx={} }) {
           Case 1: Scandal at hospital
         </Link>
         <List style={{ paddingInlineStart: "10%" }}>
-          <QuestionSet questions={Questions["Case1"]} setCaseSolved={setCaseSolved} />
+          {caseSolved<0?<QuestionSet questions={Questions["Case1"]} setCaseSolved={setCaseSolved} />:<>The whole hospital is fraud killing paitents and taking organs for money</>}
         </List>
 
         <Divider style={{ margin: "30px" }} />
