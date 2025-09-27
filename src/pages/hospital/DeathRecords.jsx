@@ -27,6 +27,7 @@ export default function deathRecords({ setPageName }) {
       companyAddress={ADDRESS["hospital"]}
       companyLogo={LOGOS["hospital"]}
       setPageName={setPageName}
+      goTo="hospital"
     />
   );
 }

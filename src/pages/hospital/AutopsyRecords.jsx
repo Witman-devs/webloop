@@ -21,6 +21,7 @@ export default function autopsyRecords({ setPageName }) {
       companyAddress={ADDRESS["hospital"]}
       companyLogo={LOGOS["hospital"]}
       setPageName={setPageName}
+      goTo="hospital"
     />
   );
 }

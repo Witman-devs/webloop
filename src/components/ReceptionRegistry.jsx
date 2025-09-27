@@ -1,15 +1,29 @@
-import { Box, Typography, Grid, Avatar, Divider, Paper } from "@mui/material";
+import {
+  Box,
+  Typography,
+  Grid,
+  Avatar,
+  Divider,
+  Paper,
+  Link,
+} from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
 
 export default function VisitorRegistry({
   companyName,
   companyAddress,
   companyLogo,
+  goTo,
+  setPageName,
   records = [],
 }) {
   const columns = [
-    
-    { field: "date", headerName: "Date", width: 100, valueFormatter: params=> new Date(params).toLocaleDateString() },
+    {
+      field: "date",
+      headerName: "Date",
+      width: 100,
+      valueFormatter: (params) => new Date(params).toLocaleDateString(),
+    },
     { field: "time", headerName: "Time", width: 100 },
     { field: "name", headerName: "Name", flex: 1 },
     { field: "purpose", headerName: "Purpose", flex: 1 },
@@ -34,12 +48,14 @@ export default function VisitorRegistry({
       <Grid container alignItems="center" spacing={2} sx={{ mb: 3 }}>
         <Grid item>
           {companyLogo && (
-            <Avatar
-              src={companyLogo}
-              alt="Company Logo"
-              variant="square"
-              sx={{ width: 80, height: 80 }}
-            />
+            <Link component="span" onClick={() => setPageName(goTo)}>
+              <Avatar
+                src={companyLogo}
+                alt="Company Logo"
+                variant="square"
+                sx={{ width: 80, height: 80 }}
+              />
+            </Link>
           )}
         </Grid>
         <Grid item xs>

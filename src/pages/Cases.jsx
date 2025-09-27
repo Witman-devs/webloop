@@ -255,6 +255,15 @@ export default function Cases({ setPageName, sx={} }) {
 
         <Divider style={{ margin: "30px" }} />
 
+        <Link
+          component="button"
+          variant="h4"
+          onClick={() => setPageName("case2")}
+          className="font"
+        >
+          Case 2: Shootout at port!  
+        </Link>
+
         {false && (
           <>
             <Link

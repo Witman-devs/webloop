@@ -11,7 +11,7 @@ export default function DataController() {
         localStorage.setItem("masterVolume", masterVolume);
         localStorage.setItem("sfxVolume", sfxVolume);
         localStorage.setItem("musicVolume", musicVolume);
-        window.location.reload();
+        window.location.href = "/";
     }
 
     return (

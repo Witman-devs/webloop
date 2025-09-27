@@ -2,7 +2,7 @@ import RecordsList from "../../components/RecordsList";
 import EmploymentRecord from "../../assets/employment_records.json";
 import { ADDRESS, LOGOS } from "../../consts";
 
-const hospitalEmployees = EmploymentRecord.filter(record=> record.company === "Redmarsh Healthcare")
+const portEmployees = EmploymentRecord.filter(record=> record.company === "Redmarsh Postal Services")
 
 const employmentCertificateColumns = [
   { field: "id", headerName: "ID", width: 70 },
@@ -11,17 +11,17 @@ const employmentCertificateColumns = [
   { field: "email", headerName: "email", flex:1 },
 ];
 
-export default function HospitalEmploymentRecords({ setPageName }) {
+export default function PortEmploymentRecords({ setPageName }) {
   return (
     <RecordsList
-      records={hospitalEmployees}
+      records={portEmployees}
       columns={employmentCertificateColumns}
       type="employee"
-      companyName="Redmarsh Healthcare"
-      companyLogo={LOGOS.hospital}
-      companyAddress={ADDRESS.hospital}
+      companyName="Redmarsh Postal Services Port Division"
+      companyLogo={LOGOS.port}
+      companyAddress={ADDRESS.port}
       setPageName={setPageName}
-      goTo="hospital"
+      goTo="port"
     />
   );
 }

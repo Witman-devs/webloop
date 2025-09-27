@@ -11,6 +11,8 @@ export default function CheckinRecords({setPageName}){
             companyAddress={ADDRESS.hospital}
             companyLogo={LOGOS.hospital}
             records={hospitalVisitorRecords}
+            setPageName={setPageName}
+            goTo="hospital"
         />
     )
 }

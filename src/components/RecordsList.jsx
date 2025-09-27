@@ -48,6 +48,7 @@ export default function RecordsList({
   companyName,
   companyAddress,
   setPageName,
+  goTo,
 }) {
   const [selectedRecord, setSelectedRecord] = useState(null);
   const [message, setMessage] = useState("");
@@ -76,7 +77,7 @@ export default function RecordsList({
       <Grid container alignItems="center" spacing={2} sx={{ mb: 3 }}>
         <Grid item>
           {companyLogo && (
-            <Link component="image" onClick={() => setPageName("hospital")}>
+            <Link component="span" onClick={() => setPageName(goTo)}>
               <Avatar
                 src={companyLogo}
                 alt="Company Logo"

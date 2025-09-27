@@ -22,6 +22,7 @@ import Police from "./pages/Police";
 import NewsAgency from "./pages/NewsAgency";
 import Hospital from "./pages/hospital/Hospital";
 import College from "./pages/college/College";
+import Port from "./pages/port/Port";
 
 // Case
 import Cases from "./pages/Cases";
@@ -29,10 +30,16 @@ import Case1 from "./pages/Case1";
 import Case3 from "./pages/Case3";
 import Case2 from "./pages/Case2";
 
+// Port Docs
+import PortEmploymentRecords from "./pages/port/EmploymentRecords";
+import PortCheckinRecords from "./pages/port/CheckinRecords";
+
 // Hospital Docs
 import BirthRecords from "./pages/hospital/BirthRecords";
 import DeathRecords from "./pages/hospital/DeathRecords";
 import AutopsyReport from "./pages/hospital/AutopsyRecords";
+import HospitalEmploymentRecords from "./pages/hospital/EmploymentRecords";
+import HospitalCheckinRecords from "./pages/hospital/CheckinRecords";
 
 // College Docs
 import AlumniRecords from "./pages/college/AlumniRecords";
@@ -46,8 +53,6 @@ import newsLogo from "./assets/logos/newsLogo.png";
 import ngoLogo from "./assets/logos/ngoLogo.png";
 import policeLogo from "./assets/logos/policeLogo.png";
 import portLogo from "./assets/logos/portLogo.png";
-import HospitalEmploymentRecords from "./pages/hospital/EmploymentRecords";
-import HospitalCheckinRecords from "./pages/hospital/CheckinRecords";
 
 export const PAGE_COMPONENTS = {
   // places
@@ -56,6 +61,7 @@ export const PAGE_COMPONENTS = {
   hospital: Hospital,
   college: College,
   police: Police,
+  port: Port,
   newsAgency: NewsAgency,
 
   // documents
@@ -67,6 +73,8 @@ export const PAGE_COMPONENTS = {
   terminationRecords: TerminationRecords,
   hospitalEmployeeRecords: HospitalEmploymentRecords,
   hospitalCheckinRecords: HospitalCheckinRecords,
+  portEmployeeRecords: PortEmploymentRecords,
+  portCheckinRecords: PortCheckinRecords,
 
   // case
   cases: Cases,
@@ -94,32 +102,41 @@ export const PAGE_COMPONENTS = {
 export const PAGE_TITLES = {
   home: "Home",
   symbols: "Symbols",
+  cases: "Cases",
+  case1: "Case 1",
+  case2: "Case 2",
+  case3: "Case 3",
 
   hospital: "RedMarsh Healthcare",
   college: "St. Healmore Medical College",
-  police: "Police",
-  newsAgency: "News Agency",
+  port: "Redmarsh Postal Services Port division",
+  
   birthRecords: "Birth Records",
   deathRecords: "Death Records",
   hospitalCheckinRecords:"Redmarsh Healthcare Checkin Records",
   autopsyRecords: "Autopsy Records",
   hospitalEmployeeRecords: "Redmarsh Healthcare Employee Records",
+
   alumniRecords: "Alumni Records",
   terminationRecords: "Termination Records",
-  cases: "Cases",
-  case1: "Case 1",
-  case2: "Case 2",
-  case3: "Case 3",
+
+  portEmployeeRecords: "Port Employment Records",
+  portCheckinRecords: "Port Checkin Records",  
+  
   director: "Dr. Cletus Blick",
-  ceo: "CEO",
   doc1: "Dr. Juan Martinez",
   doc2: "Dr. Hubert Lowe",
   doc3: "Dr. Jhon Carter",
   inspector: "Olive Harris",
+
+  police: "Police",
+  newsAgency: "News Agency",
+  ceo: "CEO",
   ngoHead: "NGO Head",
   victim2: "Victim 2",
   victim3: "Victim 3",
   ward1: "Ward 1",
+  
   notfound: "Page Not Found",
 };
 

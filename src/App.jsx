@@ -17,11 +17,8 @@ import SideMenu from "./components/SideMenu";
 import EvidenceBoard from "./components/EvidenceBoard";
 import { grey } from "@mui/material/colors";
 import Tutorial from "./components/Tutorial";
-import VideoPlayer from "./components/VideoPlayer";
 import { useSound } from "./hook/SoundContext";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { red } from "@mui/material/colors";
-import intro from "./assets/intro.mp4";
 import {
   Box,
   colors,
@@ -36,7 +33,6 @@ import {
   Typography,
 } from "@mui/material";
 import { MUSIC_TITLE, PAGE_KEYS, PAGE_TITLES } from "./consts";
-import Floaty from "./components/Floty";
 import "./App.css";
 import Cases from "./pages/Cases";
 import VolumeController from "./components/VolumeController";
