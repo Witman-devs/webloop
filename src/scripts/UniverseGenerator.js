@@ -340,6 +340,7 @@ function generateDeathRecords(
     "date": admissionDate,
     "time": timeStamp(admissionDate),
     "name": data.fullName,
+    "purpose": "Needs Medical attention",
     "comment": "Admitted to the hospital",
     "signature": data.fullName.split(" ").map(val=>val[0]).join(" "),
     "place": "Redmarsh Healthcare"
@@ -708,7 +709,7 @@ function AddStaticData() {
     birthDate: new Date("July 22, 1977"),
     profession: "Cardiologist",
     workplace: "Redmarsh Healthcare",
-    deathDate: new Date("August 11, 2005"),
+    deathDate: new Date("August 11, 2004"),
     address: "Flat 9C, Doctor's Residency, Heartline Road, Redmarsh",
   };
   generateBirthRecords(
@@ -729,7 +730,7 @@ function AddStaticData() {
     "Juan",
     "Martinez",
     dateWithTime(new Date("July 22, 1977")),
-    dateWithTime(new Date("August 11, 2005")),
+    dateWithTime(new Date("August 11, 2004")),
     "Suicide",
     "Hubert Lowe",
     "Cletus Blick"
@@ -1286,3 +1287,17 @@ fs.writeFileSync(
   JSON.stringify(checkInRecords, null, 2),
   "utf-8"
 );
+
+fs.writeFileSync(
+  "src/assets/universe.json",
+  JSON.stringify(UniverseMap, null, 2),
+  "utf-8"
+)
+
+
+fs.writeFileSync(
+  "src/assets/names.json",
+  JSON.stringify(UniverseList, null, 2),
+  "utf-8"
+)
+
