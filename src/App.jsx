@@ -10,6 +10,7 @@ import {
   X,
   FileQuestionMark,
   Settings,
+  Music,
 } from "lucide-react";
 import { NavLink, useNavigate } from "react-router";
 import SideMenu from "./components/SideMenu";
@@ -38,6 +39,8 @@ import { MUSIC_TITLE, PAGE_KEYS, PAGE_TITLES } from "./consts";
 import Floaty from "./components/Floty";
 import "./App.css";
 import Cases from "./pages/Cases";
+import VolumeController from "./components/VolumeController";
+import DataController from "./components/DataController";
 
 function App() {
   // Page and routing related states
@@ -51,6 +54,7 @@ function App() {
   });
 
   // Menus related states
+  const [optionsIsOpen, setOptionsIsOpen] = useState(false);
   const [sideMenuOpen, setSideMenuOpen] = useState(false);
   const [evidanceBoardOpen, setEvidanceBoardOpen] = useState(false);
   const [questionBoardOpen, setQuestionBoardOpen] = useState(false);
@@ -112,11 +116,10 @@ function App() {
 
   const handleKeyPress = useCallback(
     (event) => {
-      if (event.altKey && event.code === "ArrowLeft"){
+      if (event.altKey && event.code === "ArrowLeft") {
         event.preventDefault();
         goToPreviousPage();
-      } 
-      else if (event.ctrlKey && event.code === "KeyK") {
+      } else if (event.ctrlKey && event.code === "KeyK") {
         event.preventDefault();
         setSearchOpen(!searchOpen);
       } else if (event.ctrlKey && event.code === "KeyH") {
@@ -184,23 +187,38 @@ function App() {
                 aria-label="Evidence Board"
               />
             </Tooltip>
-            <Tooltip title="Go Back; clt + Left Arrow" placement="right">
+            <Tooltip title="Go Back; alt + Left Arrow" placement="right">
               <MoveLeft cursor="pointer" onClick={goToPreviousPage} />
             </Tooltip>
             <Tooltip title="Search; clt + K" placement="right">
-              <Search cursor="pointer" onClick={() => setSearchOpen(!searchOpen)} />
+              <Search
+                cursor="pointer"
+                onClick={() => setSearchOpen(!searchOpen)}
+              />
             </Tooltip>
             <Tooltip title="History; clt + H" placement="right">
-              <History cursor="pointer" onClick={() => setSideMenuOpen(!sideMenuOpen)} />
+              <History
+                cursor="pointer"
+                onClick={() => setSideMenuOpen(!sideMenuOpen)}
+              />
             </Tooltip>
-            <Tooltip title="Cases; clt + A" placement="right">
+            <Tooltip title="Cases; clt + S" placement="right">
               <FileQuestionMark
-              cursor="pointer"
+                cursor="pointer"
                 onClick={() => setQuestionBoardOpen(!questionBoardOpen)}
               />
             </Tooltip>
+            <Tooltip title="Music" placement="right">
+              <Music cursor="pointer" />
+            </Tooltip>
+
+            <Tooltip title="Settings" placement="right">
+              <Settings
+                cursor="pointer"
+                onClick={() => setOptionsIsOpen(true)}
+              />
+            </Tooltip>
           </Stack>
-          <Floaty />
         </div>
 
         <Tooltip title="Exit Application" placement="left">
@@ -262,6 +280,7 @@ function App() {
           callback={handleJoyrideCallback}
         />
 
+        {/* Cases Modal */}
         <Modal
           open={questionBoardOpen}
           onClose={() => setQuestionBoardOpen(false)}
@@ -299,7 +318,7 @@ function App() {
           </Box>
         </Modal>
 
-        {/* TODO: Make better css for search */}
+        {/* Search modal */}
         <Modal
           open={searchOpen}
           onClose={() => {
@@ -378,6 +397,51 @@ function App() {
                 ))}
               </Stack>
             </Stack>
+          </Box>
+        </Modal>
+
+        {/* settings modal */}
+        <Modal open={optionsIsOpen} onClose={() => setOptionsIsOpen(false)}>
+          <Box
+            sx={{
+              height: "55vh",
+              width: "60vw",
+              position: "absolute",
+              top: "5vh",
+              left: "20vw",
+              backgroundColor: grey[500],
+              overflow: "hidden",
+            }}
+          >
+            <Box
+              display="flex"
+              justifyContent="space-between"
+              alignItems="center"
+              mb={2}
+              paddingInline={2}
+              paddingTop={2}
+            >
+              <Typography variant="h4" component="h2">
+                Settings
+              </Typography>
+              <IconButton
+                onClick={() => setOptionsIsOpen(false)}
+                aria-label="Close settings"
+              >
+                <X />
+              </IconButton>
+            </Box>
+            <Box
+              sx={{
+                height: "50vh",
+                padding: 2,
+                border: "1px solid #ccc",
+                borderRadius: "8px",
+              }}
+            >
+              <VolumeController />
+              <DataController />
+            </Box>
           </Box>
         </Modal>
       </div>
