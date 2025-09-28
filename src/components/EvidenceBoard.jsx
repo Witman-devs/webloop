@@ -24,6 +24,7 @@ import DocumentEvidence from "./DocumentEvidence";
 import ImageEvidence from "./ImageEvidence";
 import OrganRequestEvidance from "./OrganRequestEvidance";
 import { MUSIC_TITLE } from "../consts";
+import TransparentEvidence from "./TransparentEvidence";
 
 // TODO: make easy connection from anywhere you drag
 // TODO: label for threads/edges
@@ -33,6 +34,7 @@ const nodeTypes = {
   note: Note,
   document: DocumentEvidence,
   image: ImageEvidence,
+  transparent: TransparentEvidence,
   organ_request: OrganRequestEvidance,
 };
 
