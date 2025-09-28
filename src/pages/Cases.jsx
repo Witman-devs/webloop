@@ -133,7 +133,6 @@ function Question({ questionId, correctAnswer, questionText, type, setCorrectRes
     }
     else {
       setAnsState(1);
-      setCorrectResponseCount((prevCount) => prevCount + 1);
       playSFXMusic("correct");
     }
     setAnswered(isCorrect);
@@ -361,8 +360,9 @@ export default function Cases({ setPageName, sx={} }) {
         >
           Case 3: Death of a Journalist  
         </Link>
-        {case2Solved>0?case3Solved==0?<QuestionSet questions={Questions["Case3"]} setCaseSolved={setCase3Solved} />:<>You know everything needed now, what is your decision?</>:<></>}
-
+        <List style={{ paddingInlineStart: "10%" }}>
+          {case2Solved>0?case3Solved==0?<QuestionSet questions={Questions["Case3"]} setCaseSolved={setCase3Solved} />:<>You know everything needed now, what is your decision?</>:<></>}
+        </List>
       <Snackbar
         anchorOrigin={{ vertical: "top", horizontal: "center" }}
         open={open}
