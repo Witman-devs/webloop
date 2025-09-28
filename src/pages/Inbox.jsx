@@ -40,7 +40,7 @@ import {
 import "../index.css";
 import emailsData from "../assets/emails.json";
 import VideoPlayer from "../components/VideoPlayer";
-import intro from "../assets/intro.mp4";
+import intro from "../assets/trailer2.mp4";
 import { useNavigate } from "react-router";
 import { useSound } from "../hook/SoundContext";
 import { MUSIC_TITLE } from "../consts";
