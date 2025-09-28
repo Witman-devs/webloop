@@ -1,4 +1,4 @@
-import { Box, Grid, Link, Modal, Typography } from "@mui/material";
+import { TextField, Grid, Link, Modal, Typography } from "@mui/material";
 import { useState } from "react";
 
 const flowKey = "EvidenceBoard";
@@ -18,6 +18,7 @@ const style = {
 
 export default function AudioViewer({ label, fileSrc }) {
   const [open, setOpen] = useState(false);
+  const [password, setPassword] = useState("");
 
   return (
     <>
@@ -32,11 +33,23 @@ export default function AudioViewer({ label, fileSrc }) {
             </Typography>
           </Grid>
           <Grid size={6}>
+            {
+              password == "seahorse"?
             <Typography sx={{ display: "flex", justifyContent: "center" }}>
               <audio controls src={fileSrc} style={{ width: "100%" }}>
                 Your browser does not support the audio element.
               </audio>
-            </Typography>
+            </Typography>:
+            <TextField
+              type="password"
+              label="Password"
+              variant="outlined"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              fullWidth
+              autoFocus={true}
+            />
+            }
           </Grid>
         </Grid>
       </Modal>

@@ -79,10 +79,13 @@ export const SoundProvider = ({ children }) => {
       currentMainMusic.unload();
     }
 
+    const mainTracks = MUSIC.main;
+    const selectedTrack = mainTracks.find((value) => value.label === musicTitle);
+
     currentMainMusic = new Howl({
-      src: MUSIC.main.filter((value) => value.label == musicTitle)[0].fileName,
+      src: selectedTrack.fileName,
       autoplay: true,
-      loop: true,
+      loop: false,
       volume: masterVolume * musicVolume,
       autoUnlock: true,
       onloaderror(soundId, error) {
@@ -90,6 +93,14 @@ export const SoundProvider = ({ children }) => {
       },
       onplay(soundId) {
         console.log("playing main song: ", soundId);
+      },
+      onend() {
+        // Play a random other main song (not the current one)
+        const otherTracks = mainTracks.filter((track) => track.label !== musicTitle);
+        if (otherTracks.length > 0) {
+          const randomTrack = otherTracks[Math.floor(Math.random() * otherTracks.length)];
+          playMainMusic(randomTrack.label);
+        }
       },
     });
     let soundId = currentMainMusic.play();

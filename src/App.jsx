@@ -38,6 +38,7 @@ import "./App.css";
 import Cases from "./pages/Cases";
 import VolumeController from "./components/VolumeController";
 import DataController from "./components/DataController";
+import FloatMenuStack from './components/Music';
 
 function App() {
   // Page and routing related states
@@ -52,6 +53,7 @@ function App() {
 
   // Menus related states
   const [optionsIsOpen, setOptionsIsOpen] = useState(false);
+  const [isMusicOpen, setIsMusicOpen] = useState(false);
   const [sideMenuOpen, setSideMenuOpen] = useState(false);
   const [evidanceBoardOpen, setEvidanceBoardOpen] = useState(false);
   const [questionBoardOpen, setQuestionBoardOpen] = useState(false);
@@ -217,6 +219,7 @@ function App() {
               <Music 
               cursor="pointer"
               data-tour="music"
+              onClick={()=> setIsMusicOpen(!isMusicOpen)}
                />
             </Tooltip>
 
@@ -453,6 +456,9 @@ function App() {
             </Box>
           </Box>
         </Modal>
+        
+        {/* Music menu */}
+        <FloatMenuStack open={isMusicOpen} />
       </div>
     </>
   );

@@ -1,32 +1,20 @@
 import RecordsList from "../../components/RecordsList";
 import { ADDRESS, LOGOS } from "../../consts";
+import weaponRecords from "../../assets/weapon_reports.json";
 
 const weaponRegistryColumns = [
   { field: "licenseNumber", headerName: "ID", width: 70 },
   { field: "name", headerName: "Name", flex: 1 },
-  { field: "dob", headerName: "Date of Birth", width: 140 },
-  { field: "weaponType", headerName: "Mother", flex: 1 },
-  { field: "serialNumber", headerName: "Father", flex: 1 },
-  { field: "issueDate", headerName: "Time of Birth", flex: 1 },
+  { field: "weaponType", headerName: "Weapon Type", flex: 1 },
+  { field: "serialNumber", headerName: "Serial Number", flex: 1 },
+  { field: "issueDate", headerName: "Issue Date", flex: 1 },
 ];
 
 export default function WeaponRegistry({ setPageName }) {
   return (
     <RecordsList
       columns={weaponRegistryColumns}
-      records={[{
-        id:"make some UUId 4 id",
-        issuingAuthority: "New Avalon",
-        licenseNumber: "AV-WPN-00721",
-        name: "Victor Kade",
-        dob: "January 12, 1981",
-        address: "Sector 12B, Redstone District\nNew Avalon City, NA-44211",
-        weaponType: "Handgun - Semi-automatic",
-        serialNumber: "XD9-2041-NA",
-        issueDate: "August 1, 2025",
-        expiryDate: "August 1, 2030",
-        issuedBy: "Marshal Elroy Wexler",
-      }]}
+      records={weaponRecords}
       type="weapon"
       Label="Weapon Registry"
       companyName="Redmarsh Police Department"

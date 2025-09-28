@@ -13,6 +13,7 @@ const employmentRecords = [];
 const alumniRecords = [];
 const autopsyReports = []
 const checkInRecords = [];
+const weaponRecords = [];
 
 const doctors = [];
 const postal = [];
@@ -238,6 +239,24 @@ const specialRequests = [
   "No special requests at this time.",
 ];
 
+const licensedWeaponTypes = [
+  "Handgun - Semi-automatic",
+  "Handgun - Revolver",
+  "Rifle - Semi-automatic (civilian variant)",
+  "Rifle - Bolt-action (hunting rifle)",
+  "Rifle - Lever-action",
+  "Rifle - Tactical/Designated Marksman (restricted)",
+  "Shotgun - Pump-action",
+  "Shotgun - Semi-automatic",
+  "Shotgun - Double-barrel (licensed for hunting/sporting)",
+  "Carbine - Short-barrel rifle (restricted)",
+  "Subcompact Handgun - Concealable (licensed carry)",
+  "Personal Defense Weapon (PDW) - Restricted model",
+  "Tactical Rifle - With detachable magazine (restricted)"
+];
+
+const weaponType = "Standard Issued - 22LR caliber gun"
+
 function calculateAgeAtDate(dob, dod) {
 
   if(!dod || dod == undefined || dod == null) dod = new Date("07/17/2005")
@@ -452,14 +471,16 @@ function createFamily(_name, _lastName, _gender, _age, _married, _deathDate, _pr
       birthDateSpouse,
       gender == "Male" ? "female" : "male"
     );
+    let fatherName = gender == "Male" ? `${firstName} ${lastName}` : `${spouse} ${lastName}`
+    let motherName = gender == "Female" ? `${firstName} ${lastName}` : `${spouse} ${lastName}`
     childrens.forEach((child, index) => {
       generateBirthRecords(
         child,
         lastName,
         childrensBirthDate[index],
         faker.helpers.arrayElement(["male", "female"]),
-        `${firstName} ${lastName}`,
-        `${spouse} ${lastName}`
+        fatherName,
+        motherName
       );
     });
   }
@@ -564,6 +585,47 @@ function createFamily(_name, _lastName, _gender, _age, _married, _deathDate, _pr
     });
   }
 
+  // Generate Weapon records
+  let hasWeapon = age>23 && faker.number.int({min: 0, max: 100}) > 90 || profession=="Inspector";
+  let spouseHasWeapon = married && (faker.number.int({min: 0, max: 100}) > 90 || profession=="Inspector");
+
+  if(["Alonzo McEnzie", "Ivan Lofer", "Van Swift", "Sandy Harris"].includes(`${firstName} ${lastName}`))
+    hasWeapon = false;
+
+  if(hasWeapon){
+    let issueDate = new Date(birthDateMain.getTime() + 18 * 370 * 24 * 60 *60 *1000)
+    weaponRecords.push({
+      id:uuidv4(),
+      issuingAuthority: "Zorik",
+      licenseNumber: "AV-WPN-"+faker.number.int({min:10000, max:99999}),
+      name: `${firstName} ${lastName}`,
+      dob: birthDateMain,
+      address: address,
+      weaponType: profession=="Inspector"?weaponType:faker.helpers.arrayElement(licensedWeaponTypes),
+      serialNumber: `XD9-${faker.number.int({min:1000, max:9999})}-NA`,
+      issueDate: issueDate,
+      expiryDate: new Date(issueDate + 5 * 365 * 24 * 60 *60*1000),
+      issuedBy: "Marshal Elroy Wexler",
+    })
+  }
+  if(spouseHasWeapon){
+    let issueDate = new Date(birthDateSpouse.getTime() + 18 * 370 * 24 * 60 *60 *1000)
+    weaponRecords.push({
+      id:uuidv4(),
+      issuingAuthority: "Zorik",
+      licenseNumber: "AV-WPN-"+faker.number.int({min:10000, max:99999}),
+      name: `${spouse} ${lastName}`,
+      dob: birthDateMain,
+      address: address,
+      weaponType: profession=="Inspector"?weaponType:faker.helpers.arrayElement(licensedWeaponTypes),
+      serialNumber: `XD9-${faker.number.int({min:1000, max:9999})}-NA`,
+      issueDate: issueDate,
+      expiryDate: new Date(issueDate + 5 * 365 * 24 * 60 *60*1000),
+      issuedBy: "Marshal Elroy Wexler",
+    })
+  }
+
+  // saving data for future ref
   UniverseMap[`${firstName} ${lastName}`] = {
     fullName: `${firstName} ${lastName}`,
     age: age,
@@ -702,6 +764,19 @@ function AddStaticData() {
       deathDate: new Date("July 10, 2005"),
       address: "Suite 42, Skyline Tower, Innovation District, Redmarsh"
   }
+  weaponRecords.push({
+    id:uuidv4(),
+    issuingAuthority: "Zorik",
+    licenseNumber: "AV-WPN-"+faker.number.int({min:10000, max:99999}),
+    name: "James Anderson",
+    dob: new Date("April 22, 1977"),
+    address: "Suite 42, Skyline Tower, Innovation District, Redmarsh",
+    weaponType: faker.helpers.arrayElement(licensedWeaponTypes),
+    serialNumber: `XD9-${faker.number.int({min:1000, max:9999})}-NA`,
+    issueDate: new Date("April 22, 1997"),
+    expiryDate: new Date("April 22, 2002"),
+    issuedBy: "Marshal Elroy Wexler",
+  })
 
   UniverseMap["Juan Martinez"] = {
     firstName: "Juan",
@@ -762,8 +837,6 @@ function AddStaticData() {
     "House 12, Greenview Apartments, Heartline Road, Redmarsh",
     "Cardiologist"
   );
-
-
 
   UniverseMap["John Carter"] = {
     firstName: "John",
@@ -839,6 +912,21 @@ function AddStaticData() {
     "Chemical Engineer",
     "Redmarsh Chemicals"
   );
+
+  weaponRecords.push({
+    id:uuidv4(),
+    issuingAuthority: "Zorik",
+    licenseNumber: "AV-WPN-"+faker.number.int({min:10000, max:99999}),
+    name: "Sandy Harris",
+    dob: new Date("June 12, 1985"),
+    address: "221 Oakridge Lane, Westbridge, Redmarsh",
+    weaponType: faker.helpers.arrayElement(licensedWeaponTypes),
+    serialNumber: `XD9-${faker.number.int({min:1000, max:9999})}-NA`,
+    issueDate: new Date("July 23, 2003"),
+    expiryDate: new Date("July 23, 2008"),
+    issuedBy: "Marshal Elroy Wexler",
+  })
+
 
   // Inspector who died
   UniverseMap["Mark Sullivan"] = {
@@ -963,9 +1051,24 @@ function AddStaticData() {
     deathDate: new Date("June 5, 2005"),
   };
 
-  generateBirthRecords("Molly", "Sanford", dateWithTime(new Date("July 12, 1965")), "Male")
+  generateBirthRecords("Molly", "Sanford", dateWithTime(new Date("July 12, 1965")), "Female")
   generateEmploymentRecord("Molly", "Sanford", dateWithTime(new Date("July 12, 1965")), "Suite 140, Willow Lane Residences, Redmarsh City", "Chief Executive Officer", "Redmarsh Chemicals" )
   generateDeathRecords("Molly", "Sanford", dateWithTime(new Date("July 12, 1965")), new Date("June 5, 2005"), "Murder")
+
+  weaponRecords.push({
+    id:uuidv4(),
+    issuingAuthority: "Zorik",
+    licenseNumber: "AV-WPN-"+faker.number.int({min:10000, max:99999}),
+    name: "Sandy Harris",
+    dob: new Date("July 12, 1965"),
+    address: "221 Oakridge Lane, Westbridge, Redmarsh",
+    weaponType: faker.helpers.arrayElement(licensedWeaponTypes),
+    serialNumber: `XD9-${faker.number.int({min:1000, max:9999})}-NA`,
+    issueDate: new Date("August 2, 1997"),
+    expiryDate: new Date("August 2, 2002"),
+    issuedBy: "Marshal Elroy Wexler",
+  })
+
 
   doctors.push("Cletus Blick");
   doctors.push("Hubert Lowe");
@@ -1028,12 +1131,24 @@ function AddStaticData() {
   UniverseMap["Ivan Lofer"]["deathDate"] = new Date("January 30, 2005")
 
   // Ringmaster of all this 
-  createFamily("Angelina", "Grimes", "Female", 39, true, false, "Businessman", "Redmarsh Chemicals")
+  let angelina = createFamily("Angelina", "Grimes", "Female", 39, true, false, "Businessman", "Redmarsh Chemicals")
+  weaponRecords.push({
+    id:uuidv4(),
+    issuingAuthority: "Zorik",
+    licenseNumber: "AV-WPN-"+faker.number.int({min:10000, max:99999}),
+    name: "Angelina Grimes",
+    dob: angelina.person.birthDate,
+    address: "221 Oakridge Lane, Westbridge, Redmarsh",
+    weaponType: faker.helpers.arrayElement(licensedWeaponTypes),
+    serialNumber: `XD9-${faker.number.int({min:1000, max:9999})}-NA`,
+    issueDate: new Date("July 23, 1999"),
+    expiryDate: new Date("July 23, 2004"),
+    issuedBy: "Marshal Elroy Wexler",
+  })
 
   let marcus = createFamily("Marcus", "Thorne", "Male",35, true, false)
   generateDeathRecords("Marcus", "Thorne", marcus.person.birthDate, new Date("August 2, 2004"), "Poisoning", "Juan Martinez")
   UniverseMap["Marcus Thorne"]["deathDate"] = new Date("August 2, 2004")
-
 
 }
 
@@ -1090,6 +1205,12 @@ for (let i = 0; i < 100; i++) {
       "utf-8"
     );
   }
+  weaponRecords.sort((a,b)=>b.issueDate - a.issueDate)
+  fs.writeFileSync(
+    "src/assets/weapon_reports.json",
+    JSON.stringify(weaponRecords, null, 2),
+    "utf-8"
+  );
 }
 
 
@@ -1297,7 +1418,6 @@ fs.writeFileSync(
   JSON.stringify(UniverseMap, null, 2),
   "utf-8"
 )
-
 
 fs.writeFileSync(
   "src/assets/names.json",

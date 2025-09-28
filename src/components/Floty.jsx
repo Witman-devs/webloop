@@ -94,7 +94,6 @@ export default function Floaty() {
       <div style={FloatStyle} onClick={() => setMenuOpen(!menuOpen)}>
         <Music color="white" size={32} />
       </div>
-      <FloatMenuStack open={menuOpen} />
     </>
   );
 }

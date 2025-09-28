@@ -1,11 +1,12 @@
+import { Background } from '@xyflow/react';
 import { useRef, useEffect } from 'react';
 
 const PUZZLE_ROW_HINTS = [
   [2],       
   [3],     
   [2], 
-  [5], 
-  [4],  
+  [3], 
+  [3],  
   [3],
   [3],  
   [1],   
@@ -13,8 +14,8 @@ const PUZZLE_ROW_HINTS = [
 ];
 
 const PUZZLE_COL_HINTS = [
-  [1],    
-  [2],    
+  [0],    
+  [0],    
   [9],    
   [7, 1], 
   [1, 4],   
@@ -35,10 +36,10 @@ function SingleNonogram() {
           {
             theme: {
               width: 500, // Adjust size as needed
+              height: 733,
               isMeshed: true,
-              filledColor: '#333', // Darker color for penguin body
+              filledColor: '#333', // Darker color for penguin body 
             },
-            onSuccess: () => alert('You solved the Penguin Nonogram! 🐧')
           }
         );
       } catch (error) {
@@ -48,8 +49,8 @@ function SingleNonogram() {
   }, []);
 
   return (
-    <div style={{ padding: '20px', textAlign: 'center' }}>
-      <h1>My Nonogram</h1>
+    <div style={{ left: '20vw', top: "5vh", textAlign: 'center', height:"90vh", maxWidth:"90vw",zIndex:10000, position:"absolute", background:"white", overflow:"clip" }}>
+      <h1>Guess the Sea creature in this nonogram! That is the password to my laptop </h1>
       <canvas ref={canvasRef} />
     </div>
   );
