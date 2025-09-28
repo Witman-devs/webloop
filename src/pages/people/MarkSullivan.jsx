@@ -11,7 +11,7 @@ export default function Victim({ setPageName }) {
           name: "Officer Mark Sullivan",
           fullName: "Mark Edward Sullivan",
           birthDate: "July 22, 1983",
-          deathDate: "April 9, 2023",
+          deathDate: "January 30, 2005",
           occupation: "Police Officer",
           affiliation: (
             <Link component="span" onClick={() => setPageName("police")}>
