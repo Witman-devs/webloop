@@ -13,14 +13,14 @@ import {
 } from "@mui/material";
 import React, { use, useEffect, useState } from "react";
 import { Check, X } from "lucide-react";
-import deathRecords from "../assets/death_records.json";
+import birthRecords from "../assets/birth_records.json";
 import MonochromeButton from "../components/MonochromeButton";
 import { useSound } from "../hook/SoundContext";
 import "../answers.css";
 import detImage from "../assets/characters/det.png";
 import "../App.css";
 
-const deathCertificateNumbers = deathRecords.map((record) => record.fullName);
+const peopleName = birthRecords.map((record) => record.childName);
 
 const Questions = {
   Case1: [
@@ -34,42 +34,49 @@ const Questions = {
         "Clint Barrows",
       ],
       type: "dropdown",
+      multiple: true,
     },
     {
       questionText: "Name of doctor involved in trafficking",
-      answer: new Set(["dr. hubert lowe", "hubert lowe"]),
+      answer: ["Hubert Lowe"],
+      type: "dropdown"
     },
     {
       questionText: "Who wrote the suicide note?",
-      answer: new Set(["samuel robert hayes", "samuel hayes"]),
+      answer: ["Samuel Hayes"],
+      type: "dropdown"
     },
   ],
   Case2: [
     {
-      questionText: "Who died to Karan's gun?",
-      answer: new Set(["sandy harris"]),
+      questionText: "Who's gun was used kill Mark Sullivan ?",
+      answer: ["Sandy Harris"],
+      type:"dropdown"
     },
     {
-      questionText: "License number of the gun that killed Karan",
-      answer: new Set(["idkidkidk"]),
+      questionText: "What is the comission amount per container ?",
+      answer: new Set(["22000"]),
     },
     {
-      questionText: "Who was the ringleader behind this specific operation?",
-      answer: new Set(["molly sanford"]),
+      questionText: "What time did Inspector Olive Harris reach the port ?",
+      answer: new Set(["9:10 AM", "9:10", "09:10", "09:10 AM"]),
     },
   ],
   Case3: [
     {
-      questionText: "Who funded the NGO?",
-      answer: new Set(["idkidkidk"]),
+      questionText: "Who is the person behind whole organ trafficking ?",
+      answer: ["Angelina Grimes"],
+      type: "dropdown"
     },
     {
       questionText: "Who receieved the organs?",
-      answer: new Set(["idkidkidk"]),
+      answer: ["Sergio Schroeder", "Randolph Reynolds", "Dewey Kshlerin", "Yvonne Little", "Leroy Waelchi"],
+      type: "dropdown",
+      multiple:true
     },
     {
       questionText: "What is the total transcation amount?",
-      answer: new Set(["idkidkidk"]),
+      answer: new Set(["9000000"]),
     },
   ],
 };
@@ -98,6 +105,7 @@ function QuestionSet({ questions, setCaseSolved }) {
           correctAnswer={question.answer}
           questionText={question.questionText}
           type={question.type}
+          multiple={question.multiple}
           setCorrectResponseCount={setCorrectResponseCount}
         />
       ))}
@@ -105,7 +113,7 @@ function QuestionSet({ questions, setCaseSolved }) {
   );
 }
 
-function Question({ questionId, correctAnswer, questionText, type, setCorrectResponseCount }) {
+function Question({ questionId, correctAnswer, questionText, type, multiple, setCorrectResponseCount }) {
   const { playSFXMusic } = useSound();
   const [answer, setAnswer] = useState(()=>{
     let ans = localStorage.getItem("q"+questionId) || "";
@@ -142,7 +150,6 @@ function Question({ questionId, correctAnswer, questionText, type, setCorrectRes
     localStorage.setItem("q"+questionId, answer);
   }, [answer])
 
-  // TODO: add a animation for incorrect answer
   return (
     <div style={{ marginBlockEnd: "20px" }}>
       <Typography className="font" variant="h5">Q: {questionText}</Typography>
@@ -157,6 +164,7 @@ function Question({ questionId, correctAnswer, questionText, type, setCorrectRes
             answer={answer}
             setAnswer={setAnswer}
             type={type}
+            multiple={multiple?multiple:false}
             style={{ flex:1, maxWidth: "70%" }}
           />
           <X color="red" style={{ display: answered ? "none" : "inline", marginInlineStart: "10px" }} />
@@ -168,14 +176,14 @@ function Question({ questionId, correctAnswer, questionText, type, setCorrectRes
   );
 }
 
-function InputField({ answer, setAnswer, type, style }) {
+function InputField({ answer, setAnswer, type, multiple, style }) {
   return (
     <>
       {type === "dropdown" ? (
         <Autocomplete
           multiple
           style={{ display: "inline", ...style }}
-          options={deathCertificateNumbers}
+          options={peopleName}
           getOptionLabel={(option) => option}
           value={answer}
           onChange={(event, newValue) => {
@@ -186,7 +194,7 @@ function InputField({ answer, setAnswer, type, style }) {
             <TextField
               {...params}
               variant="standard"
-              label="Multiple values"
+              label={multiple?"Multiple values": "Single value"}
               placeholder="Dead People's Names"
               fullWidth={false}
               style={{ width: "100%" }}
@@ -294,8 +302,8 @@ export default function Cases({ setPageName, sx={} }) {
     setSnackbarMessage(
       <>
           <strong>Case 3 solved!</strong><br />
-          You have found the final piece to my identity.<br />
-          What will you do now?
+          Well done detective I knew you are the only one capable of finding me.<br />
+          I wonder is that because you are good detective or you don't care about yourself in the face of curropt   
       </>);
       setShowCaseSolvedModal(true);
 
@@ -343,6 +351,7 @@ export default function Cases({ setPageName, sx={} }) {
           variant="h4"
           onClick={() => setPageName("case2")}
           className="font"
+          display={case1Solved}
         >
           Case 2: Shootout at port!  
         </Link>
@@ -357,11 +366,12 @@ export default function Cases({ setPageName, sx={} }) {
           variant="h4"
           onClick={() => setPageName("case3")}
           className="font"
+          display={case2Solved>0?"block":"none"}
         >
           Case 3: Death of a Journalist  
         </Link>
         <List style={{ paddingInlineStart: "10%" }}>
-          {case2Solved>0?case3Solved==0?<QuestionSet questions={Questions["Case3"]} setCaseSolved={setCase3Solved} />:<>You know everything needed now, what is your decision?</>:<></>}
+          {case2Solved>0?case3Solved==0?<QuestionSet questions={Questions["Case3"]} setCaseSolved={setCase3Solved} />:<>You know everything needed now, As part of your reward you find me! My location is in the home page</>:<></>}
         </List>
       <Snackbar
         anchorOrigin={{ vertical: "top", horizontal: "center" }}
