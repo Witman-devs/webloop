@@ -37,6 +37,10 @@ import Case1 from "./pages/Case1";
 import Case3 from "./pages/Case3";
 import Case2 from "./pages/Case2";
 
+// chemicals Docs
+import ChemEmploymentRecords from "./pages/chemicals/EmploymentRecords";
+import ChemCheckinRecords from "./pages/chemicals/CheckinRecords";
+
 // Port Docs
 import PortEmploymentRecords from "./pages/port/EmploymentRecords";
 import PortCheckinRecords from "./pages/port/CheckinRecords";
@@ -54,6 +58,7 @@ import TerminationRecords from "./pages/college/TerminationRecords";
 
 // Police Docs
 import WeaponRegistry from "./pages/policeOffice/WeaponRegistry";
+import PoliceEmploymentRecords from "./pages/policeOffice/EmploymentRecords";
 
 // Logos
 import collegeLogo from "./assets/logos/collegeLogo.png";
@@ -89,6 +94,9 @@ export const PAGE_COMPONENTS = {
   portEmployeeRecords: PortEmploymentRecords,
   portCheckinRecords: PortCheckinRecords,
   weaponRegistry : WeaponRegistry,
+  chemEmployeeRecords: ChemEmploymentRecords,
+  chemCheckinRecords: ChemCheckinRecords,  
+  policeEmployeeRecords: PoliceEmploymentRecords,
 
   // case
   cases: Cases,
@@ -146,7 +154,11 @@ export const PAGE_TITLES = {
   portEmployeeRecords: "Port Employment Records",
   portCheckinRecords: "Port Checkin Records",  
 
+  chemEmployeeRecords: "Redmarsh Chemicals Employment Records",
+  chemCheckinRecords: "Redmarsh Chemicals Checkin Records",  
+
   weaponRegistry: "Weapon Registry",
+  policeEmployeeRecords: "Police Employee Records",
   
   director: "Dr. Cletus Blick",
   doc1: "Dr. Juan Martinez",

@@ -49,17 +49,17 @@ const Questions = {
   ],
   Case2: [
     {
-      questionText: "Who's gun was used kill Mark Sullivan ?",
-      answer: ["Sandy Harris"],
-      type:"dropdown"
+      questionText: "What time did Inspector Olive Harris reach the port ?",
+      answer: new Set(["9:10 AM", "9:10", "09:10", "09:10 AM"]),
     },
     {
       questionText: "What is the comission amount per container ?",
       answer: new Set(["22000"]),
     },
     {
-      questionText: "What time did Inspector Olive Harris reach the port ?",
-      answer: new Set(["9:10 AM", "9:10", "09:10", "09:10 AM"]),
+      questionText: "Who's gun was used kill Mark Sullivan ?",
+      answer: ["Sandy Harris"],
+      type:"dropdown"
     },
   ],
   Case3: [

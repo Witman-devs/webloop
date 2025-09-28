@@ -16,7 +16,7 @@ const style = {
   overflowY: "scroll",
 };
 
-export default function AudioViewer({ label, fileSrc }) {
+export default function AudioViewer({ label, fileSrc, correctPassword }) {
   const [open, setOpen] = useState(false);
   const [password, setPassword] = useState("");
 
@@ -34,7 +34,7 @@ export default function AudioViewer({ label, fileSrc }) {
           </Grid>
           <Grid size={6}>
             {
-              password == "seahorse"?
+              password == correctPassword?
             <Typography sx={{ display: "flex", justifyContent: "center" }}>
               <audio controls src={fileSrc} style={{ width: "100%" }}>
                 Your browser does not support the audio element.

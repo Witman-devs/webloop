@@ -1,18 +1,5 @@
 [
   {
-    "id": "9fb39327-c1fc-408b-8441-1cd83bdbf2e3",
-    "issuingAuthority": "Zorik",
-    "licenseNumber": "AV-WPN-23899",
-    "name": "Sandy Harris",
-    "dob": "1985-06-11T18:30:00.000Z",
-    "address": "221 Oakridge Lane, Westbridge, Redmarsh",
-    "weaponType": "Tactical Rifle - With detachable magazine (restricted)",
-    "serialNumber": "XD9-3466-NA",
-    "issueDate": "2003-07-22T18:30:00.000Z",
-    "expiryDate": "2008-07-22T18:30:00.000Z",
-    "issuedBy": "Marshal Elroy Wexler"
-  },
-  {
     "id": "9eceb8d0-8fc4-4417-acf3-76d63e320417",
     "issuingAuthority": "Zorik",
     "licenseNumber": "AV-WPN-42620",
