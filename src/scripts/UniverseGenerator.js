@@ -903,7 +903,7 @@ function AddStaticData() {
     "Thompson",
     dateWithTime(new Date("May 14, 1981")),
     dateWithTime(new Date("February 05, 2005")),
-    "Accident"
+    "Murder"
   );
 
   let interviewTime = new Date("February 4, 2005 11:00:00")

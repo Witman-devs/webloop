@@ -1,20 +1,16 @@
 import { Link, Typography } from "@mui/material";
 import NewsPaperCutout from "../components/NewsPaperCutout";
+import CrimeSceneOverlay from "../components/CrimeSceneOverlay";
 
 function News1({ setPageName }) {
   return (
     <>
       <Typography variant="body1">
-        <b>Redmarsh, April 20th</b> — Acclaimed investigative reporter Micheal Thompson was found dead in his apartment late last night, just days after breaking a story on a suspicious art acquisition involving city officials and the Redmarsh NGO.
-      </Typography>
-      <Typography variant="body1">
-        Authorities responded to reports of gunfire at a downtown Redmarsh residence. Upon arrival, they discovered Thompson deceased from a gunshot wound. Early reports suggest a violent altercation took place, resulting in a shootout and an apparent suicide at the scene. Police have not released the identities of other individuals involved.
-      </Typography>
-      <Typography variant="body1">
-        Thompson, known for his fearless reporting, was investigating allegations of fraud and money laundering tied to a recent painting deal. Colleagues say he had received threats in the days leading up to his death.
-      </Typography>
-      <Typography variant="body1">
-        The Redmarsh Police Department has launched a full investigation. Anyone with information is urged to contact authorities.
+        A News reporter <Link component="span" onClick={()=>setPageName("victim3")}> Michael Thompson </Link> was found dead in his apartment. The whole apartment was
+        ransacked and destroyed, All the valuables are gone and lockers are empty.
+        Officials say this could be a burglary turned into a tragic murder. While
+        police is investigating. The news agency <Link component="span" onClick={()=>setPageName("news")}> Atlas News Agency </Link> mourns the death of an excellent
+        employee.
       </Typography>
     </>
   );
@@ -23,10 +19,11 @@ function News1({ setPageName }) {
 export default function Case3({ setPageName }) {
   return (
     <div style={{ width: "60vw", left: "20vw", position: "relative" }}>
-      <Typography variant="h2">Reporter Dead After Redmarsh Shootout</Typography>
+      <CrimeSceneOverlay />
+      <Typography variant="h2">Death of a Journalist </Typography>
       <NewsPaperCutout
-        headline="Investigative Reporter Killed Amid Art Scandal Shootout"
-        date="April 20th, 2025"
+        headline="Repoter fuond dead in his apartment"
+        date="February 6th, 2005"
         author="News Desk"
         content={<News1 setPageName={setPageName} />}
         rotation="-5"

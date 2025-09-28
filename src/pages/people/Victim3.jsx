@@ -16,9 +16,9 @@ export default function Reporter({ setPageName }) {
           affiliation: (
             <Link
               component="span"
-              onClick={() => setPageName("redmarsh-gazette")}
+              onClick={() => setPageName("news")}
             >
-              The Redmarsh Gazette
+              Atlas News Agency
             </Link>
           ),
           firstAppearance: "News Archives - March 2020",

@@ -263,6 +263,17 @@ export default function Cases({ setPageName, sx={} }) {
         >
           Case 2: Shootout at port!  
         </Link>
+        
+        <Divider style={{ margin: "30px" }} />
+
+        <Link
+          component="button"
+          variant="h4"
+          onClick={() => setPageName("case3")}
+          className="font"
+        >
+          Case 3: Death of a Journalist  
+        </Link>
 
         {false && (
           <>
