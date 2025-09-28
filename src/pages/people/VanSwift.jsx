@@ -1,6 +1,6 @@
 import { Link, Typography } from "@mui/material";
 import ProfileCard from "../../components/ProfilePage";
-import directorImg from "../../assets/characters/victim-1.png";
+import directorImg from "../../assets/characters/van.png";
 
 export default function Victim1({ setPageName }) {
   return (

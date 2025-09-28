@@ -11,11 +11,11 @@ export default function ChemCeo({ setPageName }) {
         person={{
           name: "Molly Sanford",
           fullName: "Molly Sanford",
-          birthDate: "July 12, 1965",
-          deathDate: null,
+          birthDate: "July 11, 1965",
+          deathDate: "June 04, 2005",
           occupation: "Chief Executive Officer",
           affiliation: (
-            <Link component="span" onClick={() => {}}>
+            <Link component="span" onClick={() => setPageName("chemicals")}>
               Redmarsh Chemicals
             </Link>
           ),

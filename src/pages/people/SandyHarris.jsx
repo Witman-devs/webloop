@@ -39,7 +39,7 @@ export default function ChemEngg({ setPageName }) {
           affiliation: (
             <Link
               component="span"
-              onClick={() => {}}
+              onClick={() => setPageName("chemicals")}
             >
               Redmarsh Chemicals
             </Link>
