@@ -17,6 +17,10 @@ import victim2 from "./pages/people/MarkSullivan";
 import victim3 from "./pages/people/MichaelThompson";
 import ward1 from "./pages/people/SamuelHayes";
 import chemEng from "./pages/people/SandyHarris";
+import alonzo from "./pages/people/AlonzoMcEnzie";
+import angelina from "./pages/people/AngelinaGrimes";
+import ivan from "./pages/people/IvanLofer";
+import van from "./pages/people/VanSwift";
 
 // Place
 import Police from "./pages/policeOffice/policeOffice";
@@ -104,6 +108,10 @@ export const PAGE_COMPONENTS = {
   victim3: victim3,
   ward1: ward1,
   chemEng: chemEng,
+  alonzo: alonzo,
+  angelina: angelina,
+  ivan: ivan,
+  van: van,
 
   // system
   notfound: NotFound,
@@ -150,6 +158,10 @@ export const PAGE_TITLES = {
   victim3: "Michael Thompson",
   ward1: "Ward 1",
   chemEng: "Sandy Harris",
+  alonzo: "Alonzo McEnzie",
+  angelina: "Angelina Grimes",
+  ivan: "Ivan Lofer",
+  van: "Van Swift",
 
   notfound: "Page Not Found",
 };
