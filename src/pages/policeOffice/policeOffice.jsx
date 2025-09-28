@@ -53,7 +53,7 @@ export default function PoliceOffice({ setPageName }) {
         }}
         setPageName={setPageName}
         pages={[
-          { label: "Admission Records", pageName: "admissionRecords" },
+          { label: "Weapon Registry", pageName: "weaponRegistry" },
           { label: "Faculty Records", pageName: "facultyRecords" }
         ]}
       />

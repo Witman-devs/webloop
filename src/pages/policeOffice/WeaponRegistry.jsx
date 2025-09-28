@@ -14,7 +14,8 @@ export default function WeaponRegistry({ setPageName }) {
   return (
     <RecordsList
       columns={weaponRegistryColumns}
-      records={{
+      records={[{
+        id:"make some UUId 4 id",
         issuingAuthority: "New Avalon",
         licenseNumber: "AV-WPN-00721",
         name: "Victor Kade",
@@ -25,7 +26,7 @@ export default function WeaponRegistry({ setPageName }) {
         issueDate: "August 1, 2025",
         expiryDate: "August 1, 2030",
         issuedBy: "Marshal Elroy Wexler",
-      }}
+      }]}
       type="weapon"
       Label="Weapon Registry"
       companyName="Redmarsh Police Department"

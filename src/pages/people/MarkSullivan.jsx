@@ -14,7 +14,7 @@ export default function Victim({ setPageName }) {
           deathDate: "April 9, 2023",
           occupation: "Police Officer",
           affiliation: (
-            <Link component="span" onClick={() => setPageName("station")}>
+            <Link component="span" onClick={() => setPageName("police")}>
               Redmarsh Police Department
             </Link>
           ),

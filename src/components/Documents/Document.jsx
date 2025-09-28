@@ -19,7 +19,7 @@ export default function Document({type, data}){
     case "employee":
       return <EmploymentRecord {...data} />;
     case "weapon":
-      return <WeaponLicenseCertificate {...data} />;
+      return <WeaponLicenseCertificate data={data} />;
     default:
       return <div>Unsupported document type: {type}</div>;
   }

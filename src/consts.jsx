@@ -48,6 +48,9 @@ import HospitalCheckinRecords from "./pages/hospital/CheckinRecords";
 import AlumniRecords from "./pages/college/AlumniRecords";
 import TerminationRecords from "./pages/college/TerminationRecords";
 
+// Police Docs
+import WeaponRegistry from "./pages/policeOffice/WeaponRegistry";
+
 // Logos
 import collegeLogo from "./assets/logos/collegeLogo.png";
 import companyLogo from "./assets/logos/companyLogo.png";
@@ -81,6 +84,7 @@ export const PAGE_COMPONENTS = {
   hospitalCheckinRecords: HospitalCheckinRecords,
   portEmployeeRecords: PortEmploymentRecords,
   portCheckinRecords: PortCheckinRecords,
+  weaponRegistry : WeaponRegistry,
 
   // case
   cases: Cases,
@@ -117,7 +121,7 @@ export const PAGE_TITLES = {
   hospital: "RedMarsh Healthcare",
   college: "St. Healmore Medical College",
   port: "Redmarsh Postal Services Port division",
-  police: "Police",
+  police: "Redmarsh Police Department",
   newsAgency: "News Agency",
   chemicals: "Redmarsh Chemicals",
   company: "Generico",
@@ -133,6 +137,8 @@ export const PAGE_TITLES = {
 
   portEmployeeRecords: "Port Employment Records",
   portCheckinRecords: "Port Checkin Records",  
+
+  weaponRegistry: "Weapon Registry",
   
   director: "Dr. Cletus Blick",
   doc1: "Dr. Juan Martinez",
