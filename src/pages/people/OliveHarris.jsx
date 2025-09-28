@@ -29,20 +29,6 @@ export default function Inspector({ setPageName }) {
 
   return (
     <div style={{ width: "60vw", left: "20vw", position: "relative" }}>
-      <Modal
-        open={open}
-        onClose={handleClose}
-      >
-        <Box sx={style}>
-          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-            This page does not have any information relevant to Case 1.
-          </Typography>
-          <Button onClick={handleClose} sx={{ mt: 3 }} variant="contained">
-            Close
-          </Button>
-        </Box>
-      </Modal>
-
       <ProfileCard
         person={{
           name: "Inspector Olive Harris",
@@ -53,7 +39,7 @@ export default function Inspector({ setPageName }) {
           affiliation: (
             <Link
               component="span"
-              onClick={() => setPageName("police-station")}
+              onClick={() => setPageName("police")}
             >
               Redmarsh Police Department
             </Link>

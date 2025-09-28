@@ -1,6 +1,7 @@
 import { Link, Typography } from "@mui/material";
 import NewsPaperCutout from "../components/NewsPaperCutout";
 import CrimeSceneOverlay from "../components/CrimeSceneOverlay";
+import "../App.css";
 
 function News1({ setPageName }) {
   return (
@@ -9,7 +10,7 @@ function News1({ setPageName }) {
         A News reporter <Link component="span" onClick={()=>setPageName("victim3")}> Michael Thompson </Link> was found dead in his apartment. The whole apartment was
         ransacked and destroyed, All the valuables are gone and lockers are empty.
         Officials say this could be a burglary turned into a tragic murder. While
-        police is investigating. The news agency <Link component="span" onClick={()=>setPageName("news")}> Atlas News Agency </Link> mourns the death of an excellent
+        police is investigating. The news agency <Link component="span" onClick={()=>setPageName("newsAgency")}> Atlas News Agency </Link> mourns the death of an excellent
         employee.
       </Typography>
     </>
@@ -20,9 +21,9 @@ export default function Case3({ setPageName }) {
   return (
     <div style={{ width: "60vw", left: "20vw", position: "relative" }}>
       <CrimeSceneOverlay />
-      <Typography variant="h2">Death of a Journalist </Typography>
+      <Typography className="font" variant="h2">Death of a Journalist </Typography>
       <NewsPaperCutout
-        headline="Repoter fuond dead in his apartment"
+        headline="Reporter has been found dead in his apartment"
         date="February 6th, 2005"
         author="News Desk"
         content={<News1 setPageName={setPageName} />}
