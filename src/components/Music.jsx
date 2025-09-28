@@ -12,7 +12,7 @@ const FloatStyle = {
   borderRadius: "50%",
   backgroundColor: "black", 
   position: "fixed",
-  top: "calc(100vh - 60px)",
+  left: "60px",
   zIndex: 20,
   display: 'flex',
   justifyContent: 'center',
@@ -70,30 +70,19 @@ function MusicControl() {
   );
 }
 
-function FloatMenuStack({ open }) {
+export default function FloatMenuStack({ open }) {
   return (
     <Stack
       style={{
         position: "fixed",
-        top: "calc(100vh - 190px)",
+        top: "125px",
+        left:"50px",
         display: open ? "block" : "none",
-        zIndex:20
+        zIndex:200
       }}
     >
       {/* <div>Hello</div> */}
       <MusicControl />
     </Stack>
-  );
-}
-
-export default function Floaty() {
-  const [menuOpen, setMenuOpen] = useState(false);
-  return (
-    <>
-      {/* Updated the floating button to be black with a music icon */}
-      <div style={FloatStyle} onClick={() => setMenuOpen(!menuOpen)}>
-        <Music color="white" size={32} />
-      </div>
-    </>
   );
 }
