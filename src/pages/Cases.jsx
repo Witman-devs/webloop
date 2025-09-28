@@ -351,7 +351,7 @@ export default function Cases({ setPageName, sx={} }) {
           variant="h4"
           onClick={() => setPageName("case2")}
           className="font"
-          display={case1Solved}
+          display={case1Solved>0?"block":"none"}
         >
           Case 2: Shootout at port!  
         </Link>

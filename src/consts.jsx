@@ -170,6 +170,7 @@ export const PAGE_TITLES = {
   weaponRegistry: "Weapon Registry",
   policeEmployeeRecords: "Police Employee Records",
 
+  newsArchive: "News Archive",
   
   genricoEmployeeRecords: "Genrico Employment Records",
   genricoCheckinRecords: "Genrico Checkin Records",  
