@@ -6,23 +6,26 @@ import NotFound from "./pages/NotFound";
 import Symbols from "./pages/Symbols";
 
 // People
-import Director from "./pages/people/Director";
-import CEO from "./pages/people/CEO";
-import Doc1 from "./pages/people/Doc1";
-import Doc2 from "./pages/people/Doc2";
-import Doc3 from "./pages/people/Doc3";
-import Inspector from "./pages/people/Inspector";
-import ngoHead from "./pages/people/NGO Head";
-import victim2 from "./pages/people/Victim2";
-import victim3 from "./pages/people/Victim3";
-import ward1 from "./pages/people/Ward1";
+import Director from "./pages/people/CletusBlick";
+import CEO from "./pages/people/JamesAnderson";
+import Doc1 from "./pages/people/JuanMartinez";
+import Doc2 from "./pages/people/HubertLowe";
+import Doc3 from "./pages/people/JohnCarter";
+import Inspector from "./pages/people/OliveHarris";
+import chemCeo from "./pages/people/MollySanford";
+import victim2 from "./pages/people/MarkSullivan";
+import victim3 from "./pages/people/MichaelThompson";
+import ward1 from "./pages/people/SamuelHayes";
+import chemEng from "./pages/people/SandyHarris";
 
 // Place
-import Police from "./pages/Police";
+import Police from "./pages/policeOffice/policeOffice";
 import NewsAgency from "./pages/NewsAgency";
 import Hospital from "./pages/hospital/Hospital";
 import College from "./pages/college/College";
 import Port from "./pages/port/Port";
+import Chemicals from "./pages/chemicals/Chemicals";
+import Company from "./pages/company/Company";
 
 // Case
 import Cases from "./pages/Cases";
@@ -53,6 +56,7 @@ import newsLogo from "./assets/logos/newsLogo.png";
 import ngoLogo from "./assets/logos/ngoLogo.png";
 import policeLogo from "./assets/logos/policeLogo.png";
 import portLogo from "./assets/logos/portLogo.png";
+import chemicalsLogo from "./assets/logos/chemicalsLogo.png";
 
 export const PAGE_COMPONENTS = {
   // places
@@ -63,6 +67,8 @@ export const PAGE_COMPONENTS = {
   police: Police,
   port: Port,
   newsAgency: NewsAgency,
+  chemicals: Chemicals,
+  company: Company,
 
   // documents
   // "newsArchival": NewsArchival,
@@ -89,10 +95,11 @@ export const PAGE_COMPONENTS = {
   doc2: Doc2,
   doc3: Doc3,
   inspector: Inspector,
-  ngoHead: ngoHead,
+  chemCeo: chemCeo,
   victim2: victim2,
   victim3: victim3,
   ward1: ward1,
+  chemEng: chemEng,
 
   // system
   notfound: NotFound,
@@ -110,7 +117,11 @@ export const PAGE_TITLES = {
   hospital: "RedMarsh Healthcare",
   college: "St. Healmore Medical College",
   port: "Redmarsh Postal Services Port division",
-  
+  police: "Police",
+  newsAgency: "News Agency",
+  chemicals: "Redmarsh Chemicals",
+  company: "Generico",
+
   birthRecords: "Birth Records",
   deathRecords: "Death Records",
   hospitalCheckinRecords:"Redmarsh Healthcare Checkin Records",
@@ -128,15 +139,12 @@ export const PAGE_TITLES = {
   doc2: "Dr. Hubert Lowe",
   doc3: "Dr. Jhon Carter",
   inspector: "Olive Harris",
-
-  police: "Police",
-  newsAgency: "News Agency",
-  ceo: "CEO",
-  ngoHead: "NGO Head",
-  victim2: "Victim 2",
-  victim3: "Victim 3",
+  chemCeo: "Molly Sanford",
+  victim2: "Mark Sullivan",
+  victim3: "Michael Thompson",
   ward1: "Ward 1",
-  
+  chemEng: "Sandy Harris",
+
   notfound: "Page Not Found",
 };
 
@@ -192,7 +200,7 @@ export let MUSIC = {
 
 export const ADDRESS = {
   police: "Inspector's Quarters, Police Colony, Willow Lane, Redmarsh",
-  ngo: "123 Maple Street, Willow Lane, Redmarsh",
+  chemicals: "123 Maple Street, Willow Lane, Redmarsh",
   hospital: "Health Sector 4, Heartline Road, Redmarsh",
   company: "Skyline Tower, Innovation District, Redmarsh",
   port: "Willow Lane, Redmarsh, Midwest",
@@ -208,4 +216,5 @@ export const LOGOS = {
   port: portLogo,
   news: newsLogo,
   college: collegeLogo,
+  chemicals: chemicalsLogo
 };
