@@ -16,7 +16,7 @@ export default function Reporter({ setPageName }) {
           affiliation: (
             <Link
               component="span"
-              onClick={() => setPageName("news")}
+              onClick={() => setPageName("newsAgency")}
             >
               Atlas News Agency
             </Link>
