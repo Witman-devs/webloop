@@ -97,7 +97,7 @@ const workplaceProfession = {
     "Watchman",
     "Peon",
   ],
-  Generico: [
+  "Generico": [
     "Businessman",
     "Computer Engineer",
     "Chemical Engineer",
@@ -490,7 +490,7 @@ function createFamily(_name, _lastName, _gender, _age, _married, _deathDate, _pr
   //   generating professions and work place
 
   const profession = _profession || faker.helpers.arrayElement(professions);
-  const workplace = _workplace || faker.helpers.arrayElement(workplaces);
+  const workplace = _workplace || faker.helpers.arrayElement(professionWorkPlace[profession]);
   let spouseProfession, spouseWorkplace;
   if (married) {
     spouseProfession = faker.helpers.arrayElement(professions);
@@ -523,20 +523,21 @@ function createFamily(_name, _lastName, _gender, _age, _married, _deathDate, _pr
       degree: "MBBS",
       batch: `${birthDateSpouse.getFullYear() + 17}`,
       graduationYear: `${birthDateSpouse.getFullYear() + 22}`,
-      specialization: profession,
+      specialization: spouseProfession,
       currentEmployment: "Surgeon, Redmarsh Healthcare",
     });
   }
 
   if(profession == "Delivery driver") postal.push(`${firstName} ${lastName}`)
-  if(spouseProfession ==   "Delivery driver") postal.push(` ${spouse} ${lastName}`)
+  if(spouseProfession ==   "Delivery driver") postal.push(`${spouse} ${lastName}`)
 
   generateEmploymentRecord(
     firstName,
     lastName,
     birthDateMain,
     address,
-    profession
+    profession,
+    workplace
   );
   if (married)
     generateEmploymentRecord(
@@ -544,7 +545,8 @@ function createFamily(_name, _lastName, _gender, _age, _married, _deathDate, _pr
       lastName,
       birthDateSpouse,
       address,
-      spouseProfession
+      spouseProfession,
+      spouseWorkplace
     );
 
   //   generating death certificates
@@ -617,7 +619,7 @@ function createFamily(_name, _lastName, _gender, _age, _married, _deathDate, _pr
       name: `${spouse} ${lastName}`,
       dob: birthDateMain,
       address: address,
-      weaponType: profession=="Inspector"?weaponType:faker.helpers.arrayElement(licensedWeaponTypes),
+      weaponType: spouseProfession=="Inspector"?weaponType:faker.helpers.arrayElement(licensedWeaponTypes),
       serialNumber: `XD9-${faker.number.int({min:1000, max:9999})}-NA`,
       issueDate: issueDate,
       expiryDate: new Date(issueDate + 5 * 365 * 24 * 60 *60*1000),
@@ -760,7 +762,7 @@ function AddStaticData() {
       fullName: "James Anderson",
       birthDate: new Date("April 22, 1977"),
       profession: "Chief Executive Officer",
-      workplace: "Genrico",
+      workplace: "Generico",
       deathDate: new Date("July 10, 2005"),
       address: "Suite 42, Skyline Tower, Innovation District, Redmarsh"
   }
@@ -920,7 +922,7 @@ function AddStaticData() {
     name: "Sandy Harris",
     dob: new Date("June 12, 1985"),
     address: "221 Oakridge Lane, Westbridge, Redmarsh",
-    weaponType: faker.helpers.arrayElement(licensedWeaponTypes),
+    weaponType: "Handgun - Semi-automatic 22 Cal (licensed for hunting/sporting)",
     serialNumber: `XD9-${faker.number.int({min:1000, max:9999})}-NA`,
     issueDate: new Date("July 23, 2003"),
     expiryDate: new Date("July 23, 2008"),
@@ -960,6 +962,7 @@ function AddStaticData() {
     dateWithTime(new Date("January 30, 2005")),
     "Gunshot Wound"
   );
+  autopsyReports[autopsyReports.length-1]["findings"] += "\n- A bullet of 22 caliber is retrived from the body.";
 
   // Reporter who got killed
   UniverseMap["Michael Thompson"] = {
@@ -1091,7 +1094,7 @@ function AddStaticData() {
     fullName: "Roxanne Hill",
     birthDate: new Date("November 10, 1979"),
     profession: "Computer Engineer",
-    workplace: "Genrico",
+    workplace: "Generico",
     address: "47462 Nicola Divide Apt. 606, Redmarsh, Nocturna, Zorik",
     deathDate: new Date("January 20, 2005"),
   };
@@ -1108,7 +1111,7 @@ function AddStaticData() {
     fullName: "Roger Hintz",
     birthDate: new Date("November 10, 1979"),
     profession: "Computer Engineer",
-    workplace: "Genrico",
+    workplace: "Generico",
     address: "47462 Nicola Divide Apt. 709, Redmarsh, Nocturna, Zorik"
   };
   generateBirthRecords("Roger", "Hintz", new Date("November 10, 1979"), "Male")
@@ -1288,6 +1291,8 @@ for(let d in dates){
       let date = dates[d]
       date = new Date(date.getTime() + 52200000 + faker.number.int({min: 1, max: 5}) * faker.number.int({min:1, max:60}) * 60 * 1000)
       let name = faker.helpers.arrayElement(postal)
+      while(UniverseMap[name].deathDate && UniverseMap[name].deathDate < date)
+        name = faker.helpers.arrayElement(postal)
       let signature = name.split(" ").map(val=>val[0]).join(" ")
       let receiver = UniverseMap[faker.helpers.arrayElement(UniverseList)]
       while(!receiver["workplace"] && receiver.deathDate < new Date("07/17/2005"))
@@ -1394,13 +1399,15 @@ for(let d of dates){
 for(let d of importantDates){
   if(d.includes("2005-01-30")) continue
   let postTime = new Date(new Date(d).getTime() + (Math.random() * 5 + 9) * 60 * 60 * 1000)
-  let postman = faker.helpers.arrayElement(postal);
+  let name = faker.helpers.arrayElement(postal)
+  while(UniverseMap[name].deathDate && UniverseMap[name].deathDate < postTime)
+    name = faker.helpers.arrayElement(postal)
   checkInRecords.push({
     "date": postTime,
     "time": timeStamp(postTime),
-    "name": postman,
+    "name": name,
     "comment": "Chemical sample for Angelina Grimes",
-    "signature": postman.split(" ").map(val=>val[0]).join(" "),
+    "signature": name.split(" ").map(val=>val[0]).join(" "),
     "place": "Genrico"
   })
 }

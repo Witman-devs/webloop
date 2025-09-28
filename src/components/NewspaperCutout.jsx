@@ -46,7 +46,7 @@ export default function NewsPaperCutout({ headline, date, author="",content, rot
           display: "block",
           mb: 2,
           fontStyle: "italic",
-          color: "#7b6e57",
+          color: "#2b2316ff",
         }}
       >
         {date} - {author}

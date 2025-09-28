@@ -35,7 +35,7 @@ export default function LetterViewer({ image, label, fileSrc }) {
       },
       data: { image: image, label: label },
       origin: [0.5, 0.0],
-      type: "image",
+      type: label.includes("hole")?"transparent":"image",
     });
     localStorage.setItem(flowKey, JSON.stringify(flow));
     let docs = JSON.parse(localStorage.getItem("addedDocuments")) || [];

@@ -24,7 +24,7 @@ import van from "./pages/people/VanSwift";
 
 // Place
 import Police from "./pages/policeOffice/policeOffice";
-import NewsAgency from "./pages/NewsAgency";
+import NewsAgency from "./pages/newsAgency/NewsAgency";
 import Hospital from "./pages/hospital/Hospital";
 import College from "./pages/college/College";
 import Port from "./pages/port/Port";
@@ -36,6 +36,9 @@ import Cases from "./pages/Cases";
 import Case1 from "./pages/Case1";
 import Case3 from "./pages/Case3";
 import Case2 from "./pages/Case2";
+
+// news docs
+import NewsArchive from "./pages/newsAgency/NewsArchive"
 
 // chemicals Docs
 import ChemEmploymentRecords from "./pages/chemicals/EmploymentRecords";
@@ -59,6 +62,10 @@ import TerminationRecords from "./pages/college/TerminationRecords";
 // Police Docs
 import WeaponRegistry from "./pages/policeOffice/WeaponRegistry";
 import PoliceEmploymentRecords from "./pages/policeOffice/EmploymentRecords";
+
+// Genrico Docs
+import GenricoEmploymentRecords from "./pages/company/EmploymentRecords";
+import GenricoCheckinRecords from "./pages/company/CheckinRecords";
 
 // Logos
 import collegeLogo from "./assets/logos/collegeLogo.png";
@@ -97,6 +104,9 @@ export const PAGE_COMPONENTS = {
   chemEmployeeRecords: ChemEmploymentRecords,
   chemCheckinRecords: ChemCheckinRecords,  
   policeEmployeeRecords: PoliceEmploymentRecords,
+  newsArchive: NewsArchive,
+  genricoEmployeeRecords: GenricoEmploymentRecords,
+  genricoCheckinRecords: GenricoCheckinRecords,  
 
   // case
   cases: Cases,
@@ -159,6 +169,10 @@ export const PAGE_TITLES = {
 
   weaponRegistry: "Weapon Registry",
   policeEmployeeRecords: "Police Employee Records",
+
+  
+  genricoEmployeeRecords: "Genrico Employment Records",
+  genricoCheckinRecords: "Genrico Checkin Records",  
   
   director: "Dr. Cletus Blick",
   doc1: "Dr. Juan Martinez",

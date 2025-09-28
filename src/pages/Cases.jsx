@@ -20,7 +20,7 @@ import "../answers.css";
 import detImage from "../assets/characters/det.png";
 import "../App.css";
 
-const peopleName = birthRecords.map((record) => record.childName);
+const peopleName = birthRecords.map((record) => record.childName).concat(["Sergio Schroeder", "Randolph Reynolds", "Dewey Kshlerin", "Yvonne Little", "Leroy Waelchi"]);
 
 const Questions = {
   Case1: [
@@ -64,11 +64,6 @@ const Questions = {
   ],
   Case3: [
     {
-      questionText: "Who is the person behind whole organ trafficking ?",
-      answer: ["Angelina Grimes"],
-      type: "dropdown"
-    },
-    {
       questionText: "Who receieved the organs?",
       answer: ["Sergio Schroeder", "Randolph Reynolds", "Dewey Kshlerin", "Yvonne Little", "Leroy Waelchi"],
       type: "dropdown",
@@ -77,6 +72,11 @@ const Questions = {
     {
       questionText: "What is the total transcation amount?",
       answer: new Set(["9000000"]),
+    },
+    {
+      questionText: "Who is the person behind whole organ trafficking ?",
+      answer: ["Angelina Grimes"],
+      type: "dropdown"
     },
   ],
 };
@@ -225,7 +225,7 @@ function CaseSolvedModal({ visible, onClose, message }) {
   if (!visible) return null;
 
   return (
-    <div className="modal-overlay" onClick={onClose}>
+    <div className="modal-overlay" onClick={onClose} style={{background:"white"}}>
       <div className="modal-content" onClick={e => e.stopPropagation()}>
         <img src={detImage} alt="Case Solved" />
         <h2 className="snackbar">{message}</h2>

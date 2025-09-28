@@ -17,6 +17,17 @@ function News1({ setPageName }) {
   );
 }
 
+function News2({ setPageName }) {
+  return (
+    <>
+      <Typography variant="body1">
+        <Link component="span" onClick={()=>setPageName("company")}>Generico</Link> company CEO <Link component="span" onClick={()=>setPageName("ceo")}> James Anderson </Link> found dead in his apartment. All the family members were put to sleep with some sleeping gas. His daughter Emma closes escapes the murderer. All the valuable is intact, police is investigating the incident. Police found the Oroborus symbol in his apartment. This could be the serial killer's 3rd target. 
+      </Typography>
+    </>
+  );
+}
+
+
 export default function Case3({ setPageName }) {
   return (
     <div style={{ width: "60vw", left: "20vw", position: "relative" }}>
@@ -29,6 +40,14 @@ export default function Case3({ setPageName }) {
         content={<News1 setPageName={setPageName} />}
         rotation="-5"
         left="2px"
+      />
+      <NewsPaperCutout
+        headline="Generico CEO Murdered in his own apartment"
+        date=" July 11th, 2005"
+        author="News Desk"
+        content={<News2 setPageName={setPageName} />}
+        rotation="6"
+        left="20vw"
       />
     </div>
   );
