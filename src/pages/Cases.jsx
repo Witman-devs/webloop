@@ -44,14 +44,49 @@ const Questions = {
       answer: new Set(["samuel robert hayes", "samuel hayes"]),
     },
   ],
+  Case2: [
+    {
+      questionText: "Who died to Karan's gun?",
+      answer: new Set(["sandy harris"]),
+    },
+    {
+      questionText: "License number of the gun that killed Karan",
+      answer: new Set(["IDKIDKIDK"]),
+    },
+    {
+      questionText: "Who was the ringleader behind this specific operation?",
+      answer: new Set(["molly sanford"]),
+    },
+  ],
+  Case3: [
+    {
+      questionText: "Who funded the NGO?",
+      answer: new Set(["IDKIDKIDK"]),
+    },
+    {
+      questionText: "Who receieved the organs?",
+      answer: new Set(["IDKIDKIDK"]),
+    },
+    {
+      questionText: "What is the total transcation amount?",
+      answer: new Set(["IDKIDKIDK"]),
+    },
+  ],
 };
+
+function clearStorage() {
+    localStorage.removeItem("q0");
+    localStorage.removeItem("q1");
+    localStorage.removeItem("q2");
+}
 
 function QuestionSet({ questions, setCaseSolved }) {
   const [correctResponseCount, setCorrectResponseCount] = useState(0);
   useEffect(() => {
     if (correctResponseCount === questions.length) {
       // TODO: add a animation for case solved
-      setCaseSolved((prev) => prev + 1);
+      clearStorage();
+      setCaseSolved(1);
     }
   }, [correctResponseCount, questions.length]);
 
@@ -191,7 +226,9 @@ function CaseSolvedModal({ visible, onClose, message }) {
 export default function Cases({ setPageName, sx={} }) {
   const [open, setOpen] = useState(false);
   const [snackbarMessage, setSnackbarMessage] = useState(<></>);
-  const [caseSolved, setCaseSolved] = useState(()=>localStorage.getItem("caseSolved") || 0);
+  const [case1Solved, setCase1Solved] = useState(()=>localStorage.getItem("case1Solved") || 0);
+  const [case2Solved, setCase2Solved] = useState(()=>localStorage.getItem("case2Solved") || 0);
+  const [case3Solved, setCase3Solved] = useState(()=>localStorage.getItem("case3Solved") || 0);
   const [showCaseSolvedModal, setShowCaseSolvedModal] = useState(false);
 
   const action = (
@@ -208,11 +245,11 @@ export default function Cases({ setPageName, sx={} }) {
   );
 
   useEffect(() => {
-    localStorage.setItem("caseSolved", caseSolved)
-    if (caseSolved == 0) return;
+    localStorage.setItem("case1Solved", case1Solved)
+    if (case1Solved == 0) return;
     setSnackbarMessage(
       <>
-          <strong>Case {caseSolved} solved!</strong><br />
+          <strong>Case 1 solved!</strong><br />
           Your instincts were sharp, and your deductions even sharper.<br />
           On to the next mystery...
       </>);
@@ -223,7 +260,43 @@ export default function Cases({ setPageName, sx={} }) {
     }, 30000); 
 
     return () => clearTimeout(timer);
-  }, [caseSolved]);
+  }, [case1Solved]);
+
+  useEffect(() => {
+    localStorage.setItem("case2Solved", case2Solved)
+    if (case2Solved == 0) return;
+    setSnackbarMessage(
+      <>
+          <strong>Case 2 solved!</strong><br />
+          You didn't let your emotions get to you, and you got to the bottom of your daughters death.<br />
+          On to the final case...
+      </>);
+      setShowCaseSolvedModal(true);
+
+    const timer = setTimeout(() => {
+      setShowCaseSolvedModal(false);
+    }, 30000); 
+
+    return () => clearTimeout(timer);
+  }, [case2Solved]);
+
+  useEffect(() => {
+    localStorage.setItem("case3Solved", case3Solved)
+    if (case3Solved == 0) return;
+    setSnackbarMessage(
+      <>
+          <strong>Case 3 solved!</strong><br />
+          You have found the final piece to my identity.<br />
+          What will you do now?
+      </>);
+      setShowCaseSolvedModal(true);
+
+    const timer = setTimeout(() => {
+      setShowCaseSolvedModal(false);
+    }, 30000); 
+
+    return () => clearTimeout(timer);
+  }, [case3Solved]);
 
   return (
       <div
@@ -250,7 +323,7 @@ export default function Cases({ setPageName, sx={} }) {
           Case 1: Scandal at hospital
         </Link>
         <List style={{ paddingInlineStart: "10%" }}>
-          {caseSolved<0?<QuestionSet questions={Questions["Case1"]} setCaseSolved={setCaseSolved} />:<>The whole hospital is fraud killing paitents and taking organs for money</>}
+          {case1Solved==0?<QuestionSet questions={Questions["Case1"]} setCaseSolved={setCase1Solved} />:<>The whole hospital is fraud killing paitents and taking organs for money</>}
         </List>
 
         <Divider style={{ margin: "30px" }} />
@@ -263,6 +336,9 @@ export default function Cases({ setPageName, sx={} }) {
         >
           Case 2: Shootout at port!  
         </Link>
+        <List style={{ paddingInlineStart: "10%" }}>
+          {case1Solved==1?case2Solved==0?<QuestionSet questions={Questions["Case2"]} setCaseSolved={setCase2Solved} />:<>They killed your daughter, how does that make you feel?</>:<></>}
+        </List>
         
         <Divider style={{ margin: "30px" }} />
 
@@ -274,37 +350,7 @@ export default function Cases({ setPageName, sx={} }) {
         >
           Case 3: Death of a Journalist  
         </Link>
-
-        {false && (
-          <>
-            <Link
-              component="button"
-              variant="h4"
-              onClick={() => setPageName("case2")}
-            >
-              Case 2: Shootout at port
-            </Link>
-            <List style={{ paddingInlineStart: "10%" }}>
-              <Question questionText="Whose gun did the inspector B die from ?" />
-              <Question questionText="Commission amount ?" />
-              <Question questionText="What time did the inspector A get to the port ?" />
-            </List>
-            <Divider style={{ margin: "30px" }} />
-
-            <Link
-              component="button"
-              variant="h4"
-              onClick={() => setPageName("case3")}
-            >
-              Case 3: Death of a Journalist
-            </Link>
-            <List style={{ paddingInlineStart: "10%" }}>
-              <Question questionText="What is the total transcation amount ?" />
-              <Question questionText="Who receieved the organs ?" />
-              <Question questionText="Who funded the NGO ?" />
-            </List>
-          </>
-        )}
+        {case2Solved==1?case3Solved==0?<QuestionSet questions={Questions["Case3"]} setCaseSolved={setCase3Solved} />:<>You know everything needed now, what is your decision?</>:<></>}
 
       <Snackbar
         anchorOrigin={{ vertical: "top", horizontal: "center" }}
