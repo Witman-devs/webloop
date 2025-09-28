@@ -166,7 +166,10 @@ function App() {
   };
 
   useEffect(() => {
-    setStepIndex(0);
+    if (pageName === "home") {
+      setStepIndex(0);
+      setRunTour(true);
+    }
   }, []);
 
   return (
@@ -181,39 +184,46 @@ function App() {
             <Tooltip title="Open Evidence Board. clt + Space" placement="right">
               <NotebookPen
                 cursor="pointer"
-                className="menu"
+                data-tour="menu"
                 onClick={() => setEvidanceBoardOpen(!evidanceBoardOpen)}
                 aria-label="Evidence Board"
               />
             </Tooltip>
             <Tooltip title="Go Back; alt + Left Arrow" placement="right">
-              <MoveLeft cursor="pointer" onClick={goToPreviousPage} />
+              <MoveLeft cursor="pointer" data-tour="back" onClick={goToPreviousPage} />
             </Tooltip>
             <Tooltip title="Search; clt + K" placement="right">
               <Search
                 cursor="pointer"
+                data-tour="search"
                 onClick={() => setSearchOpen(!searchOpen)}
               />
             </Tooltip>
             <Tooltip title="History; clt + H" placement="right">
               <History
                 cursor="pointer"
+                data-tour="visited"
                 onClick={() => setSideMenuOpen(!sideMenuOpen)}
               />
             </Tooltip>
             <Tooltip title="Cases; clt + S" placement="right">
               <FileQuestionMark
                 cursor="pointer"
+                data-tour="cases"
                 onClick={() => setQuestionBoardOpen(!questionBoardOpen)}
               />
             </Tooltip>
             <Tooltip title="Music" placement="right">
-              <Music cursor="pointer" />
+              <Music 
+              cursor="pointer"
+              data-tour="music"
+               />
             </Tooltip>
 
             <Tooltip title="Settings" placement="right">
               <Settings
                 cursor="pointer"
+                data-tour="settings"
                 onClick={() => setOptionsIsOpen(true)}
               />
             </Tooltip>
