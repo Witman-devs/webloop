@@ -1,6 +1,6 @@
 import { Link, Typography } from "@mui/material";
 import ProfileCard from "../../components/ProfilePage";
-import directorImg from "../../assets/characters/victim-1.png";
+import directorImg from "../../assets/characters/ivan.png";
 
 export default function Victim1({ setPageName }) {
   return (
@@ -10,6 +10,7 @@ export default function Victim1({ setPageName }) {
           name: "Ivan Lofer",
           fullName: "Ivan Lofer",
           birthDate: "September 29, 1957",
+          deathDate: "January 30, 2005",
           occupation: "Accountant",
           affiliation: (
             <Link component="span" onClick={() => setPageName("chemicals")}>
