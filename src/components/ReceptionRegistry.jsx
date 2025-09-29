@@ -7,7 +7,7 @@ import {
   Paper,
   Link,
 } from "@mui/material";
-import { DataGrid } from "@mui/x-data-grid";
+import { DataGrid, getGridDateOperators } from "@mui/x-data-grid";
 
 export default function VisitorRegistry({
   companyName,
@@ -22,7 +22,9 @@ export default function VisitorRegistry({
       field: "date",
       headerName: "Date",
       width: 100,
-      valueFormatter: (params) => new Date(params).toLocaleDateString(),
+      valueGetter: (params) => new Date(params),
+      type:"date",
+      filterOperators : getGridDateOperators()
     },
     { field: "time", headerName: "Time", width: 100 },
     { field: "name", headerName: "Name", flex: 1 },

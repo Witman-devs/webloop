@@ -22,7 +22,7 @@ export default function CEO({ setPageName }) {
           firstAppearance: "Board Members - 1999",
           address: "Suite 42, Skyline Tower,\nInnovation District,\nRedmarsh",
           image: directorImg,
-          bio: `Mr. James Anderson is the visionary CEO of NovaTech Dynamics, leading the company since 1999. Just like his father he was also able to handle company work at extremely young age.
+          bio: `Mr. James Anderson is the visionary CEO of Generico, leading the company since 1999. Just like his father he was also able to handle company work at extremely young age.
 Under his leadership, NovaTech has become a pioneer in futuristic technologies and digital solutions.
 He is recognized for his innovative thinking, commitment to ethical business, and fostering a collaborative workplace.
 James is also a strong advocate for STEM education and frequently speaks at global technology summits.`,

@@ -889,6 +889,19 @@ function AddStaticData() {
     "221 Oakridge Lane, Westbridge, Redmarsh",
     "Inspector"
   );
+  weaponRecords.push({
+    id:uuidv4(),
+    issuingAuthority: "Zorik",
+    licenseNumber: "AV-WPN-"+faker.number.int({min:10000, max:99999}),
+    name: "Olive Harris",
+    dob: new Date("July 22, 1982"),
+    address: "221 Oakridge Lane, Westbridge, Redmarsh",
+    weaponType: "Standard Issued - 22LR caliber gun",
+    serialNumber: `XD9-${faker.number.int({min:1000, max:9999})}-NA`,
+    issueDate: new Date("July 23, 2000"),
+    expiryDate: new Date("July 23, 2005"),
+    issuedBy: "Marshal Elroy Wexler",
+  })
 
   // Brother of curroupt officer
   UniverseMap["Sandy Harris"] = {
@@ -914,7 +927,6 @@ function AddStaticData() {
     "Chemical Engineer",
     "Redmarsh Chemicals"
   );
-
   weaponRecords.push({
     id:uuidv4(),
     issuingAuthority: "Zorik",
@@ -963,6 +975,19 @@ function AddStaticData() {
     "Gunshot Wound"
   );
   autopsyReports[autopsyReports.length-1]["findings"] += "\n- A bullet of 22 caliber is retrived from the body.";
+  weaponRecords.push({
+    id:uuidv4(),
+    issuingAuthority: "Zorik",
+    licenseNumber: "AV-WPN-"+faker.number.int({min:10000, max:99999}),
+    name: "Mark Sullivan",
+    dob: new Date("July 22, 1981"),
+    address: "221 Oakridge Lane, Westbridge, Redmarsh",
+    weaponType: "Standard Issued - 22LR caliber gun",
+    serialNumber: `XD9-${faker.number.int({min:1000, max:9999})}-NA`,
+    issueDate: new Date("July 23, 1999"),
+    expiryDate: new Date("July 23, 2006"),
+    issuedBy: "Marshal Elroy Wexler",
+  })
 
   // Reporter who got killed
   UniverseMap["Michael Thompson"] = {
@@ -1134,7 +1159,7 @@ function AddStaticData() {
   UniverseMap["Ivan Lofer"]["deathDate"] = new Date("January 30, 2005")
 
   // Ringmaster of all this 
-  let angelina = createFamily("Angelina", "Grimes", "Female", 39, true, false, "Businessman", "Redmarsh Chemicals")
+  let angelina = createFamily("Angelina", "Grimes", "Female", 39, true, false, "Businessman", "Generico")
   weaponRecords.push({
     id:uuidv4(),
     issuingAuthority: "Zorik",
