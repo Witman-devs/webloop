@@ -26,6 +26,7 @@ import OrganRequestEvidance from "./OrganRequestEvidance";
 import { MUSIC_TITLE } from "../consts";
 import TransparentEvidence from "./TransparentEvidence";
 import NewsCutoutEvidance from "./NewsCutoutEvidance";
+import PhotoEvidance from "./PhotoEvidance";
 
 // TODO: make easy connection from anywhere you drag
 // TODO: label for threads/edges
@@ -38,6 +39,7 @@ const nodeTypes = {
   transparent: TransparentEvidence,
   organ_request: OrganRequestEvidance,
   newsCutout: NewsCutoutEvidance,
+  photo: PhotoEvidance,
 };
 
 function CustomControls({ setEvidanceBoardOpen, save }) {

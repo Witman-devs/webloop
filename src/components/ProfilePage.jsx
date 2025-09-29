@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Box,
   Card,
@@ -10,22 +10,54 @@ import {
   Stack,
 } from "@mui/material";
 import AntagonistLogo from "./AntagonistLogo";
-import paper from '../assets/extras/paper.png';
+import paper from "../assets/extras/paper.png";
+import MonochromeButton from "./MonochromeButton";
 
-const InfoRow = ({ label, value }) =>
-  value && (
-    <Box>
-      <Typography variant="subtitle2" sx={{ fontWeight: "bold" }}>
-        {label}:
-      </Typography>
-      <Typography variant="body2" sx={{ whiteSpace: "pre-line" }}>
-        {value}
-      </Typography>
-    </Box>
+const flowKey = "EvidenceBoard";
+
+function AddToEvidence(data, setMessage) {
+  let flow = JSON.parse(localStorage.getItem(flowKey));
+  if (!flow) flow = { nodes: [], edges: [], viewport: { x: 0, y: 0, zoom: 1 } };
+  flow.nodes.push({
+    id: data["name"],
+    position: {
+      x: 0,
+      y: 0,
+    },
+    data: data,
+    origin: [0.5, 0.0],
+    type: "photo",
+  });
+  localStorage.setItem(flowKey, JSON.stringify(flow));
+  setMessage("Added to evidence board successfully!");
+  let addedDocs = JSON.parse(localStorage.getItem("addedDocuments")) || [];
+  addedDocs.push(data["name"]);
+  localStorage.setItem("addedDocuments", JSON.stringify(addedDocs));
+}
+
+function InfoRow({ label, value }) {
+  return (
+    value && (
+      <Box>
+        <Typography variant="subtitle2" sx={{ fontWeight: "bold" }}>
+          {label}:
+        </Typography>
+        <Typography variant="body2" sx={{ whiteSpace: "pre-line" }}>
+          {value}
+        </Typography>
+      </Box>
+    )
   );
+}
 
 export default function ProfileCard({ person, setPageName }) {
-  // TODO: update with red logo
+    const [message, setMessage] = useState(() => {
+      const addedDocs = JSON.parse(localStorage.getItem("addedDocuments")) || [];
+      if (addedDocs.includes(person["name"]))
+        return "This image is already Added to evidence board";
+      return "";
+    });
+
   return (
     <Card
       elevation={1}
@@ -56,19 +88,19 @@ export default function ProfileCard({ person, setPageName }) {
           <Typography variant="body1" paragraph sx={{ whiteSpace: "pre-line" }}>
             {person.bio}
           </Typography>
-          {person.items &&(
-          <>
-            <Typography variant="h6" gutterBottom>
-              Items
-            </Typography>
-            <Typography
-              variant="body1"
-              paragraph
-              sx={{ whiteSpace: "pre-line" }}
-            >
-              {person.items}
-            </Typography>
-          </>
+          {person.items && (
+            <>
+              <Typography variant="h6" gutterBottom>
+                Items
+              </Typography>
+              <Typography
+                variant="body1"
+                paragraph
+                sx={{ whiteSpace: "pre-line" }}
+              >
+                {person.items}
+              </Typography>
+            </>
           )}
         </Box>
 
@@ -93,6 +125,15 @@ export default function ProfileCard({ person, setPageName }) {
               marginBottom: 2,
             }}
           />
+          {message ? (
+            <Typography variant="body1" color="text.secondary">
+              {message}
+            </Typography>
+          ) : (
+            <MonochromeButton onClick={() => AddToEvidence({"name":person.name, "src":person.image}, setMessage)}>
+              Add photo to evidance board
+            </MonochromeButton>
+          )}
           <Box display="grid" gridTemplateColumns="1fr" rowGap={1}>
             <InfoRow label="Birth Date" value={person.birthDate} />
             <InfoRow label="Death Date" value={person.deathDate} />

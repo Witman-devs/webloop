@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import {PAGE_COMPONENTS} from '../consts';
 
 function Page({pageName, setPageName}){
@@ -9,11 +10,11 @@ function Page({pageName, setPageName}){
     )
 }
 
-export default function PageRouter({pageName, setPageName}){
+export default function PageRouter({pageName, setPageName, evidanceBoardOpen}){
 
     return(
     <> 
-        <Page pageName={pageName} setPageName={setPageName} />
+        {evidanceBoardOpen?<> <Page pageName={pageName} setPageName={setPageName}/> . </>:<Page pageName={pageName} setPageName={setPageName}/>}
     </>
     )
 }

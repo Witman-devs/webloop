@@ -271,7 +271,8 @@ function App() {
             overflowX: "hidden",
           }}
         >
-          <PageRouter pageName={pageName} setPageName={goToPage} />
+          {/* Forced state update: This is to make sure when note is deleted from board you can add it again */}
+          <PageRouter pageName={pageName} setPageName={goToPage} evidanceBoardOpen={evidanceBoardOpen}/>
         </div>
 
         {/* Hidden elements */}
