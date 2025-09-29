@@ -17,7 +17,7 @@ import VolumeController from "./components/VolumeController";
 import "./MainMenu.css";
 import { useNavigate } from "react-router";
 import { MUSIC_TITLE } from "./consts";
-import { TriangleAlert, X } from "lucide-react";
+import { ExternalLink, TriangleAlert, X } from "lucide-react";
 import DataController from "./components/DataController";
 
 const customStyles = {
@@ -90,9 +90,8 @@ export default function MainMenu() {
 
   // Handler for the start button
   const handleStartGame = () => {
-    let uri = "/game"
-    if(localStorage.getItem("emailChecked")!="true")
-      uri = "/inbox" 
+    let uri = "/game";
+    if (localStorage.getItem("emailChecked") != "true") uri = "/inbox";
     playSFXMusic(MUSIC_TITLE.MainMenuLink);
     navigate(uri);
   };
@@ -186,6 +185,16 @@ export default function MainMenu() {
               </MonochromeButton>
               <MonochromeButton onClick={handleCredits}>
                 Credits
+              </MonochromeButton>
+              <MonochromeButton>
+                <a
+                  target="_blank"
+                  href="https://discord.gg/8jE6mJBNu7"
+                  component="div"
+                  style={{color:"inherit", display:"flex", alignItems:"center", gap:5}}
+                >
+                  Join Discord <ExternalLink />
+                </a>
               </MonochromeButton>
             </Stack>
           </Box>
@@ -325,8 +334,19 @@ export default function MainMenu() {
               </li>
               <li>
                 Port Sound is provided by:
-                <Link target="_blank" href="https://pixabay.com/users/freesound_community-46691455/?utm_source=link-attribution&utm_medium=referral&utm_campaign=music&utm_content=5932">freesound_community</Link> from <Link target="_blank" href="https://pixabay.com/sound-effects//?utm_source=link-attribution&utm_medium=referral&utm_campaign=music&utm_content=5932">Pixabay</Link>
-
+                <Link
+                  target="_blank"
+                  href="https://pixabay.com/users/freesound_community-46691455/?utm_source=link-attribution&utm_medium=referral&utm_campaign=music&utm_content=5932"
+                >
+                  freesound_community
+                </Link>{" "}
+                from{" "}
+                <Link
+                  target="_blank"
+                  href="https://pixabay.com/sound-effects//?utm_source=link-attribution&utm_medium=referral&utm_campaign=music&utm_content=5932"
+                >
+                  Pixabay
+                </Link>
               </li>
             </ul>
           </Typography>
