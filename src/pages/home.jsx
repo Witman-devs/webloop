@@ -14,12 +14,14 @@ import "../App.css";
 import Port from "./port/Port";
 import birthRecords from "../assets/birth_records.json";
 import MonochromeButton from "../components/MonochromeButton";
+import { useNavigate } from "react-router";
 
 const peopleName = birthRecords.map((record) => record.childName);
 
 function Reveal() {
   const [answer, setAnswer] = useState([]);
   const [answered, setAnswered] = useState(false);
+  const navigate = useNavigate() 
   useEffect(() => {
     console.log(answer);
     console.log(answered)
@@ -81,9 +83,11 @@ function Reveal() {
 
         </Typography>
         <br/>
-        <MonochromeButton onClick={()=>alert("Play sad music by (Lurid)")}>Hand over to police, let the goverment decide what should be done </MonochromeButton>
+        <MonochromeButton onClick={()=>{localStorage.setItem("end", 1); navigate("/end")}}>Hand over to police, let the goverment decide what should be done </MonochromeButton>
         <br/>
-        <MonochromeButton onClick={()=>alert("Play mysterious music by (DR)")}>Turn blind eye and accept you couldn't solve the case </MonochromeButton>
+        OR
+        <br/>
+        <MonochromeButton onClick={()=>{localStorage.setItem("end", 2);navigate("/end")}}>Turn blind eye and accept you couldn't solve the case </MonochromeButton>
         
         </>
 

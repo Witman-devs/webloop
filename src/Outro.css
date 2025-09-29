@@ -1,0 +1,87 @@
+.bg{
+    position: absolute;    
+    top: 0;
+    left: 0;
+    width: 100%;          
+    height: 100%;
+    background: radial-gradient(
+    ellipse at center,
+    rgba(0, 0, 0, 0) 50%,
+    rgba(0, 0, 0, 0.6) 100%
+    );
+    z-index: 9999;
+    overflow: clip;
+}
+
+.slam{
+    animation: slamDown 1s ease-out;
+}
+
+@keyframes slamDown {
+    0%{
+        scale: 50 50;
+    }
+    90%{
+        scale : 1 1;
+    }
+    100%{
+        scale : 1 1;
+    }
+}
+
+.scroll{
+    position: absolute;
+    top: -11000px;
+    animation: scrollUp 60s ease-in-out;
+}
+
+@keyframes scrollUp {
+    0%{
+        top:0
+    }
+    10%{
+        top:0
+    }
+    100%{
+        top:-11000px
+    }
+}
+
+.names{
+    width: 100vw;
+    margin-top: 10vh;
+    text-align: center;
+    opacity: 100;
+    animation: fadeIn 15s ease-in;
+}
+
+@keyframes fadeIn {
+    0%{
+        opacity: 0;
+    }
+    100%{
+        opacity: 100;
+    }
+}
+
+.exitbtn{
+    position: absolute;
+    top: 50vh;
+    left: 45vw;
+    animation: btn 60s ease-in-out;
+}
+
+@keyframes btn {
+    0%{
+        top: 10px;
+        left: 10px;
+    }
+    90%{
+        top: 10px;
+        left: 10px;
+    }
+    100%{
+        top: 50vh;
+        left: 45vw;
+    }
+}

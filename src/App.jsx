@@ -168,6 +168,8 @@ function App() {
   };
 
   useEffect(() => {
+    if (localStorage.getItem("end"))
+      navigate("/end")
     if (pageName === "home") {
       setStepIndex(0);
       setRunTour(true);

@@ -8,6 +8,7 @@ import { BrowserRouter, Route, Routes } from "react-router";
 import MainMenu from "./MainMenu.jsx";
 import { createTheme, ThemeProvider } from "@mui/material";
 import { red } from "@mui/material/colors";
+import Outro from './Outro.jsx';
 Modal.setAppElement("#root");
 
 const theme = createTheme({
@@ -37,6 +38,7 @@ createRoot(document.getElementById("root")).render(
             <Route path="/" element={<MainMenu />} />
             <Route path="/inbox" element={<Inbox />} />
             <Route path="/game" element={<App />} />
+            <Route path="/end" element={<Outro />} />
           </Routes>
         </SoundProvider>
       </BrowserRouter>
