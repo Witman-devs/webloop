@@ -22,15 +22,15 @@ import gangMember from "./assets/characters/gangMember.png"
 import inspector from "./assets/characters/inspector.png"
 import ivan from "./assets/characters/ivan.png"
 import journalist from "./assets/characters/journalist.png"
-import media1 from "./assets/characters/media-1.png"
+import jeanette from "./assets/characters/jeanette.png"
 import media2 from "./assets/characters/media-2.png"
-import son from "./assets/characters/son.png"
+import francisco from "./assets/characters/francisco.png"
 import van from "./assets/characters/van.png"
 import victim1 from "./assets/characters/victim-1.png"
 import ward from "./assets/characters/ward-2.png"
 import ward1 from "./assets/characters/ward1.png"
 
-const charImages = [alonzo,angelina,ceo,chemCeo,chemEng,dealer,director,doc1,doc2,extra,gangMember,inspector,ivan,journalist,media1,media2,son,van,victim1,ward,ward1]
+const charImages = [alonzo,angelina,ceo,chemCeo,chemEng,dealer,director,doc1,doc2,extra,gangMember,inspector,ivan,journalist,jeanette,media2,francisco,van,victim1,ward,ward1]
 
 const peopleName = birthRecords.map((record) => record.childName).concat(["Sergio Schroeder", "Randolph Reynolds", "Dewey Kshlerin", "Yvonne Little", "Leroy Waelchi"]);
 

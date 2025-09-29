@@ -18,8 +18,8 @@ export default function Port({ setPageName }) {
             "Terminal Management"
         ]}
         keyPeople={[
-          { name: "Dr. Elira Koven", role: "Director" },
-          { name: "Dr. Marcus Vel", role: "Chief Medical Officer" },
+          { name: "Ms. Elira Koven", role: "Director of Postal Services Port Division" },
+          { name: "Mr. Marcus Vel", role: "Chief Operations Officer" },
         ]}
         history="Established in 1974, we began as a modest coastal dock serving domestic cargo. Today, it stands as a major international seaport with state-of-the-art terminals and a growing global footprint."
         contact={{

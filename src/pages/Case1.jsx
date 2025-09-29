@@ -6,8 +6,8 @@ import "../App.css";
 function News1({setPageName}){
     return(
         <>
-            <Link component="span" onClick={()=>setPageName("doc1")}> Dr. Juan Martinez </Link> found in staff quarter hung by a rope with suicide note saying he can't take this guilt of being reason for someones death. 
-            This is case from <Link component="span" onClick={()=>setPageName("hospital")}>RedMarsh Healthcare</Link>, case is handled by <Link component="span" onClick={()=>setPageName("inspector")}> Inspector Olive Harris</Link>. Hospital's Director <Link component="span" onClick={()=>setPageName("director")}>Dr. Cletus Blick</Link> shows grief. Says he lost one of the best doctors at the hospital. He never made any mistake in past 5 years he was working for the hospital.
+            <Link component="span" onClick={()=>setPageName("doc1")}> Dr. Juan Martinez </Link> found in staff quarter hung by a rope with suicide note saying he can't take this guilt of being the reason for someones death. 
+            This is a case from <Link component="span" onClick={()=>setPageName("hospital")}>RedMarsh Healthcare</Link> which is being handled by <Link component="span" onClick={()=>setPageName("inspector")}> Inspector Olive Harris</Link>. Hospital's Director <Link component="span" onClick={()=>setPageName("director")}>Dr. Cletus Blick</Link> shows grief. Says he lost one of the best doctors at the hospital. He never made any mistake in the past 5 years he was working for the hospital.
         </>
     )
 }

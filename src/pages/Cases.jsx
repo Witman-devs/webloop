@@ -303,7 +303,7 @@ export default function Cases({ setPageName, sx={} }) {
       <>
           <strong>Case 3 solved!</strong><br />
           Well done detective I knew you are the only one capable of finding me.<br />
-          I wonder is that because you are good detective or you don't care about yourself in the face of curropt   
+          I wonder is that because you are good detective or you don't care about yourself in the face of corruption   
       </>);
       setShowCaseSolvedModal(true);
 

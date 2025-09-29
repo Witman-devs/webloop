@@ -30,7 +30,7 @@ export default function Company({ setPageName }) {
                 Mr. James Anderson
               </Link>
             ),
-            role: "Cheif Executive Officer",
+            role: "Chief Executive Officer",
           },
           { 
             name: (
@@ -43,13 +43,39 @@ export default function Company({ setPageName }) {
                 Ms. Angelina Grimes
               </Link>
             ),
-            role: "Cheif Operations Officer",
+            role: "Chief Financial Officer",
+          },
+          { 
+            name: (
+              <Link
+                component="span"
+                onClick={() => {
+                  setPageName("francisco");
+                }}
+              >
+                Mr. Francisco Barton
+              </Link>
+            ),
+            role: "Sales Manager",
+          },
+          { 
+            name: (
+              <Link
+                component="span"
+                onClick={() => {
+                  setPageName("jeanette");
+                }}
+              >
+                Ms. Jeanette Murray
+              </Link>
+            ),
+            role: "Research Scientist",
           },
         ]}
         history="Founded in 1998, Generico Pharmaceutical began as a small formulation lab focused on essential generics. Over the years, it has grown into a globally recognized pharmaceutical company serving markets across more than 30 countries."
         contact={{
           address: ADDRESS["company"],
-          email: "contact@industech.org",
+          email: "contact@generico.org",
           phone: "+123 456 7890",
         }}
         setPageName={setPageName}
