@@ -131,7 +131,7 @@ export default function ProfileCard({ person, setPageName }) {
             </Typography>
           ) : (
             <MonochromeButton onClick={() => AddToEvidence({"name":person.name, "src":person.image}, setMessage)}>
-              Add photo to evidance board
+              Add photo to evidence board
             </MonochromeButton>
           )}
           <Box display="grid" gridTemplateColumns="1fr" rowGap={1}>
