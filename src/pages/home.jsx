@@ -87,7 +87,7 @@ function Reveal() {
         <br/>
         OR
         <br/>
-        <MonochromeButton onClick={()=>{localStorage.setItem("end", 2);navigate("/end")}}>Turn blind eye and accept you couldn't solve the case </MonochromeButton>
+        <MonochromeButton onClick={()=>{localStorage.setItem("end", 2);navigate("/end")}}>Turn blind eye and declare you couldn't solve the case </MonochromeButton>
         
         </>
 

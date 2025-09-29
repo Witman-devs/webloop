@@ -50,7 +50,7 @@ const Questions = {
   Case2: [
     {
       questionText: "What time did Inspector Olive Harris reach the port ?",
-      answer: new Set(["9:10 AM", "9:10", "09:10", "09:10 AM"]),
+      answer: new Set(["9:10", "9:10 AM", "09:10", "09:10 AM", ]),
     },
     {
       questionText: "What is the comission amount per container ?",
@@ -64,7 +64,7 @@ const Questions = {
   ],
   Case3: [
     {
-      questionText: "Who receieved the organs?",
+      questionText: "Who all are the final recipient of the organs?",
       answer: ["Sergio Schroeder", "Randolph Reynolds", "Dewey Kshlerin", "Yvonne Little", "Leroy Waelchi"],
       type: "dropdown",
       multiple:true

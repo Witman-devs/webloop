@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import { useCallback, useEffect, useState } from "react";
 import PageRouter from "./components/PageRouter";
 import {
@@ -12,6 +12,8 @@ import {
   FileQuestionMark,
   Settings,
   Music,
+  House,
+  BadgeQuestionMark,
 } from "lucide-react";
 import { NavLink, useNavigate } from "react-router";
 import SideMenu from "./components/SideMenu";
@@ -38,7 +40,7 @@ import "./App.css";
 import Cases from "./pages/Cases";
 import VolumeController from "./components/VolumeController";
 import DataController from "./components/DataController";
-import FloatMenuStack from './components/Music';
+import FloatMenuStack from "./components/Music";
 
 function App() {
   // Page and routing related states
@@ -52,6 +54,7 @@ function App() {
   });
 
   // Menus related states
+  const [helpIsOpen, setHelpIsOpen] = useState(false);
   const [optionsIsOpen, setOptionsIsOpen] = useState(false);
   const [isMusicOpen, setIsMusicOpen] = useState(false);
   const [sideMenuOpen, setSideMenuOpen] = useState(false);
@@ -87,8 +90,8 @@ function App() {
 
   useEffect(() => {
     playSFXMusic(MUSIC_TITLE.MinorLink);
-    let _pageName = pageName 
-    if(PAGE_TITLES[pageName] == null) return
+    let _pageName = pageName;
+    if (PAGE_TITLES[pageName] == null) return;
     if (seenPages.has(PAGE_TITLES[_pageName])) return;
     let newSeenPages = new Set([...seenPages, PAGE_TITLES[_pageName]]);
     setSearchResults([...newSeenPages]);
@@ -168,8 +171,7 @@ function App() {
   };
 
   useEffect(() => {
-    if (localStorage.getItem("end"))
-      navigate("/end")
+    if (localStorage.getItem("end")) navigate("/end");
     if (pageName === "home") {
       setStepIndex(0);
       setRunTour(true);
@@ -185,6 +187,14 @@ function App() {
             style={{ position: "sticky", top: "5px", zIndex: 15 }}
             spacing={1}
           >
+            <Tooltip title="Go to Home page" placement="right">
+              <House
+                cursor="pointer"
+                data-tour="home"
+                onClick={() => setPageName("home")}
+                aria-label="home"
+              />
+            </Tooltip>
             <Tooltip title="Open Evidence Board. clt + Space" placement="right">
               <NotebookPen
                 cursor="pointer"
@@ -194,7 +204,11 @@ function App() {
               />
             </Tooltip>
             <Tooltip title="Go Back; alt + Left Arrow" placement="right">
-              <MoveLeft cursor="pointer" data-tour="back" onClick={goToPreviousPage} />
+              <MoveLeft
+                cursor="pointer"
+                data-tour="back"
+                onClick={goToPreviousPage}
+              />
             </Tooltip>
             <Tooltip title="Search; clt + K" placement="right">
               <Search
@@ -218,11 +232,11 @@ function App() {
               />
             </Tooltip>
             <Tooltip title="Music" placement="right">
-              <Music 
-              cursor="pointer"
-              data-tour="music"
-              onClick={()=> setIsMusicOpen(!isMusicOpen)}
-               />
+              <Music
+                cursor="pointer"
+                data-tour="music"
+                onClick={() => setIsMusicOpen(!isMusicOpen)}
+              />
             </Tooltip>
 
             <Tooltip title="Settings" placement="right">
@@ -230,6 +244,13 @@ function App() {
                 cursor="pointer"
                 data-tour="settings"
                 onClick={() => setOptionsIsOpen(true)}
+              />
+            </Tooltip>
+            <Tooltip title="Help" placement="right">
+              <BadgeQuestionMark
+                cursor="pointer"
+                data-tour="help"
+                onClick={() => setHelpIsOpen(true)}
               />
             </Tooltip>
           </Stack>
@@ -272,7 +293,11 @@ function App() {
           }}
         >
           {/* Forced state update: This is to make sure when note is deleted from board you can add it again */}
-          <PageRouter pageName={pageName} setPageName={goToPage} evidanceBoardOpen={evidanceBoardOpen}/>
+          <PageRouter
+            pageName={pageName}
+            setPageName={goToPage}
+            evidanceBoardOpen={evidanceBoardOpen}
+          />
         </div>
 
         {/* Hidden elements */}
@@ -459,7 +484,87 @@ function App() {
             </Box>
           </Box>
         </Modal>
-        
+
+        {/* Help modal */}
+        <Modal open={helpIsOpen} onClose={() => setHelpIsOpen(false)}>
+          <Box
+            sx={{
+              height: "fit-content",
+              width: "60vw",
+              position: "absolute",
+              top: "5vh",
+              left: "20vw",
+              backgroundColor: grey[500],
+            }}
+          >
+            <Box
+              display="flex"
+              justifyContent="space-between"
+              alignItems="center"
+              mb={2}
+              paddingInline={2}
+              paddingTop={2}
+            >
+              <Typography variant="h4" component="h2">
+                Helping you mate!
+              </Typography>
+              <IconButton
+                onClick={() => setHelpIsOpen(false)}
+                aria-label="Close settings"
+              >
+                <X />
+              </IconButton>
+            </Box>
+            <Box
+              sx={{
+                height: "50vh",
+                padding: 2,
+                border: "1px solid #ccc",
+                borderRadius: "8px",
+                display: "flex",
+              }}
+            >
+              <Typography variant="body1" alignItems="center" display="flex" gap={2}>
+                <House />
+                Click this to go to home page
+              </Typography>
+              <Typography variant="body1" alignItems="center" display="flex" gap={2}>
+                <NotebookPen />
+                Click this to Open Evidance board; Or press <Typography variant="overline" style={{background:grey[200], paddingInline:9}}>Clt + space</Typography> to open and close Evidance board
+              </Typography>
+              <Typography variant="body1" alignItems="center" display="flex" gap={2}>
+                <MoveLeft />
+                Click this to back to previous page; Or press <Typography variant="overline" style={{background:grey[200], paddingInline:9}}>Alt + Left arrow</Typography> 
+              </Typography>
+              <Typography variant="body1" alignItems="center" display="flex" gap={2}>
+                <Search />
+                Click this to search any previous visited page; Or press <Typography variant="overline" style={{background:grey[200], paddingInline:9}}>clt + k</Typography> 
+              </Typography>
+              <Typography variant="body1" alignItems="center" display="flex" gap={2}>
+                <History />
+                Click this to view previous 10 page; Or press <Typography variant="overline" style={{background:grey[200], paddingInline:9}}>clt + H</Typography> 
+              </Typography>
+              <Typography variant="body1" alignItems="center" display="flex" gap={2}>
+                <FileQuestionMark />
+                Click this to view question for case; Or press <Typography variant="overline" style={{background:grey[200], paddingInline:9}}>clt + s</Typography> 
+              </Typography>
+              <Typography variant="body1" alignItems="center" display="flex" gap={2}>
+                <Music />
+                Click this to view current track play/pause or skip current track 
+              </Typography>
+
+              <Typography variant="body1" alignItems="center" display="flex" gap={2}>
+                <Settings />
+                Click this to view your settings and edit them 
+              </Typography>
+              <Typography variant="body1" alignItems="center" display="flex" gap={2}>
+                <BadgeQuestionMark />
+                You already clicked it! you are here. You know what it does
+              </Typography>
+            </Box>
+          </Box>
+        </Modal>
+
         {/* Music menu */}
         <FloatMenuStack open={isMusicOpen} />
       </div>
