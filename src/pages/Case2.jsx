@@ -15,9 +15,9 @@ function News1({ setPageName }) {
       . Arrived in the nick of time,
       <Link component="span" onClick={() => setPageName("inspector")}>
         Inspector Olive Harris
-      </Link> reported what happen at the port. He was able to injure one of the suspects. 
+      </Link> reported what happen at the port. She was able to injure one of the suspects. 
       Mark Sullivan was able to kill one of the member of gang <Link component="span" onClick={() => setPageName("ivan")}>
-        Ivan Lofer
+        Ivan Lofer. 
       </Link>
       The case is being investigated by him. Authorities are searching for suspects and urge anyone with information to come forward.
     </>

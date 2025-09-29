@@ -880,7 +880,7 @@ function AddStaticData() {
     "Olive",
     "Harris",
     dateWithTime(new Date("July 22, 1982")),
-    "Male"
+    "Female"
   );
   generateEmploymentRecord(
     "Olive",
@@ -1087,7 +1087,7 @@ function AddStaticData() {
     id:uuidv4(),
     issuingAuthority: "Zorik",
     licenseNumber: "AV-WPN-"+faker.number.int({min:10000, max:99999}),
-    name: "Sandy Harris",
+    name: "Molly Sanford",
     dob: new Date("July 12, 1965"),
     address: "221 Oakridge Lane, Westbridge, Redmarsh",
     weaponType: faker.helpers.arrayElement(licensedWeaponTypes),
@@ -1174,9 +1174,31 @@ function AddStaticData() {
     issuedBy: "Marshal Elroy Wexler",
   })
 
+  // Extras fill in characters
   let marcus = createFamily("Marcus", "Thorne", "Male",35, true, false)
   generateDeathRecords("Marcus", "Thorne", marcus.person.birthDate, new Date("August 2, 2004"), "Poisoning", "Juan Martinez")
   UniverseMap["Marcus Thorne"]["deathDate"] = new Date("August 2, 2004")
+
+  generateBirthRecords("Jeanette", "Murray", new Date("September 19, 1972"), "Female")
+  generateEmploymentRecord("Jeanette", "Murray", new Date("September 19, 1972"), "842 Elouise Meadows Suite 299, Redmarsh, Nocturna, Zorik", "Chemical Engineer", "Generico")
+  UniverseMap["Jeanette Murray"] = {
+    fullName: "Jeanette Murray",
+    birthDate: new Date("September 19, 1972"),
+    profession: "Chemical Engineer",
+    workplace: "Generico",
+    address: "842 Elouise Meadows Suite 299, Redmarsh, Nocturna, Zorik"
+  }
+
+  generateBirthRecords("Francisco", "Barton", new Date("June 25, 1981"), "Male")
+  generateEmploymentRecord("Francisco", "Barton", new Date("June 25, 1981"), "99220 Kshlerin Brooks Apt. 615, Redmarsh, Nocturna, Zorik", "Businessman", "Generico")
+  UniverseMap["Francisco Barton"]={
+    fullName: "Francisco Barton",
+    birthDate: new Date("Jube 25, 1981"),
+    profession: "Businessman",
+    workplace: "Generico",
+    address: "99220 Kshlerin Brooks Apt. 615, Redmarsh, Nocturna, Zorik"
+  }
+
 
 }
 
