@@ -22,14 +22,14 @@ export default function Director({ setPageName }) {
           name: "Dr. Cletus Blick",
           fullName: "Cletus Raj Blick",
           birthDate: "December 09, 1963",
-          deathDate: "September 14, 2023",
+          deathDate: "May 03, 2005",
           occupation: "Neurologist & Researcher",
           affiliation: (
             <Link component="span" onClick={() => setPageName("college")}>
               St. Healmore Medical College
             </Link>
           ),
-          firstAppearance: "Student Records - Batch 2008",
+          firstAppearance: "Hospital staff records - 1988",
           address:
             "Flat 3A, Doctor's Residency,\nHealth Sector 4,\nHeartline Road,\nRedmarsh",
           image: directorImg,
@@ -44,7 +44,6 @@ export default function Director({ setPageName }) {
               disorders.
             </>
           ),
-          // TODO: blink this section if the flag is found
           items: (
             flagFound && (
             <div className="blink">

@@ -17,10 +17,10 @@ export default function WardPerson({ setPageName }) {
               Redmarsh Hospital
             </Link>
           ),
-          firstAppearance: "Staff Registry - 2023",
+          firstAppearance: "Staff Registry - 1999",
           address: "Suite 12B, Willow Lane Residences,\nRedmarsh City",
           image: directorImg,
-          bio: `Samuel Hayes is a ward attendant at Redmarsh Hospital, Fictionalia.
+          bio: `Samuel Hayes is a ward attendant at Redmarsh Hospital, Zorik.
 She is known for her positive attitude and resilience in her work.
 Samuel was recently seen tending to a patient, Emily Kihn, showing her caring nature and dedication to her role.
 Samuel is supported by the dedicated staff and her family as she continues her service.`,

@@ -13,8 +13,8 @@ export default function Doc1({ setPageName }) {
         person={{
           name: "Dr. Juan Martinez",
           fullName: "Juan Martinez",
-          birthDate: "July 22, 1982",
-          deathDate: "June 5, 2023",
+          birthDate: "July 22, 1970",
+          deathDate: "August 11, 2004",
           occupation: "Surgeon & Researcher",
           affiliation: (
             <Link component="span" onClick={() => setPageName("college")}>
@@ -33,8 +33,8 @@ export default function Doc1({ setPageName }) {
               <Link onClick={() => setPageName("hospital")}>
                 Redmarsh Healthcare
               </Link>. A graduate of St.
-              Healmore Medical College, Batch of 2005, he brings over two
-              decades of experience to patient care and surgical innovation. Dr.
+              Healmore Medical College, Batch of 2000, he brings great intution for 
+              patient care and surgical innovation. Dr.
               Martinez continues to contribute to medical science through
               research publications and active participation in global surgical
               forums.
