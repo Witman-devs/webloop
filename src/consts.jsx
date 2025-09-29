@@ -21,6 +21,8 @@ import alonzo from "./pages/people/AlonzoMcEnzie";
 import angelina from "./pages/people/AngelinaGrimes";
 import ivan from "./pages/people/IvanLofer";
 import van from "./pages/people/VanSwift";
+import jeanette from "./pages/people/JeanetteMurray";
+import francisco from "./pages/people/FranciscoBarton";
 
 // Place
 import Police from "./pages/policeOffice/policeOffice";
@@ -130,6 +132,8 @@ export const PAGE_COMPONENTS = {
   angelina: angelina,
   ivan: ivan,
   van: van,
+  jeanette: jeanette,
+  francisco: francisco,
 
   // system
   notfound: NotFound,
@@ -189,6 +193,8 @@ export const PAGE_TITLES = {
   angelina: "Angelina Grimes",
   ivan: "Ivan Lofer",
   van: "Van Swift",
+  jeanette: "Jeanette Murray",
+  francisco: "Francisco Barton",
 
   notfound: "Page Not Found",
 };

@@ -66,20 +66,20 @@ function Reveal() {
         <>
         
         <Typography variant="h5">
-          Very Well detective now you know everything that is to tell you. <br/>
-          I ... I asked you to solve it cause I know you are the only person who should be given this autority to decied.<br/>
-          I loved her from bottom of my heart. I never thought we will be seperated like that. It is unbeliveavle if you ask me.<br/>
-          There is so much I wanted to tell her... Now she is not with us. I was furious, I was blinded by revenge.<br/> 
-          I was so blinded I didn't even thought before killing anyone! But James, James was different. I have worked with him.<br/>
-          I couldn’t accept that he would be involved, I justed wanted to ask him. But he fired at me, In rage and confusion I killed him<br/>
-          His daughter was standing right their, She also lost someone she loved. I still hear her voice. It haunts me. <br/>
+          Very well, Detective. Now you know everything I have to tell you. <br/>
+          I ... I asked you to solve it cause I know you are the only person who should be given this autority to decide.<br/>
+          I loved her from the bottom of my heart. I never thought we would be separated like that. It is unbelievable this happened.<br/>
+          There was so much I wanted to tell her... Now she is not with us. I was furious, I was blinded by revenge.<br/> 
+          I was so blinded I didn't even think before killing anyone! But James, James was different. I have worked with him.<br/>
+          I couldn’t accept that fact that he was involved, I just wanted to ask him. But he fired me. In rage and confusion I killed him..<br/>
+          His daughter was standing right there. She also lost someone she loved. I still hear her voice. It haunts me. <br/>
           Later I found out he was not aware of anything. Then...<br/>
-          What I did was right ? Was this the punishment for his ignorance? <br/>
-          Or Is it the punishment for my incopatance ?<br/>
+          Whatever I did, was it right ? Was this the punishment for his ignorance? <br/>
+          Or Is it the punishment for my incompetence ?<br/>
           I leave the decision upto you!
 
-          If you decied to reveal my location to police. I would surrender.<br/> 
-          But if you decied to not hand me over, and what is did is correct, I promiss you, I will hunt each and every individual down who is responsible for death of Roxanne (Rose).  
+          If you decide to reveal my location to the police. I will surrender.<br/> 
+          But if you decide not to hand me over, and think what I did was right, I promise you I will hunt down every individual responsible for the death of Roxanne (Rose).  
 
         </Typography>
         <br/>
