@@ -67,7 +67,7 @@ const emailsToBeReceived = {
 
 function KillerChallenge() {
   const navigate = useNavigate();
-  const { playMainMusic, playSFXMusic } = useSound();
+  const { playSFXMusic } = useSound();
 
   const handleStart = () => {
     playSFXMusic(MUSIC_TITLE.StartGame);
@@ -131,6 +131,11 @@ function NewsMail({ showVideo, setShowVideo }) {
 }
 
 function AttachedVideo({ showVideo, setShowVideo }) {
+  const {playMainMusic, stopMainMusic} = useSound()
+  useEffect(()=>{
+    if(showVideo) stopMainMusic()
+    else playMainMusic(MUSIC_TITLE.Puzzle)
+  },[showVideo])
   return (
     <>
       {showVideo ? (
@@ -187,7 +192,6 @@ export default function Inbox() {
         ? new Date(a.date) - new Date(b.date)
         : new Date(b.date) - new Date(a.date)
     );
-    console.log("Filtered", filtered)
     return filtered;
   }, [emails, search, sortOrder]);
 
@@ -199,14 +203,14 @@ export default function Inbox() {
   }, []);
 
   useEffect(() => {
-    console.log("okay we are here")
     if (videoPlayedOnce || !showVideo) return;
-    console.log("playing video first time", emailsToBeReceived.killer)
     setVideoPlayedOnce(true);
     setTimeout(() => {
-      console.log("Sending email")
-      let arr = [...emails, emailsToBeReceived.killer]
-      console.log(arr)
+      let email = emailsToBeReceived.killer;
+      email.date = new Date(
+            new Date("07/17/2005").getTime() + 1000 * 60 * emails.length
+          ).toISOString();
+      let arr = [...emails, email]
       setEmails(arr);
       setNewEmail("killer");
     }, 10000);
@@ -256,7 +260,7 @@ export default function Inbox() {
           new Date("07/17/2005").getTime() + 1000 * 60 * emails.length
         );
 
-        setNewEmail(id);
+        setNewEmail(id.toString());
         return [
           ...prev,
           {
