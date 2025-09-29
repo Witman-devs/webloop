@@ -20,7 +20,15 @@ import "../answers.css";
 import detImage from "../assets/characters/det.png";
 import "../App.css";
 
-const peopleName = birthRecords.map((record) => record.childName).concat(["Sergio Schroeder", "Randolph Reynolds", "Dewey Kshlerin", "Yvonne Little", "Leroy Waelchi"]);
+const peopleName = birthRecords
+  .map((record) => record.childName)
+  .concat([
+    "Sergio Schroeder",
+    "Randolph Reynolds",
+    "Dewey Kshlerin",
+    "Yvonne Little",
+    "Leroy Waelchi",
+  ]);
 
 const Questions = {
   Case1: [
@@ -39,18 +47,18 @@ const Questions = {
     {
       questionText: "Name of doctor involved in trafficking",
       answer: ["Hubert Lowe"],
-      type: "dropdown"
+      type: "dropdown",
     },
     {
       questionText: "Who wrote the suicide note?",
       answer: ["Samuel Hayes"],
-      type: "dropdown"
+      type: "dropdown",
     },
   ],
   Case2: [
     {
       questionText: "What time did Inspector Olive Harris reach the port ?",
-      answer: new Set(["9:10", "9:10 AM", "09:10", "09:10 AM", ]),
+      answer: new Set(["9:10", "9:10 AM", "09:10", "09:10 AM"]),
     },
     {
       questionText: "What is the comission amount per container ?",
@@ -59,15 +67,21 @@ const Questions = {
     {
       questionText: "Who's gun was used kill Mark Sullivan ?",
       answer: ["Sandy Harris"],
-      type:"dropdown"
+      type: "dropdown",
     },
   ],
   Case3: [
     {
       questionText: "Who all are the final recipient of the organs?",
-      answer: ["Sergio Schroeder", "Randolph Reynolds", "Dewey Kshlerin", "Yvonne Little", "Leroy Waelchi"],
+      answer: [
+        "Sergio Schroeder",
+        "Randolph Reynolds",
+        "Dewey Kshlerin",
+        "Yvonne Little",
+        "Leroy Waelchi",
+      ],
       type: "dropdown",
-      multiple:true
+      multiple: true,
     },
     {
       questionText: "What is the total transcation amount?",
@@ -76,15 +90,15 @@ const Questions = {
     {
       questionText: "Who is the person behind whole organ trafficking ?",
       answer: ["Angelina Grimes"],
-      type: "dropdown"
+      type: "dropdown",
     },
   ],
 };
 
 function clearStorage() {
-    localStorage.removeItem("q0");
-    localStorage.removeItem("q1");
-    localStorage.removeItem("q2");
+  localStorage.removeItem("q0");
+  localStorage.removeItem("q1");
+  localStorage.removeItem("q2");
 }
 
 function QuestionSet({ questions, setCaseSolved }) {
@@ -101,7 +115,7 @@ function QuestionSet({ questions, setCaseSolved }) {
       {questions.map((question, index) => (
         <Question
           key={index}
-          questionId = {index}
+          questionId={index}
           correctAnswer={question.answer}
           questionText={question.questionText}
           type={question.type}
@@ -113,20 +127,26 @@ function QuestionSet({ questions, setCaseSolved }) {
   );
 }
 
-function Question({ questionId, correctAnswer, questionText, type, multiple, setCorrectResponseCount }) {
+function Question({
+  questionId,
+  correctAnswer,
+  questionText,
+  type,
+  multiple,
+  setCorrectResponseCount,
+}) {
   const { playSFXMusic } = useSound();
-  const [answer, setAnswer] = useState(()=>{
-    let ans = localStorage.getItem("q"+questionId) || "";
-    if(type === "dropdown")
-      return ans === "" ? []:ans.split(",")
-    return ans
+  const [answer, setAnswer] = useState(() => {
+    let ans = localStorage.getItem("q" + questionId) || "";
+    if (type === "dropdown") return ans === "" ? [] : ans.split(",");
+    return ans;
   });
   const [answered, setAnswered] = useState(CheckAnswer(correctAnswer, answer));
   const [ansState, setAnsState] = useState(0);
 
   useEffect(() => {
-    if(answered){
-      setAnsState(1)
+    if (answered) {
+      setAnsState(1);
       setCorrectResponseCount((prevCount) => prevCount + 1);
     }
   }, [answered]);
@@ -134,44 +154,73 @@ function Question({ questionId, correctAnswer, questionText, type, multiple, set
   const handleSubmit = (e) => {
     e.preventDefault();
     const isCorrect = CheckAnswer(correctAnswer, answer);
-    if(!isCorrect) {
+    if (!isCorrect) {
       setAnsState(-1);
       playSFXMusic("incorrect");
       setTimeout(() => setAnsState(0), 500);
-    }
-    else {
+    } else {
       setAnsState(1);
       playSFXMusic("correct");
     }
     setAnswered(isCorrect);
   };
-  
-  useEffect(()=>{
-    localStorage.setItem("q"+questionId, answer);
-  }, [answer])
+
+  useEffect(() => {
+    localStorage.setItem("q" + questionId, answer);
+  }, [answer]);
 
   return (
     <div style={{ marginBlockEnd: "20px" }}>
-      <Typography className="font" variant="h5">Q: {questionText}</Typography>
-      {
-        answered ? (
-          <div style={{ display: "flex"}}>
-          <Typography variant="h6" className={ansState == 1 ? "green-flash-box green-text font" : "green-text font"} display="inline" >{type === "dropdown" ? answer.join(", ") : answer}</Typography>
-          </div>
-        ) : (
-          <form style={{ display: "flex", alignContent: "center", alignItems: "center" }} onSubmit={handleSubmit} className={ansState == -1 ? "shake red-border font": "font"}>
+      <Typography className="font" variant="h5">
+        Q: {questionText}
+      </Typography>
+      {answered ? (
+        <div style={{ display: "flex" }}>
+          <Typography
+            variant="h6"
+            className={
+              ansState == 1
+                ? "green-flash-box green-text font"
+                : "green-text font"
+            }
+            display="inline"
+          >
+            {type === "dropdown" ? answer.join(", ") : answer}
+          </Typography>
+        </div>
+      ) : (
+        <form
+          style={{
+            display: "flex",
+            alignContent: "center",
+            alignItems: "center",
+          }}
+          onSubmit={handleSubmit}
+          className={ansState == -1 ? "shake red-border font" : "font"}
+        >
           <InputField
             answer={answer}
             setAnswer={setAnswer}
             type={type}
-            multiple={multiple?multiple:false}
-            style={{ flex:1, maxWidth: "70%" }}
+            multiple={multiple ? multiple : false}
+            style={{ flex: 1, maxWidth: "70%" }}
           />
-          <X color="red" style={{ display: answered ? "none" : "inline", marginInlineStart: "10px" }} />
-          <MonochromeButton style={{ marginInlineStart: "10px" }} onClick={handleSubmit}> Check Answer</MonochromeButton>
-          </form>
-        )
-      }
+          <X
+            color="red"
+            style={{
+              display: answered ? "none" : "inline",
+              marginInlineStart: "10px",
+            }}
+          />
+          <MonochromeButton
+            style={{ marginInlineStart: "10px" }}
+            onClick={handleSubmit}
+          >
+            {" "}
+            Check Answer
+          </MonochromeButton>
+        </form>
+      )}
     </div>
   );
 }
@@ -194,7 +243,7 @@ function InputField({ answer, setAnswer, type, multiple, style }) {
             <TextField
               {...params}
               variant="standard"
-              label={multiple?"Multiple values": "Single value"}
+              label={multiple ? "Multiple values" : "Single value"}
               placeholder="Dead People's Names"
               fullWidth={false}
               style={{ width: "100%" }}
@@ -225,8 +274,12 @@ function CaseSolvedModal({ visible, onClose, message }) {
   if (!visible) return null;
 
   return (
-    <div className="modal-overlay" onClick={onClose} style={{background:"white"}}>
-      <div className="modal-content" onClick={e => e.stopPropagation()}>
+    <div
+      className="modal-overlay"
+      onClick={onClose}
+      style={{ background: "white" }}
+    >
+      <div className="modal-content" onClick={(e) => e.stopPropagation()}>
         <img src={detImage} alt="Case Solved" />
         <h2 className="snackbar">{message}</h2>
       </div>
@@ -234,13 +287,18 @@ function CaseSolvedModal({ visible, onClose, message }) {
   );
 }
 
-
-export default function Cases({ setPageName, sx={} }) {
+export default function Cases({ setPageName, sx = {} }) {
   const [open, setOpen] = useState(false);
-  const [snackbarMessage, setSnackbarMessage] = useState(<></>);
-  const [case1Solved, setCase1Solved] = useState(()=>localStorage.getItem("case1Solved") || 0);
-  const [case2Solved, setCase2Solved] = useState(()=>localStorage.getItem("case2Solved") || 0);
-  const [case3Solved, setCase3Solved] = useState(()=>localStorage.getItem("case3Solved") || 0);
+  const [snackbarMessage, setSnackbarMessage] = useState({});
+  const [case1Solved, setCase1Solved] = useState(
+    () => localStorage.getItem("case1Solved") || 0
+  );
+  const [case2Solved, setCase2Solved] = useState(
+    () => localStorage.getItem("case2Solved") || 0
+  );
+  const [case3Solved, setCase3Solved] = useState(
+    () => localStorage.getItem("case3Solved") || 0
+  );
   const [showCaseSolvedModal, setShowCaseSolvedModal] = useState(false);
 
   const action = (
@@ -257,137 +315,211 @@ export default function Cases({ setPageName, sx={} }) {
   );
 
   useEffect(() => {
-    localStorage.setItem("case1Solved", case1Solved)
+    localStorage.setItem("case1Solved", case1Solved);
     if (case1Solved % 2 == 0) return;
-    setSnackbarMessage(
-      <>
-          <strong>Case 1 solved!</strong><br />
-          Your instincts were sharp, and your deductions even sharper.<br />
+    setSnackbarMessage({
+      msg: (
+        <>
+          <strong>Case 1 solved!</strong>
+          <br />
+          Your instincts were sharp, and your deductions even sharper.
+          <br />
           On to the next mystery...
-      </>);
-      setShowCaseSolvedModal(true);
+        </>
+      ),
+      case: 1,
+      caseSetter:setCase1Solved,
+    });
+    setShowCaseSolvedModal(true);
 
     const timer = setTimeout(() => {
       setCase1Solved(2);
-      localStorage.setItem("case1Solved", 2)
+      localStorage.setItem("case1Solved", 2);
       setShowCaseSolvedModal(false);
-    }, 30000); 
+    }, 30000);
 
     return () => clearTimeout(timer);
   }, [case1Solved]);
 
   useEffect(() => {
-    localStorage.setItem("case2Solved", case2Solved)
+    localStorage.setItem("case2Solved", case2Solved);
     if (case2Solved % 2 == 0) return;
-    setSnackbarMessage(
-      <>
-          <strong>Case 2 solved!</strong><br />
-          You didn't let your emotions get to you, and you got to the bottom of your daughters death.<br />
+    setSnackbarMessage({
+      msg: (
+        <>
+          <strong>Case 2 solved!</strong>
+          <br />
+          You didn't let your emotions get to you, and you got to the bottom of
+          your daughters death.
+          <br />
           On to the final case...
-      </>);
-      setShowCaseSolvedModal(true);
+        </>
+      ),
+      case: 2,
+      caseSetter: setCase2Solved,
+    });
+    setShowCaseSolvedModal(true);
 
     const timer = setTimeout(() => {
       setCase2Solved(2);
-      localStorage.setItem("case2Solved", 2)
+      localStorage.setItem("case2Solved", 2);
       setShowCaseSolvedModal(false);
-    }, 30000); 
+    }, 30000);
 
     return () => clearTimeout(timer);
   }, [case2Solved]);
 
   useEffect(() => {
-    localStorage.setItem("case3Solved", case3Solved)
+    localStorage.setItem("case3Solved", case3Solved);
     if (case3Solved % 2 == 0) return;
-    setSnackbarMessage(
+    setSnackbarMessage({
+      msg:(
+
       <>
-          <strong>Case 3 solved!</strong><br />
-          Well done detective I knew you are the only one capable of finding me.<br />
-          I wonder is that because you are good detective or you don't care about yourself in the face of corruption   
-      </>);
-      setShowCaseSolvedModal(true);
+        <strong>Case 3 solved!</strong>
+        <br />
+        Well done detective I knew you are the only one capable of finding me.
+        <br />I wonder is that because you are good detective or you don't care
+        about yourself in the face of corruption
+      </>
+      ),
+      case:3,
+      caseSetter:setCase3Solved,
+    }
+    );
+    setShowCaseSolvedModal(true);
 
     const timer = setTimeout(() => {
       setCase3Solved(2);
-      localStorage.setItem("case3Solved", 2)
+      localStorage.setItem("case3Solved", 2);
       setShowCaseSolvedModal(false);
-    }, 30000); 
+    }, 30000);
 
     return () => clearTimeout(timer);
   }, [case3Solved]);
 
+  useEffect(()=>{
+    // Saving progress before exitting page
+    return ()=>{
+      localStorage.setItem(`case${snackbarMessage["case"]}Solved`, 2);
+    }
+  }, [])
+
   return (
-      <div
-        style={{
-          width: "60vw",
-          left:"20vw",
-          position: "relative",
-          paddingBlockStart: "5vh",
-          ...sx
-        }}
+    <div
+      style={{
+        width: "60vw",
+        left: "20vw",
+        position: "relative",
+        paddingBlockStart: "5vh",
+        ...sx,
+      }}
+    >
+      <Typography variant="h2" className="font">
+        Cases:
+      </Typography>
+      <Typography
+        className="font"
+        style={{ fontSize: "1.1rem", padding: "2%" }}
       >
-        <Typography variant="h2" className="font">Cases:</Typography>
-        <Typography className="font" style={{ fontSize: "1.1rem", padding: "2%" }}>
-          Answer all the questions to get access to my location. I am a good UX
-          designer, so answers are not case sensitive. I will accept the answers
-          even without middle name or prefixes.
-        </Typography>
-        <Link
-          component="button"
-          variant="h4"
-          onClick={() => setPageName("case1")}
-          className="font"
-        >
-          Case 1: Scandal at hospital
-        </Link>
-        <List style={{ paddingInlineStart: "10%" }}>
-          {case1Solved==0?<QuestionSet questions={Questions["Case1"]} setCaseSolved={setCase1Solved} />:<>The whole hospital is fraud killing paitents and taking organs for money</>}
-        </List>
+        Answer all the questions to get access to my location. I am a good UX
+        designer, so answers are not case sensitive. I will accept the answers
+        even without middle name or prefixes.
+      </Typography>
+      <Link
+        component="button"
+        variant="h4"
+        onClick={() => setPageName("case1")}
+        className="font"
+      >
+        Case 1: Scandal at hospital
+      </Link>
+      <List style={{ paddingInlineStart: "10%" }}>
+        {case1Solved == 0 ? (
+          <QuestionSet
+            questions={Questions["Case1"]}
+            setCaseSolved={setCase1Solved}
+          />
+        ) : (
+          <>
+            The whole hospital is fraud killing paitents and taking organs for
+            money
+          </>
+        )}
+      </List>
 
-        <Divider style={{ margin: "30px" }} />
+      <Divider style={{ margin: "30px" }} />
 
-        <Link
-          component="button"
-          variant="h4"
-          onClick={() => setPageName("case2")}
-          className="font"
-          display={case1Solved>0?"block":"none"}
-        >
-          Case 2: Shootout at port!  
-        </Link>
-        <List style={{ paddingInlineStart: "10%" }}>
-          {case1Solved>0?case2Solved==0?<QuestionSet questions={Questions["Case2"]} setCaseSolved={setCase2Solved} />:<>They killed your daughter, how does that make you feel?</>:<></>}
-        </List>
-        
-        <Divider style={{ margin: "30px" }} />
+      <Link
+        component="button"
+        variant="h4"
+        onClick={() => setPageName("case2")}
+        className="font"
+        display={case1Solved > 0 ? "block" : "none"}
+      >
+        Case 2: Shootout at port!
+      </Link>
+      <List style={{ paddingInlineStart: "10%" }}>
+        {case1Solved > 0 ? (
+          case2Solved == 0 ? (
+            <QuestionSet
+              questions={Questions["Case2"]}
+              setCaseSolved={setCase2Solved}
+            />
+          ) : (
+            <>They killed your daughter, how does that make you feel?</>
+          )
+        ) : (
+          <></>
+        )}
+      </List>
 
-        <Link
-          component="button"
-          variant="h4"
-          onClick={() => setPageName("case3")}
-          className="font"
-          display={case2Solved>0?"block":"none"}
-        >
-          Case 3: Death of a Journalist  
-        </Link>
-        <List style={{ paddingInlineStart: "10%" }}>
-          {case2Solved>0?case3Solved==0?<QuestionSet questions={Questions["Case3"]} setCaseSolved={setCase3Solved} />:<>You know everything needed now, As part of your reward you find me! My location is in the home page</>:<></>}
-        </List>
-      <Snackbar
+      <Divider style={{ margin: "30px" }} />
+
+      <Link
+        component="button"
+        variant="h4"
+        onClick={() => setPageName("case3")}
+        className="font"
+        display={case2Solved > 0 ? "block" : "none"}
+      >
+        Case 3: Death of a Journalist
+      </Link>
+      <List style={{ paddingInlineStart: "10%" }}>
+        {case2Solved > 0 ? (
+          case3Solved == 0 ? (
+            <QuestionSet
+              questions={Questions["Case3"]}
+              setCaseSolved={setCase3Solved}
+            />
+          ) : (
+            <>
+              You know everything needed now, As part of your reward you find
+              me! My location is in the home page
+            </>
+          )
+        ) : (
+          <></>
+        )}
+      </List>
+      {/* <Snackbar
         anchorOrigin={{ vertical: "top", horizontal: "center" }}
         open={open}
         autoHideDuration={12000}
         onClose={() => setOpen(false)}
         message={snackbarMessage}
         action={action}
-      />
+      /> */}
 
       <CaseSolvedModal
         visible={showCaseSolvedModal}
-        onClose={() => setShowCaseSolvedModal(false)}
-        message={snackbarMessage}
+        onClose={()=>{
+          localStorage.setItem(`case${snackbarMessage["case"]}Solved`, 2);
+          snackbarMessage["caseSetter"](2)
+          setShowCaseSolvedModal(false);
+        }}
+        message={snackbarMessage["msg"]}
       />
-
     </div>
   );
 }
