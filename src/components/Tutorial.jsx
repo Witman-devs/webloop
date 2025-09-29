@@ -15,6 +15,11 @@ const Tutorial = ({ runTour, stepIndex, callback }) => {
 
     },
     {
+      target: '[data-tour="home"]',
+      content: 'Your safe heaven! Start and the destination. You are always welcome back home',
+      disableBeacon: true,
+    },
+    {
       target: '[data-tour="menu"]',
       content: 'This is your Evidence Board where view clues gather, your journey history unfolds, and items reveal their secrets. Explore carefully cuz every corner holds a meaning!',
       disableBeacon: true,
@@ -47,6 +52,11 @@ const Tutorial = ({ runTour, stepIndex, callback }) => {
     {
       target: '[data-tour="settings"]',
       content: 'Control the chaos one decibel at a time.',
+      disableBeacon: true,
+    },
+    {
+      target: '[data-tour="help"]',
+      content: 'If you forget what I said. Or in case you skipped me. Here is a shorter version of me',
       disableBeacon: true,
     }
   ];
