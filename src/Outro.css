@@ -66,22 +66,33 @@
 
 .exitbtn{
     position: absolute;
-    top: 50vh;
-    left: 45vw;
+    top:10px;
+    left:10px;
+    display: block;
+    opacity: 0;
     animation: btn 60s ease-in-out;
 }
 
 @keyframes btn {
-    0%{
-        top: 10px;
-        left: 10px;
-    }
-    90%{
-        top: 10px;
-        left: 10px;
+    0%,99%{
+        opacity: 100;
     }
     100%{
-        top: 50vh;
-        left: 45vw;
+        opacity: 0;
     }
+}
+
+.endScene{
+    opacity: 100;
+    animation: fadeInLast 60s ease;
+}
+
+@keyframes fadeInLast {
+    0%,99%{display: none;}
+    100%{display: block;}
+}
+
+.characterImg:hover{
+    scale: 1.1;
+    rotate: 2deg;
 }
