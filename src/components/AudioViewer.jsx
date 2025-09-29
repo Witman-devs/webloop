@@ -1,5 +1,6 @@
 import { TextField, Grid, Link, Modal, Typography } from "@mui/material";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useSound } from "../hook/SoundContext";
 
 const flowKey = "EvidenceBoard";
 
@@ -19,6 +20,16 @@ const style = {
 export default function AudioViewer({ label, fileSrc, correctPassword }) {
   const [open, setOpen] = useState(false);
   const [password, setPassword] = useState("");
+  const [audioLevel, _] = useState(()=>parseFloat(localStorage.getItem("musicVolume")) || 0);
+  const {setMusicVolume} = useSound();
+
+  useEffect(()=>{
+    console.log("audio", audioLevel)
+    if(open) 
+      setMusicVolume(0)
+    else
+      setMusicVolume(audioLevel)
+  }, [open])
 
   return (
     <>

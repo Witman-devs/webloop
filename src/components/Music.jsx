@@ -75,7 +75,7 @@ export default function FloatMenuStack({ open }) {
     <Stack
       style={{
         position: "fixed",
-        top: "125px",
+        top: "200px",
         left:"50px",
         display: open ? "block" : "none",
         zIndex:200

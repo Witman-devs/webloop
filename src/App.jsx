@@ -185,7 +185,7 @@ function App() {
         <div style={{ height: "100vh", width: "fit-content" }}>
           <Stack
             style={{ position: "sticky", top: "5px", zIndex: 15 }}
-            spacing={1}
+            spacing={2}
           >
             <Tooltip title="Go to Home page" placement="right">
               <House
