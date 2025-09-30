@@ -325,7 +325,7 @@ export default function Cases({ setPageName, sx = {} }) {
           Your instincts were sharp, and your deductions even sharper.
           <br />
           On to the next mystery...
-      </>);
+      </>)});
       setShowCaseSolvedModal(true);
       localStorage.setItem("case1Solved", 2)
 
@@ -349,7 +349,7 @@ export default function Cases({ setPageName, sx = {} }) {
           your daughters death.
           <br />
           On to the final case...
-      </>);
+      </>)});
       setShowCaseSolvedModal(true);
       localStorage.setItem("case2Solved", 2)
 
@@ -374,7 +374,7 @@ export default function Cases({ setPageName, sx = {} }) {
         <br />I wonder is that because you are good detective or you don't care
         about yourself in the face of corruption
       </>
-      ),
+      )});
       setShowCaseSolvedModal(true);
       localStorage.setItem("case3Solved", 2)
 
