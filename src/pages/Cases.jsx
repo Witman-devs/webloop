@@ -501,12 +501,8 @@ export default function Cases({ setPageName, sx = {} }) {
 
       <CaseSolvedModal
         visible={showCaseSolvedModal}
-        onClose={()=>{
-          localStorage.setItem(`case${snackbarMessage["case"]}Solved`, 2);
-          snackbarMessage["caseSetter"](2)
-          setShowCaseSolvedModal(false);
-        }}
-        message={snackbarMessage["msg"]}
+        onClose={() => setShowCaseSolvedModal(false)}
+        message={snackbarMessage}
       />
     </div>
   );
