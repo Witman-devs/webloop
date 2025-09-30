@@ -331,10 +331,10 @@ export default function Cases({ setPageName, sx = {} }) {
       caseSetter:setCase1Solved,
     });
     setShowCaseSolvedModal(true);
+    localStorage.setItem("case1Solved", 2);
 
     const timer = setTimeout(() => {
       setCase1Solved(2);
-      localStorage.setItem("case1Solved", 2);
       setShowCaseSolvedModal(false);
     }, 30000);
 
@@ -359,10 +359,10 @@ export default function Cases({ setPageName, sx = {} }) {
       caseSetter: setCase2Solved,
     });
     setShowCaseSolvedModal(true);
+    localStorage.setItem("case2Solved", 2);
 
     const timer = setTimeout(() => {
       setCase2Solved(2);
-      localStorage.setItem("case2Solved", 2);
       setShowCaseSolvedModal(false);
     }, 30000);
 
@@ -388,10 +388,10 @@ export default function Cases({ setPageName, sx = {} }) {
     }
     );
     setShowCaseSolvedModal(true);
+    localStorage.setItem("case3Solved", 2);
 
     const timer = setTimeout(() => {
       setCase3Solved(2);
-      localStorage.setItem("case3Solved", 2);
       setShowCaseSolvedModal(false);
     }, 30000);
 
