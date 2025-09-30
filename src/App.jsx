@@ -522,6 +522,8 @@ function App() {
                 border: "1px solid #ccc",
                 borderRadius: "8px",
                 display: "flex",
+                flexDirection:"column",
+                justifyContent: "space-around"
               }}
             >
               <Typography variant="body1" alignItems="center" display="flex" gap={2}>
