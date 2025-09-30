@@ -325,12 +325,16 @@ export default function Cases({ setPageName, sx = {} }) {
           Your instincts were sharp, and your deductions even sharper.
           <br />
           On to the next mystery...
-      </>)});
-      setShowCaseSolvedModal(true);
-      localStorage.setItem("case1Solved", 2)
+        </>
+      ),
+      case: 1,
+      caseSetter:setCase1Solved,
+    });
+    setShowCaseSolvedModal(true);
 
     const timer = setTimeout(() => {
       setCase1Solved(2);
+      localStorage.setItem("case1Solved", 2);
       setShowCaseSolvedModal(false);
     }, 30000);
 
@@ -349,12 +353,16 @@ export default function Cases({ setPageName, sx = {} }) {
           your daughters death.
           <br />
           On to the final case...
-      </>)});
-      setShowCaseSolvedModal(true);
-      localStorage.setItem("case2Solved", 2)
+        </>
+      ),
+      case: 2,
+      caseSetter: setCase2Solved,
+    });
+    setShowCaseSolvedModal(true);
 
     const timer = setTimeout(() => {
       setCase2Solved(2);
+      localStorage.setItem("case2Solved", 2);
       setShowCaseSolvedModal(false);
     }, 30000);
 
@@ -374,12 +382,16 @@ export default function Cases({ setPageName, sx = {} }) {
         <br />I wonder is that because you are good detective or you don't care
         about yourself in the face of corruption
       </>
-      )});
-      setShowCaseSolvedModal(true);
-      localStorage.setItem("case3Solved", 2)
+      ),
+      case:3,
+      caseSetter:setCase3Solved,
+    }
+    );
+    setShowCaseSolvedModal(true);
 
     const timer = setTimeout(() => {
       setCase3Solved(2);
+      localStorage.setItem("case3Solved", 2);
       setShowCaseSolvedModal(false);
     }, 30000);
 
@@ -501,8 +513,12 @@ export default function Cases({ setPageName, sx = {} }) {
 
       <CaseSolvedModal
         visible={showCaseSolvedModal}
-        onClose={() => setShowCaseSolvedModal(false)}
-        message={snackbarMessage}
+        onClose={()=>{
+          localStorage.setItem(`case${snackbarMessage["case"]}Solved`, 2);
+          snackbarMessage["caseSetter"](2)
+          setShowCaseSolvedModal(false);
+        }}
+        message={snackbarMessage["msg"]}
       />
     </div>
   );
