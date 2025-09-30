@@ -3,6 +3,7 @@ import ProfileCard from "../../components/ProfilePage";
 import directorImg from "../../assets/characters/ceo.png";
 import { MedalIcon } from "lucide-react";
 import case3Audio from "../../assets/case3.mp3"
+import case3Transcript from "../../assets/case3.txt"
 import AudioViewer from "../../components/AudioViewer";
 export default function CEO({ setPageName }) {
   return (
@@ -34,7 +35,7 @@ James is also a strong advocate for STEM education and frequently speaks at glob
                   Detective I am leaving this audio clip for you. <br/>
                   This is for all your hardwork and solving cases. <br/>
                   Password is your daughter's name. All lowercase. just first name.<br/>
-                  <AudioViewer correctPassword="roxanne" fileSrc={case3Audio} label="Password is your daughter's name."/>
+                  <AudioViewer correctPassword="roxanne" fileSrc={case3Audio} label="Password is your daughter's name." transcript={case3Transcript}/>
                 </li>
               </ul>
             </div>

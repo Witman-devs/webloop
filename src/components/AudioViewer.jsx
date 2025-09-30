@@ -1,7 +1,6 @@
 import { TextField, Grid, Link, Modal, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useSound } from "../hook/SoundContext";
-
 const flowKey = "EvidenceBoard";
 
 const style = {
@@ -10,26 +9,41 @@ const style = {
   left: "50%",
   transform: "translate(-50%, -50%)",
   width: "50vw",
-  height: "20vh",
+  height: "50vh",
   bgcolor: "background.paper",
   boxShadow: 24,
   p: 4,
   overflowY: "scroll",
 };
 
-export default function AudioViewer({ label, fileSrc, correctPassword }) {
+export default function AudioViewer({ label, fileSrc, correctPassword, transcript }) {
   const [open, setOpen] = useState(false);
   const [password, setPassword] = useState("");
-  const [audioLevel, _] = useState(()=>parseFloat(localStorage.getItem("musicVolume")) || 0);
-  const {setMusicVolume} = useSound();
 
-  useEffect(()=>{
-    console.log("audio", audioLevel)
-    if(open) 
-      setMusicVolume(0)
-    else
-      setMusicVolume(audioLevel)
-  }, [open])
+  const [loadedTranscript, setTranscript] = useState("");
+  const { playMainMusic, stopMainMusic, getLastPlayingMusic } = useSound();
+  // Load transcript when the component mounts or when transcript prop changes
+  useEffect(() => {
+    async function fetchTranscript() {
+      try {
+        const response = await fetch(transcript);
+
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
+        const textContent = await response.text();
+        setTranscript(textContent);
+      } catch (error) {
+        console.error("Could not load the transcript:", error);
+        setTranscript("");
+      }
+    }
+
+    if (transcript) {
+      fetchTranscript();
+    }
+  }, [transcript]);
 
   return (
     <>
@@ -43,23 +57,32 @@ export default function AudioViewer({ label, fileSrc, correctPassword }) {
               {label}
             </Typography>
           </Grid>
-          <Grid size={6}>
+          <Grid size={8}>
             {
-              password == correctPassword?
-            <Typography sx={{ display: "flex", justifyContent: "center" }}>
-              <audio controls src={fileSrc} style={{ width: "100%" }}>
-                Your browser does not support the audio element.
-              </audio>
-            </Typography>:
-            <TextField
-              type="password"
-              label="Password"
-              variant="outlined"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              fullWidth
-              autoFocus={true}
-            />
+              password == correctPassword ?
+                <div style={{ display: "flex", flexDirection: "column", gap: "1em" }}>
+                  <audio controls src={fileSrc} style={{ width: "25vw" }}
+                    onPlay={() => stopMainMusic()}
+                    onPause={() => {
+                      console.log("Resuming background music");
+                      console.log(getLastPlayingMusic());
+                      playMainMusic(getLastPlayingMusic())
+                    }}
+                    onEnded={() => playMainMusic(getLastPlayingMusic()._src)}>
+                    Your browser does not support the audio element.
+                  </audio>
+                  <Typography variant="caption" color="textSecondary" sx={{ whiteSpace: "pre-wrap" }}>
+                    {loadedTranscript}
+                  </Typography></div> :
+                <TextField
+                  type="password"
+                  label="Password"
+                  variant="outlined"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  fullWidth
+                  autoFocus={true}
+                />
             }
           </Grid>
         </Grid>

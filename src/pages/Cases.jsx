@@ -58,7 +58,7 @@ const Questions = {
   Case2: [
     {
       questionText: "What time did Inspector Olive Harris reach the port ?",
-      answer: new Set(["9:10", "9:10 AM", "09:10", "09:10 AM"]),
+      answer: new Set(["9:10 am", "9:10", "09:10", "09:10 am"]),
     },
     {
       questionText: "What is the comission amount per container ?",
@@ -325,16 +325,12 @@ export default function Cases({ setPageName, sx = {} }) {
           Your instincts were sharp, and your deductions even sharper.
           <br />
           On to the next mystery...
-        </>
-      ),
-      case: 1,
-      caseSetter:setCase1Solved,
-    });
-    setShowCaseSolvedModal(true);
+      </>);
+      setShowCaseSolvedModal(true);
+      localStorage.setItem("case1Solved", 2)
 
     const timer = setTimeout(() => {
       setCase1Solved(2);
-      localStorage.setItem("case1Solved", 2);
       setShowCaseSolvedModal(false);
     }, 30000);
 
@@ -353,16 +349,12 @@ export default function Cases({ setPageName, sx = {} }) {
           your daughters death.
           <br />
           On to the final case...
-        </>
-      ),
-      case: 2,
-      caseSetter: setCase2Solved,
-    });
-    setShowCaseSolvedModal(true);
+      </>);
+      setShowCaseSolvedModal(true);
+      localStorage.setItem("case2Solved", 2)
 
     const timer = setTimeout(() => {
       setCase2Solved(2);
-      localStorage.setItem("case2Solved", 2);
       setShowCaseSolvedModal(false);
     }, 30000);
 
@@ -383,15 +375,11 @@ export default function Cases({ setPageName, sx = {} }) {
         about yourself in the face of corruption
       </>
       ),
-      case:3,
-      caseSetter:setCase3Solved,
-    }
-    );
-    setShowCaseSolvedModal(true);
+      setShowCaseSolvedModal(true);
+      localStorage.setItem("case3Solved", 2)
 
     const timer = setTimeout(() => {
       setCase3Solved(2);
-      localStorage.setItem("case3Solved", 2);
       setShowCaseSolvedModal(false);
     }, 30000);
 

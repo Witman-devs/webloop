@@ -106,6 +106,14 @@ export const SoundProvider = ({ children }) => {
     let soundId = currentMainMusic.play();
     return currentMainMusic, soundId;
   };
+  
+  const getLastPlayingMusic = () => {
+    if (currentMainMusic && currentMainMusic._src) {
+      const track = MUSIC.main.find((t) => t.fileName === currentMainMusic._src);
+      return track ? track.label : null;
+    }
+    return null;
+  };
 
   const stopMainMusic = () => {
     if (!currentMainMusic) console.log("Can't stop main music nothing playing");
@@ -201,7 +209,7 @@ export const SoundProvider = ({ children }) => {
     // centeral player for Background music
     playMainMusic,
     stopMainMusic,
-    updateMainMusicVolume,
+    updateMainMusicVolume,getLastPlayingMusic,
 
     // centeral player for AUX music
     playAuxMusic,

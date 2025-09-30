@@ -9,6 +9,7 @@ import { useState } from "react";
 import SingleNonogram from "../../components/SingleNonogram";
 import AudioViewer from "../../components/AudioViewer";
 import case2Audio from "../../assets/case2.mp3"
+import case2Transcript from "../../assets/case2.txt"
 
 export default function Victim({ setPageName }) {
   const [open, setOpen] = useState(false);
@@ -51,7 +52,7 @@ His bravery and sacrifice are remembered by colleagues and citizens alike.`,
                   </Modal>
                 </li>
                 <li>
-                  <AudioViewer correctPassword="seahorse" fileSrc={case2Audio} label="Autosaved file found on computer cloud"/>
+                  <AudioViewer correctPassword="seahorse" fileSrc={case2Audio} label="Autosaved file found on computer cloud" transcript={case2Transcript}/>
                 </li>
               </ul>
             </div>
