@@ -1,10 +1,11 @@
 import React, { memo,  useState } from "react";
-import { Handle, Position } from "@xyflow/react";
+import { Handle, NodeResizer, Position } from "@xyflow/react";
 import { yellow } from "@mui/material/colors";
 import {
   Card,
   CardContent,
   CardHeader,
+  TextareaAutosize,
   TextField,
   Typography,
 } from "@mui/material";
@@ -20,11 +21,11 @@ export default memo(({ data}) => {
 
   return (
     <>
+      <NodeResizer minWidth={250} minHeight={250} />
       <Card
         style={{
           backgroundColor: yellow[500],
-          width: "250px",
-          minHeight: "250px",
+          height: "100%",
           boxShadow: "5px 5px 7px rgba(33,33,33,.7)",
         }}
       >
@@ -39,12 +40,12 @@ export default memo(({ data}) => {
                   data["label"] = e.target.value;
                 }}
                 variant="standard"
-                InputProps={{ style: { fontSize: 27 }}}
-                minRows={6}
+                InputProps={{ style: { fontSize: 27, height:"100%" }}}
+                minRows={5}
               />
           
         </CardContent>
-
+      </Card>
         <Handle
           type="source"
           id="red"
@@ -57,7 +58,6 @@ export default memo(({ data}) => {
           position={Position.top}
           style={{ ...DEFAULT_HANDLE_STYLE, left: "50%", background: "red" }}
         />
-      </Card>
     </>
   );
 });
