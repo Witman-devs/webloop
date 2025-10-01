@@ -97,6 +97,8 @@ function Chart({ setEvidanceBoardOpen, rfInstance, setRfInstance, save }) {
   const { screenToFlowPosition } = useReactFlow();
   const { setViewport } = useReactFlow();
   const [contextMenu, setContextMenu] = useState(null);
+  const [selectedNode, setSelectedNode] = useState(null);
+  const [selectedEdge, setSelectedEdge] = useState(null);
 
   const onRestore = useCallback(() => {
     const restoreFlow = async () => {
@@ -114,13 +116,26 @@ function Chart({ setEvidanceBoardOpen, rfInstance, setRfInstance, save }) {
   }, [setNodes, setViewport]);
 
   const onConnect = useCallback((params) => {
+    let newEdge = true;
+    edges.forEach(edge=>{
+      if(edge.source == params.target && edge.target == params.source){
+        newEdge = false;
+        return;
+      }
+    })
+    if(!newEdge) return;
     playSFXMusic(MUSIC_TITLE.MinorLink)
     params["type"] = "straight";
     setEdges((eds) => addEdge(params, eds));
-  }, []);
+  }, [edges]);
 
-  const handleContextMenu = (event) => {
+  const handleContextMenu = (event, nodeEdge) => {
     event.preventDefault();
+
+    if(nodeEdge && nodeEdge["type"]=="straight")
+      setSelectedEdge(nodeEdge)
+    else if(nodeEdge)
+      setSelectedNode(nodeEdge)
 
     setContextMenu(
       contextMenu === null
@@ -147,6 +162,8 @@ function Chart({ setEvidanceBoardOpen, rfInstance, setRfInstance, save }) {
 
   const handleClose = () => {
     setContextMenu(null);
+    setSelectedEdge(null)
+    setSelectedNode(null)
   };
 
   const addNode = useCallback(
@@ -175,33 +192,11 @@ function Chart({ setEvidanceBoardOpen, rfInstance, setRfInstance, save }) {
   const onNodesDelete = useCallback(
     (deleted) => {
       playSFXMusic(MUSIC_TITLE.Remove)
-      let remainingNodes = [...nodes];
       deleted.forEach( deletedNode => {
         localStorage.setItem("addedDocuments", JSON.stringify(JSON.parse(localStorage.getItem("addedDocuments")).filter(id => deletedNode.id !== id)));
       })
-      setEdges(
-        deleted.reduce((acc, node) => {
-          const incomers = getIncomers(node, remainingNodes, acc);
-          const outgoers = getOutgoers(node, remainingNodes, acc);
-          const connectedEdges = getConnectedEdges([node], acc);
-
-          const remainingEdges = acc.filter(
-            (edge) => !connectedEdges.includes(edge)
-          );
-
-          const createdEdges = incomers.flatMap(({ id: source }) =>
-            outgoers.map(({ id: target }) => ({
-              id: `${source}->${target}`,
-              source,
-              target,
-            }))
-          );
-
-          remainingNodes = remainingNodes.filter((rn) => rn.id !== node.id);
-
-          return [...remainingEdges, ...createdEdges];
-        }, edges)
-      );
+      let edgesToKeep = edges.filter(edge=>edge.target!=deleted[0].id && edge.source!=deleted[0].id)
+      setEdges(edgesToKeep)
     },
     [nodes, edges]
   );
@@ -209,9 +204,21 @@ function Chart({ setEvidanceBoardOpen, rfInstance, setRfInstance, save }) {
   const deleteEdge = useCallback(
     (_, edge) => {
       setEdges((eds) => eds.filter((e) => e.id != edge.id));
+      handleClose();
     },
     [edges]
   );
+  
+  
+  const deleteNode = useCallback(
+    (node) => {
+      setNodes((nds) => nds.filter((n) => n.id != node.id));
+      onNodesDelete([node])
+      handleClose();
+    },
+    [nodes]
+  );
+
 
   return (
     <div
@@ -239,6 +246,8 @@ function Chart({ setEvidanceBoardOpen, rfInstance, setRfInstance, save }) {
         onContextMenu={handleContextMenu}
         onEdgeDoubleClick={deleteEdge}
         fitView
+        onNodeContextMenu={handleContextMenu}
+        onEdgeContextMenu={handleContextMenu}
       >
         <CustomControls
           setEvidanceBoardOpen={setEvidanceBoardOpen}
@@ -257,6 +266,8 @@ function Chart({ setEvidanceBoardOpen, rfInstance, setRfInstance, save }) {
           }
         >
           <MenuItem onClick={(e) => addNode(e)}>Add Note</MenuItem>
+          {selectedNode&&<MenuItem onClick={() => deleteNode(selectedNode)}>Delete Note</MenuItem>}
+          {selectedEdge&&<MenuItem onClick={(e) => deleteEdge(e, selectedEdge)}>Delete Edge</MenuItem>}
         </Menu>
       </ReactFlow>
     </div>
