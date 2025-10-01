@@ -16,6 +16,7 @@ import { DataGrid } from "@mui/x-data-grid";
 import Document from "./Documents/Document";
 import MonochromeButton from "./MonochromeButton";
 import { v4 as uuidv4 } from "uuid";
+import { EllipsisVertical } from "lucide-react";
 
 const flowKey = "EvidenceBoard";
 
@@ -102,6 +103,9 @@ export default function RecordsList({
       <Box sx={{ backgroundColor: "#fff", p: 2 }}>
         <Typography variant="h6" sx={{ mb: 2 }}>
           {Label}
+        </Typography>
+        <Typography variant="body1" sx={{ mb: 2 }}>
+          You can sort and filter each column. go to column header and click <EllipsisVertical />
         </Typography>
         <DataGrid
           rows={records}

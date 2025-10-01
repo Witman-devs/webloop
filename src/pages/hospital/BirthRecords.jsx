@@ -1,11 +1,19 @@
 import RecordsList from "../../components/RecordsList";
-import birthRecords from "../../assets/birth_records.json"
+import birthRecords from "../../assets/birth_records.json";
 import { ADDRESS, LOGOS } from "../../consts";
+import { getGridDateOperators } from "@mui/x-data-grid";
 
 const birthCertificateColumns = [
   { field: "id", headerName: "ID", width: 70 },
   { field: "childName", headerName: "Name", flex: 1 },
-  { field: "dateOfBirth", headerName: "Date of Birth", width: 140 },
+  {
+    field: "dateOfBirth",
+    headerName: "Date of Birth",
+    width: 140,
+    valueGetter: (params) => new Date(params),
+    type: "date",
+    filterOperators: getGridDateOperators(),
+  },
   { field: "motherName", headerName: "Mother", flex: 1 },
   { field: "fatherName", headerName: "Father", flex: 1 },
   { field: "timeOfBirth", headerName: "Time of Birth", flex: 1 },
