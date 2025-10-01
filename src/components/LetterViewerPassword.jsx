@@ -31,8 +31,8 @@ export default function LetterViewerPassword({ image, label, fileSrc, correctAns
     flow.nodes.push({
       id: label,
       position: {
-        x: 0,
-        y: 0,
+        x: Math.random() * 150,
+        y: Math.random() * 150,
       },
       data: { image: image, label: label },
       origin: [0.5, 0.0],

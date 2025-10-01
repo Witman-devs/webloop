@@ -19,8 +19,8 @@ function AddToEvidence(type, data, setMessage) {
   flow.nodes.push({
     id: data["title"],
     position: {
-      x: 0,
-      y: 0,
+      x: Math.random() * 150,
+      y: Math.random() * 150,
     },
     data: data ,
     origin: [0.5, 0.0],

@@ -218,7 +218,6 @@ function App() {
 
   const addToEvidence = ()=>{
     const selection = document.getSelection();
-    console.log(selection);
     const flowKey = "EvidenceBoard";
 
     let flow = JSON.parse(localStorage.getItem(flowKey));
@@ -226,8 +225,8 @@ function App() {
     flow.nodes.push({
       id: uuidv4(),
       position: {
-        x: 0,
-        y: 0,
+        x: Math.random() * 150,
+        y: Math.random() * 150,
       },
       data: { label: selection.toString().trim() },
       origin: [0.5, 0.0],

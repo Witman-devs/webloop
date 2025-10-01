@@ -46,8 +46,8 @@ export default function ViewGrilleCipher() {
       flow.nodes.push({
         id: 'What could this be used for?',
         position: {
-          x: 0,
-          y: 0,
+          x: Math.random() * 150,
+          y: Math.random() * 150,
         },
         data: { image: Grille, label: "Grille" },
         origin: [0.5, 0.0],

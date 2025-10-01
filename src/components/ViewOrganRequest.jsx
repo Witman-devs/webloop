@@ -125,8 +125,8 @@ export default function ViewOrganRequestMessage() {
         return {
           id: request.requestId,
           position: {
-            x: 0,
-            y: 0,
+            x: Math.random() * 150,
+            y: Math.random() * 150,
           },
           origin: [0.5, 0.0],
           type: "organ_request",
