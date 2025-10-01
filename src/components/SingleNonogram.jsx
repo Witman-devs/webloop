@@ -1,3 +1,5 @@
+import React from "react";
+import { Tooltip } from "@mui/material";
 import { grey } from "@mui/material/colors";
 import { Background } from "@xyflow/react";
 import { useRef, useEffect, useState } from "react";
@@ -28,6 +30,21 @@ function SingleNonogram() {
     }
   }, []);
 
+  const positionRef = React.useRef({
+    x: 0,
+    y: 0,
+  });
+  const popperRef = React.useRef(null);
+  const areaRef = React.useRef(null);
+
+  const handleMouseMove = (event) => {
+    positionRef.current = { x: event.clientX, y: event.clientY };
+
+    if (popperRef.current != null) {
+      popperRef.current.update();
+    }
+  };
+
   return (
     <div
       style={{
@@ -49,16 +66,40 @@ function SingleNonogram() {
       </h1>
       <h3>
         Hint:{" "}
-        <span style={{background:hint?"transparent":grey[500]}} onClick={()=>setHint(1)}>
+        <Tooltip
+          title="Click to reveal the hint"
+          slotProps={{
+            popper: {
+              popperRef,
+              anchorEl: {
+                getBoundingClientRect: () => {
+                  return new DOMRect(
+                    positionRef.current.x,
+                    areaRef.current.getBoundingClientRect().y + 20,
+                    0,
+                    0
+                  );
+                },
+              },
+            },
+          }}
+          onClick={() => setHint(1)}
+        >
           <span
-            style={{
-              opacity: hint ? 100 : 0,
-            }}
+            style={{ background: hint ? "transparent" : grey[500] }}
+            ref={areaRef}
+            onMouseMove={handleMouseMove}
           >
-            It leaves under the sea but there is another animal with similar name
-            on land.
+            <span
+              style={{
+                opacity: hint ? 100 : 0,
+              }}
+            >
+              It leaves under the sea but there is another animal with similar
+              name on land.
+            </span>
           </span>
-        </span>
+        </Tooltip>
       </h3>
       <canvas ref={canvasRef} />
     </div>
