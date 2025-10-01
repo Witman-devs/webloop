@@ -132,10 +132,14 @@ function Chart({ setEvidanceBoardOpen, rfInstance, setRfInstance, save }) {
   const handleContextMenu = (event, nodeEdge) => {
     event.preventDefault();
 
-    if(nodeEdge && nodeEdge["type"]=="straight")
+    if(nodeEdge && nodeEdge["type"]=="straight"){
+      setSelectedNode(null)
       setSelectedEdge(nodeEdge)
-    else if(nodeEdge)
+    }
+    else if(nodeEdge){
+      setSelectedEdge(null)
       setSelectedNode(nodeEdge)
+    }
 
     setContextMenu(
       contextMenu === null
@@ -228,8 +232,10 @@ function Chart({ setEvidanceBoardOpen, rfInstance, setRfInstance, save }) {
     >
       <ReactFlow
         style={{
-          "--xy-edge-stroke-default": "#5f1313ff",
+          "--xy-edge-stroke-default": "#c71919ff",
           "--xy-edge-stroke-width-default": 5,
+          "--xy-edge-stroke-selected-default":"#350707ff",
+          "--xy-resize-background-color-default": "#c71919ff"
         }}
         nodes={nodes}
         nodeTypes={nodeTypes}
