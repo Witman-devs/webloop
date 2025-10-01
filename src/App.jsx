@@ -34,6 +34,8 @@ import {
   TextField,
   Tooltip,
   Typography,
+  Menu,
+  MenuItem,
 } from "@mui/material";
 import { MUSIC_TITLE, PAGE_KEYS, PAGE_TITLES } from "./consts";
 import "./App.css";
@@ -41,6 +43,7 @@ import Cases from "./pages/Cases";
 import VolumeController from "./components/VolumeController";
 import DataController from "./components/DataController";
 import FloatMenuStack from "./components/Music";
+import { v4 as uuidv4 } from "uuid";
 
 function App() {
   // Page and routing related states
@@ -54,6 +57,7 @@ function App() {
   });
 
   // Menus related states
+  const [contextMenu, setContextMenu] = useState(null);
   const [helpIsOpen, setHelpIsOpen] = useState(false);
   const [optionsIsOpen, setOptionsIsOpen] = useState(false);
   const [isMusicOpen, setIsMusicOpen] = useState(false);
@@ -178,6 +182,66 @@ function App() {
     }
   }, []);
 
+  // Context menu
+  const handleContextMenu = (event) => {
+    event.preventDefault();
+
+    setContextMenu(
+      contextMenu === null
+        ? {
+            mouseX: event.clientX + 2,
+            mouseY: event.clientY - 6,
+          }
+        : // repeated contextmenu when it is already open closes it with Chrome 84 on Ubuntu
+          // Other native context menus might behave different.
+          // With this behavior we prevent contextmenu from the backdrop to re-locale existing context menus.
+          null
+    );
+
+    // Prevent text selection lost after opening the context menu on Safari and Firefox
+    const selection = document.getSelection();
+    if (selection && selection.rangeCount > 0) {
+      const range = selection.getRangeAt(0);
+
+      setTimeout(() => {
+        selection.addRange(range);
+      });
+    }
+  };
+
+  const copy = ()=>{
+    const selection = document.getSelection();
+    console.log(selection);
+    navigator.clipboard.writeText(selection);
+    handleClose()
+  }
+
+  const addToEvidence = ()=>{
+    const selection = document.getSelection();
+    console.log(selection);
+    const flowKey = "EvidenceBoard";
+
+    let flow = JSON.parse(localStorage.getItem(flowKey));
+    if (!flow) flow = { nodes: [], edges: [], viewport: { x: 0, y: 0, zoom: 1 } };
+    flow.nodes.push({
+      id: uuidv4(),
+      position: {
+        x: 0,
+        y: 0,
+      },
+      data: { label: selection.toString().trim() },
+      origin: [0.5, 0.0],
+      type: "note",
+    });
+    localStorage.setItem(flowKey, JSON.stringify(flow));
+
+    handleClose()
+    }
+
+  const handleClose = () => {
+    setContextMenu(null);
+  };
+
   return (
     <>
       <div style={{ padding: 10, backgroundColor: grey[400] }}>
@@ -290,7 +354,9 @@ function App() {
             width: "calc(100vw - 10px)",
             overflowY: "auto",
             overflowX: "hidden",
+            cursor: "context-menu",
           }}
+          onContextMenu={handleContextMenu}
         >
           {/* Forced state update: This is to make sure when note is deleted from board you can add it again */}
           <PageRouter
@@ -305,6 +371,20 @@ function App() {
           evidanceBoardOpen={evidanceBoardOpen}
           setEvidanceBoardOpen={setEvidanceBoardOpen}
         />
+
+        <Menu
+          open={contextMenu !== null}
+          onClose={handleClose}
+          anchorReference="anchorPosition"
+          anchorPosition={
+            contextMenu !== null
+              ? { top: contextMenu.mouseY, left: contextMenu.mouseX }
+              : undefined
+          }
+        >
+          <MenuItem onClick={copy}>Copy</MenuItem>
+          <MenuItem onClick={addToEvidence}>Add to Evidence board</MenuItem>
+        </Menu>
 
         <SideMenu
           sideMenuOpen={sideMenuOpen}
@@ -522,44 +602,121 @@ function App() {
                 border: "1px solid #ccc",
                 borderRadius: "8px",
                 display: "flex",
-                flexDirection:"column",
-                justifyContent: "space-around"
+                flexDirection: "column",
+                justifyContent: "space-around",
               }}
             >
-              <Typography variant="body1" alignItems="center" display="flex" gap={2}>
+              <Typography
+                variant="body1"
+                alignItems="center"
+                display="flex"
+                gap={2}
+              >
                 <House />
                 Click this to go to home page
               </Typography>
-              <Typography variant="body1" alignItems="center" display="flex" gap={2}>
+              <Typography
+                variant="body1"
+                alignItems="center"
+                display="flex"
+                gap={2}
+              >
                 <NotebookPen />
-                Click this to Open Evidance board; Or press <Typography variant="overline" style={{background:grey[200], paddingInline:9}}>Clt + space</Typography> to open and close Evidance board
+                Click this to Open Evidance board; Or press{" "}
+                <Typography
+                  variant="overline"
+                  style={{ background: grey[200], paddingInline: 9 }}
+                >
+                  Clt + space
+                </Typography>{" "}
+                to open and close Evidance board
               </Typography>
-              <Typography variant="body1" alignItems="center" display="flex" gap={2}>
+              <Typography
+                variant="body1"
+                alignItems="center"
+                display="flex"
+                gap={2}
+              >
                 <MoveLeft />
-                Click this to back to previous page; Or press <Typography variant="overline" style={{background:grey[200], paddingInline:9}}>Alt + Left arrow</Typography> 
+                Click this to back to previous page; Or press{" "}
+                <Typography
+                  variant="overline"
+                  style={{ background: grey[200], paddingInline: 9 }}
+                >
+                  Alt + Left arrow
+                </Typography>
               </Typography>
-              <Typography variant="body1" alignItems="center" display="flex" gap={2}>
+              <Typography
+                variant="body1"
+                alignItems="center"
+                display="flex"
+                gap={2}
+              >
                 <Search />
-                Click this to search any previous visited page; Or press <Typography variant="overline" style={{background:grey[200], paddingInline:9}}>clt + k</Typography> 
+                Click this to search any previous visited page; Or press{" "}
+                <Typography
+                  variant="overline"
+                  style={{ background: grey[200], paddingInline: 9 }}
+                >
+                  clt + k
+                </Typography>
               </Typography>
-              <Typography variant="body1" alignItems="center" display="flex" gap={2}>
+              <Typography
+                variant="body1"
+                alignItems="center"
+                display="flex"
+                gap={2}
+              >
                 <History />
-                Click this to view previous 10 page; Or press <Typography variant="overline" style={{background:grey[200], paddingInline:9}}>clt + H</Typography> 
+                Click this to view previous 10 page; Or press{" "}
+                <Typography
+                  variant="overline"
+                  style={{ background: grey[200], paddingInline: 9 }}
+                >
+                  clt + H
+                </Typography>
               </Typography>
-              <Typography variant="body1" alignItems="center" display="flex" gap={2}>
+              <Typography
+                variant="body1"
+                alignItems="center"
+                display="flex"
+                gap={2}
+              >
                 <FileQuestionMark />
-                Click this to view question for case; Or press <Typography variant="overline" style={{background:grey[200], paddingInline:9}}>clt + s</Typography> 
+                Click this to view question for case; Or press{" "}
+                <Typography
+                  variant="overline"
+                  style={{ background: grey[200], paddingInline: 9 }}
+                >
+                  clt + s
+                </Typography>
               </Typography>
-              <Typography variant="body1" alignItems="center" display="flex" gap={2}>
+              <Typography
+                variant="body1"
+                alignItems="center"
+                display="flex"
+                gap={2}
+              >
                 <Music />
-                Click this to view current track play/pause or skip current track 
+                Click this to view current track play/pause or skip current
+                track
               </Typography>
 
-              <Typography variant="body1" alignItems="center" display="flex" gap={2}>
+              <Typography
+                variant="body1"
+                alignItems="center"
+                display="flex"
+                gap={2}
+              >
                 <Settings />
-                Click this to view your settings and edit them 
+                Click this to view your settings and edit them
               </Typography>
-              <Typography variant="body1" alignItems="center" display="flex" gap={2}>
+              <Typography
+                variant="body1"
+                alignItems="center"
+                display="flex"
+                gap={2}
+              >
                 <BadgeQuestionMark />
                 You already clicked it! you are here. You know what it does
               </Typography>
