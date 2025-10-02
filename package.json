@@ -4,7 +4,7 @@
   "version": "0.0.0",
   "main": "main.js",
   "type": "module",
-  "homepage": ".",
+  "homepage": "https://witman-devs.github.io/webloop/",
   "scripts": {
     "dev": "vite",
     "start": "concurrently \"npm run dev\" \"wait-on http://localhost:5173 && npm run electron\"",

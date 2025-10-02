@@ -24,11 +24,8 @@ import { useSound } from "./hook/SoundContext";
 import { red } from "@mui/material/colors";
 import {
   Box,
-  colors,
-  Input,
   Link,
   Modal,
-  Backdrop,
   IconButton,
   Stack,
   TextField,
@@ -371,6 +368,7 @@ function App() {
           setEvidanceBoardOpen={setEvidanceBoardOpen}
         />
 
+        {/* context menu */}
         <Menu
           open={contextMenu !== null}
           onClose={handleClose}
