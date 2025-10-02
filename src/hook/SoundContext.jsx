@@ -39,23 +39,6 @@ export const SoundProvider = ({ children }) => {
     return storedVolume ? parseFloat(storedVolume) : 0.6;
   });
 
-  // onChange save volume settings to the local storage
-  useEffect(() => {
-    localStorage.setItem("masterVolume", masterVolume.toString());
-    updateMainMusicVolume(masterVolume*musicVolume);
-    updateSFXMusicVolume(masterVolume*sfxVolume);
-  }, [masterVolume]);
-
-  useEffect(() => {
-    localStorage.setItem("sfxVolume", sfxVolume.toString());
-    updateSFXMusicVolume(masterVolume*sfxVolume);
-  }, [sfxVolume]);
-
-  useEffect(() => {
-    localStorage.setItem("musicVolume", musicVolume.toString());
-    updateMainMusicVolume(masterVolume*musicVolume);
-  }, [musicVolume]);
-
   // This is to be used when you want to play couple of musics togather.
   // for eg: music1 at 100% and music2 at 50% this will help us combine the volume
   const getEffectiveVolume = useCallback(
@@ -71,8 +54,12 @@ export const SoundProvider = ({ children }) => {
     [masterVolume, sfxVolume, musicVolume]
   );
 
+  const updateMasterVolumn = (newMasterVolumn)=>{
+    setMasterVolume(newMasterVolumn);
+    localStorage.setItem("masterVolume", masterVolume.toString());
+  }
 
-  const playMainMusic = (musicTitle) => {
+  const playMainMusic = (musicTitle, callbackOnEnd, loop=false) => {
     if (currentMainMusic) {
       console.log("stoping current main music");
       currentMainMusic.stop();
@@ -83,9 +70,9 @@ export const SoundProvider = ({ children }) => {
     const selectedTrack = mainTracks.find((value) => value.label === musicTitle);
 
     currentMainMusic = new Howl({
-      src: selectedTrack.fileName,
+      src: window.location.origin.includes("localhost")?selectedTrack.fileName:selectedTrack.fileName.slice(1),
       autoplay: true,
-      loop: false,
+      loop: loop,
       volume: masterVolume * musicVolume,
       autoUnlock: true,
       onloaderror(soundId, error) {
@@ -95,12 +82,8 @@ export const SoundProvider = ({ children }) => {
         console.log("playing main song: ", soundId);
       },
       onend() {
-        // Play a random other main song (not the current one)
-        const otherTracks = mainTracks.filter((track) => track.label !== musicTitle);
-        if (otherTracks.length > 0) {
-          const randomTrack = otherTracks[Math.floor(Math.random() * otherTracks.length)];
-          playMainMusic(randomTrack.label);
-        }
+       if(callbackOnEnd) callbackOnEnd()
+        return;
       },
     });
     let soundId = currentMainMusic.play();
@@ -120,13 +103,11 @@ export const SoundProvider = ({ children }) => {
     else currentMainMusic.stop();
   };
 
-  const updateMainMusicVolume = (newVolume) => {
-    if (!currentMainMusic){
-      console.log("Can't update volume no main music");
-      return;
-    }
-    currentMainMusic.volume(newVolume);
+  const updateMusicVolume = (newVolume) => {
+    if(currentMainMusic) currentMainMusic.volume(newVolume*masterVolume);
     updateAuxMusicVolume(newVolume); // Aux should always follow volume of main
+    setMusicVolume(newVolume)
+    localStorage.setItem("musicVolume", musicVolume.toString());
   };
 
   const playAuxMusic = (musicTitle) => {
@@ -160,7 +141,7 @@ export const SoundProvider = ({ children }) => {
 
   const updateAuxMusicVolume = (newVolume) => {
     if (!currentAuxMusic) console.log("Can't update volume no Aux music");
-    else currentAuxMusic.volume(newVolume);
+    else currentAuxMusic.volume(newVolume*masterVolume);
   };
 
   const playSFXMusic = (musicTitle) => {
@@ -193,23 +174,24 @@ export const SoundProvider = ({ children }) => {
   };
 
   const updateSFXMusicVolume = (newVolume) => {
-    if (!currentSFXMusic) console.log("Can't update volume no SFX music");
-    else currentSFXMusic.volume(newVolume);
+    if (currentSFXMusic) currentSFXMusic.volume(masterVolume*newVolume);
+    setSfxVolume(newVolume)
+    localStorage.setItem("sfxVolume", sfxVolume.toString());
   };
 
   const value = {
     masterVolume,
-    setMasterVolume,
+    updateMasterVolumn,
     sfxVolume,
-    setSfxVolume,
+    updateSFXMusicVolume,
     musicVolume,
-    setMusicVolume,
+    updateMusicVolume,
     getEffectiveVolume,
 
     // centeral player for Background music
     playMainMusic,
     stopMainMusic,
-    updateMainMusicVolume,getLastPlayingMusic,
+    getLastPlayingMusic,
 
     // centeral player for AUX music
     playAuxMusic,
@@ -219,7 +201,6 @@ export const SoundProvider = ({ children }) => {
     // centeral player for SFX music
     playSFXMusic,
     stopSFXMusic,
-    updateSFXMusicVolume,
   };
 
   return (

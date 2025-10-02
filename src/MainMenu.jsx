@@ -85,7 +85,7 @@ export default function MainMenu() {
   }, []);
 
   useEffect(() => {
-    playMainMusic(MUSIC_TITLE.MainMenu);
+    playMainMusic(MUSIC_TITLE.MainMenu, null, true);
   }, []);
 
   // Handler for the start button

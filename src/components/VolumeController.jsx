@@ -6,25 +6,25 @@ import { Bell, Music, Music4 } from "lucide-react";
 export default function VolumeController() {
   const {
     masterVolume,
-    setMasterVolume,
+    updateMasterVolumn,
     sfxVolume,
-    setSfxVolume,
+    updateSFXMusicVolume,
     musicVolume,
-    setMusicVolume,
+    updateMusicVolume,
     playSFXMusic,
   } = useSound();
 
   const handleMasterVolumeChange = (event, newValue) => {
-    setMasterVolume(newValue);
+    updateMasterVolumn(newValue);
   };
 
   const handleSfxVolumeChange = (event, newValue) => {
     playSFXMusic(MUSIC_TITLE.MinorLink);
-    setSfxVolume(newValue);
+    updateSFXMusicVolume(newValue);
   };
 
   const handleMusicVolumeChange = (event, newValue) => {
-    setMusicVolume(newValue);
+    updateMusicVolume(newValue);
   };
 
   return (

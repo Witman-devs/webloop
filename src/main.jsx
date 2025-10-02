@@ -32,7 +32,7 @@ const theme = createTheme({
 
 createRoot(document.getElementById("root")).render(
     <ThemeProvider theme={theme}>
-      <BrowserRouter>
+      <BrowserRouter basename={window.location.origin.includes("localhost")?"":'/webloop'}>
         <SoundProvider>
           <Routes>
             <Route path="/" element={<MainMenu />} />

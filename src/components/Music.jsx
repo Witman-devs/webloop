@@ -6,25 +6,15 @@ import { MUSIC, MUSIC_TITLE } from "../consts";
 import { useSound } from '../hook/SoundContext'; 
 
 
-const FloatStyle = {
-  height: "50px",
-  width: "50px",
-  borderRadius: "50%",
-  backgroundColor: "black", 
-  position: "fixed",
-  left: "60px",
-  zIndex: 20,
-  display: 'flex',
-  justifyContent: 'center',
-  alignItems: 'center',
-  cursor: 'pointer',
-};
-
 // TODO: play the whole playlist automatically
 function MusicControl() {
   const [musicId, setMusicId] = useState(1);
   const [musicPlaying, setMusicPlaying] = useState(true);
   const { playMainMusic, stopMainMusic } = useSound();
+
+  const playNextSong = ()=>{
+    setMusicId(prev=>(prev+1)%MUSIC.main.length)
+  }
 
   useEffect(()=>{
     playMainMusic(MUSIC.main[musicId].label)
