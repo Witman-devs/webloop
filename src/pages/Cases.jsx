@@ -9,6 +9,7 @@ import {
   Snackbar,
   Stack,
   TextField,
+  Tooltip,
   Typography,
 } from "@mui/material";
 import React, { use, useEffect, useState } from "react";
@@ -19,6 +20,7 @@ import { useSound } from "../hook/SoundContext";
 import "../answers.css";
 import detImage from "../assets/characters/det.png";
 import "../App.css";
+import { grey } from "@mui/material/colors";
 
 const peopleName = birthRecords
   .map((record) => record.childName)
@@ -43,31 +45,37 @@ const Questions = {
       ],
       type: "dropdown",
       multiple: true,
+      hintText: "Doctors handwriting looks too good for for his own"
     },
     {
       questionText: "Name of doctor involved in trafficking",
       answer: ["Hubert Lowe"],
       type: "dropdown",
+      hintText: "I suppose someone is lying in there resume"
     },
     {
       questionText: "Who wrote the suicide note?",
       answer: ["Samuel Hayes"],
       type: "dropdown",
+      hintText:"I would say they get organs from someone who dies around the day of request"
     },
   ],
   Case2: [
     {
       questionText: "What time did Inspector Olive Harris reach the port ?",
       answer: new Set(["9:10 am", "9:10", "09:10", "09:10 am"]),
+      hintText: "Seriously I can hear it loud and clear",
     },
     {
       questionText: "What is the comission amount per container ?",
       answer: new Set(["22000"]),
+      hintText:"You know sometimes when I check in in a group only one person does the entry"
     },
     {
       questionText: "Who's gun was used kill Mark Sullivan ?",
       answer: ["Sandy Harris"],
       type: "dropdown",
+      hintText:"If only there was a medical record that would describe how someone died"
     },
   ],
   Case3: [
@@ -82,18 +90,79 @@ const Questions = {
       ],
       type: "dropdown",
       multiple: true,
+      hintText: "Think about it, how would money be going back to Redmarsh chemicals ?"
     },
     {
       questionText: "What is the total transcation amount?",
       answer: new Set(["9000000"]),
+      hintText: "You need to read news man"
     },
     {
       questionText: "Who is the person behind whole organ trafficking ?",
       answer: ["Angelina Grimes"],
       type: "dropdown",
+      hintText: "I think someone is using Jame’s name. He/She must be getting organs somehow"
     },
   ],
 };
+
+function Hint({hintText}){
+  const [hint, setHint] = useState(0);
+
+  const positionRef = React.useRef({
+      x: 0,
+      y: 0,
+    });
+    const popperRef = React.useRef(null);
+    const areaRef = React.useRef(null);
+  
+    const handleMouseMove = (event) => {
+      positionRef.current = { x: event.clientX, y: event.clientY };
+  
+      if (popperRef.current != null) {
+        popperRef.current.update();
+      }
+    };
+  
+  return(
+          <h3>
+        Hint:{" "}
+        <Tooltip
+          title="Click to reveal the hint"
+          slotProps={{
+            popper: {
+              popperRef,
+              anchorEl: {
+                getBoundingClientRect: () => {
+                  return new DOMRect(
+                    positionRef.current.x,
+                    areaRef.current.getBoundingClientRect().y + 20,
+                    0,
+                    0
+                  );
+                },
+              },
+            },
+          }}
+          onClick={() => setHint(1)}
+        >
+          <span
+            style={{ background: hint ? "transparent" : grey[500] }}
+            ref={areaRef}
+            onMouseMove={handleMouseMove}
+          >
+            <span
+              style={{
+                opacity: hint ? 100 : 0,
+              }}
+            >
+              {hintText}
+            </span>
+          </span>
+        </Tooltip>
+      </h3>
+  )
+}
 
 function clearStorage() {
   localStorage.removeItem("q0");
@@ -120,6 +189,7 @@ function QuestionSet({ questions, setCaseSolved }) {
           questionText={question.questionText}
           type={question.type}
           multiple={question.multiple}
+          hintText={question.hintText}
           setCorrectResponseCount={setCorrectResponseCount}
         />
       ))}
@@ -133,6 +203,7 @@ function Question({
   questionText,
   type,
   multiple,
+  hintText,
   setCorrectResponseCount,
 }) {
   const { playSFXMusic } = useSound();
@@ -174,6 +245,7 @@ function Question({
       <Typography className="font" variant="h5">
         Q: {questionText}
       </Typography>
+      <Hint hintText={hintText}/>
       {answered ? (
         <div style={{ display: "flex" }}>
           <Typography
