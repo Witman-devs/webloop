@@ -4,9 +4,9 @@ import { grey } from "@mui/material/colors";
 import { Background } from "@xyflow/react";
 import { useRef, useEffect, useState } from "react";
 
-const PUZZLE_ROW_HINTS = [[2], [3], [2], [3], [3], [3], [3], [1], [2]];
+const PUZZLE_ROW_HINTS = [[2], [4], [6], [2], [3], [4], [3],[2], [1,1], [3]];
 
-const PUZZLE_COL_HINTS = [[0], [0], [9], [7, 1], [1, 4]];
+const PUZZLE_COL_HINTS = [[1],[1], [2,2,2], [7,1], [10],[2,3]];
 
 function SingleNonogram() {
   const canvasRef = useRef(null);
