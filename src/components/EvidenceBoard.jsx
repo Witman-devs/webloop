@@ -299,6 +299,10 @@ export default function EvidenceBoard({
       if (evidanceBoardOpen) save(); // Save the flow before closing
       setEvidanceBoardOpen((prev) => !prev);
     }
+    if(evidanceBoardOpen && event.code === "Escape"){
+      save();
+      setEvidanceBoardOpen(false);
+    }
   }, [evidanceBoardOpen, save]);
 
   useEffect(() => {
