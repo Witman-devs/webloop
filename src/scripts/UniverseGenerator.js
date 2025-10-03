@@ -417,7 +417,7 @@ function updateDoctors() {
   })
 }
 
-function createFamily(_name, _lastName, _gender, _age, _married, _deathDate, _profession, _workplace) {
+function createFamily(_name, _lastName, _gender, _age, _married, _deathDate, _profession, _workplace, _examiner, _doctor) {
   //   Generating Base info for family
   const gender = _gender || faker.helpers.arrayElement(["Male", "Female"]);
   let firstName = _name || faker.person.firstName(
@@ -494,7 +494,7 @@ function createFamily(_name, _lastName, _gender, _age, _married, _deathDate, _pr
   let spouseProfession, spouseWorkplace;
   if (married) {
     spouseProfession = faker.helpers.arrayElement(professions);
-    spouseWorkplace = faker.helpers.arrayElement(workplaces);
+    spouseWorkplace = faker.helpers.arrayElement(professionWorkPlace[spouseProfession]);
   }
 
   if (medicalProfessions.includes(profession)) {
@@ -550,7 +550,7 @@ function createFamily(_name, _lastName, _gender, _age, _married, _deathDate, _pr
     );
 
   //   generating death certificates
-  const isDead = _deathDate || faker.datatype.boolean(0.3);
+  const isDead = _deathDate==null?faker.datatype.boolean(0.3):_deathDate;
   const deathDate = isDead
     ? _deathDate || faker.date.between({ from: birthDateMain, to: new Date("July 17, 2005") })
     : null;
@@ -572,7 +572,7 @@ function createFamily(_name, _lastName, _gender, _age, _married, _deathDate, _pr
   }
 
   if (isDead)
-    generateDeathRecords(firstName, lastName, birthDateMain, deathDate);
+    generateDeathRecords(firstName, lastName, birthDateMain, deathDate, null, _doctor, _examiner);
   if (married) {
     if (isSpouseDead)
       generateDeathRecords(spouse, lastName, birthDateSpouse, spouseDeathDate);
@@ -1103,10 +1103,10 @@ function AddStaticData() {
   doctors.push("Hubert Lowe");
 
   // data for people who were trafficked
-  createFamily("Dale", "Grady", "Male", 30, true, new Date("September 12, 2004"))
-  createFamily("May", "Bayer", "Female", 42, true, new Date("October 18, 2004"))
-  createFamily("Beverly", "Jakubowski", "Female", 20, false, new Date("November 10, 2004"))
-  createFamily("Clint", "Barrows", "Male", 50, false, new Date("December 15, 2004"))
+  createFamily("Dale", "Grady", "Male", 30, true, new Date("September 12, 2004"), null, null, "Cletus Blick", "Hubert Lowe")
+  createFamily("May", "Bayer", "Female", 42, true, new Date("October 18, 2004"), null, null, "Cletus Blick", "Hubert Lowe")
+  createFamily("Beverly", "Jakubowski", "Female", 20, false, new Date("November 10, 2004"), null, null, "Cletus Blick", "Hubert Lowe")
+  createFamily("Clint", "Barrows", "Male", 50, false, new Date("December 15, 2004"), null, null, "Cletus Blick", "Hubert Lowe")
 
   // Detective background
   generateBirthRecords("David", "Hill", new Date("February 6, 1955"), "Male")
@@ -1365,8 +1365,8 @@ for(let d of dates){
     console.log(d.getDate())
     let date = new Date(d.getTime() + 52200000 + Math.random() * 5 * 60 * 60 * 1000);
     if(d.getDate() == 30) date = new Date(d.getTime() + 52200000 + Math.random() * 15 * 60 * 1000);
-    let names = ["Alonzo McEnzie","Ivan Lofer","Van Swift"]
-    let signatures = ["A M", "I L", "V S"]
+    let names = ["Alonzo McEnzie","Ivan Lofer"]
+    let signatures = ["A M", "I L"]
     let datas =  names.map((val, idx)=>{
       let entryDate = new Date(date.getTime() + Math.random() * 20 * 60 * 1000)
       return{
