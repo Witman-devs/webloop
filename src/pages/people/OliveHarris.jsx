@@ -44,7 +44,7 @@ export default function Inspector({ setPageName }) {
               Redmarsh Police Department
             </Link>
           ),
-          firstAppearance: "Case File #102 - 2015",
+          firstAppearance: "Case File #102",
           address:
             "Inspector's Quarters,\nPolice Colony,\nWillow Lane,\nRedmarsh",
           image: directorImg,

@@ -82,7 +82,7 @@ export default function VisitorRegistry({
           fontFamily: "'Times New Roman', serif",
         }}
       >
-        Visitor Check-In/Out Registry
+        Visitor Check-In Registry
       </Typography>
 
       {/* Data Grid */}
