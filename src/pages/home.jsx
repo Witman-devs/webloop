@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import {
   Autocomplete,
+  Avatar,
   Card,
   CardContent,
   Input,
@@ -15,6 +16,7 @@ import Port from "./port/Port";
 import birthRecords from "../assets/birth_records.json";
 import MonochromeButton from "../components/MonochromeButton";
 import { useNavigate } from "react-router";
+import RogerRoxanne from "../assets/RogerRoxanne.png"
 
 const peopleName = birthRecords.map((record) => record.childName);
 
@@ -30,13 +32,15 @@ function Reveal() {
 
   return (
     <div style={{ paddingInline: "20%", paddingTop: "5vh" }}>
+      <Avatar src={RogerRoxanne} variant="rounded" sx={{width: "100%", height: "auto"}} />
+      <Typography variant="body1" style={{textAlign:"center"}}> This is photo of me and Roxanne</Typography>
       {answered ? (
         <>
         </>
       ) : (
         <>
           <Typography variant="h6" >
-            It’s tragic that this is the way we meet. Rose had invited me to lunch at your place on Saturday — she was so excited to finally introduce me as her boyfriend. It’s unsettling how life twists and turns; one moment I had a quiet, peaceful life, and now… now this! I was at the hospital when my Rose passed away, and I still can’t believe it.
+            It’s tragic that this is the way we meet. Roxanne(Rose) had invited me to lunch at your place on Saturday — she was so excited to finally introduce me as her boyfriend. It’s unsettling how life twists and turns; one moment I love of my life, have a good job, a house. I was so ready to settle down. and now… now Look at me! I am a wanted murderer. I lost my sense of my self when I lost her. I was at the hospital when my Rose passed away, and I still can’t believe it.
             <br/><br/>
             You already have every clue you need to find me. If you think something’s missing, go back, read everything I’ve written, listen to what I’ve said. I know you can reach me.
           </Typography>
@@ -67,19 +71,19 @@ function Reveal() {
         
         <Typography variant="h5">
           Very well, Detective. Now you know everything I have to tell you. <br/>
-          I ... I asked you to solve it cause I know you are the only person who should be given this autority to decide.<br/>
-          I loved her from the bottom of my heart. I never thought we would be separated like that. It is unbelievable this happened.<br/>
-          There was so much I wanted to tell her... Now she is not with us. I was furious, I was blinded by revenge.<br/> 
-          I was so blinded I didn't even think before killing anyone! But James, James was different. I have worked with him.<br/>
-          I couldn’t accept that fact that he was involved, I just wanted to ask him. But he fired me. In rage and confusion I killed him..<br/>
-          His daughter was standing right there. She also lost someone she loved. I still hear her voice. It haunts me. <br/>
-          Later I found out he was not aware of anything. Then...<br/>
-          Whatever I did, was it right ? Was this the punishment for his ignorance? <br/>
-          Or Is it the punishment for my incompetence ?<br/>
-          I leave the decision upto you!
+          I— I asked you to solve it because I know you are the only person who should be given this authority to decide.<br/>
+          I loved her from the bottom of my heart. I never thought we would be separated like that. It is unbelievable that this happened.<br/>
+          There was so much I wanted to tell her... Now she is not with us. I was furious; I was blinded by revenge.<br/> 
+          I was so blinded, I didn't even think before killing anyone! But James, James was different. I had worked with him.<br/>
+          I couldn’t accept the fact that he was involved; I just wanted to ask him. But he fired a gun at me. In the rage and heat of moment I killed him.<br/>
+          His daughter was standing right there. She, too, lost someone she loved. I still hear her voice. It haunts me. <br/>
+          Later, I found out he was not aware of anything. Then...<br/>
+          Whatever I did- was it right ? Is this acceptable? <br/>
+          They did it for money. I did it out of anger. Am I and they are really different ?<br/>
+          I don't know what to do; I leave the decision up to you!
 
-          If you decide to reveal my location to the police. I will surrender.<br/> 
-          But if you decide not to hand me over, and think what I did was right, I promise you I will hunt down every individual responsible for the death of Roxanne (Rose).  
+          If you decide to reveal my location to the police, I will surrender.<br/> 
+          But if you decide not to hand me over, and think what I did was right, I promise you I will hunt down every individual responsible for the death of Roxanne (Rose). I will give her the justice she deserves.<br/>  
 
         </Typography>
         <br/>
