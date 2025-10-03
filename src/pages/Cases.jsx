@@ -13,7 +13,7 @@ import {
   Typography,
 } from "@mui/material";
 import React, { use, useEffect, useState } from "react";
-import { Check, X } from "lucide-react";
+import { Check, CircleAlert, X } from "lucide-react";
 import birthRecords from "../assets/birth_records.json";
 import MonochromeButton from "../components/MonochromeButton";
 import { useSound } from "../hook/SoundContext";
@@ -45,19 +45,20 @@ const Questions = {
       ],
       type: "dropdown",
       multiple: true,
-      hintText: "Doctors handwriting looks too good for for his own"
+      hintText: "Doctors handwriting looks too good for for his own",
     },
     {
       questionText: "Name of doctor involved in trafficking",
       answer: ["Hubert Lowe"],
       type: "dropdown",
-      hintText: "I suppose someone is lying in there resume"
+      hintText: "I suppose someone is lying in there resume",
     },
     {
       questionText: "Who wrote the suicide note?",
       answer: ["Samuel Hayes"],
       type: "dropdown",
-      hintText:"I would say they get organs from someone who dies around the day of request"
+      hintText:
+        "I would say they get organs from someone who dies around the day of request",
     },
   ],
   Case2: [
@@ -69,13 +70,15 @@ const Questions = {
     {
       questionText: "What is the comission amount per container ?",
       answer: new Set(["22000"]),
-      hintText:"You know sometimes when I check in in a group only one person does the entry"
+      hintText:
+        "You know sometimes when I check in in a group only one person does the entry",
     },
     {
       questionText: "Who's gun was used kill Mark Sullivan ?",
       answer: ["Sandy Harris"],
       type: "dropdown",
-      hintText:"If only there was a medical record that would describe how someone died"
+      hintText:
+        "If only there was a medical record that would describe how someone died",
     },
   ],
   Case3: [
@@ -90,78 +93,60 @@ const Questions = {
       ],
       type: "dropdown",
       multiple: true,
-      hintText: "Think about it, how would money be going back to Redmarsh chemicals ?"
+      hintText:
+        "Think about it, how would money be going back to Redmarsh chemicals ?",
     },
     {
       questionText: "What is the total transcation amount?",
       answer: new Set(["9000000"]),
-      hintText: "You need to read news man"
+      hintText: "You need to read news man",
     },
     {
       questionText: "Who is the person behind whole organ trafficking ?",
       answer: ["Angelina Grimes"],
       type: "dropdown",
-      hintText: "I think someone is using Jame’s name. He/She must be getting organs somehow"
+      hintText:
+        "I think someone is using Jame’s name. He/She must be getting organs somehow",
     },
   ],
 };
 
-function Hint({hintText}){
+function Hint({ hintText }) {
   const [hint, setHint] = useState(0);
 
-  const positionRef = React.useRef({
-      x: 0,
-      y: 0,
-    });
-    const popperRef = React.useRef(null);
-    const areaRef = React.useRef(null);
-  
-    const handleMouseMove = (event) => {
-      positionRef.current = { x: event.clientX, y: event.clientY };
-  
-      if (popperRef.current != null) {
-        popperRef.current.update();
-      }
-    };
-  
-  return(
-          <h3>
-        Hint:{" "}
-        <Tooltip
-          title="Click to reveal the hint"
-          slotProps={{
-            popper: {
-              popperRef,
-              anchorEl: {
-                getBoundingClientRect: () => {
-                  return new DOMRect(
-                    positionRef.current.x,
-                    areaRef.current.getBoundingClientRect().y + 20,
-                    0,
-                    0
-                  );
-                },
-              },
-            },
-          }}
-          onClick={() => setHint(1)}
-        >
-          <span
-            style={{ background: hint ? "transparent" : grey[500] }}
-            ref={areaRef}
-            onMouseMove={handleMouseMove}
-          >
-            <span
-              style={{
-                opacity: hint ? 100 : 0,
-              }}
-            >
-              {hintText}
-            </span>
-          </span>
-        </Tooltip>
-      </h3>
-  )
+
+  const action = (
+    <React.Fragment>
+      <IconButton
+        size="small"
+        aria-label="close"
+        color="inherit"
+        onClick={() => setHint(false)}
+      >
+        <X fontSize="small" />
+      </IconButton>
+    </React.Fragment>
+  );
+
+  return (
+    <>
+    <Tooltip title="click to get Hint">
+      <MonochromeButton onClick={()=>setHint(true)}>
+        <CircleAlert />
+      </MonochromeButton>
+    </Tooltip>
+
+      <Snackbar
+      anchorOrigin={{ vertical: "top", horizontal: "center" }}
+      open={hint}
+      autoHideDuration={12000}
+      onClose={() => setHint(false)}
+      message={hintText}
+      action={action}
+    /> 
+
+    </>
+  );
 }
 
 function clearStorage() {
@@ -245,7 +230,6 @@ function Question({
       <Typography className="font" variant="h5">
         Q: {questionText}
       </Typography>
-      <Hint hintText={hintText}/>
       {answered ? (
         <div style={{ display: "flex" }}>
           <Typography
@@ -266,6 +250,7 @@ function Question({
             display: "flex",
             alignContent: "center",
             alignItems: "center",
+            gap:"10px",
           }}
           onSubmit={handleSubmit}
           className={ansState == -1 ? "shake red-border font" : "font"}
@@ -291,6 +276,7 @@ function Question({
             {" "}
             Check Answer
           </MonochromeButton>
+          <Hint hintText={hintText} />
         </form>
       )}
     </div>
@@ -360,7 +346,6 @@ function CaseSolvedModal({ visible, onClose, message }) {
 }
 
 export default function Cases({ setPageName, sx = {} }) {
-  const [open, setOpen] = useState(false);
   const [snackbarMessage, setSnackbarMessage] = useState({});
   const [case1Solved, setCase1Solved] = useState(
     () => localStorage.getItem("case1Solved") || 0
@@ -373,18 +358,7 @@ export default function Cases({ setPageName, sx = {} }) {
   );
   const [showCaseSolvedModal, setShowCaseSolvedModal] = useState(false);
 
-  const action = (
-    <React.Fragment>
-      <IconButton
-        size="small"
-        aria-label="close"
-        color="inherit"
-        onClick={() => setOpen(false)}
-      >
-        <X fontSize="small" />
-      </IconButton>
-    </React.Fragment>
-  );
+
 
   useEffect(() => {
     localStorage.setItem("case1Solved", case1Solved);
@@ -400,7 +374,7 @@ export default function Cases({ setPageName, sx = {} }) {
         </>
       ),
       case: 1,
-      caseSetter:setCase1Solved,
+      caseSetter: setCase1Solved,
     });
     setShowCaseSolvedModal(true);
     localStorage.setItem("case1Solved", 2);
@@ -445,20 +419,18 @@ export default function Cases({ setPageName, sx = {} }) {
     localStorage.setItem("case3Solved", case3Solved);
     if (case3Solved % 2 == 0) return;
     setSnackbarMessage({
-      msg:(
-
-      <>
-        <strong>Case 3 solved!</strong>
-        <br />
-        Well done detective I knew you are the only one capable of finding me.
-        <br />I wonder is that because you are good detective or you don't care
-        about yourself in the face of corruption
-      </>
+      msg: (
+        <>
+          <strong>Case 3 solved!</strong>
+          <br />
+          Well done detective I knew you are the only one capable of finding me.
+          <br />I wonder is that because you are good detective or you don't
+          care about yourself in the face of corruption
+        </>
       ),
-      case:3,
-      caseSetter:setCase3Solved,
-    }
-    );
+      case: 3,
+      caseSetter: setCase3Solved,
+    });
     setShowCaseSolvedModal(true);
     localStorage.setItem("case3Solved", 2);
 
@@ -470,12 +442,12 @@ export default function Cases({ setPageName, sx = {} }) {
     return () => clearTimeout(timer);
   }, [case3Solved]);
 
-  useEffect(()=>{
+  useEffect(() => {
     // Saving progress before exitting page
-    return ()=>{
+    return () => {
       localStorage.setItem(`case${snackbarMessage["case"]}Solved`, 2);
-    }
-  }, [])
+    };
+  }, []);
 
   return (
     <div
@@ -574,20 +546,12 @@ export default function Cases({ setPageName, sx = {} }) {
           <></>
         )}
       </List>
-      {/* <Snackbar
-        anchorOrigin={{ vertical: "top", horizontal: "center" }}
-        open={open}
-        autoHideDuration={12000}
-        onClose={() => setOpen(false)}
-        message={snackbarMessage}
-        action={action}
-      /> */}
 
       <CaseSolvedModal
         visible={showCaseSolvedModal}
-        onClose={()=>{
+        onClose={() => {
           localStorage.setItem(`case${snackbarMessage["case"]}Solved`, 2);
-          snackbarMessage["caseSetter"](2)
+          snackbarMessage["caseSetter"](2);
           setShowCaseSolvedModal(false);
         }}
         message={snackbarMessage["msg"]}
