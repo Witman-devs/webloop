@@ -114,7 +114,6 @@ const Questions = {
 function Hint({ hintText }) {
   const [hint, setHint] = useState(0);
 
-
   const action = (
     <React.Fragment>
       <IconButton
@@ -130,21 +129,20 @@ function Hint({ hintText }) {
 
   return (
     <>
-    <Tooltip title="click to get Hint">
-      <MonochromeButton onClick={()=>setHint(true)}>
-        <CircleAlert />
-      </MonochromeButton>
-    </Tooltip>
+      <Tooltip title="click to get Hint">
+        <MonochromeButton onClick={() => setHint(true)}>
+          <CircleAlert />
+        </MonochromeButton>
+      </Tooltip>
 
       <Snackbar
-      anchorOrigin={{ vertical: "top", horizontal: "center" }}
-      open={hint}
-      autoHideDuration={12000}
-      onClose={() => setHint(false)}
-      message={hintText}
-      action={action}
-    /> 
-
+        anchorOrigin={{ vertical: "top", horizontal: "center" }}
+        open={hint}
+        autoHideDuration={12000}
+        onClose={() => setHint(false)}
+        message={hintText}
+        action={action}
+      />
     </>
   );
 }
@@ -250,7 +248,7 @@ function Question({
             display: "flex",
             alignContent: "center",
             alignItems: "center",
-            gap:"10px",
+            gap: "10px",
           }}
           onSubmit={handleSubmit}
           className={ansState == -1 ? "shake red-border font" : "font"}
@@ -358,8 +356,6 @@ export default function Cases({ setPageName, sx = {} }) {
   );
   const [showCaseSolvedModal, setShowCaseSolvedModal] = useState(false);
 
-
-
   useEffect(() => {
     localStorage.setItem("case1Solved", case1Solved);
     if (case1Solved % 2 == 0) return;
@@ -382,7 +378,7 @@ export default function Cases({ setPageName, sx = {} }) {
     const timer = setTimeout(() => {
       setCase1Solved(2);
       setShowCaseSolvedModal(false);
-    }, 30000);
+    }, 5000);
 
     return () => clearTimeout(timer);
   }, [case1Solved]);
@@ -410,7 +406,7 @@ export default function Cases({ setPageName, sx = {} }) {
     const timer = setTimeout(() => {
       setCase2Solved(2);
       setShowCaseSolvedModal(false);
-    }, 30000);
+    }, 5000);
 
     return () => clearTimeout(timer);
   }, [case2Solved]);
@@ -437,7 +433,7 @@ export default function Cases({ setPageName, sx = {} }) {
     const timer = setTimeout(() => {
       setCase3Solved(2);
       setShowCaseSolvedModal(false);
-    }, 30000);
+    }, 5000);
 
     return () => clearTimeout(timer);
   }, [case3Solved]);
@@ -485,10 +481,12 @@ export default function Cases({ setPageName, sx = {} }) {
             setCaseSolved={setCase1Solved}
           />
         ) : (
-          <>
-            The whole hospital is fraud killing paitents and taking organs for
-            money
-          </>
+          <Typography variant="h6">
+            Detective how do you will feel ? your presious daughter's organ
+            being trafficed. The whole hospital is fraud killing paitents and
+            taking organs for money. And city's Police department putting dirt
+            on it. I am mission, They killed my Rose. I WILL MAKE THEM PAY!!
+          </Typography>
         )}
       </List>
 
@@ -511,7 +509,11 @@ export default function Cases({ setPageName, sx = {} }) {
               setCaseSolved={setCase2Solved}
             />
           ) : (
-            <>They killed your daughter, how does that make you feel?</>
+            <Typography variant="h6">
+              How do you feel your daughter was killed ?
+              Ha Ha HA HA!! You know this reminds me of Hamlet. You, Mark are like a light in the darkness. They ate him. His son... He lost his father.
+              I will my eye on you. I still trust you detective.   
+            </Typography>
           )
         ) : (
           <></>
@@ -537,10 +539,11 @@ export default function Cases({ setPageName, sx = {} }) {
               setCaseSolved={setCase3Solved}
             />
           ) : (
-            <>
-              You know everything needed now, As part of your reward you find
-              me! My location is in the home page
-            </>
+            <Typography variant="h6">
+              Detective, You know everything needed to know. Your daughter was killed and her organ were trafficked. FOR MONEY.
+              I don't know about you. But I am very furious. THEY ALL WILL PAYY!!
+              As part of your reward you find me! My location is in the home page.
+            </Typography>
           )
         ) : (
           <></>
