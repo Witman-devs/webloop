@@ -12,6 +12,7 @@ const weaponRegistryColumns = [
     field: "issueDate",
     headerName: "Issue Date",
     flex: 1,
+    valueFormatter: params => new Date(params).toLocaleDateString(),
     valueGetter: (params) => new Date(params),
     type: "date",
     filterOperators: getGridDateOperators(),

@@ -10,6 +10,7 @@ const autopsyCertificateColumns = [
     field: "dateOfDeath",
     headerName: "Date of Death",
     width: 140,
+    valueFormatter: params => new Date(params).toLocaleDateString(),
     valueGetter: (params) => new Date(params),
     type: "date",
     filterOperators: getGridDateOperators(),

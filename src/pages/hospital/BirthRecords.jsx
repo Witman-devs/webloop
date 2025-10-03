@@ -10,6 +10,7 @@ const birthCertificateColumns = [
     field: "dateOfBirth",
     headerName: "Date of Birth",
     width: 140,
+    valueFormatter: params => new Date(params).toLocaleDateString(),
     valueGetter: (params) => new Date(params),
     type: "date",
     filterOperators: getGridDateOperators(),

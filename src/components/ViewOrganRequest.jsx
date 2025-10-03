@@ -26,7 +26,7 @@ const organRequests = [
     specialNote: "Transport vehicle must have refrigeration. Avoid customs.",
     requestId: "REQ-1110-SHD",
     date: "11th September 2004",
-    doneDate: "12 09 2004",
+    doneDate: "12th Sep 2004",
   },
   {
     requester: "Mr. James Anderson",
@@ -38,7 +38,7 @@ const organRequests = [
     specialNote: "Donor must be under 30. Discreet transport required.",
     requestId: "REQ-1432-BLK",
     date: "17th October 2004",
-    doneDate: "18 10 2004",
+    doneDate: "18th Oct 2004",
   },
   {
     requester: "Mr. James Anderson",
@@ -50,7 +50,7 @@ const organRequests = [
     specialNote: "Ensure preservation box is pre-cooled. Recipient ready.",
     requestId: "REQ-4217-MDL",
     date: "9th Novermber 2004",
-    doneDate: "10 11 2004",
+    doneDate: "10 Nov 2004",
   },
   {
     requester: "Mr. James Anderson",
@@ -62,7 +62,7 @@ const organRequests = [
     specialNote: "Anonymity crucial. No paper trail.",
     requestId: "REQ-3094-NXG",
     date: "13th December 2004",
-    doneDate: "15 12 2004",
+    doneDate: "15 Dec 2004",
   },
   {
     requester: "Mr. James Anderson",
@@ -74,7 +74,7 @@ const organRequests = [
     specialNote: "Target already sent. Use secure transport team Alpha.",
     requestId: "REQ-8841-CTR",
     date: "20th January 2005",
-    doneDate: "20 01 2005",
+    doneDate: "20 Jan 2005",
   },
 ];
 

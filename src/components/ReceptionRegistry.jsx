@@ -22,6 +22,7 @@ export default function VisitorRegistry({
       field: "date",
       headerName: "Date",
       width: 100,
+      valueFormatter: params => new Date(params).toLocaleDateString(),
       valueGetter: (params) => new Date(params),
       type:"date",
       filterOperators : getGridDateOperators()
