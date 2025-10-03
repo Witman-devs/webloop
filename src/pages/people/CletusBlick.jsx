@@ -13,8 +13,6 @@ import "../../index.css"; // Ensure styles are imported
 
 
 export default function Director({ setPageName }) {
-  const flagFound = localStorage.getItem("flaggedStudent") === "Cletus Raj Blick";
-
   return (
     <div style={{ width: "60vw", left: "20vw", position: "relative", padding: "2vw" }}>
       <ProfileCard
@@ -45,9 +43,7 @@ export default function Director({ setPageName }) {
             </>
           ),
           items: (
-            flagFound && (
-            <div className="blink">
-              <Typography variant="subtitle2">Documents found</Typography>
+            <div>
               <ul>
                 <li><LetterViewer image={complaint1} fileSrc={complaint1Txt} label="Letters from Ward staff complaining about staff shortages." /></li>
                 <li><LetterViewer image={complaint2} fileSrc={complaint2Txt} label="Letters from Ward staff complaining about Malfunctioning Equipments." /></li>
@@ -55,7 +51,7 @@ export default function Director({ setPageName }) {
                 <li><ViewOrganRequest /></li>
               </ul>
             </div>
-          )),
+          ),
         }}
         setPageName={setPageName}
       />
