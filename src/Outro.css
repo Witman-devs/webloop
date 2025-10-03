@@ -31,7 +31,7 @@
 
 .scroll{
     position: absolute;
-    top: -11000px;
+    top: -15000px;
     animation: scrollUp 60s ease-in-out;
 }
 
@@ -43,7 +43,7 @@
         top:0
     }
     100%{
-        top:-11000px
+        top:-15000px
     }
 }
 
