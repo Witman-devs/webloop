@@ -1455,7 +1455,7 @@ for(let d of importantDates){
     "name": name,
     "comment": "Chemical sample for Angelina Grimes",
     "signature": name.split(" ").map(val=>val[0]).join(" "),
-    "place": "Genrico"
+    "place": "Generico"
   })
 }
 

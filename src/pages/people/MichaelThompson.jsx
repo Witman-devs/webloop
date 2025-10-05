@@ -20,7 +20,7 @@ export default function Reporter({ setPageName }) {
           name: "Michael Thompson",
           fullName: "Michael Andrew Thompson",
           birthDate: "May 14, 1985",
-          deathDate: "April 20, 2023",
+          deathDate: "Feb 5, 2005",
           occupation: "Investigative Reporter",
           affiliation: (
             <Link
