@@ -15,7 +15,8 @@ function News1({setPageName}){
 function News2({setPageName}){
     return(
       <>
-        Another doctor was found dead in the staff quarters, reportedly hung by a rope. While authorities suggest suicide, several details raise suspicion. The so-called suicide note is vague, and colleagues claim the doctor showed no signs of distress. This incident, again at <Link component="span" onClick={()=>setPageName("hospital")}>RedMarsh Healthcare</Link>, is being investigated by <Link component="span" onClick={()=>setPageName("inspector")}>Inspector Olive Harris</Link>. Hospital's Director <Link component="span" onClick={()=>setPageName("director")}>Dr. Cletus Blick</Link> expressed shock. Was this truly a suicide, or is something more sinister happening at the hospital?
+       In a shocking incident, the director, <Link component="span" onClick={()=>setPageName("director")}>Dr. Cletus Blick</Link> of <Link component="span" onClick={()=>setPageName("hospital")}>RedMarsh Healthcare</Link> was found dead in his home, fatally stabbed with a knife.
+Police discovered a strange Ouroboros symbol at the scene — raising chilling questions: is this the work of a cult, a gang, a serial killer, or an enraged client seeking revenge?
       </>
     )
 }
@@ -28,15 +29,15 @@ export default function Case1({setPageName}) {
       <NewsPaperCutout
         headline="Doctor hung himself out of guilt!"
         date="12 August 2004"
-        author="kelly Alan"
+        author="Michael Thompson"
         content={<News1 setPageName={setPageName}/>}
         rotation="-5"
         left="2px"
       />
       <NewsPaperCutout
-        headline="Another doctor found mysteriously dead at RedMarsh Healthcare"
-        date="12 August 2004"
-        author="Michael Thompson"
+        headline="Hospital Director murdered!!"
+        date="4 May 2005"
+        author="Kelly Alan"
         content={<News2 setPageName={setPageName}/>}
         rotation="5"
         left="20vw"

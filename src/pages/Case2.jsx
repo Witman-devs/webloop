@@ -24,6 +24,15 @@ function News1({ setPageName }) {
   );
 }
 
+function News2({ setPageName}){
+  return(
+    <>
+    The CEO of Redmarsh Chemicals, <Link component="span" onClick={()=>setPageName("chemCeo")}> Molly Sanford </Link> was found murdered in her residence, with an Ouroboros mark left ominously at the scene.
+Authorities are investigating whether this is the act of a vengeful anti-government assailant or a serial killer targeting the wealthy elite.
+    </>
+  )
+}
+
 export default function Case2({ setPageName }) {
   return (
     <div style={{ width: "60vw", left: "20vw", position: "relative", padding: "1vw" }}>
@@ -36,6 +45,14 @@ export default function Case2({ setPageName }) {
         content={<News1 setPageName={setPageName} />}
         rotation="-3"
         left="10px"
+      />
+      <NewsPaperCutout
+        headline="Ouroboros Killer Strikes Again — Redmarsh Chemicals CEO Found Dead"
+        date="June 5, 2005"
+        author="Kelly Alan"
+        content={<News2 setPageName={setPageName} />}
+        rotation="5"
+        left="20vw"
       />
     </div>
   );

@@ -21,7 +21,7 @@ function News2({ setPageName }) {
   return (
     <>
       <Typography variant="body1">
-        <Link component="span" onClick={()=>setPageName("company")}>Generico</Link> company CEO <Link component="span" onClick={()=>setPageName("ceo")}> James Anderson </Link> found dead in his apartment. All the family members were put to sleep with some sleeping gas. His daughter Emma closes escapes the murderer. All the valuable is intact, police is investigating the incident. Police found the Oroborus symbol in his apartment. This could be the serial killer's 3rd target. 
+        In a chilling incident,  <Link component="span" onClick={()=>setPageName("company")}>Generico's </Link> CEO <Link component="span" onClick={()=>setPageName("ceo")}> James Anderson </Link> was found murdered in his apartment, with family members rendered unconscious by sleeping gas. His daughter Emma narrowly escaped the attacker. Police discovered an Ouroboros symbol at the scene, fueling speculation of a cult or serial killer targeting the wealthy elite.
       </Typography>
     </>
   );
@@ -42,7 +42,7 @@ export default function Case3({ setPageName }) {
         left="2px"
       />
       <NewsPaperCutout
-        headline="Generico CEO Murdered in his own apartment"
+        headline="Generico CEO Found Dead — Ouroboros Symbol Deepens Mystery"
         date=" July 11th, 2005"
         author="News Desk"
         content={<News2 setPageName={setPageName} />}
