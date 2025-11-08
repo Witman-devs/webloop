@@ -211,7 +211,14 @@ export default function Outro() {
         <img
           src={drip}
           alt="top banner"
-          className="bleed"
+          className="drip"
+        />}
+        {endingId==2&&
+        <img
+          src={drip}
+          style={{scale:"-1 1"}}
+          alt="top banner"
+          className="drip2"
         />}
       {articles.map((article, idx) => {
         return (

@@ -48,6 +48,30 @@
     animation: bleed 60s ease-in-out;
 }
 
+.drip{
+    position: fixed;
+    top: 0;
+    width: 100vw;
+    left: 0;
+    z-index: -1;
+    pointer-events: none;
+    object-fit: cover;
+    transform-origin: top;
+    animation: drip 40s ease-in-out;
+}
+
+.drip2{
+    position: fixed;
+    top: -40%;
+    width: 100vw;
+    left: 413px;
+    z-index: -1;
+    pointer-events: none;
+    object-fit: cover;
+    transform-origin: top;
+    animation: drip2 30s ease-in-out;
+}
+
 @keyframes scrollUp {
     0%{
         top:0
@@ -64,11 +88,32 @@
     0%{
         transform: scaleY(0);    
     }
-    10%{
-        transform: scaleY(0);   
-    }
     100%{
         transform: scaleY(1);   
+    }
+}
+
+@keyframes drip {
+    0%{
+        top:-100% 
+    }
+    10%{  
+        top:-100%
+    }
+    100%{ 
+        top:0
+    }
+}
+
+@keyframes drip2 {
+    0%{
+        top:-120% 
+    }
+    10%{  
+        top:-120%
+    }
+    100%{ 
+        top:-40%
     }
 }
 
