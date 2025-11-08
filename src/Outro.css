@@ -95,4 +95,9 @@
 .characterImg:hover{
     scale: 1.1;
     rotate: 2deg;
+    filter: inherit;
+}
+
+.dead{
+filter: invert(100%);
 }
