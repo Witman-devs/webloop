@@ -94,6 +94,7 @@ export default function Outro() {
   function Sur(){
     return(
       <div className={endingId==2?'dead':null} style={{maxHeight:"50px",  justifyContent:"center", display: "flex", alignItems:"center"}}>
+        {endingId==2&&
         <img
         className="dead"
         style={{
@@ -103,7 +104,8 @@ export default function Outro() {
         }}
         src={getOverLayImage()} // Use your specific source here
         alt="Overlay"
-      />
+        />
+        }
         <img className="characterImg" style={{rotate: `${Math.random() * 20 - 10}deg`, translate: `(${Math.random()*10-5}px, ${Math.random()*10-5}`}} src={charImages[Math.floor(Math.random()*charImages.length)]}/>
       </div>
     )
@@ -143,16 +145,18 @@ export default function Outro() {
         
       </div>
       <div className="endScene">
+        {endingId==2&&
         <img
           src={bleed}
           alt="top banner"
           className="bleed"
-        />
+        />}
+        {endingId==2&&
         <img
           src={drip}
           alt="top banner"
           className="bleed"
-        />
+        />}
         <Grid container spacing={2} alignItems="center" justifyContent="center" padding={2} columns={11} style={{minHeight:"100vh", minWidth:"100vw"}}>
           <Grid size={2} >
               <Sur/>
