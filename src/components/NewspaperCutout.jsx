@@ -2,7 +2,7 @@ import { Card, CardContent, Typography, Box } from "@mui/material";
 import newspaperImage from '../assets/extras/newspaper.png';
 import "../App.css";
 
-export default function NewsPaperCutout({ headline, date, author="",content, rotation=-0.4, left='0' }){
+export default function NewsPaperCutout({ headline, date, author="",content, rotation=-0.4, left='0', position="relative" }) {
 
   return (
     <Box
@@ -16,7 +16,7 @@ export default function NewsPaperCutout({ headline, date, author="",content, rot
         left: left,
         margin: `32px`,
         transform: `rotate(${rotation}deg)`,
-        position: "relative",
+        position: position,
         color: "#3e3a36",
         backgroundImage: `
           linear-gradient(to bottom, transparent 95%, rgba(0,0,0,0.05) 100%),
