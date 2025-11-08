@@ -143,28 +143,6 @@ const ending = {
   },
 };
 
-function Sur() {
-  return (
-    <div
-      style={{
-        maxHeight: "50px",
-        justifyContent: "center",
-        display: "flex",
-        alignItems: "center",
-      }}
-    >
-      <img
-        className="characterImg"
-        style={{
-          rotate: `${Math.random() * 20 - 10}deg`,
-          translate: `(${Math.random() * 10 - 5}px, ${Math.random() * 10 - 5}`,
-        }}
-        src={charImages[Math.floor(Math.random() * charImages.length)]}
-      />
-    </div>
-  );
-}
-
 function Main() {
   const navigate = useNavigate();
   return (
@@ -223,6 +201,18 @@ export default function Outro() {
   }
   return (
     <div className="bg">
+        {endingId==2&&
+        <img
+          src={bleed}
+          alt="top banner"
+          className="bleed"
+        />}
+        {endingId==2&&
+        <img
+          src={drip}
+          alt="top banner"
+          className="bleed"
+        />}
       {articles.map((article, idx) => {
         return (
           <div
@@ -271,18 +261,6 @@ export default function Outro() {
         </div>
       </div>
       <div className="endScene">
-        {endingId==2&&
-        <img
-          src={bleed}
-          alt="top banner"
-          className="bleed"
-        />}
-        {endingId==2&&
-        <img
-          src={drip}
-          alt="top banner"
-          className="bleed"
-        />}
         <Grid container spacing={2} alignItems="center" justifyContent="center" padding={2} columns={11} style={{minHeight:"100vh", minWidth:"100vw"}}>
           <Grid size={2} >
               <Sur/>
