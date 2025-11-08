@@ -44,6 +44,8 @@ import slice12 from "./assets/splotches/slice12.png"
 import slice13 from "./assets/splotches/slice13.png"
 import slice14 from "./assets/splotches/slice14.png"
 import slice15 from "./assets/splotches/slice15.png"
+import bleed from "./assets/splotches/bleed.png"
+import drip from "./assets/splotches/drip.png"
 
 const charImages = [alonzo,angelina,ceo,chemCeo,chemEng,dealer,director,doc1,doc2,extra,gangMember,inspector,ivan,journalist,jeanette,media2,francisco,van,victim1,ward,ward1]
 
@@ -141,6 +143,16 @@ export default function Outro() {
         
       </div>
       <div className="endScene">
+        <img
+          src={bleed}
+          alt="top banner"
+          className="bleed"
+        />
+        <img
+          src={drip}
+          alt="top banner"
+          className="bleed"
+        />
         <Grid container spacing={2} alignItems="center" justifyContent="center" padding={2} columns={11} style={{minHeight:"100vh", minWidth:"100vw"}}>
           <Grid size={2} >
               <Sur/>

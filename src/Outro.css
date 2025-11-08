@@ -35,6 +35,18 @@
     animation: scrollUp 60s ease-in-out;
 }
 
+.bleed{
+    position: fixed;
+    top: 0;
+    width: 100vw;
+    left: 0;
+    z-index: -1;
+    pointer-events: none;
+    object-fit: cover;
+    transform-origin: top;
+    animation: bleed 60s ease-in-out;
+}
+
 @keyframes scrollUp {
     0%{
         top:0
@@ -44,6 +56,18 @@
     }
     100%{
         top:-11000px
+    }
+}
+
+@keyframes bleed {
+    0%{
+        transform: scaleY(0);    
+    }
+    10%{
+        transform: scaleY(0);   
+    }
+    100%{
+        transform: scaleY(1);   
     }
 }
 
