@@ -29,6 +29,23 @@ import van from "./assets/characters/van.png"
 import victim1 from "./assets/characters/victim-1.png"
 import ward from "./assets/characters/ward-2.png"
 import ward1 from "./assets/characters/ward1.png"
+import slice1 from "./assets/splotches/slice1.png"
+import slice2 from "./assets/splotches/slice2.png"
+import slice3 from "./assets/splotches/slice3.png"
+import slice4 from "./assets/splotches/slice4.png"
+import slice5 from "./assets/splotches/slice5.png"
+import slice6 from "./assets/splotches/slice6.png"
+import slice7 from "./assets/splotches/slice7.png"
+import slice8 from "./assets/splotches/slice8.png"
+import slice9 from "./assets/splotches/slice9.png"
+import slice10 from "./assets/splotches/slice10.png"
+import slice11 from "./assets/splotches/slice11.png"
+import slice12 from "./assets/splotches/slice12.png"
+import slice13 from "./assets/splotches/slice13.png"
+import slice14 from "./assets/splotches/slice14.png"
+import slice15 from "./assets/splotches/slice15.png"
+import bleed from "./assets/splotches/bleed.png"
+import drip from "./assets/splotches/drip.png"
 
 const charImages = [alonzo,angelina,ceo,chemCeo,chemEng,dealer,director,doc1,doc2,extra,gangMember,inspector,ivan,journalist,jeanette,media2,francisco,van,victim1,ward,ward1]
 
@@ -50,13 +67,6 @@ const ending = {
   },
 };
 
-function Sur(){
-  return(
-    <div style={{maxHeight:"50px",  justifyContent:"center", display: "flex", alignItems:"center"}}>
-      <img className="characterImg" style={{rotate: `${Math.random() * 20 - 10}deg`, translate: `(${Math.random()*10-5}px, ${Math.random()*10-5}`}} src={charImages[Math.floor(Math.random()*charImages.length)]}/>
-    </div>
-  )
-}
 
 function Main(){
   const navigate = useNavigate()
@@ -66,8 +76,8 @@ function Main(){
     </div>
   )
 }
-
-// const Sur = ()=>(<div style={{minHeight:"50px", minWidth:"50px", background:"#ff0000", }}></div>)
+const overlayImages = [slice1, slice2, slice3, slice4, slice5, slice6, slice7, slice8, slice9, slice10, slice11, slice12, slice13, slice14, slice15];
+const getOverLayImage = () => overlayImages[Math.floor(Math.random() * overlayImages.length)];
 // const Main = () =>(<div style={{minHeight:"150px", minWidth:"300px", background:"#ccc"}}></div>)
 
 export default function Outro() {
@@ -81,6 +91,25 @@ export default function Outro() {
     playMainMusic(ending[endingId].music)
   },[endingId])
 
+  function Sur(){
+    return(
+      <div className={endingId==2?'dead':null} style={{maxHeight:"50px",  justifyContent:"center", display: "flex", alignItems:"center"}}>
+        {endingId==2&&
+        <img
+        className="dead"
+        style={{
+          position: "absolute",
+          height: "300%", // Scale to cover the base image area
+          zIndex: 10 // Ensure it sits on top of the base image (which defaults to z-index 0)
+        }}
+        src={getOverLayImage()} // Use your specific source here
+        alt="Overlay"
+        />
+        }
+        <img className="characterImg" style={{rotate: `${Math.random() * 20 - 10}deg`, translate: `(${Math.random()*10-5}px, ${Math.random()*10-5}`}} src={charImages[Math.floor(Math.random()*charImages.length)]}/>
+      </div>
+    )
+  }
   return (
     <div className="bg">
       <div className="scroll">
@@ -116,6 +145,18 @@ export default function Outro() {
         
       </div>
       <div className="endScene">
+        {endingId==2&&
+        <img
+          src={bleed}
+          alt="top banner"
+          className="bleed"
+        />}
+        {endingId==2&&
+        <img
+          src={drip}
+          alt="top banner"
+          className="bleed"
+        />}
         <Grid container spacing={2} alignItems="center" justifyContent="center" padding={2} columns={11} style={{minHeight:"100vh", minWidth:"100vw"}}>
           <Grid size={2} >
               <Sur/>
