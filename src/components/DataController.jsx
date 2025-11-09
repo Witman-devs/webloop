@@ -1,8 +1,11 @@
 import { Box, Grid, Typography } from "@mui/material";
 import MonochromeButton from "./MonochromeButton";
+import { useNavigate } from "react-router";
+
 
 export default function DataController() {
-    
+    const navigate = useNavigate();
+
     const clearProgress = () => {
         let masterVolume = localStorage.getItem("masterVolume");
         let sfxVolume = localStorage.getItem("sfxVolume");
@@ -11,7 +14,7 @@ export default function DataController() {
         localStorage.setItem("masterVolume", masterVolume);
         localStorage.setItem("sfxVolume", sfxVolume);
         localStorage.setItem("musicVolume", musicVolume);
-        window.location.href = "/";
+        navigate("/")
     }
 
     return (
